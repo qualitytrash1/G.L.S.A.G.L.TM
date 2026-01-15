@@ -1,0 +1,110 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb08qhktrr4g3"]
+
+[ext_resource type="Script" uid="uid://djguocrvnugga" path="res://scripts/grass.gd" id="1_e1kak"]
+[ext_resource type="Texture2D" uid="uid://dcyj16gwnhks" path="res://textures/grass_overhang.png" id="2_yarb5"]
+
+[node name="Grass" type="Node2D"]
+script = ExtResource("1_e1kak")
+texture = ExtResource("2_yarb5")
+
+[node name="Side" type="Node2D" parent="."]
+
+[node name="Textures" type="Control" parent="Side"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="1" type="Control" parent="Side/Textures"]
+clip_contents = true
+anchors_preset = 0
+offset_right = 8.0
+offset_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="Side/Textures/1"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 1.0
+texture = ExtResource("2_yarb5")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="2" type="Control" parent="Side/Textures"]
+clip_contents = true
+anchors_preset = 0
+offset_top = 1.0
+offset_right = 8.0
+offset_bottom = 2.0
+
+[node name="TextureRect" type="TextureRect" parent="Side/Textures/2"]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 8.0
+offset_bottom = 1.0
+texture = ExtResource("2_yarb5")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="3" type="Control" parent="Side/Textures"]
+clip_contents = true
+anchors_preset = 0
+offset_top = 2.0
+offset_right = 8.0
+offset_bottom = 3.0
+
+[node name="TextureRect" type="TextureRect" parent="Side/Textures/3"]
+layout_mode = 0
+offset_top = -2.0
+offset_right = 8.0
+offset_bottom = 1.0
+texture = ExtResource("2_yarb5")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="4" type="Control" parent="Side/Textures"]
+clip_contents = true
+anchors_preset = 0
+offset_top = 3.0
+offset_right = 8.0
+offset_bottom = 4.0
+
+[node name="TextureRect" type="TextureRect" parent="Side/Textures/4"]
+layout_mode = 0
+offset_top = -3.0
+offset_right = 8.0
+offset_bottom = 1.0
+texture = ExtResource("2_yarb5")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="5" type="Control" parent="Side/Textures"]
+clip_contents = true
+anchors_preset = 0
+offset_top = 4.0
+offset_right = 8.0
+offset_bottom = 5.0
+
+[node name="TextureRect" type="TextureRect" parent="Side/Textures/5"]
+layout_mode = 0
+offset_top = -4.0
+offset_right = 8.0
+offset_bottom = 1.0
+texture = ExtResource("2_yarb5")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="6" type="Control" parent="Side/Textures"]
+clip_contents = true
+anchors_preset = 0
+offset_top = 5.0
+offset_right = 8.0
+offset_bottom = 6.0
+
+[node name="TextureRect" type="TextureRect" parent="Side/Textures/6"]
+layout_mode = 0
+offset_top = -5.0
+offset_right = 8.0
+offset_bottom = 1.0
+texture = ExtResource("2_yarb5")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Sides" type="Node2D" parent="."]

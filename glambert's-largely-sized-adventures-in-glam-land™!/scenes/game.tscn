@@ -1,10 +1,30 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=17 format=3 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Texture2D" uid="uid://bsbsccrok6h42" path="res://icon.svg" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://cr4vhgrraqejj" path="res://scenes/glambert.tscn" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://b008xy0cbhr2q" path="res://textures/Vaporwave.webp" id="3_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://b35bebj1q3kti" path="res://scenes/music_controller.tscn" id="4_lbhrr"]
 [ext_resource type="Script" uid="uid://dcrgb8yncovv1" path="res://scripts/level.gd" id="5_p57ef"]
+[ext_resource type="PackedScene" uid="uid://bb08qhktrr4g3" path="res://scenes/grass.tscn" id="6_p57ef"]
+[ext_resource type="Texture2D" uid="uid://bsslovlujysmg" path="res://textures/dirt.png" id="6_u5sy4"]
+
+[sub_resource type="Curve" id="Curve_p57ef"]
+_data = [Vector2(0, 0), 0.0, 0.3834275, 0, 0, Vector2(1, 1), 0.6886034, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_u5sy4"]
+_data = [Vector2(0, 0), 0.0, 1.0516858, 0, 0, Vector2(1, 1), 0.78574187, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_gee14"]
+curve_x = SubResource("Curve_p57ef")
+curve_y = SubResource("Curve_p57ef")
+curve_z = SubResource("Curve_u5sy4")
+
+[sub_resource type="Environment" id="Environment_iywne"]
+background_mode = 3
+adjustment_enabled = true
+adjustment_color_correction = SubResource("CurveXYZTexture_gee14")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
 size = Vector2(176, 170)
@@ -22,6 +42,9 @@ size = Vector2(219, 170)
 size = Vector2(179.5, 170)
 
 [node name="Game" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iywne")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 scroll_offset = Vector2(-380, -115)
@@ -104,12 +127,16 @@ zoom = Vector2(4, 4)
 [node name="Level" type="Node2D" parent="."]
 script = ExtResource("5_p57ef")
 
-[node name="Polygon2D" type="Polygon2D" parent="Level"]
-polygon = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+[node name="Polygons" type="Node2D" parent="Level"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Level"]
+[node name="Polygon" type="StaticBody2D" parent="Level/Polygons"]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/StaticBody2D"]
+[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon"]
+texture_repeat = 2
+texture = ExtResource("6_u5sy4")
+polygon = PackedVector2Array(-104, -47, 104, -64, 91, -21, 40, -9, 31, 11, 19, 25, -32, 32, -102, 2)
+
+[node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]
+
+[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon"]
 polygon = PackedVector2Array(0, 0)
-
-[node name="Points" type="Node2D" parent="Level"]

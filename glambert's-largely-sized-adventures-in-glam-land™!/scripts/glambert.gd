@@ -6,7 +6,7 @@ const GROUND_FRICTION: float = 0.9
 const AIR_FRICTION: float = 0.98
 const MAX_COYOTE_TIME: float = 0.08
 const MAX_BUFFER_JUMP: float = 0.08
-const MAX_JUMPS: int = 2
+const MAX_JUMPS: int = 1
 
 var coyote_time: float = MAX_COYOTE_TIME
 var buffer_jump: float = MAX_BUFFER_JUMP
