@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3 uid="uid://cvhnqj4t7mdea"]
+
+[ext_resource type="Texture2D" uid="uid://bsbsccrok6h42" path="res://icon.svg" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://cr4vhgrraqejj" path="res://scenes/glambert.tscn" id="1_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://b008xy0cbhr2q" path="res://textures/Vaporwave.webp" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://b35bebj1q3kti" path="res://scenes/music_controller.tscn" id="4_lbhrr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
+size = Vector2(176, 170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
+size = Vector2(20, 170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
+size = Vector2(180, 170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
+size = Vector2(219, 170)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gee14"]
+size = Vector2(179.5, 170)
+
+[node name="Game" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_offset = Vector2(-380, -115)
+repeat_size = Vector2(800, 0)
+
+[node name="Vaporwave" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(-2, -1)
+texture = ExtResource("3_lnu2h")
+
+[node name="Vaporwave2" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(1598, -1)
+texture = ExtResource("3_lnu2h")
+
+[node name="Glambert" parent="." instance=ExtResource("1_yqjtg")]
+position = Vector2(0, -84)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(-78, 79)
+shape = SubResource("RectangleShape2D_p57ef")
+
+[node name="Icon" type="Sprite2D" parent="Floor"]
+position = Vector2(-78.49999, 79)
+scale = Vector2(1.3828124, 1.328125)
+texture = ExtResource("1_uwrxv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Floor"]
+position = Vector2(96, 79)
+shape = SubResource("RectangleShape2D_lbhrr")
+
+[node name="Icon2" type="Sprite2D" parent="Floor"]
+position = Vector2(96, 79)
+scale = Vector2(0.15625, 1.328125)
+texture = ExtResource("1_uwrxv")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Floor"]
+position = Vector2(279, 79)
+shape = SubResource("RectangleShape2D_u5sy4")
+
+[node name="Icon3" type="Sprite2D" parent="Floor"]
+position = Vector2(279, 79)
+scale = Vector2(1.4062499, 1.328125)
+texture = ExtResource("1_uwrxv")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Floor"]
+position = Vector2(99.5, 126)
+shape = SubResource("RectangleShape2D_iywne")
+
+[node name="Icon4" type="Sprite2D" parent="Floor"]
+position = Vector2(99.5, 126)
+scale = Vector2(1.7109374, 1.328125)
+texture = ExtResource("1_uwrxv")
+
+[node name="Icon5" type="Sprite2D" parent="Floor"]
+position = Vector2(-256.5, -51)
+scale = Vector2(1.4062499, 1.328125)
+texture = ExtResource("1_uwrxv")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Floor"]
+position = Vector2(-256.75, -51)
+shape = SubResource("RectangleShape2D_gee14")
+
+[node name="Icon6" type="Sprite2D" parent="Floor"]
+position = Vector2(20.562439, -214.10938)
+scale = Vector2(1.9775387, 1.763916)
+texture = ExtResource("1_uwrxv")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Floor"]
+position = Vector2(20.210938, -214.10938)
+scale = Vector2(1.4062499, 1.328125)
+shape = SubResource("RectangleShape2D_gee14")
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(0, -439)
+zoom = Vector2(4, 4)
+
+[node name="MusicController" parent="." instance=ExtResource("4_lbhrr")]

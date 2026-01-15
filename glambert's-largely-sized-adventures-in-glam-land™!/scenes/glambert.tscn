@@ -1,0 +1,236 @@
+[gd_scene load_steps=19 format=3 uid="uid://cr4vhgrraqejj"]
+
+[ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
+[ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
+[ext_resource type="Texture2D" uid="uid://cft7domi85cwy" path="res://textures/glambert-sunglasses.png" id="2_4w5rh"]
+[ext_resource type="AudioStream" uid="uid://bybsh3itodtk8" path="res://audio/sfx/boing.wav" id="4_0dbj0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dbj0"]
+atlas = ExtResource("1_eb3d3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioqu6"]
+atlas = ExtResource("1_eb3d3")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb3d3"]
+atlas = ExtResource("1_eb3d3")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_btdif"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dbj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioqu6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eb3d3")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4w5rh"]
+atlas = ExtResource("1_eb3d3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbkum"]
+atlas = ExtResource("1_eb3d3")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57g0r"]
+atlas = ExtResource("1_eb3d3")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p27ua"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4w5rh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbkum")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57g0r")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eb3d3"]
+radius = 12.0415945
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0dbj0"]
+
+[sub_resource type="Animation" id="Animation_ioqu6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, -4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:skew")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rbkum"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.53),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 0.95)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.53),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, -4), Vector2(-1, -3)]
+}
+
+[sub_resource type="Animation" id="Animation_0dbj0"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, -4), Vector2(-0.4, -4.75)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:skew")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.41),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.05235987755982989]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ioqu6"]
+_data = {
+&"RESET": SubResource("Animation_ioqu6"),
+&"idle": SubResource("Animation_rbkum"),
+&"walk": SubResource("Animation_0dbj0")
+}
+
+[node name="Glambert" type="CharacterBody2D"]
+script = ExtResource("1_4w5rh")
+
+[node name="Sprite" type="Node2D" parent="."]
+position = Vector2(-1, -4)
+
+[node name="SpriteFacingLeft" type="AnimatedSprite2D" parent="Sprite"]
+sprite_frames = SubResource("SpriteFrames_btdif")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="SpriteFacingRight" type="AnimatedSprite2D" parent="Sprite"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_p27ua")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="GlambertSunglasses" type="Sprite2D" parent="Sprite"]
+texture = ExtResource("2_4w5rh")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_eb3d3")
+
+[node name="Boing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0dbj0")
+volume_db = -21.985
+
+[node name="WallDetector" type="Area2D" parent="."]
+visible = false
+
+[node name="Collision" type="CollisionShape2D" parent="WallDetector"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_0dbj0")
+
+[node name="SmoothAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ioqu6")
+}
+
+[connection signal="body_entered" from="WallDetector" to="." method="_on_wall_detector_body_entered"]
