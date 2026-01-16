@@ -29,10 +29,13 @@ var in_air: bool = false
 @onready var smooth_animations: AnimationPlayer = $SmoothAnimations
 #SOUNDS
 @onready var boing: AudioStreamPlayer = $Boing
-
+@onready var soda_can_open: AudioStreamPlayer2D = $SodaCanOpen
+#MISC
 @onready var camera: Camera2D = $"../Camera"
+@onready var iced_tea_texts: RichTextLabel = $UI/IcedTeaTexts
 
 func _ready() -> void:
+	iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
 	buffer_jump = 0
 	jumps = MAX_JUMPS
 	coyote_time = MAX_COYOTE_TIME
@@ -127,3 +130,24 @@ func falling_animation(delta : float) -> void:
 		sprites.scale = lerp(Vector2(1.0,1.0), Vector2(0.7,1.3), fall_time)
 	else:
 		sprites.scale = lerp(sprites.scale, Vector2(1,1), delta * 30)
+
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	
+	#IS A COLLECTABLE
+	if area.is_in_group("collectable"):
+		#IS AN ICE TEA
+		if area.is_in_group("ice-tea"):
+			
+			area.get_child(1).queue_free()
+			
+			soda_can_open.play()
+			area.get_child(0).play("collect")
+			
+			Globals.iced_teas += 1
+			iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
+			
+			await area.get_child(0).animation_finished
+			
+			area.queue_free()

@@ -12,14 +12,23 @@ config_version=5
 
 config/name="Glambert's Largely Sized Adventures in Glam-Land™!"
 run/main_scene="uid://cvhnqj4t7mdea"
-config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/features=PackedStringArray("4.6", "GL Compatibility")
+config/icon="res://textures/icon.svg"
+
+[autoload]
+
+Globals="*res://scripts/globals.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=2
+
+[global_group]
+
+collectable=""
+ice-tea=""
 
 [input]
 
@@ -79,4 +88,4 @@ remove_point={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.3019608, 0, 0.3019608, 1)
+environment/defaults/default_clear_color=Color(0.0742504, 0.050797284, 0.3214313, 1)
