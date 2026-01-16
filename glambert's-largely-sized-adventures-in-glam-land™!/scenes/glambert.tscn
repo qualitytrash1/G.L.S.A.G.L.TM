@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cr4vhgrraqejj"]
+[gd_scene load_steps=27 format=3 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c0f4nnrnoel2y" path="res://textures/statue-head_only.png" id="5_2yc5u"]
 [ext_resource type="AudioStream" uid="uid://bhqjkvt1i7obr" path="res://audio/sfx/soda-can_open.mp3" id="5_ioqu6"]
 [ext_resource type="Texture2D" uid="uid://bustbe34s5gfi" path="res://textures/statue-outline.png" id="7_57g0r"]
+[ext_resource type="AudioStream" uid="uid://dh63w2iumuxd6" path="res://audio/sfx/standby-beeps.mp3" id="8_4fsu5"]
 [ext_resource type="AudioStream" uid="uid://cw03lk1ivf4b6" path="res://audio/sfx/stone-sliding.ogg" id="8_p27ua"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0dbj0"]
@@ -307,6 +308,9 @@ autoplay = "outline"
 [node name="Boing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_0dbj0")
 volume_db = -21.985
+
+[node name="FinishLevel" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_4fsu5")
 
 [node name="StoneSliding" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_p27ua")

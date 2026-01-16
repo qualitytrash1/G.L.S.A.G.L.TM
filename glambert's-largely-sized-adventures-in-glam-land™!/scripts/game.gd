@@ -13,7 +13,8 @@ func _ready() -> void:
 	set_start_and_end_computers()
 	
 	Globals.statue_amount = statues.get_child_count()
-
+	Globals.iced_teas = 0
+	Globals.statues = 0
 
 func set_start_and_end_computers():
 	

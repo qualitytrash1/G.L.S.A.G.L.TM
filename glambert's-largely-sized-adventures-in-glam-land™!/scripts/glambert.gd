@@ -35,6 +35,7 @@ var current_animation: String
 @onready var boing: AudioStreamPlayer = $Boing
 @onready var soda_can_open: AudioStreamPlayer = $SodaCanOpen
 @onready var stone_sliding: AudioStreamPlayer = $StoneSliding
+@onready var finish_level: AudioStreamPlayer = $FinishLevel
 #MISC
 @onready var camera: Camera2D = $"../../Camera"
 @onready var iced_tea_texts: RichTextLabel = $UI/IcedTeaTexts
@@ -207,7 +208,24 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			await area.get_child(2).animation_finished
 		#COMPUTER
 		if area.is_in_group("computer"):
-			#GOES TO NEXT LEVEL
-			Globals.current_level += 1
-			get_tree().reload_current_scene()
+			end_level(area, 0.4)
 			
+
+func end_level(node: Node, time: float):
+	#GOES TO NEXT LEVEL
+		Globals.current_level += 1
+		#ANIMATION
+		var tween: Tween = create_tween()
+		tween.set_parallel(true)
+		#TWEENS
+		tween.tween_property(self, "scale", Vector2(0, 0), time)
+		tween.tween_property(self, "global_position", node.global_position, time)
+		tween.tween_property(self, "modulate", Color(0.161, 0.294, 0.761, 1.0), time)
+		tween.tween_property(camera, "zoom", (camera.zoom * 4), time)
+		tween.tween_property(camera, "global_position", node.global_position, time)
+		#NOISE
+		finish_level.play()
+		
+		await tween.finished
+		
+		get_tree().reload_current_scene()
