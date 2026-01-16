@@ -1,11 +1,14 @@
-[gd_scene load_steps=33 format=4 uid="uid://cr4vhgrraqejj"]
+[gd_scene load_steps=37 format=4 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
 [ext_resource type="Texture2D" uid="uid://cft7domi85cwy" path="res://textures/glambert-sunglasses.png" id="2_4w5rh"]
 [ext_resource type="AudioStream" uid="uid://bybsh3itodtk8" path="res://audio/sfx/boing.wav" id="4_0dbj0"]
+[ext_resource type="Texture2D" uid="uid://c0f4nnrnoel2y" path="res://textures/statue-head_only.png" id="5_2yc5u"]
 [ext_resource type="AudioStream" uid="uid://bhqjkvt1i7obr" path="res://audio/sfx/soda-can_open.mp3" id="5_ioqu6"]
 [ext_resource type="FontFile" uid="uid://daw3langu30qf" path="res://fonts/pixel-game-font/PixelGame-R9AZe.otf" id="6_rbkum"]
+[ext_resource type="Texture2D" uid="uid://bustbe34s5gfi" path="res://textures/statue-outline.png" id="7_57g0r"]
+[ext_resource type="AudioStream" uid="uid://cw03lk1ivf4b6" path="res://audio/sfx/stone-sliding.ogg" id="8_p27ua"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0dbj0"]
 atlas = ExtResource("1_eb3d3")
@@ -1173,7 +1176,7 @@ variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
 base_font = SubResource("FontFile_rbkum")
 variation_transform = Transform2D(1, 0.2, 0, 1, 0, 0)
 
-[sub_resource type="Image" id="Image_p27ua"]
+[sub_resource type="Image" id="Image_2yc5u"]
 data = {
 "data": PackedByteArray("/////////////////////w=="),
 "format": "RGBA8",
@@ -1183,7 +1186,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_ug42a"]
-image = SubResource("Image_p27ua")
+image = SubResource("Image_2yc5u")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwivv"]
 content_margin_left = 4.0
@@ -1240,8 +1243,28 @@ RichTextLabel/fonts/normal_font = ExtResource("6_rbkum")
 RichTextLabel/icons/horizontal_rule = SubResource("ImageTexture_ug42a")
 RichTextLabel/styles/focus = SubResource("StyleBoxFlat_gwivv")
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_2yc5u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_2yc5u")
+}],
+"loop": false,
+"name": &"full",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_57g0r")
+}],
+"loop": false,
+"name": &"outline",
+"speed": 5.0
+}]
+
 [node name="Glambert" type="CharacterBody2D"]
 script = ExtResource("1_4w5rh")
+metadata/_edit_vertical_guides_ = [1420.0]
 
 [node name="Model" type="Node2D" parent="."]
 position = Vector2(-1, -4)
@@ -1269,10 +1292,6 @@ texture = ExtResource("2_4w5rh")
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_eb3d3")
 
-[node name="Boing" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_0dbj0")
-volume_db = -21.985
-
 [node name="WallDetector" type="Area2D" parent="."]
 visible = false
 
@@ -1292,9 +1311,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_0dbj0")
 
-[node name="SodaCanOpen" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_ioqu6")
-
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="IcedTeaTexts" type="RichTextLabel" parent="UI"]
@@ -1307,6 +1323,26 @@ scale = Vector2(0.6300715, 0.6300715)
 mouse_filter = 2
 theme = SubResource("Theme_rwaqa")
 text = "Iced-Teas: 0"
+
+[node name="Statues" type="Node2D" parent="UI"]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="UI/Statues"]
+position = Vector2(2493.7136, 93.679184)
+scale = Vector2(4.794611, 4.794611)
+sprite_frames = SubResource("SpriteFrames_2yc5u")
+animation = &"outline"
+autoplay = "outline"
+
+[node name="Boing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0dbj0")
+volume_db = -21.985
+
+[node name="StoneSliding" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_p27ua")
+
+[node name="SodaCanOpen" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ioqu6")
+volume_db = -10.495
 
 [connection signal="body_entered" from="WallDetector" to="." method="_on_wall_detector_body_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

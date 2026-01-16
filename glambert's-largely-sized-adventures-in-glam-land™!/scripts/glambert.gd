@@ -27,12 +27,15 @@ var in_air: bool = false
 @onready var sprites: Node2D = $Model/Sprites
 @onready var glambert_sunglasses: Sprite2D = $Model/Sprites/GlambertSunglasses
 @onready var smooth_animations: AnimationPlayer = $SmoothAnimations
+@onready var statue_outline: AnimatedSprite2D = $UI/Statues/Sprite
 #SOUNDS
 @onready var boing: AudioStreamPlayer = $Boing
-@onready var soda_can_open: AudioStreamPlayer2D = $SodaCanOpen
+@onready var soda_can_open: AudioStreamPlayer = $SodaCanOpen
+@onready var stone_sliding: AudioStreamPlayer = $StoneSliding
 #MISC
 @onready var camera: Camera2D = $"../Camera"
 @onready var iced_tea_texts: RichTextLabel = $UI/IcedTeaTexts
+@onready var statues: Node2D = $UI/Statues
 
 func _ready() -> void:
 	iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
@@ -42,6 +45,19 @@ func _ready() -> void:
 	friction = GROUND_FRICTION
 	current_animation = "idle"
 	flip()
+	
+	await get_tree().create_timer(0).timeout
+	
+	for i in range(Globals.statue_amount):
+		
+		var offset: int = -128
+		var clone_statue_button = statue_outline.duplicate()
+		
+		statues.add_child(clone_statue_button)
+		clone_statue_button.play("outline")
+		
+		clone_statue_button.position.x = statue_outline.position.x + (offset * i)
+	statue_outline.queue_free()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -151,3 +167,19 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			await area.get_child(0).animation_finished
 			
 			area.queue_free()
+		if area.is_in_group("statue"):
+			
+			statues.get_child(Globals.statues).play("full")
+			
+			area.get_child(1).queue_free()
+			
+			stone_sliding.play()
+			Globals.statues += 1
+			
+			area.get_child(2).play("dissapear")
+			
+			await area.get_child(2).animation_finished
+			
+			area.get_child(0).play("base")
+			area.show()
+			
