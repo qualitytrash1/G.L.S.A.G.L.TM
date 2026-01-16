@@ -7,6 +7,7 @@ extends Node2D
 
 @onready var side: Node2D = $Side
 @onready var polygon: Polygon2D = $".."
+@onready var level: Level = $"../../../../"
 @onready var sides: Node2D = $Sides
 @onready var textures: Control = $Side/Textures
 
@@ -20,6 +21,8 @@ func _process(delta: float) -> void:
 			update = false
 
 func _update() -> void:
+	level.update_polygons()
+	await get_tree().create_timer(0.1).timeout
 	create_tex(texture)
 	for i in sides.get_children():
 		i.queue_free()

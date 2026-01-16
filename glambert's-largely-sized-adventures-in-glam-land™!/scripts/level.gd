@@ -1,3 +1,7 @@
+@tool
+
+class_name Level
+
 extends Node2D
 
 const POINT = preload("uid://v8qfgbxfrh3l")
@@ -58,5 +62,3 @@ func update_polygons() -> void:
 	for i : StaticBody2D in polygons.get_children(): #loop polygons
 		points = i.get_child(0).polygon
 		i.get_child(1).polygon = points #set collisions
-		if i.get_child(0).get_child_count() > 0: #has overlay child
-			i.get_child(0).get_child(0)._update()

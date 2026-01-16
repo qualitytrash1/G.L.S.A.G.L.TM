@@ -1,10 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://b35bebj1q3kti"]
 
-[ext_resource type="AudioStream" uid="uid://w4gmaldwpqiv" path="res://audio/music/[Vaporwave] - MACINTOSH PLUS - リサフランク420 現代のコンピュー.mp3" id="1_86cwe"]
+[ext_resource type="AudioStream" uid="uid://c1ckqndnn46hb" path="res://audio/music/Horizon.ogg" id="1_86cwe"]
 
 [node name="MusicController" type="Node"]
 
-[node name="[vaporwave]MacintoshPlusリサフランク420現代のコンピュー" type="AudioStreamPlayer" parent="."]
+[node name="Horizon" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_86cwe")
-volume_db = -11.45
 autoplay = true
