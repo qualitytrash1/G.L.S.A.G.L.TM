@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Horizon.ogg-f6e1f742d9641bf3d53ee52d5c1b112e.
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

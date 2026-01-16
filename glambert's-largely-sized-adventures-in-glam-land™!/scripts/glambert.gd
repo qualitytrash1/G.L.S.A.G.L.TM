@@ -2,23 +2,26 @@ extends CharacterBody2D
 
 class_name Glambert
 
+#MAX AND CONSTANTS
 const GROUND_FRICTION: float = 0.9
 const AIR_FRICTION: float = 0.98
 const MAX_COYOTE_TIME: float = 0.08
 const MAX_BUFFER_JUMP: float = 0.08
 const MAX_JUMPS: int = 1
+const BASE_SPEED: int = 1200
 
+#MOVEMENT
 var coyote_time: float = MAX_COYOTE_TIME
 var buffer_jump: float = MAX_BUFFER_JUMP
-var speed: float = 1200.0
+var speed: float = BASE_SPEED
 var jump_velocity: float = -300.0
 var friction: float = 0.9
 var jumps: int = MAX_JUMPS
 var fall_time : float = 0
-
+var in_air: bool = false
+#ANIMATION
 var flipped: bool = false
 var current_animation: String
-var in_air: bool = false
 
 
 #SPRITES
@@ -33,21 +36,28 @@ var in_air: bool = false
 @onready var soda_can_open: AudioStreamPlayer = $SodaCanOpen
 @onready var stone_sliding: AudioStreamPlayer = $StoneSliding
 #MISC
-@onready var camera: Camera2D = $"../Camera"
+@onready var camera: Camera2D = $"../../Camera"
 @onready var iced_tea_texts: RichTextLabel = $UI/IcedTeaTexts
 @onready var statues: Node2D = $UI/Statues
+@onready var level_text: RichTextLabel = $UI/LevelText
 
 func _ready() -> void:
-	iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
+	
+	#SETS MOVEMENT VARIABLES
+	speed = BASE_SPEED
 	buffer_jump = 0
 	jumps = MAX_JUMPS
 	coyote_time = MAX_COYOTE_TIME
 	friction = GROUND_FRICTION
+	#VISUAL THINGS
 	current_animation = "idle"
+	iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
+	level_text.text = "Level: #" + str(Globals.current_level)
 	flip()
 	
 	await get_tree().create_timer(0).timeout
 	
+	#CREATES THE RIGHT AMOUNT OF OUTLINES FOR STATUES IN LEVEL
 	for i in range(Globals.statue_amount):
 		
 		var offset: int = -128
@@ -57,10 +67,17 @@ func _ready() -> void:
 		clone_statue_button.play("outline")
 		
 		clone_statue_button.position.x = statue_outline.position.x + (offset * i)
+	#REMOVES OG OUTLINE
 	statue_outline.queue_free()
+	#SPAWN AND CAMERA STUFFS (STUF OREOS? 677!!!) AHAHAHAHHHAH GET IT GET IT AHAHAHAHA
+	position = Globals.spawn_location
+	camera.position.x = position.x
+	camera.position.y = position.y - Globals.zoom_factor
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
+	
+	
 	
 	if is_on_floor():
 		in_air = false
@@ -103,6 +120,14 @@ func _physics_process(delta: float) -> void:
 	velocity.x += (direction * speed) * delta
 	
 	if direction:
+		
+		if Input.is_action_pressed("sprint"):
+			speed = BASE_SPEED * 1.3
+			smooth_animations.speed_scale = 2
+		else:
+			speed = BASE_SPEED
+			smooth_animations.speed_scale = 1
+		
 		friction = GROUND_FRICTION
 		glambert_sunglasses.position.x = direction * 5
 		flip()
@@ -153,7 +178,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	
 	#IS A COLLECTABLE
 	if area.is_in_group("collectable"):
-		#IS AN ICE TEA
+		#ICE TEA
 		if area.is_in_group("ice-tea"):
 			
 			area.get_child(1).queue_free()
@@ -167,6 +192,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			await area.get_child(0).animation_finished
 			
 			area.queue_free()
+		#STATUE
 		if area.is_in_group("statue"):
 			
 			statues.get_child(Globals.statues).play("full")
@@ -179,7 +205,9 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			area.get_child(2).play("dissapear")
 			
 			await area.get_child(2).animation_finished
-			
-			area.get_child(0).play("base")
-			area.show()
+		#COMPUTER
+		if area.is_in_group("computer"):
+			#GOES TO NEXT LEVEL
+			Globals.current_level += 1
+			get_tree().reload_current_scene()
 			
