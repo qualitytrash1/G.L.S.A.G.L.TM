@@ -44,8 +44,8 @@ func _update() -> void:
 		new_side.rotation = 0
 		var tex_index : float = 0
 		for i in new_side.get_child(0).get_children():
-			i.size.x = point.distance_to(next_point) - tex_index
-			i.get_child(0).size.x = i.size.x
+			i.get_child(0).size.x = point.distance_to(next_point) - tex_index
+			i.get_child(0).get_child(0).size.x = i.get_child(0).size.x
 			tex_index += 1
 		new_side.show()
 		index += 1
@@ -54,8 +54,10 @@ func create_tex(texture : Texture2D) -> void:
 	for i in textures.get_children():
 		i.queue_free()
 	for i in range(texture.get_size().y):
+		var new_node : Node2D = Node2D.new()
+		textures.add_child(new_node)
 		var new_cont : Control = Control.new()
-		textures.add_child(new_cont)
+		new_node.add_child(new_cont)
 		var new_rect : TextureRect = TextureRect.new()
 		new_cont.add_child(new_rect)
 		new_cont.size = Vector2(texture.get_size().x, 1)
