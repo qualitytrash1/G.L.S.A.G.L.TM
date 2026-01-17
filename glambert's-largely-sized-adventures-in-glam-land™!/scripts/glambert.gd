@@ -30,6 +30,8 @@ var ground_pounding: bool = false
 var ground_pound_time: float = 0
 var direction : float = 0
 var last_wall_normal : Vector2
+var last_wall_jump_normal : Vector2
+var last_vel : Vector2
 
 #ANIMATION
 var flipped: bool = false
@@ -130,7 +132,7 @@ func _physics_process(delta: float) -> void:
 		in_air = true
 		fall_time += delta
 		
-	if is_on_wall_only():
+	if is_on_wall_only() and (abs(last_vel.x) > 50 or on_wall) and not ground_pounding:
 		print(fall_time)
 		on_wall = true
 		last_wall_normal = get_wall_normal()
@@ -183,26 +185,31 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		buffer_jump = MAX_BUFFER_JUMP
 		
-	if jumps > 0 and buffer_jump > 0 and (not on_wall or (on_wall and wall_time > 0.08)) and (coyote_time > 0 or (fall_time > 0.05)):
-		if on_wall:
-			velocity.x = last_wall_normal.x * 200
-			wall_jumps += 1
-		else:
-			if jumps == MAX_JUMPS:
-				fall_time = 0
-		position.x += last_wall_normal.x * 2
-		boing.play()
-		if coyote_time <= 0 or (on_wall and wall_jumps > 1):
-			jumps -= 1
-		coyote_time = 0
-		buffer_jump = 0
-		velocity.y = jump_velocity
-		if wall_jumps > 2:
-			velocity.y += ((wall_jumps - 2) * 45)
-			velocity.y = clamp(velocity.y, -10000, -140)
-		weight = BASE_WEIGHT
-		ground_pounding = false
-		ground_pound_time = 0
+	if jumps > 0 and buffer_jump > 0 and (not on_wall or (on_wall and wall_time > 0.12)) and (coyote_time > 0 or (fall_time > 0.1)):
+		var same_wall_jump : bool = wall_jumps > 1 and round(last_wall_jump_normal.x) == round(last_wall_normal.x)
+		if coyote_time <= 0 or (not same_wall_jump or (same_wall_jump and jumps == MAX_JUMPS)):
+			if on_wall:
+				velocity.x = last_wall_normal.x * 200
+				wall_jumps += 1
+			else:
+				if jumps == MAX_JUMPS:
+					fall_time = 0
+			position.x += last_wall_normal.x * 2
+			boing.play()
+			if coyote_time <= 0:
+				jumps -= 1
+			coyote_time = 0
+			buffer_jump = 0
+			velocity.y = jump_velocity
+			if same_wall_jump:
+				jumps -= 1
+				velocity.y += ((wall_jumps - 1) * 50)
+				velocity.y = clamp(velocity.y, -10000, -140)
+			weight = BASE_WEIGHT
+			ground_pounding = false
+			ground_pound_time = 0
+			if on_wall:
+				last_wall_jump_normal = last_wall_normal
 
 	
 
@@ -243,6 +250,7 @@ func _physics_process(delta: float) -> void:
 	
 	set_animation(current_animation)
 	falling_animation(delta)
+	last_vel = velocity
 	move_and_slide()
 	
 
