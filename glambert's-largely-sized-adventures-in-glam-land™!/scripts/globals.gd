@@ -5,4 +5,10 @@ var statues: int = 0
 var statue_amount: int
 var spawn_location: Vector2 = Vector2(0, 0)
 var zoom_factor: float = 1000
-var current_level: int = 1
+var current_level: int = 0
+
+
+var level_data: Array[Dictionary] = [
+	{"level": 1, "time": 400, "song": "uid://c1ckqndnn46hb"},
+	{"level": 2, "time": 400, "song": "uid://bsn7u4s87ur8q"}
+]

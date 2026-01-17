@@ -1,9 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://b35bebj1q3kti"]
 
-[ext_resource type="AudioStream" uid="uid://c1ckqndnn46hb" path="res://audio/music/Horizon.ogg" id="1_86cwe"]
+[ext_resource type="Script" uid="uid://dbyi7a813bvwp" path="res://scripts/music_controller.gd" id="1_a2hxn"]
 
 [node name="MusicController" type="Node"]
+script = ExtResource("1_a2hxn")
 
-[node name="Horizon" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_86cwe")
-autoplay = true
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

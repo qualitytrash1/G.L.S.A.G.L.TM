@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=29 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
@@ -9,12 +9,13 @@
 [ext_resource type="Script" uid="uid://dcrgb8yncovv1" path="res://scripts/level.gd" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://c0ah5kn2ch61y" path="res://scenes/background.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://bb08qhktrr4g3" path="res://scenes/grass.tscn" id="6_p57ef"]
-[ext_resource type="Texture2D" uid="uid://bsslovlujysmg" path="res://textures/dirt.png" id="6_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://ff51uench70u" path="res://textures/spikes-short.png" id="9_ir15t"]
 [ext_resource type="PackedScene" uid="uid://3romnl56ifsa" path="res://scenes/ice_tea.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://badtfuyl8v0pi" path="res://scenes/statue.tscn" id="11_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://83b0a7speph3" path="res://textures/dirt-purple.png" id="12_ca42v"]
 [ext_resource type="PackedScene" uid="uid://bvqdsk3hm4v53" path="res://scenes/computer.tscn" id="13_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dabx0pgoxd26s" path="res://textures/wood-platform.png" id="14_trtic"]
+[ext_resource type="PackedScene" uid="uid://jqibvuu70u6f" path="res://scenes/enemy-purple.tscn" id="15_ca42v"]
 
 [sub_resource type="Gradient" id="Gradient_gts02"]
 colors = PackedColorArray(0.63, 0, 0.609, 1, 0.22916658, 0, 0.55, 0)
@@ -212,48 +213,8 @@ tile_set = SubResource("TileSet_kvuet")
 
 [node name="Spikes" type="TileMapLayer" parent="Level" groups=["insta-death"]]
 position = Vector2(7, -6)
-tile_map_data = PackedByteArray("AAC9//z/AAADAAAAAAC8//z/AAACAAAAAAC7//z/AAAAAAAAAAD4//z/AAAAAAAAAAD5//z/AAABAAAAAAD6//z/AAACAAAAAAD7//z/AAACAAAAAAD8//z/AAADAAAAAADm//z/AAAEAAAAAADs//z/AAAEAAAAAADy//z/AAAEAAAAAAC+//D/AAADAAAAAAC9//D/AAABAAAAAAC8//D/AAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAC9//z/AAADAAAAAAC8//z/AAACAAAAAAC7//z/AAAAAAAAAAD4//z/AAAAAAAAAAD5//z/AAABAAAAAAD6//z/AAACAAAAAAD7//z/AAACAAAAAAD8//z/AAADAAAAAADm//z/AAAEAAAAAADs//z/AAAEAAAAAADy//z/AAAEAAAAAAC+//D/AAADAAAAAAC9//D/AAABAAAAAAC8//D/AAAAAAAAAADt/w4AAAAAAAAAAADu/w4AAAABAAAAAADv/w4AAAABAAAAAADw/w4AAAACAAAAAADx/w4AAAADAAAAAAA=")
 tile_set = SubResource("TileSet_rysoc")
-
-[node name="Polygons" type="Node2D" parent="Level"]
-
-[node name="Polygon" type="StaticBody2D" parent="Level/Polygons"]
-
-[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon"]
-texture_repeat = 2
-texture = ExtResource("6_u5sy4")
-polygon = PackedVector2Array(-4836, -6, -1062, -739, -1062.8615, -144, -1198, -144, -1198, -55, -1063, -55, 150, -54, 173, -86, 199, -114, 229, -140, 257, -160, 299, -175, 354, -189, 408, -196, 465, -193, 509, -181, 561, -155, 643, -64, 2813, -64, 2813, -400, 3572, -960, 3572, 941, 2842, 940, -4864, 912)
-
-[node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]
-
-[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon"]
-polygon = PackedVector2Array(-4836, -6, -1062, -739, -1062.8615, -144, -1198, -144, -1198, -55, -1063, -55, 150, -54, 173, -86, 199, -114, 229, -140, 257, -160, 299, -175, 354, -189, 408, -196, 465, -193, 509, -181, 561, -155, 643, -64, 2813, -64, 2813, -400, 3572, -960, 3572, 941, 2842, 940, -4864, 912)
-
-[node name="Polygon2" type="StaticBody2D" parent="Level/Polygons"]
-position = Vector2(45, 16)
-
-[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon2"]
-texture_repeat = 2
-texture = ExtResource("6_u5sy4")
-polygon = PackedVector2Array(-811, -401, -718, -401, -718, -110, -811, -110)
-
-[node name="Grass" parent="Level/Polygons/Polygon2/Polygon" instance=ExtResource("6_p57ef")]
-
-[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon2"]
-polygon = PackedVector2Array(-811, -401, -718, -401, -718, -110, -811, -110)
-
-[node name="Polygon3" type="StaticBody2D" parent="Level/Polygons"]
-position = Vector2(-131, 16)
-
-[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon3"]
-texture_repeat = 2
-texture = ExtResource("6_u5sy4")
-polygon = PackedVector2Array(-811, -401, -718, -401, -718, -110, -811, -110)
-
-[node name="Grass" parent="Level/Polygons/Polygon3/Polygon" instance=ExtResource("6_p57ef")]
-
-[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon3"]
-polygon = PackedVector2Array(-811, -401, -718, -401, -718, -110, -811, -110)
 
 [node name="Interactable" type="Node2D" parent="Level"]
 
@@ -284,6 +245,51 @@ position = Vector2(-589, -103)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Level/Interactable"]
 position = Vector2(0, -11)
+
+[node name="Polygons" type="Node2D" parent="Level"]
+
+[node name="Polygon" type="StaticBody2D" parent="Level/Polygons"]
+
+[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon"]
+texture_repeat = 2
+texture = ExtResource("12_ca42v")
+polygon = PackedVector2Array(-4836, -6, -1062, -739, -1062.8615, -144, -1198, -144, -1198, -55, -1063, -55, -284.97876, -54.358597, -289, 234, -230, 234, -228.53253, -54.312057, 150, -54, 173, -86, 199, -114, 229, -140, 257, -160, 299, -175, 354, -189, 408, -196, 465, -193, 509, -181, 561, -155, 643, -64, 2813, -64, 2813, -400, 3572, -960, 3572, 941, 2842, 940, -4864, 912)
+
+[node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]
+
+[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon"]
+polygon = PackedVector2Array(-4836, -6, -1062, -739, -1062.8615, -144, -1198, -144, -1198, -55, -1063, -55, 150, -54, 173, -86, 199, -114, 229, -140, 257, -160, 299, -175, 354, -189, 408, -196, 465, -193, 509, -181, 561, -155, 643, -64, 2813, -64, 2813, -400, 3572, -960, 3572, 941, 2842, 940, -4864, 912)
+
+[node name="Polygon2" type="StaticBody2D" parent="Level/Polygons"]
+position = Vector2(45, 16)
+
+[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon2"]
+texture_repeat = 2
+texture = ExtResource("12_ca42v")
+polygon = PackedVector2Array(-811, -401, -718, -401, -718, -110, -811, -110)
+
+[node name="Grass" parent="Level/Polygons/Polygon2/Polygon" instance=ExtResource("6_p57ef")]
+
+[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon2"]
+polygon = PackedVector2Array(-811, -401, -718, -401, -718, -110, -811, -110)
+
+[node name="Polygon3" type="StaticBody2D" parent="Level/Polygons"]
+position = Vector2(-131, 16)
+
+[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon3"]
+texture_repeat = 2
+texture = ExtResource("12_ca42v")
+polygon = PackedVector2Array(-811, -401, -718, -401, -718, -110, -811, -110)
+
+[node name="Grass" parent="Level/Polygons/Polygon3/Polygon" instance=ExtResource("6_p57ef")]
+
+[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon3"]
+polygon = PackedVector2Array(-811, -401, -718, -401, -718, -110, -811, -110)
+
+[node name="Enemies" type="Node2D" parent="Level"]
+
+[node name="Purple" parent="Level" instance=ExtResource("15_ca42v")]
+position = Vector2(-965, -71)
 
 [node name="Glambert" parent="Level" instance=ExtResource("1_yqjtg")]
 position = Vector2(-929, -576)

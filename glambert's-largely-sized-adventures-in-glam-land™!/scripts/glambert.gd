@@ -12,12 +12,13 @@ const MAX_BUFFER_JUMP: float = 0.1
 const MAX_JUMPS: int = 1
 const BASE_SPEED: int = 1200
 const BASE_WEIGHT: float = 1
+const MAX_JUMP_HEIGHT: float = -300
 
 #MOVEMENT
 var coyote_time: float = MAX_COYOTE_TIME
 var buffer_jump: float = MAX_BUFFER_JUMP
 var speed: float = BASE_SPEED
-var jump_velocity: float = -300.0
+var jump_velocity: float
 var friction: float = 0.9
 var jumps: int = MAX_JUMPS
 var wall_jumps: int = 0
@@ -32,11 +33,17 @@ var direction : float = 0
 var last_wall_normal : Vector2
 var last_wall_jump_normal : Vector2
 var last_vel : Vector2
+var high_jump: bool = false
+var jump_height: float = MAX_JUMP_HEIGHT
+var crouching: bool = false
 
 #ANIMATION
 var flipped: bool = false
 var current_animation: String
 var slipping: bool = false
+
+#OTHER
+var dying: bool = false
 
 #SPRITES
 @onready var sprite_facing_left: AnimatedSprite2D = $Model/Sprites/SpriteFacingLeft
@@ -58,11 +65,15 @@ var slipping: bool = false
 @onready var iced_tea_texts: RichTextLabel = $UI/Control/IcedTeaTexts
 @onready var statues: HBoxContainer = $UI/Control/Statues
 @onready var level_text: RichTextLabel = $UI/Control/LevelText
+@onready var circle_collision: CollisionShape2D = $CircleCollision
 
 
 func _ready() -> void:
 	
+	get_tree().paused = false
+	
 	#SETS MOVEMENT VARIABLES
+	crouching = false
 	ground_pound_time = 0
 	weight = BASE_WEIGHT
 	ground_pounding = false
@@ -71,10 +82,13 @@ func _ready() -> void:
 	jumps = MAX_JUMPS
 	coyote_time = MAX_COYOTE_TIME
 	friction = GROUND_FRICTION
+	jump_velocity = MAX_JUMP_HEIGHT
+	#OTHER VARS
+	dying = false
 	#VISUAL THINGS
 	current_animation = "idle"
 	iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
-	level_text.text = "Level: #" + str(Globals.current_level)
+	level_text.text = "Level: #" + str(Globals.current_level + 1)
 	flip()
 	
 	await get_tree().create_timer(0).timeout
@@ -99,6 +113,7 @@ func _ready() -> void:
 	iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
 
 func _physics_process(delta: float) -> void:
+	
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -129,6 +144,8 @@ func _physics_process(delta: float) -> void:
 			ground_pound_time += delta
 			weight += 0.08
 		
+		
+			
 		in_air = true
 		fall_time += delta
 		
@@ -159,6 +176,7 @@ func _physics_process(delta: float) -> void:
 			weight = BASE_WEIGHT
 			
 	if in_air:
+		crouching = false
 		#CHECKS IF PRESSING DOWN
 		if Input.is_action_just_pressed("pound") and not ground_pounding and not on_wall:
 			velocity.x = clamp(velocity.x, -80, 80)
@@ -171,6 +189,7 @@ func _physics_process(delta: float) -> void:
 			
 		velocity += ((get_gravity() * weight) * delta)
 	else:
+		
 		jumps = MAX_JUMPS
 		coyote_time = MAX_COYOTE_TIME
 		in_air = false
@@ -273,7 +292,8 @@ func set_animation(animation: String):
 	
 	sprite_facing_left.play(animation)
 	sprite_facing_right.play(animation)
-	smooth_animations.play(animation)
+	if not crouching:
+		smooth_animations.play(animation)
 	
 func falling_animation(delta : float) -> void:
 	if in_air:
@@ -328,6 +348,7 @@ func end_level(node: Node, time: float, level_complete: bool):
 		#GOES TO NEXT LEVEL
 		
 		if level_complete:
+			
 			Globals.current_level += 1
 			#ANIMATION
 			var tween: Tween = create_tween()
@@ -341,7 +362,8 @@ func end_level(node: Node, time: float, level_complete: bool):
 			#NOISE
 			finish_level.play()
 			await tween.finished
-		
+		else:
+			dying = true
 		get_tree().reload_current_scene()
 
 #SPIKE COLLISION
