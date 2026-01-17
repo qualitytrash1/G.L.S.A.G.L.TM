@@ -94,7 +94,7 @@ _data = {
 size = Vector2(81, 48)
 
 [node name="Computer" type="Area2D" groups=["collectable", "computer"]]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 0
 metadata/location = ""
 

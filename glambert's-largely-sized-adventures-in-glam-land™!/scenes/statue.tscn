@@ -135,7 +135,7 @@ _data = {
 }
 
 [node name="Statue" type="Area2D" groups=["collectable", "statue"]]
-collision_layer = 2
+collision_layer = 4
 collision_mask = 0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]

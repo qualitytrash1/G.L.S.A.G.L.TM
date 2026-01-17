@@ -23,6 +23,7 @@ var in_air: bool = false
 var weight: float = BASE_WEIGHT
 var ground_pounding: bool = false
 var ground_pound_time: float = 0
+var direction : float = 0
 
 #ANIMATION
 var flipped: bool = false
@@ -88,7 +89,7 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	
 	#MAKES GROUNDPOUNDING GOOD
-	if ground_pound_time > 0.1:
+	if ground_pound_time > 0.08:
 		if weight < 0:
 			weight = BASE_WEIGHT * 8
 	elif ground_pounding:
@@ -102,6 +103,7 @@ func _physics_process(delta: float) -> void:
 		if ground_pounding:
 			weight = BASE_WEIGHT
 			ground_pounding = false
+			velocity.x = 0
 			punch.play()
 	#IN AIR
 	else:
@@ -117,6 +119,9 @@ func _physics_process(delta: float) -> void:
 	if in_air:
 		#CHECKS IF PRESSING DOWN
 		if Input.is_action_just_pressed("pound") and not ground_pounding:
+			velocity.x = 0
+			direction = 0
+			velocity.y = -120
 			ground_pound_time = 0
 			swishlast.play()
 			
@@ -149,7 +154,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("left", "right")
+	direction = Input.get_axis("left", "right")
 	
 	glambert_sunglasses.position.x = lerp(glambert_sunglasses.position.x, direction * 4, 0.08)
 	velocity.x += (direction * speed) * delta
@@ -243,8 +248,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		#COMPUTER
 		if area.is_in_group("computer"):
 			end_level(area, 0.4, true)
-	if area.is_in_group("insta-death"):
-		end_level(self, 0, false)
+
 
 func end_level(node: Node, time: float, level_complete: bool):
 		#GOES TO NEXT LEVEL
@@ -265,3 +269,8 @@ func end_level(node: Node, time: float, level_complete: bool):
 			await tween.finished
 		
 		get_tree().reload_current_scene()
+
+#SPIKE COLLISION
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group("insta-death"):
+		end_level(self, 0, false)
