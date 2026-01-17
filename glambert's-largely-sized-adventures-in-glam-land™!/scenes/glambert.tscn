@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cr4vhgrraqejj"]
+[gd_scene load_steps=31 format=3 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cw03lk1ivf4b6" path="res://audio/sfx/stone-sliding.ogg" id="8_p27ua"]
 [ext_resource type="AudioStream" uid="uid://bcyie2y7k8t3" path="res://audio/sfx/punch.ogg" id="8_ug42a"]
 [ext_resource type="AudioStream" uid="uid://d2g03c2xyijg" path="res://audio/sfx/swishlast.mp3" id="11_gwivv"]
+[ext_resource type="AudioStream" uid="uid://dei83ewex4agu" path="res://audio/sfx/goofy-ahh-slip.mp3" id="13_jxnjb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0dbj0"]
 atlas = ExtResource("1_eb3d3")
@@ -237,26 +238,22 @@ metadata/_edit_vertical_guides_ = [1420.0]
 position = Vector2(-1, -4)
 
 [node name="Sprites" type="Node2D" parent="Model"]
-position = Vector2(1, 4)
 
 [node name="SpriteFacingLeft" type="AnimatedSprite2D" parent="Model/Sprites"]
-position = Vector2(-1, -4)
 sprite_frames = SubResource("SpriteFrames_btdif")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="SpriteFacingRight" type="AnimatedSprite2D" parent="Model/Sprites"]
 visible = false
-position = Vector2(-1, -4)
 sprite_frames = SubResource("SpriteFrames_p27ua")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="GlambertSunglasses" type="Sprite2D" parent="Model/Sprites"]
-position = Vector2(-1, -4)
 texture = ExtResource("2_4w5rh")
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="CircleCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_eb3d3")
 
 [node name="WallDetector" type="Area2D" parent="."]
@@ -365,6 +362,11 @@ bus = &"Sounds"
 
 [node name="SodaCanOpen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ioqu6")
+volume_db = -10.495
+bus = &"Sounds"
+
+[node name="Slip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_jxnjb")
 volume_db = -10.495
 bus = &"Sounds"
 

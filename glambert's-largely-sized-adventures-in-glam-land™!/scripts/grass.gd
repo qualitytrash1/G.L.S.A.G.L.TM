@@ -39,7 +39,7 @@ func _update() -> void:
 		else:
 			next_point = polygon.polygon[index + 1]
 		new_side.position = point
-		new_side.look_at(next_point)
+		new_side.look_at(next_point + global_position)
 		new_side.get_child(0).rotation = new_side.rotation
 		new_side.rotation = 0
 		var tex_index : float = 0

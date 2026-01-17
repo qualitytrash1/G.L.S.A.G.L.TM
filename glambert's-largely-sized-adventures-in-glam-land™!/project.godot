@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Glambert's Largely Sized Adventures in Glam-Land™!"
 run/main_scene="uid://cvhnqj4t7mdea"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://textures/icon.svg"
 
 [autoload]
@@ -104,6 +104,14 @@ pound={
 , Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":-1,"axis":5,"axis_value":1.0,"script":null)
 ]
 }
+
+[physics]
+
+2d/run_on_separate_thread=true
+common/max_physics_steps_per_frame=1
+2d/solver/solver_iterations=8
+2d/solver/default_contact_bias=1.0
+common/physics_interpolation=true
 
 [rendering]
 
