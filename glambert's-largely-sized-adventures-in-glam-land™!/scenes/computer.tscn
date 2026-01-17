@@ -126,9 +126,9 @@ texture = ExtResource("1_7ikar")
 [node name="LocationText" type="RichTextLabel" parent="."]
 clip_contents = false
 offset_left = -22.0
-offset_top = 44.0
+offset_top = 19.000002
 offset_right = 418.25772
-offset_bottom = 184.082
+offset_bottom = 159.082
 scale = Vector2(0.09994146, 0.09994146)
 mouse_filter = 2
 theme = ExtResource("4_tjrug")
