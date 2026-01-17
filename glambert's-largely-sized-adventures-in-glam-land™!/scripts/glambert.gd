@@ -150,6 +150,9 @@ func _physics_process(delta: float) -> void:
 		coyote_time = MAX_COYOTE_TIME
 		buffer_jump = 0
 		velocity.y = jump_velocity
+		weight = BASE_WEIGHT
+		ground_pounding = false
+		ground_pound_time = 0
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
