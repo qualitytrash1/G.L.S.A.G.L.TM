@@ -1,0 +1,9 @@
+SYNTAX: 
+	MAJOR.MEDIUM.MINOR.PATCH.BUILD
+	
+Each new version adds to the build, and the rest are for if you actually add something.
+
+Versions:
+	0.0.6.0.3:
+		Basic level, start and end computer, coins, statues, and almost finished movement.
+		
