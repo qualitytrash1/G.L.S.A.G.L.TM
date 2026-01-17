@@ -103,7 +103,6 @@ func _physics_process(delta: float) -> void:
 		if ground_pounding:
 			weight = BASE_WEIGHT
 			ground_pounding = false
-			velocity.x = 0
 			punch.play()
 	#IN AIR
 	else:
@@ -119,7 +118,7 @@ func _physics_process(delta: float) -> void:
 	if in_air:
 		#CHECKS IF PRESSING DOWN
 		if Input.is_action_just_pressed("pound") and not ground_pounding:
-			velocity.x = 0
+			velocity.x = clamp(velocity.x, -80, 80)
 			direction = 0
 			velocity.y = -120
 			ground_pound_time = 0
