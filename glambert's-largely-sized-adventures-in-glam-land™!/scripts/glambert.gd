@@ -106,8 +106,10 @@ func _ready() -> void:
 	
 	#SPAWN AND CAMERA STUFFS (STUF OREOS? 677!!!) AHAHAHAHHHAH GET IT GET IT AHAHAHAHA
 	position = Globals.spawn_location
+	#CAMERA
 	camera.position.x = position.x
 	camera.position.y = position.y - Globals.zoom_factor
+	camera.limit_bottom = Globals.camera_y_limit
 	
 	#GUI
 	iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
@@ -311,6 +313,8 @@ func falling_animation(delta : float) -> void:
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	
 	#IS A COLLECTABLE
+	if area.is_in_group("insta-death"):
+		end_level(self, 0, false)
 	if area.is_in_group("collectable"):
 		#ICE TEA
 		if area.is_in_group("ice-tea"):
