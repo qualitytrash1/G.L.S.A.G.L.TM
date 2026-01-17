@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cr4vhgrraqejj"]
+[gd_scene load_steps=30 format=3 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
@@ -223,6 +223,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gwivv"]
+random_pitch = 1.02
+streams_count = 1
+stream_0/stream = ExtResource("4_0dbj0")
+
 [node name="Glambert" type="CharacterBody2D"]
 collision_mask = 3
 script = ExtResource("1_4w5rh")
@@ -335,27 +340,33 @@ autoplay = "outline"
 centered = false
 
 [node name="Boing" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_0dbj0")
-volume_db = -21.985
+stream = SubResource("AudioStreamRandomizer_gwivv")
+volume_db = -18.0
+bus = &"Sounds"
 
 [node name="Punch" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_ug42a")
 volume_db = -4.992
 pitch_scale = 0.79
+bus = &"Sounds"
 
 [node name="FinishLevel" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_4fsu5")
+bus = &"Sounds"
 
 [node name="StoneSliding" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_p27ua")
+bus = &"Sounds"
 
 [node name="Swishlast" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_gwivv")
 volume_db = -2.496
+bus = &"Sounds"
 
 [node name="SodaCanOpen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ioqu6")
 volume_db = -10.495
+bus = &"Sounds"
 
 [connection signal="body_entered" from="WallDetector" to="." method="_on_wall_detector_body_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
