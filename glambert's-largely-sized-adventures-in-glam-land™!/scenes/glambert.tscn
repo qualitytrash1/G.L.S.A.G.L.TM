@@ -272,8 +272,17 @@ shape = SubResource("CircleShape2D_0dbj0")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="IcedTeaTexts" type="RichTextLabel" parent="UI"]
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IcedTeaTexts" type="RichTextLabel" parent="UI/Control"]
 clip_contents = false
+layout_mode = 0
 offset_left = 17.0
 offset_top = 8.0
 offset_right = 3013.4854
@@ -283,12 +292,19 @@ mouse_filter = 2
 theme = ExtResource("4_2yc5u")
 text = "Iced-Teas: 0"
 
-[node name="LevelText" type="RichTextLabel" parent="UI"]
+[node name="LevelText" type="RichTextLabel" parent="UI/Control"]
 clip_contents = false
-offset_left = 17.0
-offset_top = 1337.0
-offset_right = 3013.4854
-offset_bottom = 1475.0
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -90.0
+offset_right = 16.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 0
 scale = Vector2(0.6300715, 0.6300715)
 mouse_filter = 2
 theme = ExtResource("4_2yc5u")
@@ -296,14 +312,25 @@ theme_override_colors/default_color = Color(0.99, 0.726, 0, 1)
 theme_override_colors/font_outline_color = Color(0.6262141, 0.4120647, 1.92523e-07, 1)
 text = "Level: #0"
 
-[node name="Statues" type="Node2D" parent="UI"]
+[node name="Statues" type="HBoxContainer" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 128.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+alignment = 2
 
-[node name="Sprite" type="AnimatedSprite2D" parent="UI/Statues"]
-position = Vector2(2493.7136, 93.679184)
-scale = Vector2(4.794611, 4.794611)
+[node name="StatueOutline" type="Control" parent="UI/Control/Statues"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Sprite" type="AnimatedSprite2D" parent="UI/Control/Statues/StatueOutline"]
+scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_2yc5u")
 animation = &"outline"
 autoplay = "outline"
+centered = false
 
 [node name="Boing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_0dbj0")

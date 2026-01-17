@@ -12,6 +12,8 @@ extends Node2D
 @onready var textures: Control = $Side/Textures
 
 
+func _ready() -> void:
+	_update()
 
 				
 func _process(delta: float) -> void:
@@ -21,7 +23,6 @@ func _process(delta: float) -> void:
 			update = false
 
 func _update() -> void:
-	level.update_polygons()
 	await get_tree().create_timer(0.1).timeout
 	create_tex(texture)
 	for i in sides.get_children():

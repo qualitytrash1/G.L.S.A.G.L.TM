@@ -30,7 +30,7 @@ var current_animation: String
 @onready var sprites: Node2D = $Model/Sprites
 @onready var glambert_sunglasses: Sprite2D = $Model/Sprites/GlambertSunglasses
 @onready var smooth_animations: AnimationPlayer = $SmoothAnimations
-@onready var statue_outline: AnimatedSprite2D = $UI/Statues/Sprite
+@onready var statue_outline: Control = $UI/Control/Statues/StatueOutline
 #SOUNDS
 @onready var boing: AudioStreamPlayer = $Boing
 @onready var soda_can_open: AudioStreamPlayer = $SodaCanOpen
@@ -38,9 +38,10 @@ var current_animation: String
 @onready var finish_level: AudioStreamPlayer = $FinishLevel
 #MISC
 @onready var camera: Camera2D = $"../../Camera"
-@onready var iced_tea_texts: RichTextLabel = $UI/IcedTeaTexts
-@onready var statues: Node2D = $UI/Statues
-@onready var level_text: RichTextLabel = $UI/LevelText
+@onready var iced_tea_texts: RichTextLabel = $UI/Control/IcedTeaTexts
+@onready var statues: HBoxContainer = $UI/Control/Statues
+@onready var level_text: RichTextLabel = $UI/Control/LevelText
+
 
 func _ready() -> void:
 	
@@ -61,15 +62,14 @@ func _ready() -> void:
 	#CREATES THE RIGHT AMOUNT OF OUTLINES FOR STATUES IN LEVEL
 	for i in range(Globals.statue_amount):
 		
-		var offset: int = -128
 		var clone_statue_button = statue_outline.duplicate()
 		
 		statues.add_child(clone_statue_button)
-		clone_statue_button.play("outline")
+		clone_statue_button.get_child(0).play("outline")
 		
-		clone_statue_button.position.x = statue_outline.position.x + (offset * i)
 	#REMOVES OG OUTLINE
 	statue_outline.queue_free()
+	
 	#SPAWN AND CAMERA STUFFS (STUF OREOS? 677!!!) AHAHAHAHHHAH GET IT GET IT AHAHAHAHA
 	position = Globals.spawn_location
 	camera.position.x = position.x
@@ -196,7 +196,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		#STATUE
 		if area.is_in_group("statue"):
 			
-			statues.get_child(Globals.statues).play("full")
+			statues.get_child(Globals.statues).get_child(0).play("full")
 			
 			area.get_child(1).queue_free()
 			
