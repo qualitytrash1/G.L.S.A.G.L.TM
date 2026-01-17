@@ -1,13 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=22 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
-[ext_resource type="PackedScene" path="res://scenes/sky_background.tscn" id="1_gee14"]
+[ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cr4vhgrraqejj" path="res://scenes/glambert.tscn" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://dy3pc8t7jwyyy" path="res://textures/graphical_ground.png" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://b35bebj1q3kti" path="res://scenes/music_controller.tscn" id="4_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://sfqrjqno6jek" path="res://textures/vaporwave_sun.png" id="5_0tnpc"]
 [ext_resource type="Script" uid="uid://dcrgb8yncovv1" path="res://scripts/level.gd" id="5_p57ef"]
-[ext_resource type="PackedScene" path="res://scenes/background.tscn" id="6_gee14"]
+[ext_resource type="PackedScene" uid="uid://c0ah5kn2ch61y" path="res://scenes/background.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://bb08qhktrr4g3" path="res://scenes/grass.tscn" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bsslovlujysmg" path="res://textures/dirt.png" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://3romnl56ifsa" path="res://scenes/ice_tea.tscn" id="10_vtaks"]
@@ -57,7 +57,7 @@ position = Vector2(0, -1364)
 zoom = Vector2(4, 4)
 
 [node name="Fade4" type="Sprite2D" parent="Camera"]
-position = Vector2(-1920, -34)
+position = Vector2(-1920, 34)
 texture = SubResource("GradientTexture2D_0tnpc")
 offset = Vector2(1920, 0)
 flip_v = true
@@ -67,13 +67,39 @@ position = Vector2(0, -112)
 texture = ExtResource("5_0tnpc")
 
 [node name="BG" type="Node2D" parent="."]
+position = Vector2(0, -31)
+
+[node name="Background2" parent="BG" instance=ExtResource("6_gee14")]
+modulate = Color(0.57700837, 0.5770084, 0.57700837, 1)
+scroll_scale = Vector2(0.6, 0.6)
+scroll_offset = Vector2(-1093, 127)
 
 [node name="Background" parent="BG" instance=ExtResource("6_gee14")]
 scroll_scale = Vector2(0.8, 0.6)
 scroll_offset = Vector2(64, 127)
 
+[node name="Background3" parent="BG" instance=ExtResource("6_gee14")]
+modulate = Color(0, 2.4409287, 2.4782562, 1)
+scroll_scale = Vector2(0.9, 0.6)
+scroll_offset = Vector2(-1178, 152)
+
 [node name="Sky" parent="BG" instance=ExtResource("1_gee14")]
 scroll_offset = Vector2(1711, 173)
+
+[node name="Ground2" type="Parallax2D" parent="BG"]
+scroll_scale = Vector2(0.85, 0.6)
+scroll_offset = Vector2(16, 122)
+repeat_size = Vector2(1280, 0)
+
+[node name="GraphicalGround" type="Sprite2D" parent="BG/Ground2"]
+position = Vector2(-319, 190)
+texture = ExtResource("2_u5sy4")
+offset = Vector2(1280, 0)
+
+[node name="GraphicalGround2" type="Sprite2D" parent="BG/Ground2"]
+position = Vector2(-319, 190)
+texture = ExtResource("2_u5sy4")
+offset = Vector2(1920, 0)
 
 [node name="Ground" type="Parallax2D" parent="BG"]
 scroll_scale = Vector2(0.9, 0.6)
@@ -110,13 +136,14 @@ polygon = PackedVector2Array(-4836, -6, -1062, -739, -1062.8615, -149.81541, -11
 [node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]
 
 [node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon"]
+polygon = PackedVector2Array(-4836, -6, -1062, -739, -1062.8615, -149.81541, -1198, -150, -1198, -55, -1063, -55, 150, -54, 173, -86, 199, -114, 229, -140, 257, -160, 299, -175, 354, -189, 408, -196, 465, -193, 509, -181, 561, -155, 643, -65, 2813, -64, 2813, -953, 3572, -960, 3572, 941, 2842, 940, -4864, 912)
 
 [node name="Interactable" type="Node2D" parent="Level"]
 
-[node name="Collectables" type="TileMap" parent="Level/Interactable"]
+[node name="Collectables" type="TileMapLayer" parent="Level/Interactable"]
+use_parent_material = true
+tile_map_data = PackedByteArray("AAAtAPb/AAAAAAAAAQAxAPb/AAAAAAAAAQDg//n/AAAAAAAAAQDg//r/AAAAAAAAAQDh//n/AAAAAAAAAQDh//r/AAAAAAAAAQDi//n/AAAAAAAAAQDi//r/AAAAAAAAAQDj//n/AAAAAAAAAQDj//r/AAAAAAAAAQDk//n/AAAAAAAAAQDk//r/AAAAAAAAAQDl//n/AAAAAAAAAQDl//r/AAAAAAAAAQDm//n/AAAAAAAAAQDm//r/AAAAAAAAAQDn//n/AAAAAAAAAQDn//r/AAAAAAAAAQDo//n/AAAAAAAAAQDo//r/AAAAAAAAAQDp//n/AAAAAAAAAQDp//r/AAAAAAAAAQDq//n/AAAAAAAAAQDq//r/AAAAAAAAAQDr//n/AAAAAAAAAQDr//r/AAAAAAAAAQDs//n/AAAAAAAAAQDs//r/AAAAAAAAAQDt//n/AAAAAAAAAQDt//r/AAAAAAAAAQDu//n/AAAAAAAAAQDu//r/AAAAAAAAAQDv//n/AAAAAAAAAQDv//r/AAAAAAAAAQDw//n/AAAAAAAAAQDw//r/AAAAAAAAAQDx//n/AAAAAAAAAQDx//r/AAAAAAAAAQDy//n/AAAAAAAAAQDy//r/AAAAAAAAAQDz//n/AAAAAAAAAQDz//r/AAAAAAAAAQD0//n/AAAAAAAAAQD0//r/AAAAAAAAAQD1//n/AAAAAAAAAQD1//r/AAAAAAAAAQACAPz/AAAAAAAAAQAFAPz/AAAAAAAAAQAIAPz/AAAAAAAAAQAKAPr/AAAAAAAAAQAMAPj/AAAAAAAAAQAOAPb/AAAAAAAAAQAQAPX/AAAAAAAAAQASAPT/AAAAAAAAAQAVAPP/AAAAAAAAAQAYAPP/AAAAAAAAAQAZAPP/AAAAAAAAAQAaAPP/AAAAAAAAAQDg//j/AAAAAAAAAQDh//j/AAAAAAAAAQDi//j/AAAAAAAAAQDj//j/AAAAAAAAAQDk//j/AAAAAAAAAQDl//j/AAAAAAAAAQDm//j/AAAAAAAAAQDn//j/AAAAAAAAAQDo//j/AAAAAAAAAQDp//j/AAAAAAAAAQDq//j/AAAAAAAAAQDr//j/AAAAAAAAAQDs//j/AAAAAAAAAQDt//j/AAAAAAAAAQDu//j/AAAAAAAAAQDv//j/AAAAAAAAAQDw//j/AAAAAAAAAQDx//j/AAAAAAAAAQDy//j/AAAAAAAAAQDz//j/AAAAAAAAAQD0//j/AAAAAAAAAQD1//j/AAAAAAAAAQA=")
 tile_set = SubResource("TileSet_0tnpc")
-format = 2
-layer_0/tile_data = PackedInt32Array(-655315, 0, 65536, -655311, 0, 65536, -393248, 0, 65536, -327712, 0, 65536, -393247, 0, 65536, -327711, 0, 65536, -393246, 0, 65536, -327710, 0, 65536, -393245, 0, 65536, -327709, 0, 65536, -393244, 0, 65536, -327708, 0, 65536, -393243, 0, 65536, -327707, 0, 65536, -393242, 0, 65536, -327706, 0, 65536, -393241, 0, 65536, -327705, 0, 65536, -393240, 0, 65536, -327704, 0, 65536, -393239, 0, 65536, -327703, 0, 65536, -393238, 0, 65536, -327702, 0, 65536, -393237, 0, 65536, -327701, 0, 65536, -393236, 0, 65536, -327700, 0, 65536, -393235, 0, 65536, -327699, 0, 65536, -393234, 0, 65536, -327698, 0, 65536, -393233, 0, 65536, -327697, 0, 65536, -393232, 0, 65536, -327696, 0, 65536, -393231, 0, 65536, -327695, 0, 65536, -393230, 0, 65536, -327694, 0, 65536, -393229, 0, 65536, -327693, 0, 65536, -393228, 0, 65536, -327692, 0, 65536, -393227, 0, 65536, -327691, 0, 65536, -262142, 0, 65536, -262139, 0, 65536, -262136, 0, 65536, -393206, 0, 65536, -524276, 0, 65536, -655346, 0, 65536, -720880, 0, 65536, -786414, 0, 65536, -851947, 0, 65536, -851944, 0, 65536, -851943, 0, 65536, -851942, 0, 65536, -458784, 0, 65536, -458783, 0, 65536, -458782, 0, 65536, -458781, 0, 65536, -458780, 0, 65536, -458779, 0, 65536, -458778, 0, 65536, -458777, 0, 65536, -458776, 0, 65536, -458775, 0, 65536, -458774, 0, 65536, -458773, 0, 65536, -458772, 0, 65536, -458771, 0, 65536, -458770, 0, 65536, -458769, 0, 65536, -458768, 0, 65536, -458767, 0, 65536, -458766, 0, 65536, -458765, 0, 65536, -458764, 0, 65536, -458763, 0, 65536)
 
 [node name="Statues" type="Node2D" parent="Level/Interactable"]
 
@@ -136,6 +163,8 @@ position = Vector2(1023, -124)
 
 [node name="Computer" parent="Level/Interactable/Computers" instance=ExtResource("13_kvuet")]
 position = Vector2(-643, -114)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Level/Interactable"]
 
 [node name="Glambert" parent="Level" instance=ExtResource("1_yqjtg")]
 position = Vector2(-929, -576)
