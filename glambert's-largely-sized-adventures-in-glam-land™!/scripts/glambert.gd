@@ -9,6 +9,7 @@ const MAX_COYOTE_TIME: float = 0.08
 const MAX_BUFFER_JUMP: float = 0.08
 const MAX_JUMPS: int = 1
 const BASE_SPEED: int = 1200
+const BASE_WEIGHT: float = 1
 
 #MOVEMENT
 var coyote_time: float = MAX_COYOTE_TIME
@@ -19,10 +20,13 @@ var friction: float = 0.9
 var jumps: int = MAX_JUMPS
 var fall_time : float = 0
 var in_air: bool = false
+var weight: float = BASE_WEIGHT
+var ground_pounding: bool = false
+var ground_pound_time: float = 0
+
 #ANIMATION
 var flipped: bool = false
 var current_animation: String
-
 
 #SPRITES
 @onready var sprite_facing_left: AnimatedSprite2D = $Model/Sprites/SpriteFacingLeft
@@ -36,6 +40,8 @@ var current_animation: String
 @onready var soda_can_open: AudioStreamPlayer = $SodaCanOpen
 @onready var stone_sliding: AudioStreamPlayer = $StoneSliding
 @onready var finish_level: AudioStreamPlayer = $FinishLevel
+@onready var punch: AudioStreamPlayer = $Punch
+@onready var swishlast: AudioStreamPlayer = $Swishlast
 #MISC
 @onready var camera: Camera2D = $"../../Camera"
 @onready var iced_tea_texts: RichTextLabel = $UI/Control/IcedTeaTexts
@@ -46,6 +52,9 @@ var current_animation: String
 func _ready() -> void:
 	
 	#SETS MOVEMENT VARIABLES
+	ground_pound_time = 0
+	weight = BASE_WEIGHT
+	ground_pounding = false
 	speed = BASE_SPEED
 	buffer_jump = 0
 	jumps = MAX_JUMPS
@@ -78,17 +87,42 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	
+	#MAKES GROUNDPOUNDING GOOD
+	if ground_pound_time > 0.1:
+		if weight < 0:
+			weight = BASE_WEIGHT * 8
+	elif ground_pounding:
+		weight = -0.2
 	
-	
+	#NOT IN AIR
 	if is_on_floor():
 		in_air = false
 		fall_time = 0
+		#RESETS WEIGHT
+		if ground_pounding:
+			weight = BASE_WEIGHT
+			ground_pounding = false
+			punch.play()
+	#IN AIR
 	else:
+		#MAKES IT GO FASTER AS IT GOES DOWN
+		if ground_pounding:
+			
+			ground_pound_time += delta
+			weight += 0.08
+		
 		in_air = true
 		fall_time += delta
 	
 	if in_air:
-		velocity += get_gravity() * delta
+		#CHECKS IF PRESSING DOWN
+		if Input.is_action_just_pressed("pound") and not ground_pounding:
+			ground_pound_time = 0
+			swishlast.play()
+			
+			ground_pounding = true
+			
+		velocity += ((get_gravity() * weight) * delta)
 	else:
 		jumps = MAX_JUMPS
 		coyote_time = MAX_COYOTE_TIME
@@ -169,7 +203,7 @@ func set_animation(animation: String):
 func falling_animation(delta : float) -> void:
 	if in_air:
 		fall_time = clamp(fall_time, 0, 1)
-		sprites.scale = lerp(Vector2(1.0,1.0), Vector2(0.7,1.3), fall_time)
+		sprites.scale = lerp(Vector2(1.0,1.0), Vector2(0.7 / (1 + (weight * 0.1)), 1.3 * (1 + (weight * 0.1))), fall_time)
 	else:
 		sprites.scale = lerp(sprites.scale, Vector2(1,1), delta * 30)
 
@@ -208,24 +242,26 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			await area.get_child(2).animation_finished
 		#COMPUTER
 		if area.is_in_group("computer"):
-			end_level(area, 0.4)
-			
+			end_level(area, 0.4, true)
+	if area.is_in_group("insta-death"):
+		end_level(self, 0, false)
 
-func end_level(node: Node, time: float):
-	#GOES TO NEXT LEVEL
-		Globals.current_level += 1
-		#ANIMATION
-		var tween: Tween = create_tween()
-		tween.set_parallel(true)
-		#TWEENS
-		tween.tween_property(self, "scale", Vector2(0, 0), time)
-		tween.tween_property(self, "global_position", node.global_position, time)
-		tween.tween_property(self, "modulate", Color(0.161, 0.294, 0.761, 1.0), time)
-		tween.tween_property(camera, "zoom", (camera.zoom * 4), time)
-		tween.tween_property(camera, "global_position", node.global_position, time)
-		#NOISE
-		finish_level.play()
+func end_level(node: Node, time: float, level_complete: bool):
+		#GOES TO NEXT LEVEL
 		
-		await tween.finished
+		if level_complete:
+			Globals.current_level += 1
+			#ANIMATION
+			var tween: Tween = create_tween()
+			tween.set_parallel(true)
+			#TWEENS
+			tween.tween_property(self, "scale", Vector2(0, 0), time)
+			tween.tween_property(self, "global_position", node.global_position, time)
+			tween.tween_property(self, "modulate", Color(0.161, 0.294, 0.761, 1.0), time)
+			tween.tween_property(camera, "zoom", (camera.zoom * 4), time)
+			tween.tween_property(camera, "global_position", node.global_position, time)
+			#NOISE
+			finish_level.play()
+			await tween.finished
 		
 		get_tree().reload_current_scene()

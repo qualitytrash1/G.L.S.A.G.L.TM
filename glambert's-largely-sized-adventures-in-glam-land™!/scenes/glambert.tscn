@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cr4vhgrraqejj"]
+[gd_scene load_steps=29 format=3 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://bustbe34s5gfi" path="res://textures/statue-outline.png" id="7_57g0r"]
 [ext_resource type="AudioStream" uid="uid://dh63w2iumuxd6" path="res://audio/sfx/standby-beeps.mp3" id="8_4fsu5"]
 [ext_resource type="AudioStream" uid="uid://cw03lk1ivf4b6" path="res://audio/sfx/stone-sliding.ogg" id="8_p27ua"]
+[ext_resource type="AudioStream" uid="uid://bcyie2y7k8t3" path="res://audio/sfx/punch.ogg" id="8_ug42a"]
+[ext_resource type="AudioStream" uid="uid://d2g03c2xyijg" path="res://audio/sfx/swishlast.mp3" id="11_gwivv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0dbj0"]
 atlas = ExtResource("1_eb3d3")
@@ -222,6 +224,7 @@ animations = [{
 }]
 
 [node name="Glambert" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_4w5rh")
 metadata/_edit_vertical_guides_ = [1420.0]
 
@@ -264,7 +267,6 @@ libraries = {
 }
 
 [node name="Hitbox" type="Area2D" parent="."]
-visible = false
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
@@ -336,11 +338,20 @@ centered = false
 stream = ExtResource("4_0dbj0")
 volume_db = -21.985
 
+[node name="Punch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ug42a")
+volume_db = -4.992
+pitch_scale = 0.79
+
 [node name="FinishLevel" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_4fsu5")
 
 [node name="StoneSliding" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_p27ua")
+
+[node name="Swishlast" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_gwivv")
+volume_db = -2.496
 
 [node name="SodaCanOpen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ioqu6")
