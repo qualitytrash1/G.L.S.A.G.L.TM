@@ -71,6 +71,8 @@ var dying: bool = false
 @onready var level_text: RichTextLabel = $UI/Control/LevelText
 @onready var circle_collision: CollisionShape2D = $CircleCollision
 @onready var chromatic_abberation: ColorRect = $UI/Control/ChromaticAbberation
+@onready var ground_particles: GPUParticles2D = $Ground
+@onready var ground_pound_particles: GPUParticles2D = $GroundPound
 
 
 func _ready() -> void:
@@ -91,6 +93,7 @@ func _ready() -> void:
 	#OTHER VARS
 	dying = false
 	#VISUAL THINGS
+	ground_particles.emitting = false
 	current_animation = "idle"
 	iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
 	level_text.text = "Level: #" + str(Globals.current_level + 1)
@@ -143,6 +146,8 @@ func _physics_process(delta: float) -> void:
 			weight = BASE_WEIGHT
 			ground_pounding = false
 			punch.play()
+			stone_sliding.play()
+			ground_pound_particles.restart()
 	#IN AIR
 	else:
 		#MAKES IT GO FASTER AS IT GOES DOWN
@@ -156,7 +161,7 @@ func _physics_process(delta: float) -> void:
 		in_air = true
 		fall_time += delta
 		
-	if is_on_wall_only() and (abs(last_vel.x) > 50 or on_wall) and not ground_pounding:
+	if (is_on_wall_only() and (abs(last_vel.x) > 50 or on_wall) and not ground_pounding):
 		print(fall_time)
 		on_wall = true
 		last_wall_normal = get_wall_normal()
@@ -183,15 +188,16 @@ func _physics_process(delta: float) -> void:
 			weight = BASE_WEIGHT
 			
 	if in_air:
+		ground_particles.emitting = false
 		crouching = false
 		#CHECKS IF PRESSING DOWN
 		if Input.is_action_just_pressed("pound") and not ground_pounding and not on_wall:
+			
 			velocity.x = clamp(velocity.x, -80, 80)
 			direction = 0
 			velocity.y = -120
 			ground_pound_time = 0
 			swishlast.play()
-			
 			ground_pounding = true
 			
 		velocity += ((get_gravity() * weight) * delta)
@@ -252,16 +258,19 @@ func _physics_process(delta: float) -> void:
 		else:
 			speed = BASE_SPEED
 			smooth_animations.speed_scale = 1
-		
+		if not in_air:
+			ground_particles.emitting = true
 		friction = GROUND_FRICTION
 		glambert_sunglasses.position.x = direction * 5
 		flip()
 		current_animation = "walk"
 	#COMMENT
 	elif in_air:
+		ground_particles.emitting = false
 		friction = AIR_FRICTION
 	
 	if !direction and !in_air:
+		ground_particles.emitting = false
 		current_animation = "idle"
 		friction = GROUND_FRICTION
 	

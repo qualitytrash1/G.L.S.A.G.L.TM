@@ -34,6 +34,7 @@ statue=""
 computer=""
 insta-death=""
 enemy=""
+enemy-spawner=""
 
 [input]
 

@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Wave.ogg-ce80de860227360c29216d3b4601a30c.ogg
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

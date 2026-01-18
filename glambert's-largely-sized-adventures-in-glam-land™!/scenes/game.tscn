@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://83b0a7speph3" path="res://textures/dirt-purple.png" id="12_ca42v"]
 [ext_resource type="PackedScene" uid="uid://bvqdsk3hm4v53" path="res://scenes/computer.tscn" id="13_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dabx0pgoxd26s" path="res://textures/wood-platform.png" id="14_trtic"]
-[ext_resource type="PackedScene" uid="uid://bxh6mbpbm8fhm" path="res://scenes/enemy-purple.tscn" id="15_ca42v"]
+[ext_resource type="PackedScene" uid="uid://br813p4gprdda" path="res://scenes/enemy_spawner.tscn" id="15_1kice"]
 [ext_resource type="Texture2D" uid="uid://dtdk5pdbi7fjg" path="res://textures/bushes.png" id="17_rysoc"]
 
 [sub_resource type="Gradient" id="Gradient_gts02"]
@@ -271,7 +271,7 @@ tile_set = SubResource("TileSet_kvuet")
 [node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon"]
 texture_repeat = 2
 texture = ExtResource("12_ca42v")
-polygon = PackedVector2Array(-1675, -834, -1063, -1358, -1062, -661, -1225, -661, -1224.9812, -576, -1062, -576, -1062.8615, -144, -1198, -144, -1198, -55, -1063, -55, -284.97876, -54.358597, -289, 234, -230, 234, -228.53253, -54.312057, -138.8378, -54.23812, -139, 233, -82, 233, -82, -54.160633, 150, -54, 173, -87, 229, -140, 299, -175, 372, -193, 439, -195, 519, -175, 586, -134, 623, -91, 659.5938, -63.99997, 1109, -64, 1113, -289, 1296.9127, -289, 1296, -965, 1536, -530, 1539, 401, -1667.4448, 406)
+polygon = PackedVector2Array(-1675, -1359, -1063, -1358, -1062, -661, -1225, -661, -1224.9812, -576, -1062, -576, -1062.8615, -144, -1198, -144, -1198, -55, -1063, -55, -284.97876, -54.358597, -289, 234, -230, 234, -228.53253, -54.312057, -138.8378, -54.23812, -139, 233, -82, 233, -82, -54.160633, 150, -54, 173, -87, 229, -140, 299, -175, 372, -193, 439, -195, 519, -175, 586, -134, 623, -91, 659.5938, -63.99997, 1109, -64, 1113, -289, 1296.9127, -289, 1296, -965, 1536, -966, 1539, 401, -1667.4448, 406)
 
 [node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]
 
@@ -306,20 +306,25 @@ polygon = PackedVector2Array(-811, -401, -718, -401, -718, -110, -811, -110)
 
 [node name="Enemies" type="Node2D" parent="Level"]
 
-[node name="Purple" parent="Level/Enemies" instance=ExtResource("15_ca42v")]
-position = Vector2(-180, -98)
+[node name="EnemySpawner" parent="Level/Enemies" instance=ExtResource("15_1kice")]
+position = Vector2(-21, -74)
 
-[node name="Purple2" parent="Level/Enemies" instance=ExtResource("15_ca42v")]
-position = Vector2(81, -68)
+[node name="EnemySpawner6" parent="Level/Enemies" instance=ExtResource("15_1kice")]
+position = Vector2(102, -74)
 
-[node name="Purple3" parent="Level/Enemies" instance=ExtResource("15_ca42v")]
-position = Vector2(1251, -297)
+[node name="EnemySpawner2" parent="Level/Enemies" instance=ExtResource("15_1kice")]
+position = Vector2(-182, -82)
 
-[node name="Purple4" parent="Level/Enemies" instance=ExtResource("15_ca42v")]
-position = Vector2(810, -81)
+[node name="EnemySpawner3" parent="Level/Enemies" instance=ExtResource("15_1kice")]
+position = Vector2(818, -111)
+enemy_to_spawn = 1
 
-[node name="Purple5" parent="Level/Enemies" instance=ExtResource("15_ca42v")]
-position = Vector2(-886, -396)
+[node name="EnemySpawner4" parent="Level/Enemies" instance=ExtResource("15_1kice")]
+position = Vector2(1213, -325)
+
+[node name="EnemySpawner5" parent="Level/Enemies" instance=ExtResource("15_1kice")]
+position = Vector2(-901, -413)
+enemy_to_spawn = 2
 
 [node name="Glambert" parent="Level" instance=ExtResource("1_yqjtg")]
 position = Vector2(-929, -576)

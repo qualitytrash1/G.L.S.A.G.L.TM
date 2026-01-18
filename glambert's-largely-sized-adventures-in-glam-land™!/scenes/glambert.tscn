@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cr4vhgrraqejj"]
+[gd_scene load_steps=38 format=3 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
@@ -15,6 +15,9 @@
 [ext_resource type="AudioStream" uid="uid://d2g03c2xyijg" path="res://audio/sfx/swishlast.mp3" id="11_gwivv"]
 [ext_resource type="AudioStream" uid="uid://dei83ewex4agu" path="res://audio/sfx/goofy-ahh-slip.mp3" id="13_jxnjb"]
 [ext_resource type="AudioStream" uid="uid://21aieoosy3km" path="res://audio/sfx/electricity-charge-sound-effect.mp3" id="14_rwaqa"]
+[ext_resource type="Texture2D" uid="uid://wd4lygejleri" path="res://textures/dirt-particle.png" id="16_y0eeb"]
+[ext_resource type="Material" uid="uid://jvq3nyoju8rb" path="res://materials/walk_particles.tres" id="17_u87yd"]
+[ext_resource type="Material" uid="uid://dbavlmf514os0" path="res://materials/ground-pound_sparticles.tres" id="18_jtgda"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0dbj0"]
 atlas = ExtResource("1_eb3d3")
@@ -454,7 +457,7 @@ color = Color(1, 1, 1, 0)
 
 [node name="Boing" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_gwivv")
-volume_db = -18.0
+volume_db = -14.414
 bus = &"Sounds"
 
 [node name="Punch" type="AudioStreamPlayer" parent="."]
@@ -469,6 +472,7 @@ bus = &"Sounds"
 
 [node name="StoneSliding" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_p27ua")
+volume_db = 5.123
 bus = &"Sounds"
 
 [node name="Swishlast" type="AudioStreamPlayer" parent="."]
@@ -489,6 +493,23 @@ bus = &"Sounds"
 [node name="Attack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_rwaqa")
 volume_db = 5.2
+
+[node name="Ground" type="GPUParticles2D" parent="."]
+position = Vector2(0, 9)
+emitting = false
+amount = 10
+texture = ExtResource("16_y0eeb")
+lifetime = 0.5
+process_material = ExtResource("17_u87yd")
+
+[node name="GroundPound" type="GPUParticles2D" parent="."]
+position = Vector2(0, 10)
+emitting = false
+texture = ExtResource("16_y0eeb")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource("18_jtgda")
 
 [connection signal="body_entered" from="WallDetector" to="." method="_on_wall_detector_body_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

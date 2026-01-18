@@ -11,6 +11,7 @@ extends CharacterBody2D
 @onready var smooth_animations: AnimationPlayer = $SmoothAnimations
 @onready var body: CollisionShape2D = $Body
 @onready var sparks: GPUParticles2D = $Sparks
+@onready var always_emitting_sparks: GPUParticles2D = $AlwaysEmittingSparks
 
 const SPEED = 800.0
 const JUMP_VELOCITY = -400.0
@@ -32,6 +33,7 @@ func _physics_process(delta: float) -> void:
 		hole_detector.position.x = -hole_detector.position.x
 		direction = -direction
 		velocity.x = 0
+		always_emitting_sparks.position.x = -always_emitting_sparks.position.x
 	
 	old_pos_x = position.x
 	velocity.x += (direction * SPEED) * delta

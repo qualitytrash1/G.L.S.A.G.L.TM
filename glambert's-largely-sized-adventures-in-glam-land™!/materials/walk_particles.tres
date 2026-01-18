@@ -1,0 +1,17 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://jvq3nyoju8rb"]
+
+[sub_resource type="Curve" id="Curve_y0eeb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.5480218, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u87yd"]
+curve = SubResource("Curve_y0eeb")
+
+[resource]
+particle_flag_disable_z = true
+angle_min = -360.0
+angle_max = 360.00003
+gravity = Vector3(0, 98, 0)
+scale_min = 0.39999998
+scale_max = 2.0
+alpha_curve = SubResource("CurveTexture_u87yd")
