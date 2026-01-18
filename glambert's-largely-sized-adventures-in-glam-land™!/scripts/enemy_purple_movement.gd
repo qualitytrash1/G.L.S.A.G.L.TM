@@ -3,6 +3,9 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var hole_detector: RayCast2D = $HoleDetector
 @onready var attack: AudioStreamPlayer = $Attack
+@onready var hit_box_collision: CollisionShape2D = $Hitbox/CollisionShape2D
+@onready var smooth_animations: AnimationPlayer = $SmoothAnimations
+@onready var body: CollisionShape2D = $Body
 
 const SPEED = 800.0
 const JUMP_VELOCITY = -400.0
@@ -37,5 +40,17 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
+	
 	if area.get_parent() is Glambert:
-		area.get_parent().end_level(self, 0, false)
+		
+		if area.get_parent().ground_pounding:
+			
+			body.queue_free()
+			hit_box_collision.queue_free()
+			
+			smooth_animations.play("death")
+			await smooth_animations.animation_finished
+			queue_free()
+		
+		else:
+			area.get_parent().end_level(self, 0, false)
