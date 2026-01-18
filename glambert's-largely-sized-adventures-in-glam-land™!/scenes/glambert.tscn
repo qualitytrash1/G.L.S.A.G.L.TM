@@ -455,6 +455,16 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
+[node name="FPS" type="RichTextLabel" parent="UI"]
+offset_left = 1561.0
+offset_top = 962.0
+offset_right = 1916.0
+offset_bottom = 1080.0
+theme_override_font_sizes/normal_font_size = 32
+text = "das"
+horizontal_alignment = 2
+vertical_alignment = 2
+
 [node name="Boing" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_gwivv")
 volume_db = -14.414

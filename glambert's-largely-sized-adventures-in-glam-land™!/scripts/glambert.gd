@@ -65,6 +65,7 @@ var dying: bool = false
 @onready var slip: AudioStreamPlayer = $Slip
 @onready var attack: AudioStreamPlayer = $Attack
 #MISC
+@onready var fps: RichTextLabel = $UI/FPS
 @onready var camera: Camera2D = $"../../Camera"
 @onready var iced_tea_texts: RichTextLabel = $UI/Control/IcedTeaTexts
 @onready var statues: HBoxContainer = $UI/Control/Statues
@@ -124,6 +125,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
+	
+	fps.text = "FPS: " + str(Engine.get_frames_per_second())
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -362,8 +365,9 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			end_level(area, 0.4, true)
 			
 	if area.get_parent() is BasicEnemy:
+		
 		var enemy : BasicEnemy = area.get_parent()
-	
+		
 		if ground_pounding:
 			#jump
 			coyote_time = MAX_COYOTE_TIME

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=32 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dabx0pgoxd26s" path="res://textures/wood-platform.png" id="14_trtic"]
 [ext_resource type="PackedScene" uid="uid://br813p4gprdda" path="res://scenes/enemy_spawner.tscn" id="15_1kice"]
 [ext_resource type="Texture2D" uid="uid://dtdk5pdbi7fjg" path="res://textures/bushes.png" id="17_rysoc"]
+[ext_resource type="Texture2D" uid="uid://doa8itx5bouhd" path="res://textures/palm-trees.png" id="18_ssvqc"]
 
 [sub_resource type="Gradient" id="Gradient_gts02"]
 colors = PackedColorArray(0.63, 0, 0.609, 1, 0.22916658, 0, 0.55, 0)
@@ -179,7 +180,7 @@ offset = Vector2(1920, 0)
 
 [node name="Ground" type="Parallax2D" parent="BG"]
 scroll_scale = Vector2(0.9, 0.6)
-scroll_offset = Vector2(0, 122)
+scroll_offset = Vector2(17, 122)
 repeat_size = Vector2(1280, 0)
 
 [node name="GraphicalGround" type="Sprite2D" parent="BG/Ground"]
@@ -205,6 +206,54 @@ flip_v = true
 position = Vector2(964, 121)
 scale = Vector2(4, 4)
 texture = ExtResource("5_0tnpc")
+
+[node name="PalmTrees2" type="Parallax2D" parent="BG"]
+modulate = Color(0.5409905, 0.5409905, 0.5409905, 1)
+scroll_scale = Vector2(0.9, 0.8)
+scroll_offset = Vector2(-269, -3)
+repeat_size = Vector2(640, 0)
+
+[node name="Bushes" type="Sprite2D" parent="BG/PalmTrees2"]
+position = Vector2(-367, 0)
+texture = ExtResource("18_ssvqc")
+offset = Vector2(1280, 0)
+
+[node name="Bushes2" type="Sprite2D" parent="BG/PalmTrees2"]
+position = Vector2(-367, 0)
+texture = ExtResource("18_ssvqc")
+offset = Vector2(640, 0)
+
+[node name="PalmTrees" type="Parallax2D" parent="BG"]
+modulate = Color(0.8431839, 0.8431839, 0.84318376, 1)
+scroll_scale = Vector2(0.95, 0.9)
+scroll_offset = Vector2(-1070, -66)
+repeat_size = Vector2(640, 0)
+
+[node name="Bushes" type="Sprite2D" parent="BG/PalmTrees"]
+position = Vector2(-367, 0)
+texture = ExtResource("18_ssvqc")
+offset = Vector2(1280, 0)
+
+[node name="Bushes2" type="Sprite2D" parent="BG/PalmTrees"]
+position = Vector2(-367, 0)
+texture = ExtResource("18_ssvqc")
+offset = Vector2(640, 0)
+
+[node name="Bushes2" type="Parallax2D" parent="BG"]
+modulate = Color(0.5409909, 0.5409904, 0.5409905, 1)
+scroll_scale = Vector2(0.95, 0.8)
+scroll_offset = Vector2(-452, 31)
+repeat_size = Vector2(640, 0)
+
+[node name="Bushes" type="Sprite2D" parent="BG/Bushes2"]
+position = Vector2(-351, 0)
+texture = ExtResource("17_rysoc")
+offset = Vector2(640, 0)
+
+[node name="Bushes2" type="Sprite2D" parent="BG/Bushes2"]
+position = Vector2(289, 0)
+texture = ExtResource("17_rysoc")
+offset = Vector2(1280, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_iywne")
@@ -276,7 +325,7 @@ polygon = PackedVector2Array(-1675, -1359, -1063, -1358, -1062, -661, -1225, -66
 [node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]
 
 [node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon"]
-polygon = PackedVector2Array(-1675, -834, -1063, -1358, -1062, -661, -1225, -661, -1224.9812, -576, -1062, -576, -1062.8615, -144, -1198, -144, -1198, -55, -1063, -55, -284.97876, -54.358597, -289, 234, -230, 234, -228.53253, -54.312057, -138.8378, -54.23812, -139, 233, -82, 233, -82, -54.160633, 150, -54, 173, -87, 229, -140, 299, -175, 372, -193, 439, -195, 519, -175, 586, -134, 623, -91, 659.5938, -63.99997, 1109, -64, 1113, -289, 1296.9127, -289, 1296, -965, 1536, -530, 1539, 401, -1667.4448, 406)
+polygon = PackedVector2Array(-1675, -1359, -1063, -1358, -1062, -661, -1225, -661, -1224.9812, -576, -1062, -576, -1062.8615, -144, -1198, -144, -1198, -55, -1063, -55, -284.97876, -54.358597, -289, 234, -230, 234, -228.53253, -54.312057, -138.8378, -54.23812, -139, 233, -82, 233, -82, -54.160633, 150, -54, 173, -87, 229, -140, 299, -175, 372, -193, 439, -195, 519, -175, 586, -134, 623, -91, 659.5938, -63.99997, 1109, -64, 1113, -289, 1296.9127, -289, 1296, -965, 1536, -966, 1539, 401, -1667.4448, 406)
 
 [node name="Polygon2" type="StaticBody2D" parent="Level/Polygons"]
 position = Vector2(45, 16)
@@ -361,3 +410,18 @@ offset = Vector2(640, 0)
 position = Vector2(273, 0)
 texture = ExtResource("17_rysoc")
 offset = Vector2(1280, 0)
+
+[node name="PalmTrees" type="Parallax2D" parent="FG"]
+scroll_scale = Vector2(1.3, 1)
+scroll_offset = Vector2(-430, 25)
+repeat_size = Vector2(640, 0)
+
+[node name="Bushes" type="Sprite2D" parent="FG/PalmTrees"]
+position = Vector2(-367, 0)
+texture = ExtResource("18_ssvqc")
+offset = Vector2(1280, 0)
+
+[node name="Bushes2" type="Sprite2D" parent="FG/PalmTrees"]
+position = Vector2(-367, 0)
+texture = ExtResource("18_ssvqc")
+offset = Vector2(640, 0)
