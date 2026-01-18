@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cr4vhgrraqejj"]
+[gd_scene load_steps=33 format=3 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bcyie2y7k8t3" path="res://audio/sfx/punch.ogg" id="8_ug42a"]
 [ext_resource type="AudioStream" uid="uid://d2g03c2xyijg" path="res://audio/sfx/swishlast.mp3" id="11_gwivv"]
 [ext_resource type="AudioStream" uid="uid://dei83ewex4agu" path="res://audio/sfx/goofy-ahh-slip.mp3" id="13_jxnjb"]
+[ext_resource type="AudioStream" uid="uid://21aieoosy3km" path="res://audio/sfx/electricity-charge-sound-effect.mp3" id="14_rwaqa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0dbj0"]
 atlas = ExtResource("1_eb3d3")
@@ -450,6 +451,10 @@ bus = &"Sounds"
 stream = ExtResource("13_jxnjb")
 volume_db = -10.495
 bus = &"Sounds"
+
+[node name="Attack" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_rwaqa")
+volume_db = 5.2
 
 [connection signal="body_entered" from="WallDetector" to="." method="_on_wall_detector_body_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

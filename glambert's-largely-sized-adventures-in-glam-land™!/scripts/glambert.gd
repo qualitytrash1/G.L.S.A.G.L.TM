@@ -60,6 +60,7 @@ var dying: bool = false
 @onready var punch: AudioStreamPlayer = $Punch
 @onready var swishlast: AudioStreamPlayer = $Swishlast
 @onready var slip: AudioStreamPlayer = $Slip
+@onready var attack: AudioStreamPlayer = $Attack
 #MISC
 @onready var camera: Camera2D = $"../../Camera"
 @onready var iced_tea_texts: RichTextLabel = $UI/Control/IcedTeaTexts
@@ -355,6 +356,9 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			coyote_time = MAX_COYOTE_TIME
 			buffer_jump = MAX_BUFFER_JUMP
 			ground_pounding = false
+			
+			attack.play()
+			punch.play()
 			
 			enemy.body.queue_free()
 			enemy.hit_box_collision.queue_free()
