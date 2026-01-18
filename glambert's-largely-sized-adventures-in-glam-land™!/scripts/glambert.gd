@@ -15,20 +15,15 @@ const BASE_WEIGHT: float = 1
 const MAX_JUMP_HEIGHT: float = -300
 
 #MOVEMENT
-var coyote_time: float = MAX_COYOTE_TIME
-var buffer_jump: float = MAX_BUFFER_JUMP
 var speed: float = BASE_SPEED
 var jump_velocity: float
 var friction: float = 0.9
 var jumps: int = MAX_JUMPS
 var wall_jumps: int = 0
-var fall_time : float = 0
-var wall_time : float = 0
 var in_air: bool = false
 var on_wall: bool = false
 var weight: float = BASE_WEIGHT
 var ground_pounding: bool = false
-var ground_pound_time: float = 0
 var direction : float = 0
 var last_wall_normal : Vector2
 var last_wall_jump_normal : Vector2
@@ -36,6 +31,14 @@ var last_vel : Vector2
 var high_jump: bool = false
 var jump_height: float = MAX_JUMP_HEIGHT
 var crouching: bool = false
+
+#TIMERS
+var fall_time : float = 0
+var wall_time : float = 0
+var coyote_time: float = MAX_COYOTE_TIME
+var buffer_jump: float = MAX_BUFFER_JUMP
+var ground_pound_time: float = 0
+var time_since_ground_pound : float = 0
 
 #ANIMATION
 var flipped: bool = false

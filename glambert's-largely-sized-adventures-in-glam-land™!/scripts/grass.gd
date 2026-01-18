@@ -56,7 +56,10 @@ func create_tex() -> void:
 		get_child(0).get_child(0).add_child(new_cont)
 		var new_rect : TextureRect = TextureRect.new()
 		new_rect.texture = texture
+		new_rect.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 		new_cont.add_child(new_rect)
+		new_cont.scale = Vector2(1, 1) / get_child(0).get_child(0).scale
+		new_rect.scale = new_cont.scale
 		new_cont.size = Vector2(texture.get_size().x, 1)
 		new_rect.size = Vector2(texture.get_size().x, i + 1)
 		new_cont.clip_contents = true
@@ -64,6 +67,10 @@ func create_tex() -> void:
 		new_rect.stretch_mode = TextureRect.STRETCH_TILE
 		new_cont.position.y = i
 		new_rect.position.y = -i
+		new_cont.size.x += float(i) / 4.0
+		new_cont.position.x += float(i) / 8.0
+		new_rect.size.x = new_cont.size.x
+		new_rect.position.x = new_cont.position.x
 		print("added: " + str(new_cont))
 		print("added: " + str(new_rect))
 	
