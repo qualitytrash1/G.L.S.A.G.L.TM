@@ -1,13 +1,13 @@
-[gd_scene load_steps=30 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=31 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
-[ext_resource type="PackedScene" path="res://scenes/sky_background.tscn" id="1_gee14"]
+[ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cr4vhgrraqejj" path="res://scenes/glambert.tscn" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://dy3pc8t7jwyyy" path="res://textures/graphical_ground.png" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://b35bebj1q3kti" path="res://scenes/music_controller.tscn" id="4_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://sfqrjqno6jek" path="res://textures/vaporwave_sun.png" id="5_0tnpc"]
 [ext_resource type="Script" uid="uid://dcrgb8yncovv1" path="res://scripts/level.gd" id="5_p57ef"]
-[ext_resource type="PackedScene" path="res://scenes/background.tscn" id="6_gee14"]
+[ext_resource type="PackedScene" uid="uid://c0ah5kn2ch61y" path="res://scenes/background.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://bb08qhktrr4g3" path="res://scenes/grass.tscn" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://ff51uench70u" path="res://textures/spikes-short.png" id="9_ir15t"]
 [ext_resource type="PackedScene" uid="uid://3romnl56ifsa" path="res://scenes/ice_tea.tscn" id="10_vtaks"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bvqdsk3hm4v53" path="res://scenes/computer.tscn" id="13_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dabx0pgoxd26s" path="res://textures/wood-platform.png" id="14_trtic"]
 [ext_resource type="PackedScene" uid="uid://bxh6mbpbm8fhm" path="res://scenes/enemy-purple.tscn" id="15_ca42v"]
+[ext_resource type="Texture2D" uid="uid://dtdk5pdbi7fjg" path="res://textures/bushes.png" id="17_rysoc"]
 
 [sub_resource type="Gradient" id="Gradient_gts02"]
 colors = PackedColorArray(0.63, 0, 0.609, 1, 0.22916658, 0, 0.55, 0)
@@ -275,6 +276,7 @@ polygon = PackedVector2Array(-1675, -834, -1063, -1358, -1062, -661, -1225, -661
 [node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]
 
 [node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon"]
+polygon = PackedVector2Array(-1675, -834, -1063, -1358, -1062, -661, -1225, -661, -1224.9812, -576, -1062, -576, -1062.8615, -144, -1198, -144, -1198, -55, -1063, -55, -284.97876, -54.358597, -289, 234, -230, 234, -228.53253, -54.312057, -138.8378, -54.23812, -139, 233, -82, 233, -82, -54.160633, 150, -54, 173, -87, 229, -140, 299, -175, 372, -193, 439, -195, 519, -175, 586, -134, 623, -91, 659.5938, -63.99997, 1109, -64, 1113, -289, 1296.9127, -289, 1296, -965, 1536, -530, 1539, 401, -1667.4448, 406)
 
 [node name="Polygon2" type="StaticBody2D" parent="Level/Polygons"]
 position = Vector2(45, 16)
@@ -313,5 +315,44 @@ position = Vector2(81, -68)
 [node name="Purple3" parent="Level/Enemies" instance=ExtResource("15_ca42v")]
 position = Vector2(1251, -297)
 
+[node name="Purple4" parent="Level/Enemies" instance=ExtResource("15_ca42v")]
+position = Vector2(810, -81)
+
+[node name="Purple5" parent="Level/Enemies" instance=ExtResource("15_ca42v")]
+position = Vector2(-886, -396)
+
 [node name="Glambert" parent="Level" instance=ExtResource("1_yqjtg")]
 position = Vector2(-929, -576)
+
+[node name="FG" type="Node2D" parent="."]
+
+[node name="Bushes2" type="Parallax2D" parent="FG"]
+modulate = Color(0.64, 0.64, 0.64, 1)
+scroll_scale = Vector2(1.05, 1)
+scroll_offset = Vector2(-1092, -66)
+repeat_size = Vector2(640, 0)
+
+[node name="Bushes" type="Sprite2D" parent="FG/Bushes2"]
+position = Vector2(-351, 0)
+texture = ExtResource("17_rysoc")
+offset = Vector2(640, 0)
+
+[node name="Bushes2" type="Sprite2D" parent="FG/Bushes2"]
+position = Vector2(289, 0)
+texture = ExtResource("17_rysoc")
+offset = Vector2(1280, 0)
+
+[node name="Bushes" type="Parallax2D" parent="FG"]
+scroll_scale = Vector2(1.2, 1)
+scroll_offset = Vector2(-1070, -66)
+repeat_size = Vector2(640, 0)
+
+[node name="Bushes" type="Sprite2D" parent="FG/Bushes"]
+position = Vector2(-367, 0)
+texture = ExtResource("17_rysoc")
+offset = Vector2(640, 0)
+
+[node name="Bushes2" type="Sprite2D" parent="FG/Bushes"]
+position = Vector2(273, 0)
+texture = ExtResource("17_rysoc")
+offset = Vector2(1280, 0)

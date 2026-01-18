@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c64v154ca7onu"
+path="res://.godot/imported/Pixelated Skies.ogg-a6defcb8b1e6dcd039937899c9f1d7ee.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/music/Pixelated Skies.ogg"
+dest_files=["res://.godot/imported/Pixelated Skies.ogg-a6defcb8b1e6dcd039937899c9f1d7ee.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

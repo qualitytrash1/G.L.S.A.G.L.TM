@@ -70,6 +70,7 @@ var dying: bool = false
 @onready var statues: HBoxContainer = $UI/Control/Statues
 @onready var level_text: RichTextLabel = $UI/Control/LevelText
 @onready var circle_collision: CollisionShape2D = $CircleCollision
+@onready var chromatic_abberation: ColorRect = $UI/Control/ChromaticAbberation
 
 
 func _ready() -> void:
@@ -363,12 +364,19 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			attack.play()
 			punch.play()
 			
+			#MAKES IT SO PARTICLES DONT CUT OFF
+			var particles = enemy.sparks.duplicate()
+			add_child(particles)
+			particles.emitting = true
+			
 			enemy.body.queue_free()
 			enemy.hit_box_collision.queue_free()
 			
 			enemy.smooth_animations.play("death")
 			await enemy.smooth_animations.animation_finished
 			enemy.queue_free()
+			await particles.finished
+			particles.queue_free()
 
 		
 		else:

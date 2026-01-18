@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cr4vhgrraqejj"]
+[gd_scene load_steps=35 format=3 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c0f4nnrnoel2y" path="res://textures/statue-head_only.png" id="5_2yc5u"]
 [ext_resource type="AudioStream" uid="uid://bhqjkvt1i7obr" path="res://audio/sfx/soda-can_open.mp3" id="5_ioqu6"]
 [ext_resource type="Texture2D" uid="uid://bustbe34s5gfi" path="res://textures/statue-outline.png" id="7_57g0r"]
+[ext_resource type="Shader" uid="uid://dvucg12v3ujeu" path="res://shaders/crt.gdshader" id="7_yvlf7"]
 [ext_resource type="AudioStream" uid="uid://dh63w2iumuxd6" path="res://audio/sfx/standby-beeps.mp3" id="8_4fsu5"]
 [ext_resource type="AudioStream" uid="uid://cw03lk1ivf4b6" path="res://audio/sfx/stone-sliding.ogg" id="8_p27ua"]
 [ext_resource type="AudioStream" uid="uid://bcyie2y7k8t3" path="res://audio/sfx/punch.ogg" id="8_ug42a"]
@@ -301,6 +302,26 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y0eeb"]
+shader = ExtResource("7_yvlf7")
+shader_parameter/enable_grain = true
+shader_parameter/enable_curving = false
+shader_parameter/enable_scanlines = false
+shader_parameter/enable_chromatic_aberration = true
+shader_parameter/enable_rgb_grid = false
+shader_parameter/enable_vhs_wiggle = false
+shader_parameter/enable_vignette = false
+shader_parameter/brightness_multiplier = 1.0
+shader_parameter/grain_strength = 0.25
+shader_parameter/curve_power = 1.02
+shader_parameter/vignette_size = 0.4
+shader_parameter/vignette_smoothness = 0.4
+shader_parameter/scanlines_interval = 12.0
+shader_parameter/scanline_opacity = 0.10000000149012
+shader_parameter/scanline_thickness = 3.0
+shader_parameter/chromatic_aberration_strength = 1.0
+shader_parameter/wiggle = 0.002
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gwivv"]
 random_pitch = 1.02
 streams_count = 1
@@ -402,7 +423,10 @@ text = "Level: #0"
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 128.0
+offset_left = -7.0
+offset_top = 5.0
+offset_right = -7.0
+offset_bottom = 133.0
 grow_horizontal = 2
 theme_override_constants/separation = 0
 alignment = 2
@@ -417,6 +441,16 @@ sprite_frames = SubResource("SpriteFrames_2yc5u")
 animation = &"outline"
 autoplay = "outline"
 centered = false
+
+[node name="ChromaticAbberation" type="ColorRect" parent="UI/Control"]
+material = SubResource("ShaderMaterial_y0eeb")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
 
 [node name="Boing" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_gwivv")

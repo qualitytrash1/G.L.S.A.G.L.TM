@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var hit_box_collision: CollisionShape2D = $Hitbox/CollisionShape2D
 @onready var smooth_animations: AnimationPlayer = $SmoothAnimations
 @onready var body: CollisionShape2D = $Body
+@onready var sparks: GPUParticles2D = $Sparks
 
 const SPEED = 800.0
 const JUMP_VELOCITY = -400.0
@@ -20,6 +21,7 @@ var old_pos_x: float
 
 func _ready() -> void:
 	direction = -1
+	sparks.emitting = false
 
 func _physics_process(delta: float) -> void:
 	
