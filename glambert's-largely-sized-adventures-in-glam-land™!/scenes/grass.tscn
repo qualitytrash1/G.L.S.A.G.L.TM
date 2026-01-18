@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bb08qhktrr4g3"]
 
 [ext_resource type="Script" uid="uid://djguocrvnugga" path="res://scripts/grass.gd" id="1_e1kak"]
-[ext_resource type="Texture2D" uid="uid://dcyj16gwnhks" path="res://textures/grass_overhang.png" id="2_yarb5"]
+[ext_resource type="Texture2D" uid="uid://cc3g0b7lxq0ca" path="res://textures/grass.png" id="2_yarb5"]
 
 [node name="Grass" type="Node2D"]
 script = ExtResource("1_e1kak")
@@ -12,22 +12,5 @@ texture = ExtResource("2_yarb5")
 [node name="Textures" type="Control" parent="Side"]
 layout_mode = 3
 anchors_preset = 0
-
-[node name="1" type="Node2D" parent="Side/Textures"]
-
-[node name="1" type="Control" parent="Side/Textures/1"]
-clip_contents = true
-layout_mode = 3
-anchors_preset = 0
-offset_right = 80.0
-offset_bottom = 10.0
-
-[node name="TextureRect" type="TextureRect" parent="Side/Textures/1/1"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 1.0
-texture = ExtResource("2_yarb5")
-expand_mode = 1
-stretch_mode = 1
 
 [node name="Sides" type="Node2D" parent="."]

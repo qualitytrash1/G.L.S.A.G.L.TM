@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://jqibvuu70u6f"]
+[gd_scene load_steps=14 format=3 uid="uid://bxh6mbpbm8fhm"]
 
 [ext_resource type="Script" uid="uid://qgwdrh4yir84" path="res://scripts/enemy_purple_movement.gd" id="1_016g0"]
 [ext_resource type="Texture2D" uid="uid://d4k7c10nlp41q" path="res://textures/cord-enemy-short.png" id="2_itpxd"]
@@ -32,34 +32,6 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_itpxd"]
 size = Vector2(41, 10)
-
-[sub_resource type="Animation" id="Animation_itpxd"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.55),
-"transitions": PackedFloat32Array(0.7071068, 1.2311445),
-"update": 0,
-"values": [Vector2(-17, -5), Vector2(-17, -6.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.55),
-"transitions": PackedFloat32Array(0.70710677, 1.2311445),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 1.09375)]
-}
 
 [sub_resource type="Animation" id="Animation_y258b"]
 length = 0.001
@@ -164,6 +136,34 @@ tracks/3/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_itpxd"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.55),
+"transitions": PackedFloat32Array(0.7071068, 1.2311445),
+"update": 0,
+"values": [Vector2(-17, -5), Vector2(-17, -6.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.55),
+"transitions": PackedFloat32Array(0.70710677, 1.2311445),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.09375)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y258b"]
 _data = {
 &"RESET": SubResource("Animation_y258b"),
@@ -201,9 +201,9 @@ bus = &"Sounds"
 [node name="Attack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_itpxd")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." groups=["enemy"]]
 process_mode = 3
-collision_layer = 0
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 process_mode = 3
@@ -215,5 +215,3 @@ libraries = {
 &"": SubResource("AnimationLibrary_y258b")
 }
 autoplay = "idle"
-
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

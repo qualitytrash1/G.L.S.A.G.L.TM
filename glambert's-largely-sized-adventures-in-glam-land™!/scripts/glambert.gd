@@ -346,6 +346,26 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		#COMPUTER
 		if area.is_in_group("computer"):
 			end_level(area, 0.4, true)
+			
+	if area.get_parent() is BasicEnemy:
+		var enemy : BasicEnemy = area.get_parent()
+	
+		if ground_pounding:
+			#jump
+			coyote_time = MAX_COYOTE_TIME
+			buffer_jump = MAX_BUFFER_JUMP
+			ground_pounding = false
+			
+			enemy.body.queue_free()
+			enemy.hit_box_collision.queue_free()
+			
+			enemy.smooth_animations.play("death")
+			await enemy.smooth_animations.animation_finished
+			enemy.queue_free()
+
+		
+		else:
+			end_level(enemy, 0, false)
 
 
 func end_level(node: Node, time: float, level_complete: bool):

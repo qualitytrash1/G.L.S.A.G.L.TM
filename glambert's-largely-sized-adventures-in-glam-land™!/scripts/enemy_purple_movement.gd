@@ -1,4 +1,8 @@
+class_name BasicEnemy
+
 extends CharacterBody2D
+
+
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var hole_detector: RayCast2D = $HoleDetector
@@ -37,20 +41,3 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	move_and_slide()
-
-
-func _on_hitbox_area_entered(area: Area2D) -> void:
-	
-	if area.get_parent() is Glambert:
-		
-		if area.get_parent().ground_pounding:
-			
-			body.queue_free()
-			hit_box_collision.queue_free()
-			
-			smooth_animations.play("death")
-			await smooth_animations.animation_finished
-			queue_free()
-		
-		else:
-			area.get_parent().end_level(self, 0, false)

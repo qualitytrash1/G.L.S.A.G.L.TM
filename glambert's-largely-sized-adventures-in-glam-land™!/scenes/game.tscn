@@ -1,13 +1,13 @@
 [gd_scene load_steps=30 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
-[ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
+[ext_resource type="PackedScene" path="res://scenes/sky_background.tscn" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cr4vhgrraqejj" path="res://scenes/glambert.tscn" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://dy3pc8t7jwyyy" path="res://textures/graphical_ground.png" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://b35bebj1q3kti" path="res://scenes/music_controller.tscn" id="4_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://sfqrjqno6jek" path="res://textures/vaporwave_sun.png" id="5_0tnpc"]
 [ext_resource type="Script" uid="uid://dcrgb8yncovv1" path="res://scripts/level.gd" id="5_p57ef"]
-[ext_resource type="PackedScene" uid="uid://c0ah5kn2ch61y" path="res://scenes/background.tscn" id="6_gee14"]
+[ext_resource type="PackedScene" path="res://scenes/background.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://bb08qhktrr4g3" path="res://scenes/grass.tscn" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://ff51uench70u" path="res://textures/spikes-short.png" id="9_ir15t"]
 [ext_resource type="PackedScene" uid="uid://3romnl56ifsa" path="res://scenes/ice_tea.tscn" id="10_vtaks"]
@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://83b0a7speph3" path="res://textures/dirt-purple.png" id="12_ca42v"]
 [ext_resource type="PackedScene" uid="uid://bvqdsk3hm4v53" path="res://scenes/computer.tscn" id="13_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dabx0pgoxd26s" path="res://textures/wood-platform.png" id="14_trtic"]
-[ext_resource type="PackedScene" uid="uid://jqibvuu70u6f" path="res://scenes/enemy-purple.tscn" id="15_ca42v"]
+[ext_resource type="PackedScene" uid="uid://bxh6mbpbm8fhm" path="res://scenes/enemy-purple.tscn" id="15_ca42v"]
 
 [sub_resource type="Gradient" id="Gradient_gts02"]
 colors = PackedColorArray(0.63, 0, 0.609, 1, 0.22916658, 0, 0.55, 0)
@@ -275,7 +275,6 @@ polygon = PackedVector2Array(-1675, -834, -1063, -1358, -1062, -661, -1225, -661
 [node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]
 
 [node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon"]
-polygon = PackedVector2Array(-4836, -6, -1062, -739, -1062.8615, -144, -1198, -144, -1198, -55, -1063, -55, -284.97876, -54.358597, -289, 234, -230, 234, -228.53253, -54.312057, -138.8378, -54.23812, -139, 233, -82, 233, -82, -54.160633, 150, -54, 173, -86, 199, -114, 229, -140, 257, -160, 299, -175, 354, -189, 408, -196, 465, -193, 509, -181, 561, -155, 643, -64, 2813, -64, 2813, -400, 3572, -960, 3572, 941, 2842, 940, -4864, 912)
 
 [node name="Polygon2" type="StaticBody2D" parent="Level/Polygons"]
 position = Vector2(45, 16)
