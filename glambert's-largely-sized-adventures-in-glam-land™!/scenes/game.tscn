@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=33 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://badtfuyl8v0pi" path="res://scenes/statue.tscn" id="11_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://83b0a7speph3" path="res://textures/dirt-purple.png" id="12_ca42v"]
 [ext_resource type="PackedScene" uid="uid://bvqdsk3hm4v53" path="res://scenes/computer.tscn" id="13_kvuet"]
+[ext_resource type="PackedScene" uid="uid://f4am5o61tsi4" path="res://scenes/checkpoint.tscn" id="14_264po"]
 [ext_resource type="Texture2D" uid="uid://dabx0pgoxd26s" path="res://textures/wood-platform.png" id="14_trtic"]
 [ext_resource type="PackedScene" uid="uid://br813p4gprdda" path="res://scenes/enemy_spawner.tscn" id="15_1kice"]
 [ext_resource type="Texture2D" uid="uid://dtdk5pdbi7fjg" path="res://textures/bushes.png" id="17_rysoc"]
@@ -308,6 +309,11 @@ position = Vector2(-589, -103)
 [node name="TileMapLayer" type="TileMapLayer" parent="Level/Interactable"]
 visible = false
 position = Vector2(0, -11)
+
+[node name="Checkpoints" type="Node2D" parent="Level/Interactable"]
+
+[node name="Checkpoint" parent="Level/Interactable/Checkpoints" instance=ExtResource("14_264po")]
+position = Vector2(409, -256)
 
 [node name="Platforms" type="TileMapLayer" parent="Level"]
 tile_map_data = PackedByteArray("AAB6/93/BwAEAAAAAAB6/9n/BwAEAAAAAAB+/+f/BwADAAAAAAB9/+f/BwABAAAAAAB8/+f/BwABAAAAAAB7/+f/BwACAAAAAAB+/9//BwADAAAAAAB9/9//BwACAAAAAAB8/9//BwABAAAAAAB7/9//BwACAAAAAAB6/9//BwAAAAAAAAB+/9f/BwADAAAAAAB9/9f/BwABAAAAAAB8/9f/BwACAAAAAAB7/9f/BwACAAAAAAB6/9f/BwAAAAAAAAB6/+f/BwAAAAAAAADu//H/BwADAAAAAADt//H/BwACAAAAAADs//H/BwABAAAAAADr//H/BwABAAAAAADq//H/BwABAAAAAADp//H/BwACAAAAAADo//H/BwABAAAAAADn//H/BwABAAAAAADm//H/BwACAAAAAADl//H/BwACAAAAAADk//H/BwABAAAAAADj//H/BwAAAAAAAAAWAPH/BwADAAAAAAAVAPH/BwABAAAAAAAUAPH/BwACAAAAAAATAPH/BwABAAAAAAASAPH/BwACAAAAAAARAPH/BwABAAAAAAAQAPH/BwACAAAAAAAPAPH/BwAAAAAAAAAVAPL/BwADAAAAAAAUAPL/BwAAAAAAAADr//L/BwADAAAAAADq//L/BwACAAAAAADp//L/BwABAAAAAADo//L/BwABAAAAAADn//L/BwACAAAAAADm//L/BwAAAAAAAAB7/+D/BwADAAAAAAB6/+D/BwAAAAAAAAB7/9j/BwADAAAAAAB6/9j/BwAAAAAAAACg/8D/BwACAAAAAACf/8D/BwACAAAAAACe/8D/BwABAAAAAACd/8D/BwACAAAAAACc/8D/BwABAAAAAACb/8D/BwACAAAAAACa/8D/BwABAAAAAACZ/8D/BwACAAAAAACY/8D/BwACAAAAAACX/8D/BwABAAAAAACW/8D/BwACAAAAAACV/8D/BwABAAAAAACW/8H/BwADAAAAAACV/8H/BwAAAAAAAACg/8H/BwADAAAAAACf/8H/BwAAAAAAAACh/8D/BwADAAAAAACU/8D/BwAAAAAAAAB6/6D/BwAAAAAAAAB7/6D/BwACAAAAAAB8/6D/BwACAAAAAAB9/6D/BwACAAAAAAB+/6D/BwACAAAAAAB//6D/BwABAAAAAACA/6D/BwADAAAAAAB7/6H/BwADAAAAAAB6/6H/BwAAAAAAAACKAND/BwABAAAAAACJAND/BwABAAAAAACIAND/BwABAAAAAACHAND/BwACAAAAAACGAND/BwAAAAAAAACLAND/BwACAAAAAACMAND/BwADAAAAAACKANH/BwAAAAAAAACLANH/BwACAAAAAACMANH/BwABAAAAAACNANH/BwADAAAAAACGANz/BwAAAAAAAACHANz/BwACAAAAAACIANz/BwACAAAAAACJANz/BwACAAAAAACKANz/BwACAAAAAACLANz/BwADAAAAAACKAN3/BwAAAAAAAACLAN3/BwADAAAAAAA=")
