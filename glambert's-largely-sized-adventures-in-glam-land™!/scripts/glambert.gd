@@ -239,7 +239,7 @@ func _physics_process(delta: float) -> void:
 		velocity += ((get_gravity() * weight) * delta)
 		
 		#CUT JUMP
-		if Input.is_action_just_released("jump") and jumping and velocity.y:
+		if Input.is_action_just_released("jump") and jumping:
 			cut_jump = true
 	else:
 		if Input.is_action_just_pressed("pound") and not ground_pounding and not on_wall and not crouching and bodies_in_crouch == 0:
@@ -269,7 +269,7 @@ func _physics_process(delta: float) -> void:
 		cut_jump = false
 		
 	if cut_jump and velocity.y < -35 and not ground_pounding and wall_jumps == 0:
-		velocity.y = lerp(velocity.y, -25.0, delta * (weight * 6))
+		velocity.y = lerp(velocity.y, -35.0, delta * (weight * 4))
 		
 		
 	if jumps > 0 and buffer_jump > 0 and (not on_wall or (on_wall and wall_time > 0.12)) and (coyote_time > 0 or (fall_time > 0.1)) and time_since_ground_pound > MIN_TIME_SINCE_GROUND_POUND and bodies_in_uncrouch < 1:
