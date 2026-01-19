@@ -13,6 +13,8 @@ const MAX_JUMPS: int = 1
 const BASE_SPEED: int = 1200
 const BASE_WEIGHT: float = 1
 const MAX_JUMP_HEIGHT: float = -300
+const GROUND_PARTICLE_COUNT: int = 10
+const MIN_TIME_SINCE_GROUND_POUND : float = 0.05
 
 #MOVEMENT
 var speed: float = BASE_SPEED
@@ -44,13 +46,18 @@ var time_since_ground_pound : float = 0
 var flipped: bool = false
 var current_animation: String
 var slipping: bool = false
+var visual_crouching
 
 #OTHER
 var dying: bool = false
+var bodies_in_crouch: int = 0
+var bodies_in_uncrouch: int = 0
 
 #SPRITES
 @onready var sprite_facing_left: AnimatedSprite2D = $Model/Sprites/SpriteFacingLeft
 @onready var sprite_facing_right: AnimatedSprite2D = $Model/Sprites/SpriteFacingRight
+@onready var crouch_facing_left: AnimatedSprite2D = $Model/Sprites/CrouchFacingLeft
+@onready var crouch_facing_right: AnimatedSprite2D = $Model/Sprites/CrouchFacingRight
 @onready var sprites: Node2D = $Model/Sprites
 @onready var glambert_sunglasses: Sprite2D = $Model/Sprites/GlambertSunglasses
 @onready var smooth_animations: AnimationPlayer = $SmoothAnimations
@@ -64,6 +71,8 @@ var dying: bool = false
 @onready var swishlast: AudioStreamPlayer = $Swishlast
 @onready var slip: AudioStreamPlayer = $Slip
 @onready var attack: AudioStreamPlayer = $Attack
+@onready var squish: AudioStreamPlayer = $Squish
+@onready var pop: AudioStreamPlayer = $Pop
 #MISC
 @onready var fps: RichTextLabel = $UI/FPS
 @onready var camera: Camera2D = $"../../Camera"
@@ -74,6 +83,11 @@ var dying: bool = false
 @onready var chromatic_abberation: ColorRect = $UI/Control/ChromaticAbberation
 @onready var ground_particles: GPUParticles2D = $Ground
 @onready var ground_pound_particles: GPUParticles2D = $GroundPound
+@onready var normal_collision: CollisionShape2D = $NormalCollision
+@onready var crouch_collision: CollisionShape2D = $CrouchCollision
+@onready var normal_hitbox: CollisionShape2D = $Hitbox/NormalHitbox
+@onready var crouch_hitbox: CollisionShape2D = $Hitbox/CrouchHitbox
+@onready var bottom_gradient: TextureRect = $"../BottomGradient"
 
 
 func _ready() -> void:
@@ -119,6 +133,7 @@ func _ready() -> void:
 	camera.position.x = position.x
 	camera.position.y = position.y - Globals.zoom_factor
 	camera.limit_bottom = Globals.camera_y_limit
+	bottom_gradient.position.y = Globals.camera_y_limit - bottom_gradient.size.y
 	
 	#GUI
 	iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
@@ -147,10 +162,13 @@ func _physics_process(delta: float) -> void:
 		#RESETS WEIGHT
 		if ground_pounding:
 			weight = BASE_WEIGHT
+			time_since_ground_pound = 0
 			ground_pounding = false
 			punch.play()
 			stone_sliding.play()
 			ground_pound_particles.restart()
+			#PLAY ANIMATION
+			uncrouch(true)
 	#IN AIR
 	else:
 		#MAKES IT GO FASTER AS IT GOES DOWN
@@ -165,6 +183,7 @@ func _physics_process(delta: float) -> void:
 		fall_time += delta
 		
 	if (is_on_wall_only() and (abs(last_vel.x) > 50 or on_wall) and not ground_pounding):
+		rotation = 0
 		print(fall_time)
 		on_wall = true
 		last_wall_normal = get_wall_normal()
@@ -186,13 +205,17 @@ func _physics_process(delta: float) -> void:
 	else:
 		on_wall = false
 		wall_time = 0
-		sprites.rotation = lerp(sprites.rotation, deg_to_rad(get_floor_normal().x * 67.5), delta * 24)
+		sprites.rotation = lerp(sprites.rotation, 0.0, delta * 24)
+		if not in_air:
+			rotation = lerp(rotation, deg_to_rad(get_floor_normal().x * 59.9), delta * 24)
 		if not ground_pounding:
 			weight = BASE_WEIGHT
 			
 	if in_air:
+		rotation = 0
 		ground_particles.emitting = false
-		crouching = false
+		if bodies_in_uncrouch == 0:
+			uncrouch()
 		#CHECKS IF PRESSING DOWN
 		if Input.is_action_just_pressed("pound") and not ground_pounding and not on_wall:
 			
@@ -205,22 +228,30 @@ func _physics_process(delta: float) -> void:
 			
 		velocity += ((get_gravity() * weight) * delta)
 	else:
-		
+		if Input.is_action_just_pressed("pound") and not ground_pounding and not on_wall and not crouching and bodies_in_crouch == 0:
+			crouch()
+			
 		jumps = MAX_JUMPS
 		coyote_time = MAX_COYOTE_TIME
 		in_air = false
 		
-	#SUBTRACT VARIABLES
+	if not Input.is_action_pressed("pound") and crouching and bodies_in_uncrouch == 0: #uncrouch
+		uncrouch()
+		
+	#TIMER VARIABLES
 	coyote_time -= delta
 	buffer_jump -= delta
-		
+	time_since_ground_pound += delta
 
-	# Handle jump.
+	#JUMPING
 	
 	if Input.is_action_just_pressed("jump"):
 		buffer_jump = MAX_BUFFER_JUMP
 		
-	if jumps > 0 and buffer_jump > 0 and (not on_wall or (on_wall and wall_time > 0.12)) and (coyote_time > 0 or (fall_time > 0.1)):
+	if buffer_jump > 0 and time_since_ground_pound <= MIN_TIME_SINCE_GROUND_POUND:
+		buffer_jump = MAX_BUFFER_JUMP
+		
+	if jumps > 0 and buffer_jump > 0 and (not on_wall or (on_wall and wall_time > 0.12)) and (coyote_time > 0 or (fall_time > 0.1)) and time_since_ground_pound > MIN_TIME_SINCE_GROUND_POUND:
 		var same_wall_jump : bool = wall_jumps > 1 and round(last_wall_jump_normal.x) == round(last_wall_normal.x)
 		if coyote_time <= 0 or (not same_wall_jump or (same_wall_jump and jumps == MAX_JUMPS)):
 			if on_wall:
@@ -240,6 +271,8 @@ func _physics_process(delta: float) -> void:
 				jumps -= 1
 				velocity.y += ((wall_jumps - 1) * 50)
 				velocity.y = clamp(velocity.y, -10000, -140)
+			if time_since_ground_pound < MIN_TIME_SINCE_GROUND_POUND * 3:
+				velocity.y += (jump_velocity / 4)
 			weight = BASE_WEIGHT
 			ground_pounding = false
 			ground_pound_time = 0
@@ -259,7 +292,8 @@ func _physics_process(delta: float) -> void:
 			speed = BASE_SPEED * 1.3
 			smooth_animations.speed_scale = 2
 		else:
-			speed = BASE_SPEED
+			if not crouching:
+				speed = BASE_SPEED
 			smooth_animations.speed_scale = 1
 		if not in_air:
 			ground_particles.emitting = true
@@ -285,12 +319,27 @@ func _physics_process(delta: float) -> void:
 	velocity.x = clamp(velocity.x, -BASE_SPEED, BASE_SPEED)
 	
 	camera.global_position = lerp(camera.global_position, global_position, 0.08)
+	bottom_gradient.position.x = camera.position.x - get_viewport_rect().size.x/2
+	bottom_gradient.size.x = get_viewport_rect().size.x + 64
 	
-	set_animation(current_animation)
-	falling_animation(delta)
+	if not crouching and not crouch_facing_left.is_playing():
+		set_animation(current_animation)
+	code_animation(delta)
+	if crouching:
+		#crouch hitboxes
+		crouch_collision.disabled = false
+		crouch_hitbox.disabled = false
+		normal_collision.disabled = true
+		normal_hitbox.disabled = true
+	else:
+		#normal hitboxes
+		crouch_collision.disabled = true
+		crouch_hitbox.disabled = true
+		normal_collision.disabled = false
+		normal_hitbox.disabled = false
 	last_vel = velocity
 	move_and_slide()
-	
+	set_collision_mask_value(4, (velocity.y >= 0 and not on_wall) or velocity.y >= 30) #disable platform collision if moving up
 
 func flip():
 	var flip_dir : bool = false #false = left, true = right
@@ -298,23 +347,65 @@ func flip():
 		flip_dir = last_wall_normal.x > 0
 	else:
 		flip_dir = velocity.x < 0
+	#HIDE ALL
+	for i in sprites.get_children():
+		if i == glambert_sunglasses:
+			break
+		i.hide() 
 	if flip_dir:
-		sprite_facing_left.hide()
-		sprite_facing_right.show()
+		if visual_crouching:
+			crouch_facing_right.show()
+		else:
+			sprite_facing_right.show()
 		glambert_sunglasses.flip_h = true
 	else:
-		sprite_facing_left.show()
-		sprite_facing_right.hide()
+		if visual_crouching:
+			crouch_facing_left.show()
+		else:
+			sprite_facing_left.show()
 		glambert_sunglasses.flip_h = false
 
 func set_animation(animation: String):
 	
-	sprite_facing_left.play(animation)
-	sprite_facing_right.play(animation)
-	if not crouching:
-		smooth_animations.play(animation)
+	visual_crouching = crouching
 	
-func falling_animation(delta : float) -> void:
+	if animation == "crouch" or animation == "uncrouch":
+		visual_crouching = true
+	
+	
+	if visual_crouching:
+		crouch_facing_left.play(animation)
+		crouch_facing_right.play(animation)
+	else:
+		sprite_facing_left.play(animation)
+		sprite_facing_right.play(animation)
+		
+	smooth_animations.stop()
+	smooth_animations.play(animation)
+	flip()
+	if visual_crouching:
+		await crouch_facing_left.animation_finished
+		visual_crouching = crouching
+		
+		
+func crouch(override : bool = false) -> void:
+	if not crouching or override:
+		crouching = false
+		speed = BASE_SPEED / 2
+		set_animation("crouch")
+		squish.play()
+	crouching = true
+	
+func uncrouch(override : bool = false) -> void:
+	if crouching or override:
+		crouching = true
+		set_animation("uncrouch")
+		speed = BASE_SPEED
+		pop.play()
+	crouching = false
+	
+func code_animation(delta : float) -> void:
+	ground_particles.amount = GROUND_PARTICLE_COUNT * (1 + ((speed - BASE_SPEED) / BASE_SPEED))
 	if in_air:
 		sprites.scale = lerp(Vector2(1.0,1.0), Vector2(0.7 / (1 + (weight * 0.1)), 1.3 * (1 + (weight * 0.1))), fall_time)
 		if on_wall:
@@ -323,7 +414,10 @@ func falling_animation(delta : float) -> void:
 		sprites.scale.x = clamp(sprites.scale.x, 0.75, 1.25)
 		sprites.scale.y = clamp(sprites.scale.y, 0.75, 1.25)
 	else:
-		sprites.scale = lerp(sprites.scale, Vector2(1,1), delta * 30)
+		if crouching:
+			glambert_sunglasses.position.y = lerp(glambert_sunglasses.position.y, 16.0, delta * 12)
+		sprites.scale = lerp(sprites.scale, Vector2(1,1), delta * 30) #RESET
+		glambert_sunglasses.position.y = lerp(glambert_sunglasses.position.y, 0.0, delta * 30) #RESET
 
 
 
@@ -368,11 +462,13 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		
 		var enemy : BasicEnemy = area.get_parent()
 		
-		if ground_pounding:
+		if ground_pounding or time_since_ground_pound <= 0.05:
 			#jump
 			coyote_time = MAX_COYOTE_TIME
 			buffer_jump = MAX_BUFFER_JUMP
+			time_since_ground_pound = 0
 			ground_pounding = false
+			
 			
 			attack.play()
 			punch.play()
@@ -390,6 +486,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			enemy.queue_free()
 			await particles.finished
 			particles.queue_free()
+
 
 		
 		else:
@@ -422,3 +519,23 @@ func end_level(node: Node, time: float, level_complete: bool):
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("insta-death"):
 		end_level(self, 0, false)
+
+
+func _on_safe_to_crouch_body_entered(body: Node2D) -> void:
+	if not body is Glambert:
+		bodies_in_crouch += 1
+
+
+func _on_safe_to_crouch_body_exited(body: Node2D) -> void:
+	if not body is Glambert:
+		bodies_in_crouch -= 1
+
+
+func _on_safe_to_uncrouch_body_entered(body: Node2D) -> void:
+	if not body is Glambert:
+		bodies_in_uncrouch += 1
+
+
+func _on_safe_to_uncrouch_body_exited(body: Node2D) -> void:
+	if not body is Glambert:
+		bodies_in_uncrouch -= 1

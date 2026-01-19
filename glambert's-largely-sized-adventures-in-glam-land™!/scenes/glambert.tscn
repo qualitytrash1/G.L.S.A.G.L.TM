@@ -1,8 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://cr4vhgrraqejj"]
+[gd_scene load_steps=60 format=3 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
 [ext_resource type="Texture2D" uid="uid://cft7domi85cwy" path="res://textures/glambert-sunglasses.png" id="2_4w5rh"]
+[ext_resource type="Texture2D" uid="uid://883fpk8ht0wg" path="res://textures/glambert-crouch-animation.png" id="3_a4u71"]
 [ext_resource type="AudioStream" uid="uid://bybsh3itodtk8" path="res://audio/sfx/boing.wav" id="4_0dbj0"]
 [ext_resource type="Theme" uid="uid://cbp0x2v5m6a5b" path="res://textures/ui.tres" id="4_2yc5u"]
 [ext_resource type="Texture2D" uid="uid://c0f4nnrnoel2y" path="res://textures/statue-head_only.png" id="5_2yc5u"]
@@ -12,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://dh63w2iumuxd6" path="res://audio/sfx/standby-beeps.mp3" id="8_4fsu5"]
 [ext_resource type="AudioStream" uid="uid://cw03lk1ivf4b6" path="res://audio/sfx/stone-sliding.ogg" id="8_p27ua"]
 [ext_resource type="AudioStream" uid="uid://bcyie2y7k8t3" path="res://audio/sfx/punch.ogg" id="8_ug42a"]
+[ext_resource type="AudioStream" uid="uid://ccjam0idg4ly8" path="res://audio/sfx/squish.mp3" id="10_qos6g"]
 [ext_resource type="AudioStream" uid="uid://d2g03c2xyijg" path="res://audio/sfx/swishlast.mp3" id="11_gwivv"]
 [ext_resource type="AudioStream" uid="uid://dei83ewex4agu" path="res://audio/sfx/goofy-ahh-slip.mp3" id="13_jxnjb"]
 [ext_resource type="AudioStream" uid="uid://21aieoosy3km" path="res://audio/sfx/electricity-charge-sound-effect.mp3" id="14_rwaqa"]
@@ -53,6 +55,56 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qos6g"]
+atlas = ExtResource("3_a4u71")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dt7h"]
+atlas = ExtResource("3_a4u71")
+region = Rect2(0, 64, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rodan"]
+atlas = ExtResource("3_a4u71")
+region = Rect2(0, 96, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jf5aq"]
+atlas = ExtResource("3_a4u71")
+region = Rect2(0, 32, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eb36h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qos6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dt7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rodan")
+}],
+"loop": false,
+"name": &"crouch",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rodan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dt7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jf5aq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qos6g")
+}],
+"loop": false,
+"name": &"uncrouch",
+"speed": 12.0
+}]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_4w5rh"]
 atlas = ExtResource("1_eb3d3")
 region = Rect2(32, 0, 32, 32)
@@ -87,8 +139,73 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb36h"]
+atlas = ExtResource("3_a4u71")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npyba"]
+atlas = ExtResource("3_a4u71")
+region = Rect2(48, 64, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w646j"]
+atlas = ExtResource("3_a4u71")
+region = Rect2(48, 96, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xrc8"]
+atlas = ExtResource("3_a4u71")
+region = Rect2(48, 96, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ualp"]
+atlas = ExtResource("3_a4u71")
+region = Rect2(48, 64, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aggqf"]
+atlas = ExtResource("3_a4u71")
+region = Rect2(48, 32, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cq3c8"]
+atlas = ExtResource("3_a4u71")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_npyba"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eb36h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npyba")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w646j")
+}],
+"loop": false,
+"name": &"crouch",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xrc8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ualp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aggqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cq3c8")
+}],
+"loop": false,
+"name": &"uncrouch",
+"speed": 12.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_eb3d3"]
 radius = 12.0415945
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jtgda"]
+radius = 8.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0dbj0"]
 
@@ -275,16 +392,78 @@ tracks/2/keys = {
 "values": [0.0, 0.05235987755982989]
 }
 
+[sub_resource type="Animation" id="Animation_a4u71"]
+resource_name = "crouch"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2),
+"transitions": PackedFloat32Array(1, -2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.025, 0.975), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-1, -4), Vector2(-1, -3.5), Vector2(-1, -4)]
+}
+
+[sub_resource type="Animation" id="Animation_qos6g"]
+resource_name = "uncrouch"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, -2, -2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.975, 1.025), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-1, -4), Vector2(-1, -4.5), Vector2(-1, -4)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ioqu6"]
 _data = {
 &"RESET": SubResource("Animation_ioqu6"),
+&"crouch": SubResource("Animation_a4u71"),
 &"die": SubResource("Animation_jxnjb"),
 &"idle": SubResource("Animation_rbkum"),
+&"uncrouch": SubResource("Animation_qos6g"),
 &"walk": SubResource("Animation_0dbj0")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0dbj0"]
 radius = 13.038404
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1dt7h"]
+radius = 9.0
+height = 32.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2yc5u"]
 animations = [{
@@ -305,25 +484,38 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_qos6g"]
+colors = PackedColorArray(0.30323282, 0.30323282, 0.30323282, 1, 0.52906674, 0.5290667, 0.5290667, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1dt7h"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rodan"]
+noise = SubResource("FastNoiseLite_1dt7h")
+color_ramp = SubResource("Gradient_qos6g")
+seamless = true
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y0eeb"]
 shader = ExtResource("7_yvlf7")
 shader_parameter/enable_grain = true
-shader_parameter/enable_curving = false
+shader_parameter/enable_curving = true
 shader_parameter/enable_scanlines = false
 shader_parameter/enable_chromatic_aberration = true
 shader_parameter/enable_rgb_grid = false
-shader_parameter/enable_vhs_wiggle = false
-shader_parameter/enable_vignette = false
+shader_parameter/enable_vhs_wiggle = true
+shader_parameter/enable_vignette = true
 shader_parameter/brightness_multiplier = 1.0
-shader_parameter/grain_strength = 0.25
-shader_parameter/curve_power = 1.02
-shader_parameter/vignette_size = 0.4
-shader_parameter/vignette_smoothness = 0.4
-shader_parameter/scanlines_interval = 12.0
-shader_parameter/scanline_opacity = 0.10000000149012
-shader_parameter/scanline_thickness = 3.0
-shader_parameter/chromatic_aberration_strength = 1.0
-shader_parameter/wiggle = 0.002
+shader_parameter/grain_strength = 0.10000000149012
+shader_parameter/curve_power = 1.00999999977648
+shader_parameter/vignette_size = 10.0
+shader_parameter/vignette_smoothness = 25.0
+shader_parameter/vignette_opacity = 0.0
+shader_parameter/scanlines_interval = 20.0
+shader_parameter/scanline_opacity = 0.00999999977648
+shader_parameter/scanline_thickness = 4.0
+shader_parameter/chromatic_aberration_strength = 1.5000000223518
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_rodan")
+shader_parameter/wiggle = 0.05000000074506
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gwivv"]
 random_pitch = 1.02
@@ -331,7 +523,7 @@ streams_count = 1
 stream_0/stream = ExtResource("4_0dbj0")
 
 [node name="Glambert" type="CharacterBody2D"]
-collision_mask = 3
+collision_mask = 11
 script = ExtResource("1_4w5rh")
 metadata/_edit_vertical_guides_ = [1420.0]
 
@@ -343,9 +535,16 @@ process_mode = 3
 
 [node name="SpriteFacingLeft" type="AnimatedSprite2D" parent="Model/Sprites"]
 process_mode = 3
+visible = false
 sprite_frames = SubResource("SpriteFrames_btdif")
-animation = &"idle"
+animation = &"walk"
 autoplay = "idle"
+
+[node name="CrouchFacingLeft" type="AnimatedSprite2D" parent="Model/Sprites"]
+process_mode = 3
+visible = false
+sprite_frames = SubResource("SpriteFrames_eb36h")
+animation = &"uncrouch"
 
 [node name="SpriteFacingRight" type="AnimatedSprite2D" parent="Model/Sprites"]
 process_mode = 3
@@ -354,12 +553,25 @@ sprite_frames = SubResource("SpriteFrames_p27ua")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="CrouchFacingRight" type="AnimatedSprite2D" parent="Model/Sprites"]
+process_mode = 3
+sprite_frames = SubResource("SpriteFrames_npyba")
+animation = &"uncrouch"
+frame = 3
+frame_progress = 1.0
+
 [node name="GlambertSunglasses" type="Sprite2D" parent="Model/Sprites"]
 process_mode = 3
 texture = ExtResource("2_4w5rh")
 
-[node name="CircleCollision" type="CollisionShape2D" parent="."]
+[node name="NormalCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_eb3d3")
+
+[node name="CrouchCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_jtgda")
+disabled = true
 
 [node name="WallDetector" type="Area2D" parent="."]
 visible = false
@@ -377,8 +589,30 @@ libraries = {
 [node name="Hitbox" type="Area2D" parent="."]
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="NormalHitbox" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_0dbj0")
+
+[node name="CrouchHitbox" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 4)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_1dt7h")
+disabled = true
+
+[node name="SafeToCrouch" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CrouchCollision" type="CollisionShape2D" parent="SafeToCrouch"]
+position = Vector2(0, 4)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_jtgda")
+disabled = true
+
+[node name="SafeToUncrouch" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="NormalCollision" type="CollisionShape2D" parent="SafeToUncrouch"]
+position = Vector2(0, -0.1)
+shape = SubResource("CircleShape2D_eb3d3")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -470,6 +704,18 @@ stream = SubResource("AudioStreamRandomizer_gwivv")
 volume_db = -14.414
 bus = &"Sounds"
 
+[node name="Squish" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_qos6g")
+volume_db = -4.0
+pitch_scale = 0.9
+bus = &"Sounds"
+
+[node name="Pop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_qos6g")
+volume_db = -4.0
+pitch_scale = 1.1
+bus = &"Sounds"
+
 [node name="Punch" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_ug42a")
 volume_db = -4.992
@@ -524,3 +770,7 @@ process_material = ExtResource("18_jtgda")
 [connection signal="body_entered" from="WallDetector" to="." method="_on_wall_detector_body_entered"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="SafeToCrouch" to="." method="_on_safe_to_crouch_body_entered"]
+[connection signal="body_exited" from="SafeToCrouch" to="." method="_on_safe_to_crouch_body_exited"]
+[connection signal="body_entered" from="SafeToUncrouch" to="." method="_on_safe_to_uncrouch_body_entered"]
+[connection signal="body_exited" from="SafeToUncrouch" to="." method="_on_safe_to_uncrouch_body_exited"]

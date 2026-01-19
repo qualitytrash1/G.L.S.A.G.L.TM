@@ -2,7 +2,13 @@ extends Node2D
 
 class_name EnemySpawner
 
-@export var enemy_to_spawn: int
+enum Enemies {
+	SHORT_CORD_SNAKE,
+	LONG_CORD_SNAKE,
+	PURPLE_PLUG_WALK
+}
+
+@export var enemy_to_spawn: Enemies
 
 var enemies: Array[Dictionary] = [
 	{"name": "Short Cord Snake", "address": "uid://bxh6mbpbm8fhm"},

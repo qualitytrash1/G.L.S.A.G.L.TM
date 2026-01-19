@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bfj0n8ykh3tje"
+path="res://.godot/imported/Vaporwave more like shlmaperlavw.ogg-99545c8027c7662a7709e2ad8cfab26f.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/music/Vaporwave more like shlmaperlavw.ogg"
+dest_files=["res://.godot/imported/Vaporwave more like shlmaperlavw.ogg-99545c8027c7662a7709e2ad8cfab26f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

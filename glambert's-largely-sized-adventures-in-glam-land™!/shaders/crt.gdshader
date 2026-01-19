@@ -18,15 +18,16 @@ uniform float curve_power: hint_range(1.0, 1.05, 0.005) =1.02;
 
 group_uniforms vignette_settings;
 uniform float vignette_size: hint_range(0.1, 10.0, 0.1) = 0.4;
-uniform float vignette_smoothness: hint_range(0.05, 5.0, 0.05) = 0.4;
+uniform float vignette_smoothness: hint_range(0.05, 25.0, 0.05) = 0.4;
+uniform float vignette_opacity: hint_range(0.0, 1.0, 0.05) = 1.0;
 
 group_uniforms scanlines_settings;
 uniform float scanlines_interval: hint_range(0.0, 20.0, 1.0) = 6.0;
-uniform float scanline_opacity: hint_range(0, 1, 0.05) = 0.45;
+uniform float scanline_opacity: hint_range(0, 1, 0.01) = 0.45;
 uniform float scanline_thickness: hint_range(0, 10, 1.0) = 3;
 
 group_uniforms chromatic_aberration_settings;
-uniform float chromatic_aberration_strength: hint_range(0.0, 10.0, 1.0) = 1.0;
+uniform float chromatic_aberration_strength: hint_range(0.0, 10.0, 0.1) = 1.0;
 
 
 group_uniforms vhs_wiggle_settings;
@@ -122,7 +123,7 @@ void fragment()
 		uv *=  1.0 - uv.yx;
 		float vig = uv.x*uv.y / vignette_size * 1000.0;
 		vig = pow(vig, 1.0/vignette_smoothness);
-		color.rgb -= 1.0-(clamp(vig,0,1));
+		color.rgb -= 1.0-(clamp(vig + vignette_opacity,0,1)) ;
 	}
 
 	COLOR = color;

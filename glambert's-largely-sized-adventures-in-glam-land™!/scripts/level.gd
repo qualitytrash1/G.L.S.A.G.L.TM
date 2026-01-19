@@ -5,6 +5,12 @@ class_name Level
 extends Node2D
 
 const POINT = preload("uid://v8qfgbxfrh3l")
+const DEFAULT_UV : PackedVector2Array = [
+	Vector2(0,0),
+	Vector2(64,0),
+	Vector2(64,64),
+	Vector2(0,64)
+]
 
 @export var editor : bool = false
 
@@ -62,3 +68,7 @@ func update_polygons() -> void:
 	for i : StaticBody2D in polygons.get_children(): #loop polygons
 		points = i.get_child(0).polygon
 		i.get_child(1).polygon = points #set collisions
+		if len(i.get_child(0).polygon) == 4:
+			i.get_child(0).uv = i.get_child(0).polygon #reset uv
+		else:
+			i.get_child(0).uv = DEFAULT_UV #reset uv
