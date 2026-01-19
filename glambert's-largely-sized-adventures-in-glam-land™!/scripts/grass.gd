@@ -16,6 +16,8 @@ var texture_ready : bool = false
 
 var thread : Thread = Thread.new()
 
+var distances : Array[Vector2] = []
+
 
 func _ready() -> void:
 	if thread.is_started():
@@ -34,6 +36,7 @@ func _process(delta: float) -> void:
 			create_tex = false
 
 func _update() -> void:
+	distances = []
 	await get_tree().create_timer(0).timeout
 	call_deferred("_create_tex")
 	if not texture_ready:
@@ -56,9 +59,43 @@ func _update() -> void:
 		tex_polygon.look_at(next_point + global_position)
 		tex_polygon.polygon[0].x = 0
 		tex_polygon.polygon[1].x = tex_polygon.global_position.distance_to(next_point + global_position)
-		tex_polygon.polygon[2].x = tex_polygon.global_position.distance_to(next_point + global_position) - 16
-		tex_polygon.polygon[3].x = 16
+		tex_polygon.polygon[2].x = tex_polygon.global_position.distance_to(next_point + global_position)
+		tex_polygon.polygon[3].x = 0
+		update_visual_points(tex_polygon)
 		new_side.show()
+		index += 1
+	await get_tree().create_timer(0).timeout
+	index = 0
+	for this_side in sides.get_children():
+		var tex_polygon : Polygon2D = this_side.get_child(0)
+		var next_side : Node2D
+		var next_tex_polygon : Polygon2D
+		next_side = get_next_side(index)
+		next_tex_polygon = next_side.get_child(0)
+		var distance : float = abs(tex_polygon.polygon[2].x - next_tex_polygon.polygon[3].x)
+		this_side.get_child(1).text = str(float(round(distance * 1000)) / 1000.0)
+		index += 1
+	index = 0
+	
+	for this_side in sides.get_children():
+		var tex_polygon : Polygon2D = this_side.get_child(0)
+		var next_side : Node2D
+		var next_tex_polygon : Polygon2D
+		next_side = get_next_side(index)
+		next_tex_polygon = next_side.get_child(0)
+		index += 1
+		
+func get_next_side(index : int) -> Node2D:
+	if index + 1 >= len(polygon.polygon):
+		return sides.get_child(0)
+	else:
+		return sides.get_child(index + 1)
+		
+func update_visual_points(tex_polygon : Polygon2D) -> void:
+	var index : int = 0
+	for i in tex_polygon.get_children():
+		i.position = tex_polygon.polygon[index]
+		i.rotation = -tex_polygon.rotation
 		index += 1
 		
 func _create_tex() -> void:

@@ -33,6 +33,8 @@ var last_vel : Vector2
 var high_jump: bool = false
 var jump_height: float = MAX_JUMP_HEIGHT
 var crouching: bool = false
+var jumping: bool = false
+var cut_jump: bool = false
 
 #TIMERS
 var fall_time : float = 0
@@ -164,6 +166,7 @@ func _physics_process(delta: float) -> void:
 	#NOT IN AIR
 	if is_on_floor():
 		in_air = false
+		jumping = false
 		wall_jumps = 0
 		fall_time = 0
 		#RESETS WEIGHT
@@ -191,8 +194,8 @@ func _physics_process(delta: float) -> void:
 		
 	if (is_on_wall_only() and (abs(last_vel.x) > 50 or on_wall) and not ground_pounding):
 		rotation = 0
-		print(fall_time)
 		on_wall = true
+		jumping = false
 		last_wall_normal = get_wall_normal()
 		wall_time += delta
 		sprites.rotation = lerp(sprites.rotation, deg_to_rad(get_wall_normal().x * 90), delta * 24)
@@ -234,6 +237,10 @@ func _physics_process(delta: float) -> void:
 			ground_pounding = true
 			
 		velocity += ((get_gravity() * weight) * delta)
+		
+		#CUT JUMP
+		if Input.is_action_just_released("jump") and jumping and velocity.y:
+			cut_jump = true
 	else:
 		if Input.is_action_just_pressed("pound") and not ground_pounding and not on_wall and not crouching and bodies_in_crouch == 0:
 			crouch()
@@ -258,9 +265,18 @@ func _physics_process(delta: float) -> void:
 	if buffer_jump > 0 and time_since_ground_pound <= MIN_TIME_SINCE_GROUND_POUND:
 		buffer_jump = MAX_BUFFER_JUMP
 		
+	if not jumping:
+		cut_jump = false
+		
+	if cut_jump and velocity.y < -5 and not ground_pounding and wall_jumps == 0:
+		velocity.y = lerp(velocity.y, 5.0, delta * (weight * 10))
+		
+		
 	if jumps > 0 and buffer_jump > 0 and (not on_wall or (on_wall and wall_time > 0.12)) and (coyote_time > 0 or (fall_time > 0.1)) and time_since_ground_pound > MIN_TIME_SINCE_GROUND_POUND and bodies_in_uncrouch < 1:
 		var same_wall_jump : bool = wall_jumps > 1 and round(last_wall_jump_normal.x) == round(last_wall_normal.x)
 		if coyote_time <= 0 or (not same_wall_jump or (same_wall_jump and jumps == MAX_JUMPS)):
+			jumping = true
+			cut_jump = false
 			if on_wall:
 				velocity.x = last_wall_normal.x * 200
 				wall_jumps += 1
