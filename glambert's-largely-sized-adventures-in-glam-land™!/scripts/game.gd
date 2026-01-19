@@ -36,5 +36,5 @@ func set_start_and_end_computers():
 	#END COMPUTER
 	computers.get_child(end_child).get_child(3).text = "End"
 	computers.get_child(end_child).set_meta("location", "start")
-	
-	Globals.spawn_location = computers.get_child(start_child).position
+	if not Globals.has_checkpoint:
+		Globals.spawn_location = computers.get_child(start_child).position

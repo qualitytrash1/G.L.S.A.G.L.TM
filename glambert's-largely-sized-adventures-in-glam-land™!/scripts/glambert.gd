@@ -63,6 +63,7 @@ var bodies_in_uncrouch: int = 0
 @onready var smooth_animations: AnimationPlayer = $SmoothAnimations
 @onready var statue_outline: Control = $UI/Control/Statues/StatueOutline
 #SOUNDS
+@onready var ding: AudioStreamPlayer = $Ding
 @onready var boing: AudioStreamPlayer = $Boing
 @onready var soda_can_open: AudioStreamPlayer = $SodaCanOpen
 @onready var stone_sliding: AudioStreamPlayer = $StoneSliding
@@ -457,7 +458,23 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		#COMPUTER
 		if area.is_in_group("computer"):
 			end_level(area, 0.4, true)
+		#CHECKPOINT
+		if area.is_in_group("check-point"):
+			ding.play()
+			Globals.has_checkpoint = true
+			Globals.spawn_location = area.position
+			#ANIMATIONS
+			var tween: Tween = create_tween()
+			tween.set_parallel(true)
+			tween.tween_property(area, "modulate", Color(0.0, 0.0, 0.0, 0.0), 0.25)
+			tween.tween_property(area, "position", Vector2(area.position.x, area.position.y - 50), 0.3)
+			await tween.finished
 			
+			Globals.check_points.append(area.position.x)
+			
+			area.queue_free()
+		
+	#ENEMY
 	if area.get_parent() is BasicEnemy:
 		
 		var enemy : BasicEnemy = area.get_parent()
@@ -498,6 +515,8 @@ func end_level(node: Node, time: float, level_complete: bool):
 		
 		if level_complete:
 			
+			Globals.check_points = []
+			Globals.has_checkpoint = false
 			Globals.current_level += 1
 			#ANIMATION
 			var tween: Tween = create_tween()

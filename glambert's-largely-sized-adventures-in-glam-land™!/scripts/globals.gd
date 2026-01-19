@@ -7,9 +7,11 @@ var spawn_location: Vector2 = Vector2(0, 0)
 var zoom_factor: float = 1000
 var current_level: int = 0
 var camera_y_limit: float = 10000
+var has_checkpoint: bool = false
 
 var level_data: Array[Dictionary] = [
 	{"level": 1, "time": 400, "song": "uid://c1ckqndnn46hb"},
 	{"level": 2, "time": 400, "song": "uid://bsn7u4s87ur8q"},
 	{"level": 3, "time": 400, "song": "uid://c64v154ca7onu"}
 ]
+var check_points: Array = []
