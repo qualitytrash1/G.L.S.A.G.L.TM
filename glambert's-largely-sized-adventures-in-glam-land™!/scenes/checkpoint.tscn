@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://f4am5o61tsi4"]
+[gd_scene load_steps=18 format=3 uid="uid://f4am5o61tsi4"]
 
+[ext_resource type="Script" uid="uid://c30gmuvl6tdf1" path="res://scripts/checkpoint.gd" id="1_ywqth"]
 [ext_resource type="Texture2D" uid="uid://88aa03jtftfv" path="res://textures/floppy-disk_spin.png" id="1_yyywg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yyywg"]
@@ -113,12 +114,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyywg"]
 size = Vector2(20, 28)
 
-[node name="Checkpoint" type="Area2D"]
+[node name="Checkpoint" type="Area2D" groups=["check-point", "collectable"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_ywqth")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vc08m")
 autoplay = "default"
-frame_progress = 0.6987147
+frame_progress = 0.21370369
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

@@ -35,6 +35,7 @@ computer=""
 insta-death=""
 enemy=""
 enemy-spawner=""
+check-point=""
 
 [input]
 
