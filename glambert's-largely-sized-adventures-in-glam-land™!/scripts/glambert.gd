@@ -12,7 +12,7 @@ const MAX_BUFFER_JUMP: float = 0.1
 const MAX_JUMPS: int = 1
 const BASE_SPEED: int = 1200
 const BASE_WEIGHT: float = 1
-const MAX_JUMP_HEIGHT: float = -312
+const MAX_JUMP_HEIGHT: float = -300
 const GROUND_PARTICLE_COUNT: int = 10
 const MIN_TIME_SINCE_GROUND_POUND : float = 0.05
 
@@ -34,7 +34,6 @@ var high_jump: bool = false
 var jump_height: float = MAX_JUMP_HEIGHT
 var crouching: bool = false
 var jumping: bool = false
-var cut_jump: bool = false
 
 #TIMERS
 var fall_time : float = 0
@@ -238,9 +237,6 @@ func _physics_process(delta: float) -> void:
 			
 		velocity += ((get_gravity() * weight) * delta)
 		
-		#CUT JUMP
-		if Input.is_action_just_released("jump") and jumping and velocity.y:
-			cut_jump = true
 	else:
 		if Input.is_action_just_pressed("pound") and not ground_pounding and not on_wall and not crouching and bodies_in_crouch == 0:
 			crouch()
@@ -265,18 +261,13 @@ func _physics_process(delta: float) -> void:
 	if buffer_jump > 0 and time_since_ground_pound <= MIN_TIME_SINCE_GROUND_POUND:
 		buffer_jump = MAX_BUFFER_JUMP
 		
-	if not jumping:
-		cut_jump = false
-		
-	if cut_jump and velocity.y < -25 and not ground_pounding and wall_jumps == 0:
-		velocity.y = lerp(velocity.y, 10.0, delta * (weight * 8))
+
 		
 		
 	if jumps > 0 and buffer_jump > 0 and (not on_wall or (on_wall and wall_time > 0.12)) and (coyote_time > 0 or (fall_time > 0.1)) and time_since_ground_pound > MIN_TIME_SINCE_GROUND_POUND and bodies_in_uncrouch < 1:
 		var same_wall_jump : bool = wall_jumps > 1 and round(last_wall_jump_normal.x) == round(last_wall_normal.x)
 		if coyote_time <= 0 or (not same_wall_jump or (same_wall_jump and jumps == MAX_JUMPS)):
 			jumping = true
-			cut_jump = false
 			if on_wall:
 				velocity.x = last_wall_normal.x * 200
 				wall_jumps += 1
