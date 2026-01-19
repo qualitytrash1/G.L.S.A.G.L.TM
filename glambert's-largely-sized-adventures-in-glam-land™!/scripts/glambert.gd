@@ -12,7 +12,7 @@ const MAX_BUFFER_JUMP: float = 0.1
 const MAX_JUMPS: int = 1
 const BASE_SPEED: int = 1200
 const BASE_WEIGHT: float = 1
-const MAX_JUMP_HEIGHT: float = -300
+const MAX_JUMP_HEIGHT: float = -312
 const GROUND_PARTICLE_COUNT: int = 10
 const MIN_TIME_SINCE_GROUND_POUND : float = 0.05
 
@@ -268,8 +268,8 @@ func _physics_process(delta: float) -> void:
 	if not jumping:
 		cut_jump = false
 		
-	if cut_jump and velocity.y < -15 and not ground_pounding and wall_jumps == 0:
-		velocity.y = lerp(velocity.y, 0.0, delta * (weight * 8))
+	if cut_jump and velocity.y < -25 and not ground_pounding and wall_jumps == 0:
+		velocity.y = lerp(velocity.y, 10.0, delta * (weight * 8))
 		
 		
 	if jumps > 0 and buffer_jump > 0 and (not on_wall or (on_wall and wall_time > 0.12)) and (coyote_time > 0 or (fall_time > 0.1)) and time_since_ground_pound > MIN_TIME_SINCE_GROUND_POUND and bodies_in_uncrouch < 1:
