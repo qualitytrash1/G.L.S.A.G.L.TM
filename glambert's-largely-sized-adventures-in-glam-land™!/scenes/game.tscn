@@ -296,6 +296,7 @@ environment = SubResource("Environment_iywne")
 
 [node name="Level" type="Node2D" parent="."]
 script = ExtResource("5_p57ef")
+level_editor = null
 
 [node name="BottomGradient" type="TextureRect" parent="Level"]
 anchors_preset = 12

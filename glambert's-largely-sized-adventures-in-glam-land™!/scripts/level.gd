@@ -12,7 +12,7 @@ const DEFAULT_UV : PackedVector2Array = [
 	Vector2(0,64)
 ]
 
-@export var editor : bool = false
+@export var level_editor : bool = false
 
 
 @onready var points_node: Node2D = $Points
@@ -24,7 +24,7 @@ func _ready() -> void:
 	update_polygons()
 	
 func _input(event: InputEvent) -> void:
-	if editor:
+	if level_editor:
 		if Input.is_action_just_pressed("new_point"):
 			if not Input.is_action_pressed("click"):
 				points.append(get_local_mouse_position())
@@ -39,7 +39,7 @@ func _input(event: InputEvent) -> void:
 				update_polygons()
 
 func point_pressed(point : Node2D) -> void:
-	if editor:
+	if level_editor:
 		while Input.is_action_pressed("click"):
 			point.position = get_local_mouse_position()
 			await get_tree().create_timer(0).timeout
@@ -47,7 +47,7 @@ func point_pressed(point : Node2D) -> void:
 		update_polygons()
 	
 func update_points() -> void:
-	if editor:
+	if level_editor:
 		var index : int = 0
 		for i in points_node.get_children():
 			if index >= len(points):
@@ -67,6 +67,10 @@ func update_points() -> void:
 func update_polygons() -> void:
 	for i : StaticBody2D in polygons.get_children(): #loop polygons
 		points = i.get_child(0).polygon
+		#PREVENT STINKY DECIMAL
+		for point in points:
+			point = round(point)
+		i.get_child(0).polygon = points
 		if Engine.is_editor_hint():
 			i.get_child(1).polygon = []
 		else:

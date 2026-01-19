@@ -179,6 +179,9 @@ func _physics_process(delta: float) -> void:
 			punch.play()
 			stone_sliding.play()
 			ground_pound_particles.restart()
+			if abs(get_floor_normal().x) > 0:
+				velocity.x = get_floor_normal().x * 500
+				rotation = deg_to_rad(get_floor_normal().x * 59.9)
 			#PLAY ANIMATION
 			uncrouch(true)
 	#IN AIR
@@ -233,7 +236,7 @@ func _physics_process(delta: float) -> void:
 			
 			velocity.x = clamp(velocity.x, -80, 80)
 			direction = 0
-			velocity.y = -120
+			velocity.y = -200
 			ground_pound_time = 0
 			swishlast.play()
 			ground_pounding = true
@@ -244,14 +247,14 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_released("jump") and jumping:
 			cut_jump = true
 	else:
-		if Input.is_action_just_pressed("pound") and not ground_pounding and not on_wall and not crouching and bodies_in_crouch == 0:
+		if Input.is_action_just_pressed("crouch") and not ground_pounding and not on_wall and not crouching and bodies_in_crouch == 0:
 			crouch()
 			
 		jumps = MAX_JUMPS
 		coyote_time = MAX_COYOTE_TIME
 		in_air = false
 		
-	if not Input.is_action_pressed("pound") and crouching and bodies_in_uncrouch == 0: #uncrouch
+	if not Input.is_action_pressed("crouch") and crouching and bodies_in_uncrouch == 0: #uncrouch
 		uncrouch()
 		
 	#TIMER VARIABLES
@@ -261,7 +264,8 @@ func _physics_process(delta: float) -> void:
 
 	#JUMPING
 	
-	if Input.is_action_just_pressed("jump"):
+	#enable hold jump but only if on ground
+	if (Input.is_action_pressed("jump") and coyote_time > 0 and not on_wall) or (Input.is_action_just_pressed("jump")):
 		buffer_jump = MAX_BUFFER_JUMP
 		
 	if buffer_jump > 0 and time_since_ground_pound <= MIN_TIME_SINCE_GROUND_POUND:
