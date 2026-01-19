@@ -320,6 +320,7 @@ func _physics_process(delta: float) -> void:
 	velocity.x = clamp(velocity.x, -BASE_SPEED, BASE_SPEED)
 	
 	camera.global_position = lerp(camera.global_position, global_position, 0.08)
+	camera.global_position = round(camera.global_position * 4) / 4
 	bottom_gradient.position.x = camera.position.x - get_viewport_rect().size.x/2
 	bottom_gradient.size.x = get_viewport_rect().size.x + 64
 	

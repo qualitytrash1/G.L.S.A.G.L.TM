@@ -11,9 +11,17 @@ extends Node2D
 @onready var sides: Node2D = $Sides
 @onready var textures: Control = $Side/Textures
 
+signal done_making_texture
+var texture_ready : bool = false
+
+var thread : Thread = Thread.new()
+
 
 func _ready() -> void:
-	_update()
+	if thread.is_started():
+		thread.wait_to_finish()
+	thread = Thread.new()
+	thread.start(_update)
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -26,8 +34,10 @@ func _process(delta: float) -> void:
 			create_tex = false
 
 func _update() -> void:
-	await get_tree().create_timer(0.1).timeout
-	_create_tex()
+	await get_tree().create_timer(0).timeout
+	call_deferred("_create_tex")
+	if not texture_ready:
+		await done_making_texture
 	for i in sides.get_children():
 		i.queue_free()
 	side.hide()
@@ -52,24 +62,18 @@ func _update() -> void:
 		index += 1
 		
 func _create_tex() -> void:
-	for i in range(texture.get_size().y):
-		var new_cont : Control = Control.new()
-		get_child(0).get_child(0).add_child(new_cont)
-		var new_rect : TextureRect = TextureRect.new()
-		new_rect.texture = texture
-		new_rect.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
-		new_cont.add_child(new_rect)
-		new_cont.scale = Vector2(1, 1) / get_child(0).get_child(0).scale
-		new_rect.scale = new_cont.scale
-		new_cont.size = Vector2(texture.get_size().x, 1)
-		new_rect.size = Vector2(texture.get_size().x, i + 1)
-		new_cont.clip_contents = true
-		new_rect.stretch_mode = TextureRect.STRETCH_TILE
-		new_cont.position.y = i
-		new_rect.position.y = -i
-		new_cont.size.x += float(i) / 4.0
-		new_cont.position.x += float(i) / 8.0
-		new_rect.size.x = new_cont.size.x
-		new_rect.position.x = new_cont.position.x
-		print("added: " + str(new_cont))
-		print("added: " + str(new_rect))
+	var tex_polygon : Polygon2D = get_child(0).get_child(0)
+	tex_polygon.texture = texture
+	tex_polygon.polygon = [
+		Vector2(0,0),
+		Vector2(16,0),
+		Vector2(16,16),
+		Vector2(0,16),
+	]
+	tex_polygon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	tex_polygon.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	emit_signal("done_making_texture")
+	texture_ready = true
+	
+func _exit_tree() -> void:
+	thread.wait_to_finish()
