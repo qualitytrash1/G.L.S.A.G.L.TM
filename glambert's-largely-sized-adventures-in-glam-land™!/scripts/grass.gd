@@ -4,6 +4,7 @@ extends Node2D
 
 @export var texture : Texture2D
 @export var update : bool = false
+@export var create_tex : bool = false
 @onready var side: Node2D = $Side
 @onready var polygon: Polygon2D = $".."
 @onready var level: Level = $"../../../../"
@@ -15,13 +16,18 @@ func _ready() -> void:
 	_update()
 
 func _process(delta: float) -> void:
-	if update:
-		create_tex()
-		update = false
+	if Engine.is_editor_hint():
+		if update:
+			level.update_polygons()
+			_update()
+			update = false
+		if create_tex:
+			_create_tex()
+			create_tex = false
 
 func _update() -> void:
 	await get_tree().create_timer(0.1).timeout
-	create_tex()
+	_create_tex()
 	for i in sides.get_children():
 		i.queue_free()
 	side.hide()
@@ -29,6 +35,7 @@ func _update() -> void:
 	var index : int = 0
 	for point in polygon.polygon:
 		var new_side : Node2D = side.duplicate()
+		var tex_polygon : Polygon2D = new_side.get_child(0)
 		sides.add_child(new_side)
 		var next_point : Vector2
 		if index + 1 >= len(polygon.polygon):
@@ -36,21 +43,15 @@ func _update() -> void:
 		else:
 			next_point = polygon.polygon[index + 1]
 		new_side.position = point
-		new_side.look_at(next_point + global_position)
-		new_side.get_child(0).rotation = new_side.rotation
-		new_side.rotation = 0
-		var tex_index : float = 0
-		for i in new_side.get_child(0).get_children():
-			i.size.x = point.distance_to(next_point) - tex_index
-			i.get_child(0).size.x = i.size.x
-			tex_index += 1
+		tex_polygon.look_at(next_point + global_position)
+		tex_polygon.polygon[0].x = 0
+		tex_polygon.polygon[1].x = tex_polygon.global_position.distance_to(next_point + global_position)
+		tex_polygon.polygon[2].x = tex_polygon.global_position.distance_to(next_point + global_position) - 16
+		tex_polygon.polygon[3].x = 16
 		new_side.show()
 		index += 1
 		
-func create_tex() -> void:
-	for i in get_child(0).get_child(0).get_children():
-		i.queue_free()
-		print("clearing: " + str(i))
+func _create_tex() -> void:
 	for i in range(texture.get_size().y):
 		var new_cont : Control = Control.new()
 		get_child(0).get_child(0).add_child(new_cont)
@@ -63,7 +64,6 @@ func create_tex() -> void:
 		new_cont.size = Vector2(texture.get_size().x, 1)
 		new_rect.size = Vector2(texture.get_size().x, i + 1)
 		new_cont.clip_contents = true
-		new_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		new_rect.stretch_mode = TextureRect.STRETCH_TILE
 		new_cont.position.y = i
 		new_rect.position.y = -i
@@ -73,4 +73,3 @@ func create_tex() -> void:
 		new_rect.position.x = new_cont.position.x
 		print("added: " + str(new_cont))
 		print("added: " + str(new_rect))
-	

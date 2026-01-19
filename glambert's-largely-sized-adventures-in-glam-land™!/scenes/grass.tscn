@@ -6,12 +6,8 @@
 [node name="Grass" type="Node2D"]
 script = ExtResource("1_e1kak")
 texture = ExtResource("2_yarb5")
+create_tex = null
 
 [node name="Side" type="Node2D" parent="."]
-
-[node name="Textures" type="Control" parent="Side"]
-layout_mode = 3
-anchors_preset = 0
-scale = Vector2(16, 16)
 
 [node name="Sides" type="Node2D" parent="."]

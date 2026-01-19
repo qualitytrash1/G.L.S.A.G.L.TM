@@ -67,7 +67,10 @@ func update_points() -> void:
 func update_polygons() -> void:
 	for i : StaticBody2D in polygons.get_children(): #loop polygons
 		points = i.get_child(0).polygon
-		i.get_child(1).polygon = points #set collisions
+		if Engine.is_editor_hint():
+			i.get_child(1).polygon = []
+		else:
+			i.get_child(1).polygon = points #set collisions
 		if len(i.get_child(0).polygon) == 4:
 			i.get_child(0).uv = i.get_child(0).polygon #reset uv
 		else:
