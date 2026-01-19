@@ -1,13 +1,14 @@
-[gd_scene load_steps=35 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=36 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
-[ext_resource type="PackedScene" path="res://scenes/sky_background.tscn" id="1_gee14"]
+[ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cr4vhgrraqejj" path="res://scenes/glambert.tscn" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://dy3pc8t7jwyyy" path="res://textures/graphical_ground.png" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://b35bebj1q3kti" path="res://scenes/music_controller.tscn" id="4_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://sfqrjqno6jek" path="res://textures/vaporwave_sun.png" id="5_0tnpc"]
 [ext_resource type="Script" uid="uid://dcrgb8yncovv1" path="res://scripts/level.gd" id="5_p57ef"]
-[ext_resource type="PackedScene" path="res://scenes/background.tscn" id="6_gee14"]
+[ext_resource type="Texture2D" uid="uid://bl4t22m8q6hwe" path="res://textures/stars.png" id="6_1kice"]
+[ext_resource type="PackedScene" uid="uid://c0ah5kn2ch61y" path="res://scenes/background.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://bb08qhktrr4g3" path="res://scenes/grass.tscn" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://ff51uench70u" path="res://textures/spikes-short.png" id="9_ir15t"]
 [ext_resource type="PackedScene" uid="uid://3romnl56ifsa" path="res://scenes/ice_tea.tscn" id="10_vtaks"]
@@ -222,6 +223,20 @@ flip_v = true
 position = Vector2(964, 121)
 scale = Vector2(4, 4)
 texture = ExtResource("5_0tnpc")
+
+[node name="Stars" type="Sprite2D" parent="BG/Sun"]
+modulate = Color(1, 1, 1, 0.4745098)
+position = Vector2(964, 553.00006)
+scale = Vector2(2.9330645, 2.9330645)
+texture = ExtResource("6_1kice")
+
+[node name="Stars2" type="Sprite2D" parent="BG/Sun"]
+modulate = Color(1, 1, 1, 0.6509804)
+position = Vector2(964, 553.00006)
+scale = Vector2(2.9330645, 2.9330645)
+texture = ExtResource("6_1kice")
+flip_h = true
+flip_v = true
 
 [node name="PalmTrees2" type="Parallax2D" parent="BG"]
 modulate = Color(0.5409905, 0.5409905, 0.5409905, 1)
