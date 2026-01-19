@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bvqdsk3hm4v53"]
+[gd_scene load_steps=15 format=3 uid="uid://bvqdsk3hm4v53"]
 
 [ext_resource type="Texture2D" uid="uid://8lp4816waf4" path="res://textures/computer-base.png" id="1_7ikar"]
 [ext_resource type="Texture2D" uid="uid://dp37a8dmp6aro" path="res://textures/computer-screen.png" id="2_tjrug"]
@@ -126,6 +126,10 @@ shader_parameter/chromatic_aberration_strength = 1.0
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_ur38h")
 shader_parameter/wiggle = 0.010000000475
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_uiul0"]
+a = Vector2(-56.5, 0)
+b = Vector2(56.6, 0)
+
 [node name="Computer" type="Area2D" groups=["collectable", "computer"]]
 collision_layer = 4
 collision_mask = 0
@@ -186,3 +190,10 @@ offset_top = -32.0
 offset_right = 41.0
 offset_bottom = 16.0
 color = Color(1, 1, 1, 0)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.5, -46)
+shape = SubResource("SegmentShape2D_uiul0")
+one_way_collision = true
