@@ -429,7 +429,7 @@ func uncrouch(override : bool = false) -> void:
 	crouching = false
 	
 func code_animation(delta : float) -> void:
-	ground_particles.amount = GROUND_PARTICLE_COUNT * (1 + ((speed - BASE_SPEED) / BASE_SPEED))
+	ground_particles.amount = GROUND_PARTICLE_COUNT * (1 + (((speed * abs(direction)) - BASE_SPEED) / BASE_SPEED))
 	if in_air:
 		sprites.scale = lerp(Vector2(1.0,1.0), Vector2(0.7 / (1 + (weight * 0.1)), 1.3 * (1 + (weight * 0.1))), fall_time)
 		if on_wall:
