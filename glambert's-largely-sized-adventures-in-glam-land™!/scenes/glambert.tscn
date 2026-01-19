@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cr4vhgrraqejj"]
+[gd_scene load_steps=63 format=3 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
@@ -13,12 +13,14 @@
 [ext_resource type="AudioStream" uid="uid://dh63w2iumuxd6" path="res://audio/sfx/standby-beeps.mp3" id="8_4fsu5"]
 [ext_resource type="AudioStream" uid="uid://cw03lk1ivf4b6" path="res://audio/sfx/stone-sliding.ogg" id="8_p27ua"]
 [ext_resource type="AudioStream" uid="uid://bcyie2y7k8t3" path="res://audio/sfx/punch.ogg" id="8_ug42a"]
+[ext_resource type="Texture2D" uid="uid://dhd6keqc7p4rs" path="res://textures/sunglasses-no_shading.png" id="9_rodan"]
 [ext_resource type="AudioStream" uid="uid://ccjam0idg4ly8" path="res://audio/sfx/squish.mp3" id="10_qos6g"]
 [ext_resource type="AudioStream" uid="uid://d2g03c2xyijg" path="res://audio/sfx/swishlast.mp3" id="11_gwivv"]
 [ext_resource type="AudioStream" uid="uid://dei83ewex4agu" path="res://audio/sfx/goofy-ahh-slip.mp3" id="13_jxnjb"]
 [ext_resource type="AudioStream" uid="uid://21aieoosy3km" path="res://audio/sfx/electricity-charge-sound-effect.mp3" id="14_rwaqa"]
 [ext_resource type="AudioStream" uid="uid://bbvtwby6r5os8" path="res://audio/sfx/ding-sound-effect_2(1).mp3" id="15_1dt7h"]
 [ext_resource type="Texture2D" uid="uid://wd4lygejleri" path="res://textures/dirt-particle.png" id="16_y0eeb"]
+[ext_resource type="AudioStream" uid="uid://2u61l26um6sf" path="res://audio/sfx/powerUp.wav" id="17_jf5aq"]
 [ext_resource type="Material" uid="uid://jvq3nyoju8rb" path="res://materials/walk_particles.tres" id="17_u87yd"]
 [ext_resource type="Material" uid="uid://dbavlmf514os0" path="res://materials/ground-pound_sparticles.tres" id="18_jtgda"]
 
@@ -205,8 +207,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_eb3d3"]
 radius = 12.0415945
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jtgda"]
-radius = 8.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rodan"]
+radius = 6.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0dbj0"]
 
@@ -569,9 +571,9 @@ texture = ExtResource("2_4w5rh")
 shape = SubResource("CircleShape2D_eb3d3")
 
 [node name="CrouchCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0, 6)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_jtgda")
+shape = SubResource("CapsuleShape2D_rodan")
 disabled = true
 
 [node name="WallDetector" type="Area2D" parent="."]
@@ -603,9 +605,9 @@ disabled = true
 collision_mask = 3
 
 [node name="CrouchCollision" type="CollisionShape2D" parent="SafeToCrouch"]
-position = Vector2(0, 4)
+position = Vector2(0, 6)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_jtgda")
+shape = SubResource("CapsuleShape2D_rodan")
 disabled = true
 
 [node name="SafeToUncrouch" type="Area2D" parent="."]
@@ -690,6 +692,25 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
+[node name="SunglassesNoShading" type="Sprite2D" parent="UI/Control"]
+visible = false
+position = Vector2(277, 968)
+scale = Vector2(3.2107382, 3.2107382)
+texture = ExtResource("9_rodan")
+
+[node name="Lives" type="RichTextLabel" parent="UI/Control"]
+clip_contents = false
+layout_mode = 0
+offset_left = 14.000001
+offset_top = 933.0
+offset_right = 605.9918
+offset_bottom = 1087.6365
+scale = Vector2(0.6402115, 0.6402115)
+mouse_filter = 2
+theme = ExtResource("4_2yc5u")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+
 [node name="FPS" type="RichTextLabel" parent="UI"]
 offset_left = 1561.0
 offset_top = 962.0
@@ -739,6 +760,11 @@ bus = &"Sounds"
 
 [node name="Ding" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_1dt7h")
+bus = &"Sounds"
+
+[node name="PowerUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_jf5aq")
+bus = &"Sounds"
 
 [node name="SodaCanOpen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_ioqu6")
@@ -753,6 +779,7 @@ bus = &"Sounds"
 [node name="Attack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_rwaqa")
 volume_db = 5.2
+bus = &"Sounds"
 
 [node name="Ground" type="GPUParticles2D" parent="."]
 position = Vector2(0, 9)

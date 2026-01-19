@@ -36,6 +36,7 @@ insta-death=""
 enemy=""
 enemy-spawner=""
 check-point=""
+life=""
 
 [input]
 

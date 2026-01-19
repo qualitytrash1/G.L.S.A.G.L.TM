@@ -14,6 +14,8 @@ func _ready() -> void:
 	Globals.statue_amount = statues.get_child_count()
 	Globals.iced_teas = 0
 	Globals.statues = 0
+	if Globals.lives < 1:
+		Globals.lives = 5
 
 func set_start_and_end_computers():
 	
@@ -36,5 +38,5 @@ func set_start_and_end_computers():
 	#END COMPUTER
 	computers.get_child(end_child).get_child(3).text = "End"
 	computers.get_child(end_child).set_meta("location", "start")
-	if not Globals.has_checkpoint:
+	if (not Globals.has_checkpoint) or Globals.lives < 1:
 		Globals.spawn_location = computers.get_child(start_child).position

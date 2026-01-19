@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://8ml8rkvcnoyg"]
+[gd_scene load_steps=23 format=3 uid="uid://8ml8rkvcnoyg"]
 
 [ext_resource type="Script" uid="uid://qgwdrh4yir84" path="res://scripts/enemy_purple_movement.gd" id="1_mi8o7"]
 [ext_resource type="Texture2D" uid="uid://c77fq5m62tm76" path="res://textures/plug-wallkkkkkk.png" id="2_mi8o7"]
 [ext_resource type="AudioStream" uid="uid://bdnay5srgxvnd" path="res://audio/sfx/eletricity.mp3" id="3_nd18a"]
+[ext_resource type="Texture2D" uid="uid://b8b84dtby4208" path="res://textures/plug-walk_flipped.png" id="3_r6d0t"]
 [ext_resource type="AudioStream" uid="uid://21aieoosy3km" path="res://audio/sfx/electricity-charge-sound-effect.mp3" id="4_r6d0t"]
 [ext_resource type="Texture2D" uid="uid://bkv4pas165ka6" path="res://textures/electricity-particles.png" id="5_ps3xs"]
 [ext_resource type="Material" uid="uid://db6lfpusmfk8o" path="res://materials/always-emmiting-sparks.tres" id="6_mi8o7"]
@@ -11,32 +12,64 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_016g0"]
 size = Vector2(13, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jb1l3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ps3xs"]
 atlas = ExtResource("2_mi8o7")
 region = Rect2(32, 0, 32, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nd18a"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc6qk"]
 atlas = ExtResource("2_mi8o7")
 region = Rect2(0, 0, 32, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r6d0t"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qnc5"]
 atlas = ExtResource("2_mi8o7")
+region = Rect2(64, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ttb5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ps3xs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc6qk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qnc5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc6qk")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_piw54"]
+atlas = ExtResource("3_r6d0t")
+region = Rect2(32, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3d5l8"]
+atlas = ExtResource("3_r6d0t")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_duo7v"]
+atlas = ExtResource("3_r6d0t")
 region = Rect2(64, 0, 32, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_itpxd"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jb1l3")
+"texture": SubResource("AtlasTexture_piw54")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nd18a")
+"texture": SubResource("AtlasTexture_3d5l8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r6d0t")
+"texture": SubResource("AtlasTexture_duo7v")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nd18a")
+"texture": SubResource("AtlasTexture_3d5l8")
 }],
 "loop": true,
 "name": &"walk",
@@ -51,7 +84,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Sprite_Parent/SpriteRight:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -63,7 +96,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:scale")
+tracks/1/path = NodePath("Sprite_Parent/SpriteRight:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -75,7 +108,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/path = NodePath("Sprite_Parent/SpriteRight:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -87,7 +120,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite:visible")
+tracks/3/path = NodePath("Sprite_Parent/SpriteRight:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -103,7 +136,7 @@ length = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:scale")
+tracks/0/path = NodePath("Sprite_Parent/SpriteRight:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -115,7 +148,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
+tracks/1/path = NodePath("Sprite_Parent/SpriteRight:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -127,7 +160,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/path = NodePath("Sprite_Parent/SpriteRight:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -139,7 +172,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite:visible")
+tracks/3/path = NodePath("Sprite_Parent/SpriteRight:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -156,7 +189,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:position")
+tracks/0/path = NodePath("Sprite_Parent/SpriteRight:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -168,7 +201,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:scale")
+tracks/1/path = NodePath("Sprite_Parent/SpriteRight:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -197,12 +230,22 @@ shape = SubResource("RectangleShape2D_016g0")
 position = Vector2(-4, 1)
 hit_from_inside = true
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite_Parent" type="Node2D" parent="."]
+
+[node name="SpriteRight" type="AnimatedSprite2D" parent="Sprite_Parent"]
+position = Vector2(-17, -5)
+sprite_frames = SubResource("SpriteFrames_5ttb5")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.71571296
+offset = Vector2(20, 0)
+
+[node name="SpriteLeft" type="AnimatedSprite2D" parent="Sprite_Parent"]
 position = Vector2(-17, -5)
 sprite_frames = SubResource("SpriteFrames_itpxd")
 animation = &"walk"
 autoplay = "walk"
-frame_progress = 0.39130354
+frame_progress = 0.15127616
 offset = Vector2(20, 0)
 
 [node name="ElectricStatic" type="AudioStreamPlayer2D" parent="."]
@@ -235,7 +278,7 @@ autoplay = "idle"
 position = Vector2(4, -13)
 amount = 6
 texture = ExtResource("5_ps3xs")
-lifetime = 1.5999999999999999
+lifetime = 1.6
 randomness = 0.45
 process_material = ExtResource("6_mi8o7")
 

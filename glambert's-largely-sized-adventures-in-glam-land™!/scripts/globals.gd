@@ -8,6 +8,7 @@ var zoom_factor: float = 1000
 var current_level: int = 0
 var camera_y_limit: float = 10000
 var has_checkpoint: bool = false
+var lives: int = 5
 
 var level_data: Array[Dictionary] = [
 	{"level": 1, "time": 400, "song": "uid://c1ckqndnn46hb"},

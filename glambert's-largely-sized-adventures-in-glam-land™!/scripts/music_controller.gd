@@ -7,5 +7,7 @@ extends Node
 
 func _ready() -> void:
 	
+	audio_stream_player.bus = &"music"
+	
 	audio_stream_player.stream = load(Globals.level_data[Globals.current_level]["song"])
 	audio_stream_player.play()

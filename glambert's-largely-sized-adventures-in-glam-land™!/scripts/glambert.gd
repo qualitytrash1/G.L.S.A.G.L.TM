@@ -62,6 +62,7 @@ var bodies_in_uncrouch: int = 0
 @onready var glambert_sunglasses: Sprite2D = $Model/Sprites/GlambertSunglasses
 @onready var smooth_animations: AnimationPlayer = $SmoothAnimations
 @onready var statue_outline: Control = $UI/Control/Statues/StatueOutline
+@onready var sunglasses_no_shading: Sprite2D = $UI/Control/SunglassesNoShading
 #SOUNDS
 @onready var ding: AudioStreamPlayer = $Ding
 @onready var boing: AudioStreamPlayer = $Boing
@@ -74,6 +75,7 @@ var bodies_in_uncrouch: int = 0
 @onready var attack: AudioStreamPlayer = $Attack
 @onready var squish: AudioStreamPlayer = $Squish
 @onready var pop: AudioStreamPlayer = $Pop
+@onready var power_up: AudioStreamPlayer = $PowerUp
 #MISC
 @onready var fps: RichTextLabel = $UI/FPS
 @onready var camera: Camera2D = $"../../Camera"
@@ -89,6 +91,7 @@ var bodies_in_uncrouch: int = 0
 @onready var normal_hitbox: CollisionShape2D = $Hitbox/NormalHitbox
 @onready var crouch_hitbox: CollisionShape2D = $Hitbox/CrouchHitbox
 @onready var bottom_gradient: TextureRect = $"../BottomGradient"
+@onready var lives: RichTextLabel = $UI/Control/Lives
 
 
 func _ready() -> void:
@@ -111,8 +114,9 @@ func _ready() -> void:
 	#VISUAL THINGS
 	ground_particles.emitting = false
 	current_animation = "idle"
-	iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
-	level_text.text = "Level: #" + str(Globals.current_level + 1)
+	
+	
+	
 	flip()
 	
 	await get_tree().create_timer(0).timeout
@@ -138,6 +142,8 @@ func _ready() -> void:
 	
 	#GUI
 	iced_tea_texts.text = "Iced-Teas: " + str(Globals.iced_teas)
+	level_text.text = "Level: #" + str(Globals.current_level + 1)
+	set_lives()
 
 func _physics_process(delta: float) -> void:
 	
@@ -252,7 +258,7 @@ func _physics_process(delta: float) -> void:
 	if buffer_jump > 0 and time_since_ground_pound <= MIN_TIME_SINCE_GROUND_POUND:
 		buffer_jump = MAX_BUFFER_JUMP
 		
-	if jumps > 0 and buffer_jump > 0 and (not on_wall or (on_wall and wall_time > 0.12)) and (coyote_time > 0 or (fall_time > 0.1)) and time_since_ground_pound > MIN_TIME_SINCE_GROUND_POUND:
+	if jumps > 0 and buffer_jump > 0 and (not on_wall or (on_wall and wall_time > 0.12)) and (coyote_time > 0 or (fall_time > 0.1)) and time_since_ground_pound > MIN_TIME_SINCE_GROUND_POUND and bodies_in_uncrouch < 1:
 		var same_wall_jump : bool = wall_jumps > 1 and round(last_wall_jump_normal.x) == round(last_wall_normal.x)
 		if coyote_time <= 0 or (not same_wall_jump or (same_wall_jump and jumps == MAX_JUMPS)):
 			if on_wall:
@@ -464,6 +470,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			ding.play()
 			Globals.has_checkpoint = true
 			Globals.spawn_location = area.position
+			Globals.check_points.append(area.position.x)
 			#ANIMATIONS
 			var tween: Tween = create_tween()
 			tween.set_parallel(true)
@@ -471,10 +478,18 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			tween.tween_property(area, "position", Vector2(area.position.x, area.position.y - 50), 0.3)
 			await tween.finished
 			
-			Globals.check_points.append(area.position.x)
-			
 			area.queue_free()
-		
+		#LIFE
+		if area.is_in_group("life"):
+			
+			area.get_child(1).queue_free()
+			
+			power_up.play()
+			area.get_child(0).play("collect")
+			
+			Globals.lives += 1
+			set_lives()
+	
 	#ENEMY
 	if area.get_parent() is BasicEnemy:
 		
@@ -512,8 +527,8 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 
 
 func end_level(node: Node, time: float, level_complete: bool):
-		#GOES TO NEXT LEVEL
 		
+		#GOES TO NEXT LEVEL
 		if level_complete:
 			
 			Globals.check_points = []
@@ -531,9 +546,26 @@ func end_level(node: Node, time: float, level_complete: bool):
 			#NOISE
 			finish_level.play()
 			await tween.finished
+		#DIES
 		else:
+			Globals.lives -= 1
 			dying = true
 		get_tree().reload_current_scene()
+
+
+func set_lives():
+	var offset: int = 50
+	for i in range(Globals.lives):
+		
+		var clone_sunglasses = sunglasses_no_shading.duplicate()
+		
+		lives.add_child(clone_sunglasses)
+		clone_sunglasses.show()
+		clone_sunglasses.scale = Vector2(5, 5)
+		clone_sunglasses.position = Vector2(50, offset)
+		
+		offset -= 50
+
 
 #SPIKE COLLISION
 func _on_hitbox_body_entered(body: Node2D) -> void:
