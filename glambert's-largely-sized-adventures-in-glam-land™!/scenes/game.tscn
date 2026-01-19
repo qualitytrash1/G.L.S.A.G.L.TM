@@ -1,8 +1,9 @@
-[gd_scene load_steps=37 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=38 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cr4vhgrraqejj" path="res://scenes/glambert.tscn" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://chqvop78alemk" path="res://scenes/settings.tscn" id="2_37s47"]
 [ext_resource type="Texture2D" uid="uid://dy3pc8t7jwyyy" path="res://textures/graphical_ground.png" id="2_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://b35bebj1q3kti" path="res://scenes/music_controller.tscn" id="4_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://sfqrjqno6jek" path="res://textures/vaporwave_sun.png" id="5_0tnpc"]
@@ -475,3 +476,7 @@ offset = Vector2(1280, 0)
 position = Vector2(-367, 0)
 texture = ExtResource("18_ssvqc")
 offset = Vector2(640, 0)
+
+[node name="Settings" parent="." instance=ExtResource("2_37s47")]
+layer = 999
+visible = false

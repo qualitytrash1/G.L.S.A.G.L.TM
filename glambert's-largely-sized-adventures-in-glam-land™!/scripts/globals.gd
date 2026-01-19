@@ -10,6 +10,14 @@ var camera_y_limit: float = 10000
 var has_checkpoint: bool = false
 var lives: int = 5
 
+#SETTINGS
+var in_settings: bool = false
+#VOLUME
+var volume_on: bool = true
+var master_vol: float = 1
+var sound_vol: float = 1
+var music_vol: float = 1
+
 var level_data: Array[Dictionary] = [
 	{"level": 1, "time": 400, "song": "uid://c1ckqndnn46hb"},
 	{"level": 2, "time": 400, "song": "uid://bsn7u4s87ur8q"},
