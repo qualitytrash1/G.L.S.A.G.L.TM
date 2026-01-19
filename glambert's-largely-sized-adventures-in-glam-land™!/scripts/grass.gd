@@ -61,7 +61,6 @@ func _update() -> void:
 		tex_polygon.polygon[1].x = tex_polygon.global_position.distance_to(next_point + global_position)
 		tex_polygon.polygon[2].x = tex_polygon.global_position.distance_to(next_point + global_position)
 		tex_polygon.polygon[3].x = 0
-		update_visual_points(tex_polygon)
 		new_side.show()
 		index += 1
 	await get_tree().create_timer(0).timeout
