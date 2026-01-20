@@ -14,31 +14,51 @@ extends Node2D
 signal done_making_texture
 var texture_ready : bool = false
 
-var thread : Thread = Thread.new()
+var thread : Thread
 
 var distances : Array[Vector2] = []
 
 
 func _ready() -> void:
-	if thread.is_started():
-		thread.wait_to_finish()
-	thread = Thread.new()
-	thread.start(_update)
+	_update_threaded()
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		if update:
 			level.update_polygons()
-			_update()
+			_update_threaded(true)
 			update = false
 		if create_tex:
 			_create_tex()
 			create_tex = false
+			
+func _update_threaded(debug : bool = false) -> void:
+	if thread:
+		if thread.is_started():
+			thread.wait_to_finish()
+	thread = Thread.new()
+	thread.start(_update.bind(debug))
 
-func _update() -> void:
-	distances = []
+func _update(debug : bool = false) -> void:
+	#HIDE/QUEUE FREE DEBUG TEXT
 	await get_tree().create_timer(0).timeout
-	call_deferred("_create_tex")
+	if not debug or Globals.final_export:
+		for i in side.get_child(0).get_children():
+			if Globals.final_export:
+				i.queue_free()
+			else:
+				i.hide()
+	if not debug or Globals.final_export:
+		if Globals.final_export:
+			side.get_child(1).queue_free()
+		else:
+			side.get_child(1).hide()
+	if debug:
+		for i in side.get_child(0).get_children():
+			i.show()
+		side.get_child(1).show()
+	distances = []
+	_create_tex()
 	if not texture_ready:
 		await done_making_texture
 	for i in sides.get_children():
@@ -62,7 +82,9 @@ func _update() -> void:
 		tex_polygon.polygon[2].x = tex_polygon.global_position.distance_to(next_point + global_position)
 		tex_polygon.polygon[3].x = 0
 		new_side.show()
-		update_visual_points(tex_polygon)
+		#DEBUG
+		if debug:
+			update_visual_points(tex_polygon)
 		index += 1
 	await get_tree().create_timer(0).timeout
 	index = 0
@@ -73,7 +95,9 @@ func _update() -> void:
 		next_side = get_next_side(index)
 		next_tex_polygon = next_side.get_child(0)
 		var distance : float = abs(tex_polygon.polygon[2].x - next_tex_polygon.polygon[3].x)
-		this_side.get_child(1).text += str(float(round(distance * 1000)) / 1000.0)
+		#DEBUG
+		if debug:
+			this_side.get_child(1).text += str(float(round(distance * 1000)) / 1000.0)
 		index += 1
 	index = 0
 	for this_side in sides.get_children():
@@ -83,7 +107,7 @@ func _update() -> void:
 		next_side = get_next_side(index)
 		next_tex_polygon = next_side.get_child(0)
 		index += 1
-		
+			
 func get_next_side(index : int) -> Node2D:
 	if index + 1 >= len(polygon.polygon):
 		return sides.get_child(0)
@@ -119,3 +143,9 @@ func _create_tex() -> void:
 	
 func _exit_tree() -> void:
 	thread.wait_to_finish()
+	
+func _input(event: InputEvent) -> void:
+	if not Globals.final_export:
+		if event is InputEventKey:
+			if Input.is_action_just_pressed("debug_grass"):
+				_update_threaded(true)

@@ -1,5 +1,8 @@
 extends Node
 
+#CHANGE ON FINAL EXPORT (disables debug features)
+var final_export : bool = false
+
 var iced_teas: int = 0
 var statues: int = 0
 var statue_amount: int
