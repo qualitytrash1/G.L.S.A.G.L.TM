@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://cr4vhgrraqejj"]
+[gd_scene load_steps=65 format=3 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
@@ -204,8 +204,12 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_eb3d3"]
-radius = 12.0415945
+[sub_resource type="CircleShape2D" id="CircleShape2D_jf5aq"]
+radius = 12.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eb36h"]
+custom_solver_bias = 0.005
+size = Vector2(14, 4)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rodan"]
 radius = 6.0
@@ -468,6 +472,10 @@ radius = 13.038404
 radius = 9.0
 height = 32.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_eb3d3"]
+custom_solver_bias = 0.005
+radius = 12.0415945
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_2yc5u"]
 animations = [{
 "frames": [{
@@ -527,6 +535,7 @@ stream_0/stream = ExtResource("4_0dbj0")
 
 [node name="Glambert" type="CharacterBody2D"]
 collision_mask = 11
+floor_snap_length = 12.0
 script = ExtResource("1_4w5rh")
 metadata/_edit_vertical_guides_ = [1420.0]
 
@@ -568,7 +577,11 @@ process_mode = 3
 texture = ExtResource("2_4w5rh")
 
 [node name="NormalCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_eb3d3")
+shape = SubResource("CircleShape2D_jf5aq")
+
+[node name="NormalCollision2" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_eb36h")
 
 [node name="CrouchCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)
@@ -595,6 +608,10 @@ collision_mask = 4
 [node name="NormalHitbox" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_0dbj0")
 
+[node name="NormalHitbox2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(2.842171e-14, 10)
+shape = SubResource("RectangleShape2D_eb36h")
+
 [node name="CrouchHitbox" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 4)
 rotation = 1.5707964
@@ -614,8 +631,12 @@ disabled = true
 collision_mask = 3
 
 [node name="NormalCollision" type="CollisionShape2D" parent="SafeToUncrouch"]
-position = Vector2(0, -0.1)
+position = Vector2(0, -0.041)
 shape = SubResource("CircleShape2D_eb3d3")
+
+[node name="NormalCollision2" type="CollisionShape2D" parent="SafeToUncrouch"]
+position = Vector2(0, 9.959)
+shape = SubResource("RectangleShape2D_eb36h")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

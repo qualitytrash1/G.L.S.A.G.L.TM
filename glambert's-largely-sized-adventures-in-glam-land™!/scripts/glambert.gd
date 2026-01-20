@@ -89,8 +89,10 @@ var bodies_in_uncrouch: int = 0
 @onready var ground_particles: GPUParticles2D = $Ground
 @onready var ground_pound_particles: GPUParticles2D = $GroundPound
 @onready var normal_collision: CollisionShape2D = $NormalCollision
+@onready var normal_collision_2: CollisionShape2D = $NormalCollision2
 @onready var crouch_collision: CollisionShape2D = $CrouchCollision
 @onready var normal_hitbox: CollisionShape2D = $Hitbox/NormalHitbox
+@onready var normal_hitbox_2: CollisionShape2D = $Hitbox/NormalHitbox2
 @onready var crouch_hitbox: CollisionShape2D = $Hitbox/CrouchHitbox
 @onready var bottom_gradient: TextureRect = $"../BottomGradient"
 @onready var lives: RichTextLabel = $UI/Control/Lives
@@ -181,8 +183,8 @@ func _physics_process(delta: float) -> void:
 			stone_sliding.play()
 			ground_pound_particles.restart()
 			if abs(get_floor_normal().x) > 0:
-				velocity.x = get_floor_normal().x * 500
-				rotation = deg_to_rad(get_floor_normal().x * 59.9)
+				velocity.x = get_floor_normal().x * 1000
+				rotation = lerp(rotation, get_floor_angle() * (get_floor_normal().x / abs(get_floor_normal().x)), delta * 24)
 			#PLAY ANIMATION
 			uncrouch(true)
 	#IN AIR
@@ -223,15 +225,16 @@ func _physics_process(delta: float) -> void:
 		wall_time = 0
 		sprites.rotation = lerp(sprites.rotation, 0.0, delta * 24)
 		if not in_air:
-			rotation = lerp(rotation, deg_to_rad(get_floor_normal().x * 59.9), delta * 24)
+			if get_floor_angle():
+				rotation = lerp(rotation, get_floor_angle() * (get_floor_normal().x / abs(get_floor_normal().x)), delta * 24)
+			else:
+				rotation = 0
 		if not ground_pounding:
 			weight = BASE_WEIGHT
 			
 	if in_air:
 		rotation = 0
 		ground_particles.emitting = false
-		if bodies_in_uncrouch < 1:
-			uncrouch()
 		#CHECKS IF PRESSING DOWN
 		if Input.is_action_just_pressed("pound") and not ground_pounding and not on_wall:
 			
@@ -257,6 +260,10 @@ func _physics_process(delta: float) -> void:
 		
 	if not Input.is_action_pressed("crouch") and crouching and bodies_in_uncrouch < 1: #uncrouch
 		uncrouch()
+		
+	if coyote_time <= 0:
+		if bodies_in_uncrouch < 1:
+			uncrouch()
 		
 	#TIMER VARIABLES
 	coyote_time -= delta
@@ -361,16 +368,21 @@ func _physics_process(delta: float) -> void:
 		crouch_collision.disabled = false
 		crouch_hitbox.disabled = false
 		normal_collision.disabled = true
+		normal_collision_2.disabled = true
 		normal_hitbox.disabled = true
+		normal_hitbox_2.disabled = true
 	else:
 		#normal hitboxes
 		crouch_collision.disabled = true
 		crouch_hitbox.disabled = true
 		normal_collision.disabled = false
+		normal_collision_2.disabled = false
 		normal_hitbox.disabled = false
+		normal_hitbox_2.disabled = false
 	last_vel = velocity
 	move_and_slide()
 	set_collision_mask_value(4, (velocity.y >= 0 and not on_wall) or velocity.y >= 30) #disable platform collision if moving up
+
 
 func flip():
 	var flip_dir : bool = false #false = left, true = right

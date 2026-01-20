@@ -101,7 +101,7 @@ func update_visual_points(tex_polygon : Polygon2D) -> void:
 		i.modulate = rand_color
 		#i.global_position += Vector2(randf_range(-2,2), randf_range(-2,2))
 		index += 1
-	tex_polygon.get_parent().get_child(1).text = str(index) + ": [color=#" + str(rand_color.to_html()) + "]"
+	tex_polygon.get_parent().get_child(1).text = str(tex_polygon.get_parent().get_index()) + ": [color=#" + str(rand_color.to_html()) + "]"
 		
 func _create_tex() -> void:
 	var tex_polygon : Polygon2D = get_child(0).get_child(0)

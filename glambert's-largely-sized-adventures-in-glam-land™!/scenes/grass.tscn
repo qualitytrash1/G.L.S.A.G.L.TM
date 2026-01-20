@@ -64,7 +64,7 @@ theme_override_font_sizes/normal_font_size = 12
 text = "3"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Side"]
-modulate = Color(1, 1, 1, 0.53333336)
+modulate = Color(1, 1, 1, 0.78431374)
 z_index = 100
 clip_contents = false
 offset_left = 6.0
