@@ -12,11 +12,17 @@ var lives: int = 5
 
 #SETTINGS
 var in_settings: bool = false
+
 #VOLUME
 var volume_on: bool = true
 var master_vol: float = 1
 var sound_vol: float = 1
 var music_vol: float = 1
+
+#VIDEO
+var enable_filter: bool = false
+var filter_node: ColorRect
+
 
 var level_data: Array[Dictionary] = [
 	{"level": 1, "time": 400, "song": "uid://c1ckqndnn46hb"},

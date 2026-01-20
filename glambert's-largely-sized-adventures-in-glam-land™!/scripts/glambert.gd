@@ -113,6 +113,7 @@ func _ready() -> void:
 	jump_velocity = MAX_JUMP_HEIGHT
 	#OTHER VARS
 	dying = false
+	Globals.filter_node = chromatic_abberation
 	#VISUAL THINGS
 	ground_particles.emitting = false
 	current_animation = "idle"
@@ -229,14 +230,14 @@ func _physics_process(delta: float) -> void:
 	if in_air:
 		rotation = 0
 		ground_particles.emitting = false
-		if bodies_in_uncrouch == 0:
+		if bodies_in_uncrouch < 1:
 			uncrouch()
 		#CHECKS IF PRESSING DOWN
 		if Input.is_action_just_pressed("pound") and not ground_pounding and not on_wall:
 			
 			velocity.x = clamp(velocity.x, -80, 80)
 			direction = 0
-			velocity.y = -200
+			velocity.y = jump_velocity / 1.25
 			ground_pound_time = 0
 			swishlast.play()
 			ground_pounding = true
@@ -247,14 +248,14 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_released("jump") and jumping:
 			cut_jump = true
 	else:
-		if Input.is_action_just_pressed("crouch") and not ground_pounding and not on_wall and not crouching and bodies_in_crouch == 0:
+		if Input.is_action_pressed("crouch") and not ground_pounding and not on_wall and not crouching and bodies_in_crouch < 1:
 			crouch()
 			
 		jumps = MAX_JUMPS
 		coyote_time = MAX_COYOTE_TIME
 		in_air = false
 		
-	if not Input.is_action_pressed("crouch") and crouching and bodies_in_uncrouch == 0: #uncrouch
+	if not Input.is_action_pressed("crouch") and crouching and bodies_in_uncrouch < 1: #uncrouch
 		uncrouch()
 		
 	#TIMER VARIABLES

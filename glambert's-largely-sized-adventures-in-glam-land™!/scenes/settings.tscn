@@ -78,7 +78,6 @@ offset_right = 574.0
 offset_bottom = 128.0
 theme = ExtResource("1_5p8wc")
 max_value = 3.0
-step = 0.1
 value = 1.0
 
 [node name="Text" type="RichTextLabel" parent="Control/TabContainer/Audio/Volume/MasterVolume"]
@@ -102,7 +101,6 @@ offset_right = 574.0
 offset_bottom = 211.0
 theme = ExtResource("1_5p8wc")
 max_value = 3.0
-step = 0.1
 value = 1.0
 
 [node name="Text" type="RichTextLabel" parent="Control/TabContainer/Audio/Volume/SoundVolume"]
@@ -126,7 +124,6 @@ offset_right = 574.0
 offset_bottom = 292.0
 theme = ExtResource("1_5p8wc")
 max_value = 3.0
-step = 0.1
 value = 1.0
 
 [node name="Text" type="RichTextLabel" parent="Control/TabContainer/Audio/Volume/MusicVolume"]
@@ -180,6 +177,15 @@ offset_right = 270.0
 offset_bottom = 169.0
 theme = ExtResource("1_5p8wc")
 
+[node name="Enable Filter" type="CheckBox" parent="Control/TabContainer/Video"]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 196.0
+offset_right = 474.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 64
+text = "Enable Filter"
+
 [node name="SaveData" type="Control" parent="Control/TabContainer"]
 visible = false
 layout_mode = 2
@@ -193,3 +199,4 @@ volume_db = -6.148
 [connection signal="value_changed" from="Control/TabContainer/Audio/Volume/SoundVolume" to="." method="_on_sound_volume_value_changed"]
 [connection signal="value_changed" from="Control/TabContainer/Audio/Volume/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="pressed" from="Control/TabContainer/Audio/VolumeToggle" to="." method="_on_volume_toggle_pressed"]
+[connection signal="toggled" from="Control/TabContainer/Video/Enable Filter" to="." method="_on_enable_filter_toggled"]

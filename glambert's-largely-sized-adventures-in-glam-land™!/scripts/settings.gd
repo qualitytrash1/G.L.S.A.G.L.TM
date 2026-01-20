@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var sound_volume: HSlider = $Control/TabContainer/Audio/Volume/SoundVolume
 @onready var music_volume: HSlider = $Control/TabContainer/Audio/Volume/MusicVolume
 @onready var pop_sound: AudioStreamPlayer = $PopSound
+@onready var enable_filter: CheckBox = $"Control/TabContainer/Video/Enable Filter"
 
 
 
@@ -13,13 +14,17 @@ func _ready() -> void:
 	get_tree().paused = false
 	hide()
 	
-	#SETS VOLUMU
+	#SET SETTINGS FROM GLOBAL VARS
 	master_volume.value = Globals.master_vol
 	sound_volume.value = Globals.sound_vol
 	music_volume.value = Globals.music_vol
+	enable_filter.button_pressed = Globals.enable_filter
+	#APPLY SETTINGS
 	AudioServer.set_bus_volume_linear(0, Globals.master_vol)
 	AudioServer.set_bus_volume_linear(2, Globals.sound_vol)
 	AudioServer.set_bus_volume_linear(1, Globals.music_vol)
+	if Globals.filter_node:
+		Globals.filter_node.visible = Globals.enable_filter
 	
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("escape"):
@@ -82,3 +87,9 @@ func _on_music_volume_value_changed(value: float) -> void:
 	pop_sound.bus = &"Music"
 	pop_sound.play()
 	
+
+
+func _on_enable_filter_toggled(toggled_on: bool) -> void:
+	Globals.enable_filter = toggled_on
+	if Globals.filter_node:
+		Globals.filter_node.visible = Globals.enable_filter

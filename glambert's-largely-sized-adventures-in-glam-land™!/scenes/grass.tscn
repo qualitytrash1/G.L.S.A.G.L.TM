@@ -15,6 +15,18 @@ texture_repeat = 2
 texture = ExtResource("2_yarb5")
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 16, 0, 16)
 
+[node name="0" type="RichTextLabel" parent="Side/Polygon2D"]
+z_index = 4096
+clip_contents = false
+offset_right = 32.0
+offset_bottom = 26.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 12
+text = "0"
+
 [node name="1" type="RichTextLabel" parent="Side/Polygon2D"]
 z_index = 4096
 clip_contents = false
@@ -22,10 +34,10 @@ offset_right = 32.0
 offset_bottom = 26.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.78431374)
-theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 12
-text = "0"
+text = "1"
 
 [node name="2" type="RichTextLabel" parent="Side/Polygon2D"]
 z_index = 4096
@@ -34,10 +46,10 @@ offset_right = 32.0
 offset_bottom = 26.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.78431374)
-theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 12
-text = "1"
+text = "2"
 
 [node name="3" type="RichTextLabel" parent="Side/Polygon2D"]
 z_index = 4096
@@ -46,34 +58,23 @@ offset_right = 32.0
 offset_bottom = 26.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.78431374)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/normal_font_size = 12
-text = "2"
-
-[node name="4" type="RichTextLabel" parent="Side/Polygon2D"]
-z_index = 4096
-clip_contents = false
-offset_right = 32.0
-offset_bottom = 26.0
-scale = Vector2(0.5, 0.5)
-mouse_filter = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.78431374)
-theme_override_constants/outline_size = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 12
 text = "3"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Side"]
-modulate = Color(1, 1, 0, 0.53333336)
+modulate = Color(1, 1, 1, 0.53333336)
 z_index = 100
 clip_contents = false
-offset_top = 6.0
-offset_right = 78.0
-offset_bottom = 90.0
+offset_left = 6.0
+offset_right = 84.0
+offset_bottom = 84.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/normal_font_size = 16
-text = "0.01"
+bbcode_enabled = true
+text = "[color=yellow]0.01"
 
 [node name="Sides" type="Node2D" parent="."]
