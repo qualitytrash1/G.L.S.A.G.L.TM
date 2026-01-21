@@ -307,7 +307,7 @@ func _physics_process(delta: float) -> void:
 			if same_wall_jump:
 				jumps -= 1
 				velocity.y += ((wall_jumps - 1) * 50)
-				velocity.y = clamp(velocity.y, -10000, -140)
+				velocity.y = clamp(velocity.y, -10000, -120)
 			if time_since_ground_pound < MIN_TIME_SINCE_GROUND_POUND * 3:
 				velocity.y += (jump_velocity / 4)
 			weight = BASE_WEIGHT
