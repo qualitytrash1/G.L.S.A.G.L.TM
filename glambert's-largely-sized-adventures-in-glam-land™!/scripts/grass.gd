@@ -18,8 +18,10 @@ var thread : Thread
 
 var distances : Array[Vector2] = []
 
+var final_export : bool = false
 
 func _ready() -> void:
+	final_export = Globals.final_export
 	_update_threaded()
 
 func _process(delta: float) -> void:
@@ -40,16 +42,17 @@ func _update_threaded(debug : bool = false) -> void:
 	thread.start(_update.bind(debug))
 
 func _update(debug : bool = false) -> void:
+	#SETUP
 	#HIDE/QUEUE FREE DEBUG TEXT
 	await get_tree().create_timer(0).timeout
-	if not debug or Globals.final_export:
+	if not debug or final_export:
 		for i in side.get_child(0).get_children():
 			if Globals.final_export:
 				i.queue_free()
 			else:
 				i.hide()
-	if not debug or Globals.final_export:
-		if Globals.final_export:
+	if not debug or final_export:
+		if final_export:
 			side.get_child(1).queue_free()
 		else:
 			side.get_child(1).hide()
@@ -63,8 +66,12 @@ func _update(debug : bool = false) -> void:
 		await done_making_texture
 	for i in sides.get_children():
 		i.queue_free()
+	await get_tree().create_timer(0).timeout
 	side.hide()
 	position = Vector2(0,0)
+	
+	#MAIN CODE
+	#No clue how in the bigglyty gobly thid works
 	var index : int = 0
 	for point in polygon.polygon:
 		var new_side : Node2D = side.duplicate()
@@ -78,9 +85,9 @@ func _update(debug : bool = false) -> void:
 		new_side.position = point
 		tex_polygon.look_at(next_point + global_position)
 		tex_polygon.polygon[0].x = 0
-		tex_polygon.polygon[1].x = tex_polygon.global_position.distance_to(next_point + global_position)
-		tex_polygon.polygon[2].x = tex_polygon.global_position.distance_to(next_point + global_position)
-		tex_polygon.polygon[3].x = 0
+		tex_polygon.polygon[1].x = tex_polygon.global_position.distance_to(next_point + global_position) 
+		tex_polygon.polygon[2].x = tex_polygon.global_position.distance_to(next_point + global_position) # + 16
+		tex_polygon.polygon[3].x = 0 #-16
 		new_side.show()
 		#DEBUG
 		if debug:
@@ -94,19 +101,42 @@ func _update(debug : bool = false) -> void:
 		var next_tex_polygon : Polygon2D
 		next_side = get_next_side(index)
 		next_tex_polygon = next_side.get_child(0)
-		var distance : float = abs(tex_polygon.polygon[2].x - next_tex_polygon.polygon[3].x)
+		var distance : Vector2 = Vector2(tex_polygon.to_global(tex_polygon.polygon[2]).x - next_tex_polygon.to_global(next_tex_polygon.polygon[3]).x, tex_polygon.to_global(tex_polygon.polygon[2]).y - next_tex_polygon.to_global(next_tex_polygon.polygon[3]).y)
+		
+		distances.append(distance)
 		#DEBUG
 		if debug:
-			this_side.get_child(1).text += str(float(round(distance * 1000)) / 1000.0)
+			this_side.get_child(1).text += str(Vector2(round(distance * 1000)) / 1000.0)
 		index += 1
 	index = 0
 	for this_side in sides.get_children():
+		var distance : Vector2 = distances[index]
 		var tex_polygon : Polygon2D = this_side.get_child(0)
 		var next_side : Node2D
 		var next_tex_polygon : Polygon2D
 		next_side = get_next_side(index)
 		next_tex_polygon = next_side.get_child(0)
+		var new_node : Node2D = Node2D.new()
+		tex_polygon.add_child(new_node)
+		new_node.position = tex_polygon.polygon[2]
+		new_node.global_translate(-distance)
+		tex_polygon.polygon[2].x = new_node.position.x
+		var precision : float = 0.002 #LOWER NUMBER = SLOWER BUT BETTER
+		for i in range(3000):
+			next_tex_polygon.polygon[3].x = next_tex_polygon.to_local(tex_polygon.to_global(tex_polygon.polygon[2])).x
+			tex_polygon.polygon[2].x = tex_polygon.to_local(next_tex_polygon.to_global(next_tex_polygon.polygon[3])).x
+			if i % 500 == 499:
+				await get_tree().create_timer(0)
+			if tex_polygon.to_global(tex_polygon.polygon[2]).distance_to(next_tex_polygon.to_global(next_tex_polygon.polygon[3])) < precision:
+				break
+		new_node.queue_free()
+		#next_tex_polygon.polygon[3].x -= distances[index] / 2
+		#DEBUG
+		#if debug:
+			#update_visual_points(tex_polygon)
+			#this_side.get_child(1).text += str(Vector2(round(distances[index] * 1000)) / 1000.0)
 		index += 1
+			
 			
 func get_next_side(index : int) -> Node2D:
 	if index + 1 >= len(polygon.polygon):
@@ -145,7 +175,7 @@ func _exit_tree() -> void:
 	thread.wait_to_finish()
 	
 func _input(event: InputEvent) -> void:
-	if not Globals.final_export:
+	if not final_export:
 		if event is InputEventKey:
 			if Input.is_action_just_pressed("debug_grass"):
 				_update_threaded(true)
