@@ -1,7 +1,7 @@
-[gd_scene load_steps=38 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=39 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
-[ext_resource type="PackedScene" path="res://scenes/sky_background.tscn" id="1_gee14"]
+[ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cr4vhgrraqejj" path="res://scenes/glambert.tscn" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://chqvop78alemk" path="res://scenes/settings.tscn" id="2_37s47"]
 [ext_resource type="Texture2D" uid="uid://dy3pc8t7jwyyy" path="res://textures/graphical_ground.png" id="2_u5sy4"]
@@ -9,11 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://sfqrjqno6jek" path="res://textures/vaporwave_sun.png" id="5_0tnpc"]
 [ext_resource type="Script" uid="uid://dcrgb8yncovv1" path="res://scripts/level.gd" id="5_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bl4t22m8q6hwe" path="res://textures/stars.png" id="6_1kice"]
-[ext_resource type="PackedScene" path="res://scenes/background.tscn" id="6_gee14"]
+[ext_resource type="PackedScene" uid="uid://c0ah5kn2ch61y" path="res://scenes/background.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://bb08qhktrr4g3" path="res://scenes/grass.tscn" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://ff51uench70u" path="res://textures/spikes-short.png" id="9_ir15t"]
 [ext_resource type="PackedScene" uid="uid://3romnl56ifsa" path="res://scenes/ice_tea.tscn" id="10_vtaks"]
 [ext_resource type="PackedScene" uid="uid://badtfuyl8v0pi" path="res://scenes/statue.tscn" id="11_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://becnmmqtfxs0t" path="res://scenes/moving_platform.tscn" id="12_bt5mj"]
 [ext_resource type="Texture2D" uid="uid://83b0a7speph3" path="res://textures/dirt-purple.png" id="12_ca42v"]
 [ext_resource type="PackedScene" uid="uid://ukurqghjblqn" path="res://scenes/sunglasses-life.tscn" id="13_5newe"]
 [ext_resource type="PackedScene" uid="uid://bvqdsk3hm4v53" path="res://scenes/computer.tscn" id="13_kvuet"]
@@ -325,6 +326,13 @@ position = Vector2(7, -6)
 tile_map_data = PackedByteArray("AAC9//z/AAADAAAAAAC8//z/AAACAAAAAAC7//z/AAAAAAAAAADm//z/AAAEAAAAAADs//z/AAAEAAAAAAC+//D/AAADAAAAAAC9//D/AAABAAAAAAC8//D/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_rysoc")
 
+[node name="MovingPlatforms" type="Node2D" parent="Level"]
+
+[node name="MovingPlatform" parent="Level/MovingPlatforms" instance=ExtResource("12_bt5mj")]
+position = Vector2(32, -120)
+points = Array[Vector2]([Vector2(-50, 0), Vector2(50, 0), Vector2(50, -100)])
+speed_multiplier = 1.0
+
 [node name="Interactable" type="Node2D" parent="Level"]
 
 [node name="Collectables" type="TileMapLayer" parent="Level/Interactable"]
@@ -372,7 +380,7 @@ tile_set = SubResource("TileSet_kvuet")
 [node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon"]
 texture_repeat = 2
 texture = ExtResource("12_ca42v")
-polygon = PackedVector2Array(-1675, -1359, -1643, -1359, -1409, -1110, -1579, -1359, -1063, -1359, -1062, -661, -1225, -661, -1224, -576, -1062, -576, -1062, -144, -1198, -144, -1198, -54, -284, -54, -284, 234, -230, 234, -228, -54, -138, -54, -139, 233, -82, 233, -82, -54, 150, -54, 173, -87, 229, -140, 299, -175, 372, -193, 439, -195, 519, -175, 586, -134, 623, -91, 659.5938, -63.99997, 1109, -64, 1113, -289, 1296.9127, -289, 1350, -289, 1479, -289, 1479, -358, 1350, -358, 1350, -302, 1296.8912, -302, 1296, -965, 1536, -966, 2041, -136, 1539, 401, -1667.4448, 406)
+polygon = PackedVector2Array(-1675, -1359, -1063, -1359, -1062, -661, -1225, -661, -1224, -576, -1062, -576, -1062, -144, -1198, -144, -1198, -54, -284, -54, -284, 234, -230, 234, -228, -54, -138, -54, -139, 233, -82, 233, -82, -54, 150, -54, 173, -87, 229, -140, 299, -175, 372, -193, 439, -195, 519, -175, 586, -134, 623, -91, 659.5938, -63.99997, 1109, -64, 1113, -289, 1296.9127, -289, 1350, -289, 1479, -289, 1479, -358, 1350, -358, 1350, -302, 1296.8912, -302, 1296, -965, 1536, -966, 2041, -136, 1539, 401, -1667.4448, 406)
 uv = PackedVector2Array(0, 0, 64, 0, 64, 64, 0, 64)
 
 [node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]

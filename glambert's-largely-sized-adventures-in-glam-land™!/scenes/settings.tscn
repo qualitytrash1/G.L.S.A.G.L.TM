@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://chqvop78alemk"]
+[gd_scene load_steps=8 format=3 uid="uid://chqvop78alemk"]
 
 [ext_resource type="Theme" uid="uid://cbp0x2v5m6a5b" path="res://textures/ui.tres" id="1_5p8wc"]
 [ext_resource type="Script" uid="uid://dopgnifo2k0wh" path="res://scripts/settings.gd" id="1_f4mfi"]
 [ext_resource type="Texture2D" uid="uid://dsi32t8owkwtl" path="res://textures/volume-off.png" id="2_r6d6q"]
 [ext_resource type="Texture2D" uid="uid://btoecslt2qk6b" path="res://textures/volume-on.png" id="3_6wm04"]
 [ext_resource type="AudioStream" uid="uid://bnah3itumo6cq" path="res://audio/sfx/pop.mp3" id="5_es4n0"]
+[ext_resource type="Texture2D" uid="uid://c42gpdcedhsly" path="res://textures/button-64_16.png" id="6_gis3k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f4mfi"]
 animations = [{
@@ -29,7 +30,8 @@ animations = [{
 process_mode = 3
 script = ExtResource("1_f4mfi")
 
-[node name="Control" type="Control" parent="."]
+[node name="Settings" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,7 +39,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BG" type="Panel" parent="Control"]
+[node name="BG" type="Panel" parent="Settings"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,7 +48,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_5p8wc")
 
-[node name="TabContainer" type="TabContainer" parent="Control"]
+[node name="TabContainer" type="TabContainer" parent="Settings"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,19 +60,19 @@ theme = ExtResource("1_5p8wc")
 current_tab = 1
 clip_tabs = false
 
-[node name="Audio" type="Control" parent="Control/TabContainer"]
+[node name="Audio" type="Control" parent="Settings/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Volume" type="Control" parent="Control/TabContainer/Audio"]
+[node name="Volume" type="Control" parent="Settings/TabContainer/Audio"]
 anchors_preset = 0
 offset_left = 11.0
 offset_top = 48.0
 offset_right = 652.0
 offset_bottom = 387.0
 
-[node name="MasterVolume" type="HSlider" parent="Control/TabContainer/Audio/Volume"]
+[node name="MasterVolume" type="HSlider" parent="Settings/TabContainer/Audio/Volume"]
 layout_mode = 0
 offset_left = 50.0
 offset_top = 88.0
@@ -81,7 +83,7 @@ max_value = 3.0
 step = 0.25
 value = 1.0
 
-[node name="Text" type="RichTextLabel" parent="Control/TabContainer/Audio/Volume/MasterVolume"]
+[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Audio/Volume/MasterVolume"]
 clip_contents = false
 layout_mode = 0
 offset_left = 4.0
@@ -94,7 +96,7 @@ theme = ExtResource("1_5p8wc")
 text = "Master"
 horizontal_alignment = 1
 
-[node name="SoundVolume" type="HSlider" parent="Control/TabContainer/Audio/Volume"]
+[node name="SoundVolume" type="HSlider" parent="Settings/TabContainer/Audio/Volume"]
 layout_mode = 0
 offset_left = 50.0
 offset_top = 171.0
@@ -105,7 +107,7 @@ max_value = 3.0
 step = 0.25
 value = 1.0
 
-[node name="Text" type="RichTextLabel" parent="Control/TabContainer/Audio/Volume/SoundVolume"]
+[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Audio/Volume/SoundVolume"]
 clip_contents = false
 layout_mode = 0
 offset_left = 5.0
@@ -118,7 +120,7 @@ theme = ExtResource("1_5p8wc")
 text = "Sound"
 horizontal_alignment = 1
 
-[node name="MusicVolume" type="HSlider" parent="Control/TabContainer/Audio/Volume"]
+[node name="MusicVolume" type="HSlider" parent="Settings/TabContainer/Audio/Volume"]
 layout_mode = 0
 offset_left = 50.0
 offset_top = 252.0
@@ -129,7 +131,7 @@ max_value = 3.0
 step = 0.25
 value = 1.0
 
-[node name="Text" type="RichTextLabel" parent="Control/TabContainer/Audio/Volume/MusicVolume"]
+[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Audio/Volume/MusicVolume"]
 clip_contents = false
 layout_mode = 0
 offset_left = 5.0
@@ -142,7 +144,7 @@ theme = ExtResource("1_5p8wc")
 text = "Music"
 horizontal_alignment = 1
 
-[node name="VolumeToggle" type="Button" parent="Control/TabContainer/Audio"]
+[node name="VolumeToggle" type="Button" parent="Settings/TabContainer/Audio"]
 layout_mode = 0
 offset_left = 69.0
 offset_top = 376.0
@@ -150,13 +152,13 @@ offset_right = 179.0
 offset_bottom = 480.0
 flat = true
 
-[node name="VolumeIcon" type="AnimatedSprite2D" parent="Control/TabContainer/Audio/VolumeToggle"]
+[node name="VolumeIcon" type="AnimatedSprite2D" parent="Settings/TabContainer/Audio/VolumeToggle"]
 position = Vector2(57, 48)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_f4mfi")
 animation = &"true"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/TabContainer/Audio"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Audio"]
 clip_contents = false
 layout_mode = 0
 offset_left = 225.0
@@ -168,11 +170,11 @@ mouse_filter = 2
 theme = ExtResource("1_5p8wc")
 text = "VOLUME"
 
-[node name="Video" type="Control" parent="Control/TabContainer"]
+[node name="Video" type="Control" parent="Settings/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="MaxFPS" type="LineEdit" parent="Control/TabContainer/Video"]
+[node name="MaxFPS" type="LineEdit" parent="Settings/TabContainer/Video"]
 layout_mode = 0
 offset_left = 61.0
 offset_top = 67.0
@@ -180,7 +182,7 @@ offset_right = 270.0
 offset_bottom = 169.0
 theme = ExtResource("1_5p8wc")
 
-[node name="Enable Filter" type="CheckBox" parent="Control/TabContainer/Video"]
+[node name="Enable Filter" type="CheckBox" parent="Settings/TabContainer/Video"]
 layout_mode = 0
 offset_left = 62.0
 offset_top = 196.0
@@ -189,17 +191,102 @@ offset_bottom = 292.0
 theme_override_font_sizes/font_size = 64
 text = "Enable Filter"
 
-[node name="SaveData" type="Control" parent="Control/TabContainer"]
+[node name="SaveData" type="Control" parent="Settings/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="PopSound" type="AudioStreamPlayer" parent="."]
+[node name="PopSound" type="AudioStreamPlayer" parent="Settings"]
 stream = ExtResource("5_es4n0")
 volume_db = -6.148
 
-[connection signal="value_changed" from="Control/TabContainer/Audio/Volume/MasterVolume" to="." method="_on_master_volume_value_changed"]
-[connection signal="value_changed" from="Control/TabContainer/Audio/Volume/SoundVolume" to="." method="_on_sound_volume_value_changed"]
-[connection signal="value_changed" from="Control/TabContainer/Audio/Volume/MusicVolume" to="." method="_on_music_volume_value_changed"]
-[connection signal="pressed" from="Control/TabContainer/Audio/VolumeToggle" to="." method="_on_volume_toggle_pressed"]
-[connection signal="toggled" from="Control/TabContainer/Video/Enable Filter" to="." method="_on_enable_filter_toggled"]
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="Panel" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_5p8wc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 648.0
+offset_top = 190.00003
+offset_right = -1200.0
+offset_bottom = -794.49695
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(8.439527, 8.439527)
+theme_override_constants/separation = 0
+
+[node name="Resume" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("6_gis3k")
+flat = true
+
+[node name="Text" type="RichTextLabel" parent="Menu/VBoxContainer/Resume"]
+clip_contents = false
+layout_mode = 0
+offset_left = 13.744847
+offset_top = 5.9245033
+offset_right = 438.76868
+offset_bottom = 136.0358
+scale = Vector2(0.10746051, 0.10746051)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+text = "resume"
+horizontal_alignment = 1
+
+[node name="Settings" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("6_gis3k")
+flat = true
+
+[node name="Text" type="RichTextLabel" parent="Menu/VBoxContainer/Settings"]
+clip_contents = false
+layout_mode = 0
+offset_left = 13.744847
+offset_top = 5.9245033
+offset_right = 438.76868
+offset_bottom = 136.0358
+scale = Vector2(0.10746051, 0.10746051)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+text = "settings"
+horizontal_alignment = 1
+
+[node name="ExitGame" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("6_gis3k")
+flat = true
+
+[node name="Text" type="RichTextLabel" parent="Menu/VBoxContainer/ExitGame"]
+clip_contents = false
+layout_mode = 0
+offset_left = 4.147156
+offset_top = 5.9245033
+offset_right = 599.57166
+offset_bottom = 136.0358
+scale = Vector2(0.10746051, 0.10746051)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+text = "Exit game"
+horizontal_alignment = 1
+
+[connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/MasterVolume" to="." method="_on_master_volume_value_changed"]
+[connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/SoundVolume" to="." method="_on_sound_volume_value_changed"]
+[connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/MusicVolume" to="." method="_on_music_volume_value_changed"]
+[connection signal="pressed" from="Settings/TabContainer/Audio/VolumeToggle" to="." method="_on_volume_toggle_pressed"]
+[connection signal="toggled" from="Settings/TabContainer/Video/Enable Filter" to="." method="_on_enable_filter_toggled"]

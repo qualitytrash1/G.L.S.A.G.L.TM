@@ -5,8 +5,8 @@ extends CanvasLayer
 @onready var master_volume: HSlider = $Control/TabContainer/Audio/Volume/MasterVolume
 @onready var sound_volume: HSlider = $Control/TabContainer/Audio/Volume/SoundVolume
 @onready var music_volume: HSlider = $Control/TabContainer/Audio/Volume/MusicVolume
-@onready var pop_sound: AudioStreamPlayer = $PopSound
 @onready var enable_filter: CheckBox = $"Control/TabContainer/Video/Enable Filter"
+@onready var pop_sound: AudioStreamPlayer = $Control/PopSound
 
 
 
