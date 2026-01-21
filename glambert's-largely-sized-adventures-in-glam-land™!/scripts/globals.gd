@@ -23,7 +23,7 @@ var sound_vol: float = 1
 var music_vol: float = 1
 
 #VIDEO
-var enable_filter: bool = false
+var enable_filter: bool = true
 var filter_node: ColorRect
 
 
