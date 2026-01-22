@@ -10,7 +10,7 @@ extends CharacterBody2D
 @onready var smooth_animations: AnimationPlayer = $SmoothAnimations
 @onready var body: CollisionShape2D = $Body
 @onready var sparks: GPUParticles2D = $Sparks
-@onready var always_emitting_sparks: GPUParticles2D = $AlwaysEmittingSparks
+@onready var always_emitting_sparks: Node2D = $PassiveSparks
 
 @onready var sprite_parent: Node2D = $Sprite_Parent
 @onready var sprite: Node2D = $Sprite

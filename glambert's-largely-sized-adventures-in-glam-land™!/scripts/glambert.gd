@@ -152,7 +152,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	
 	fps.text = "FPS: " + str(Engine.get_frames_per_second())
 	
 	# Get the input direction and handle the movement/deceleration.

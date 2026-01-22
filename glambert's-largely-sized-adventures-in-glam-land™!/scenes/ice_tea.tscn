@@ -136,6 +136,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="Animation" type="AnimationPlayer" parent="."]
+process_mode = 3
 libraries = {
 &"": SubResource("AnimationLibrary_knfas")
 }

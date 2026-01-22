@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://21aieoosy3km" path="res://audio/sfx/electricity-charge-sound-effect.mp3" id="4_itpxd"]
 [ext_resource type="Texture2D" uid="uid://bkv4pas165ka6" path="res://textures/electricity-particles.png" id="5_y258b"]
 [ext_resource type="Material" uid="uid://b31jrplsj76ko" path="res://materials/small-sparks.tres" id="6_6awaq"]
-[ext_resource type="Material" uid="uid://db6lfpusmfk8o" path="res://materials/always-emmiting-sparks.tres" id="7_fmgk8"]
+[ext_resource type="PackedScene" uid="uid://m47tj38p80m" path="res://scenes/passive_sparks.tscn" id="7_fmgk8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_016g0"]
 size = Vector2(39, 8)
@@ -220,14 +220,6 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="AlwaysEmittingSparks" type="GPUParticles2D" parent="."]
-position = Vector2(29, 1)
-amount = 6
-texture = ExtResource("5_y258b")
-lifetime = 2.0
-randomness = 0.45
-process_material = ExtResource("7_fmgk8")
-
 [node name="Sparks" type="GPUParticles2D" parent="."]
 position = Vector2(0, -5)
 emitting = false
@@ -238,3 +230,6 @@ one_shot = true
 explosiveness = 1.0
 randomness = 0.45
 process_material = ExtResource("6_6awaq")
+
+[node name="PassiveSparks" parent="." instance=ExtResource("7_fmgk8")]
+position = Vector2(29, 0)

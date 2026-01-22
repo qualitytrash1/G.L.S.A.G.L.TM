@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://m47tj38p80m"]
+
+[ext_resource type="Texture2D" uid="uid://bkv4pas165ka6" path="res://textures/electricity-particles.png" id="1_4u76x"]
+[ext_resource type="Material" uid="uid://db6lfpusmfk8o" path="res://materials/always-emmiting-sparks.tres" id="2_0n6ul"]
+
+[node name="PassiveSparks" type="Node2D"]
+process_mode = 3
+
+[node name="AlwaysEmittingSparks" type="GPUParticles2D" parent="."]
+amount = 6
+texture = ExtResource("1_4u76x")
+lifetime = 2.0
+randomness = 0.45
+process_material = ExtResource("2_0n6ul")

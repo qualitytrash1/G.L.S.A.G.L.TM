@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://chqvop78alemk"]
+[gd_scene load_steps=9 format=3 uid="uid://chqvop78alemk"]
 
 [ext_resource type="Theme" uid="uid://cbp0x2v5m6a5b" path="res://textures/ui.tres" id="1_5p8wc"]
 [ext_resource type="Script" uid="uid://dopgnifo2k0wh" path="res://scripts/settings.gd" id="1_f4mfi"]
 [ext_resource type="Texture2D" uid="uid://dsi32t8owkwtl" path="res://textures/volume-off.png" id="2_r6d6q"]
 [ext_resource type="Texture2D" uid="uid://btoecslt2qk6b" path="res://textures/volume-on.png" id="3_6wm04"]
 [ext_resource type="AudioStream" uid="uid://bnah3itumo6cq" path="res://audio/sfx/pop.mp3" id="5_es4n0"]
+[ext_resource type="Texture2D" uid="uid://c4i3asq400ejf" path="res://textures/button-32_16.png" id="6_83j8s"]
 [ext_resource type="Texture2D" uid="uid://c42gpdcedhsly" path="res://textures/button-64_16.png" id="6_gis3k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f4mfi"]
@@ -57,11 +58,10 @@ offset_top = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_5p8wc")
-current_tab = 1
+current_tab = 0
 clip_tabs = false
 
 [node name="Audio" type="Control" parent="Settings/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -171,6 +171,7 @@ theme = ExtResource("1_5p8wc")
 text = "VOLUME"
 
 [node name="Video" type="Control" parent="Settings/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -200,7 +201,31 @@ metadata/_tab_index = 2
 stream = ExtResource("5_es4n0")
 volume_db = -6.148
 
+[node name="Exit" type="Button" parent="Settings"]
+layout_mode = 0
+offset_left = 1590.9999
+offset_top = 885.0
+offset_right = 1630.9999
+offset_bottom = 909.0
+scale = Vector2(8.44, 8.44)
+icon = ExtResource("6_83j8s")
+flat = true
+
+[node name="Text" type="RichTextLabel" parent="Settings/Exit"]
+clip_contents = false
+layout_mode = 0
+offset_left = -2.2511654
+offset_top = 5.9245033
+offset_right = 422.77267
+offset_bottom = 136.0358
+scale = Vector2(0.10746051, 0.10746051)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+text = "EXIT"
+horizontal_alignment = 1
+
 [node name="Menu" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -290,3 +315,6 @@ horizontal_alignment = 1
 [connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="pressed" from="Settings/TabContainer/Audio/VolumeToggle" to="." method="_on_volume_toggle_pressed"]
 [connection signal="toggled" from="Settings/TabContainer/Video/Enable Filter" to="." method="_on_enable_filter_toggled"]
+[connection signal="pressed" from="Settings/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Settings" to="." method="_on_settings_pressed"]

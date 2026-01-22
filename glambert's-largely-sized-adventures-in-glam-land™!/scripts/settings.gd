@@ -1,19 +1,21 @@
 extends CanvasLayer
 
-@onready var volume_icon: AnimatedSprite2D = $Control/TabContainer/Audio/VolumeToggle/VolumeIcon
-@onready var volume: Control = $Control/TabContainer/Audio/Volume
-@onready var master_volume: HSlider = $Control/TabContainer/Audio/Volume/MasterVolume
-@onready var sound_volume: HSlider = $Control/TabContainer/Audio/Volume/SoundVolume
-@onready var music_volume: HSlider = $Control/TabContainer/Audio/Volume/MusicVolume
-@onready var enable_filter: CheckBox = $"Control/TabContainer/Video/Enable Filter"
-@onready var pop_sound: AudioStreamPlayer = $Control/PopSound
+@onready var volume_icon: AnimatedSprite2D = $Settings/TabContainer/Audio/VolumeToggle/VolumeIcon
+@onready var volume: Control = $Settings/TabContainer/Audio/Volume
+@onready var pop_sound: AudioStreamPlayer = $Settings/PopSound
+@onready var menu: Control = $Menu
+@onready var settings: Control = $Settings
+@onready var master_volume: HSlider = $Settings/TabContainer/Audio/Volume/MasterVolume
+@onready var sound_volume: HSlider = $Settings/TabContainer/Audio/Volume/SoundVolume
+@onready var music_volume: HSlider = $Settings/TabContainer/Audio/Volume/MusicVolume
+@onready var enable_filter: CheckBox = $"Settings/TabContainer/Video/Enable Filter"
 
-
+var in_settings: bool = false
 
 func _ready() -> void:
 	get_tree().paused = false
-	hide()
 	
+	in_settings = false
 	#SET SETTINGS FROM GLOBAL VARS
 	master_volume.value = Globals.master_vol
 	sound_volume.value = Globals.sound_vol
@@ -29,15 +31,27 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("escape"):
 		#OPENS SETTINHGS
-		if not Globals.in_settings:
-			show()
-			get_tree().paused = true
-			Globals.in_settings = true
+		if not Globals.in_menu:
+			open_menu()
 		#CLOSES SETTINGS
 		else:
-			hide()
-			get_tree().paused = false
-			Globals.in_settings = false
+			if not in_settings:
+				close_menu()
+			else:
+				#CLOSE SETTINGS
+				in_settings = false
+				settings.hide()
+				open_menu()
+
+func open_menu():
+	menu.show()
+	get_tree().paused = true
+	Globals.in_menu = true
+
+func close_menu():
+	menu.hide()
+	get_tree().paused = false
+	Globals.in_menu = false
 
 func _on_volume_toggle_pressed() -> void:
 	
@@ -93,3 +107,19 @@ func _on_enable_filter_toggled(toggled_on: bool) -> void:
 	Globals.enable_filter = toggled_on
 	if Globals.filter_node:
 		Globals.filter_node.visible = Globals.enable_filter
+
+
+func _on_resume_pressed() -> void:
+	close_menu()
+
+
+func _on_settings_pressed() -> void:
+	in_settings = true
+	settings.show()
+	menu.hide()
+
+
+func _on_exit_pressed() -> void:
+	in_settings = false
+	settings.hide()
+	open_menu()

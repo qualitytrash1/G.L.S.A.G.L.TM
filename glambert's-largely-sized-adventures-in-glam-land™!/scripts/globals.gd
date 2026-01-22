@@ -14,7 +14,7 @@ var has_checkpoint: bool = false
 var lives: int = 5
 
 #SETTINGS
-var in_settings: bool = false
+var in_menu: bool = false
 
 #VOLUME
 var volume_on: bool = true
