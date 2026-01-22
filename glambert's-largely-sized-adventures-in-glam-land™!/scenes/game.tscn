@@ -329,8 +329,8 @@ tile_set = SubResource("TileSet_rysoc")
 [node name="MovingPlatforms" type="Node2D" parent="Level"]
 
 [node name="MovingPlatform" parent="Level/MovingPlatforms" instance=ExtResource("12_bt5mj")]
-position = Vector2(32, -120)
-points = Array[Vector2]([Vector2(-50, 0), Vector2(50, 0), Vector2(50, -100)])
+position = Vector2(-985, -102)
+points = Array[Vector2]([Vector2(0, 0), Vector2(0, -300)])
 speed_multiplier = 1.0
 
 [node name="Interactable" type="Node2D" parent="Level"]
