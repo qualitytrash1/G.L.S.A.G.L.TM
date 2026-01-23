@@ -422,7 +422,6 @@ func set_animation(animation: String):
 		sprite_facing_left.play(animation)
 		sprite_facing_right.play(animation)
 		
-	smooth_animations.stop()
 	smooth_animations.play(animation)
 	flip()
 	if visual_crouching:

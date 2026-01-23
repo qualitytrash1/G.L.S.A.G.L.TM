@@ -22,11 +22,10 @@ func _ready() -> void:
 	music_volume.value = Globals.music_vol
 	enable_filter.button_pressed = Globals.enable_filter
 	#APPLY SETTINGS
-	AudioServer.set_bus_volume_linear(0, Globals.master_vol)
-	AudioServer.set_bus_volume_linear(2, Globals.sound_vol)
-	AudioServer.set_bus_volume_linear(1, Globals.music_vol)
-	if Globals.filter_node:
-		Globals.filter_node.visible = Globals.enable_filter
+	_on_master_volume_value_changed(Globals.master_vol)
+	_on_sound_volume_value_changed(Globals.sound_vol)
+	_on_music_volume_value_changed(Globals.music_vol)
+	_on_enable_filter_toggled(Globals.enable_filter)
 	
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("escape"):
@@ -47,11 +46,16 @@ func open_menu():
 	menu.show()
 	get_tree().paused = true
 	Globals.in_menu = true
-
+	var tween : Tween = create_tween()
+	tween.tween_property(AudioServer.get_bus_effect(1,0), "cutoff_hz", 600, 0.1)
+	
 func close_menu():
 	menu.hide()
 	get_tree().paused = false
 	Globals.in_menu = false
+	var tween : Tween = create_tween()
+	tween.tween_property(AudioServer.get_bus_effect(1,0), "cutoff_hz", 20500, 0.1)
+	await tween.finished
 
 func _on_volume_toggle_pressed() -> void:
 	
@@ -84,20 +88,20 @@ func _on_volume_toggle_pressed() -> void:
 
 func _on_master_volume_value_changed(value: float) -> void:
 	Globals.master_vol = value
-	AudioServer.set_bus_volume_linear(0, value)
+	AudioServer.set_bus_volume_linear(0, value / 2)
 	pop_sound.bus = &"Master"
 	pop_sound.play()
 
 func _on_sound_volume_value_changed(value: float) -> void:
 	Globals.sound_vol = value
-	AudioServer.set_bus_volume_linear(2, value)
+	AudioServer.set_bus_volume_linear(2, value / 2)
 	pop_sound.bus = &"Sounds"
 	pop_sound.play()
 	
 
 func _on_music_volume_value_changed(value: float) -> void:
 	Globals.music_vol = value
-	AudioServer.set_bus_volume_linear(1, value)
+	AudioServer.set_bus_volume_linear(1, value / 2)
 	pop_sound.bus = &"Music"
 	pop_sound.play()
 	
