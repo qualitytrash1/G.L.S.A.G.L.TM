@@ -142,7 +142,11 @@ func _ready() -> void:
 	#CAMERA
 	camera.position.x = position.x
 	camera.position.y = position.y - Globals.zoom_factor
+	#SETS CAMERA LIMITS
 	camera.limit_bottom = Globals.camera_y_limit
+	camera.limit_left = Globals.camera_left_limit
+	camera.limit_right = Globals.camera_right_limit
+	
 	bottom_gradient.position.y = Globals.camera_y_limit - bottom_gradient.size.y
 	
 	#GUI

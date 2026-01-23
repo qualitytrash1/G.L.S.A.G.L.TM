@@ -9,6 +9,7 @@ extends CanvasLayer
 @onready var sound_volume: HSlider = $Settings/TabContainer/Audio/Volume/SoundVolume
 @onready var music_volume: HSlider = $Settings/TabContainer/Audio/Volume/MusicVolume
 @onready var enable_filter: CheckBox = $"Settings/TabContainer/Video/Enable Filter"
+@onready var anim: AnimationPlayer = $Anim
 
 var in_settings: bool = false
 
@@ -44,6 +45,7 @@ func _input(event: InputEvent) -> void:
 
 func open_menu():
 	menu.show()
+	anim.play("open")
 	get_tree().paused = true
 	Globals.in_menu = true
 	var tween : Tween = create_tween()
@@ -51,6 +53,7 @@ func open_menu():
 	
 func close_menu():
 	menu.hide()
+	anim.play("close")
 	get_tree().paused = false
 	Globals.in_menu = false
 	var tween : Tween = create_tween()
@@ -70,15 +73,15 @@ func _on_volume_toggle_pressed() -> void:
 			i.editable = false
 			i.value = 0
 	else:
-		Globals.master_vol = 1
-		Globals.sound_vol = 1
-		Globals.music_vol = 1
+		Globals.master_vol = 2
+		Globals.sound_vol = 2
+		Globals.music_vol = 2
 		master_volume.value = Globals.master_vol
 		sound_volume.value = Globals.sound_vol
 		music_volume.value = Globals.music_vol
-		AudioServer.set_bus_volume_linear(0, Globals.master_vol)
-		AudioServer.set_bus_volume_linear(2, Globals.sound_vol)
-		AudioServer.set_bus_volume_linear(1, Globals.music_vol)
+		_on_master_volume_value_changed(Globals.master_vol)
+		_on_sound_volume_value_changed(Globals.sound_vol)
+		_on_music_volume_value_changed(Globals.music_vol)
 		
 		AudioServer.set_bus_mute(0, false)
 		for i: HSlider in volume.get_children():

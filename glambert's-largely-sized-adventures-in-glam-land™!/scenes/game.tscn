@@ -1,7 +1,7 @@
-[gd_scene load_steps=42 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=40 format=3 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
-[ext_resource type="PackedScene" path="res://scenes/sky_background.tscn" id="1_gee14"]
+[ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cr4vhgrraqejj" path="res://scenes/glambert.tscn" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://chqvop78alemk" path="res://scenes/settings.tscn" id="2_37s47"]
 [ext_resource type="Texture2D" uid="uid://dy3pc8t7jwyyy" path="res://textures/graphical_ground.png" id="2_u5sy4"]
@@ -9,19 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://sfqrjqno6jek" path="res://textures/vaporwave_sun.png" id="5_0tnpc"]
 [ext_resource type="Script" uid="uid://dcrgb8yncovv1" path="res://scripts/level.gd" id="5_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bl4t22m8q6hwe" path="res://textures/stars.png" id="6_1kice"]
-[ext_resource type="PackedScene" path="res://scenes/background.tscn" id="6_gee14"]
+[ext_resource type="PackedScene" uid="uid://c0ah5kn2ch61y" path="res://scenes/background.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://bb08qhktrr4g3" path="res://scenes/grass.tscn" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://ff51uench70u" path="res://textures/spikes-short.png" id="9_ir15t"]
 [ext_resource type="PackedScene" uid="uid://3romnl56ifsa" path="res://scenes/ice_tea.tscn" id="10_vtaks"]
 [ext_resource type="Texture2D" uid="uid://bb4fukyjqwsgw" path="res://textures/bushes-vaporwave.png" id="11_e1j6l"]
-[ext_resource type="PackedScene" uid="uid://badtfuyl8v0pi" path="res://scenes/statue.tscn" id="11_kvpfn"]
-[ext_resource type="PackedScene" uid="uid://becnmmqtfxs0t" path="res://scenes/moving_platform.tscn" id="12_bt5mj"]
 [ext_resource type="Texture2D" uid="uid://83b0a7speph3" path="res://textures/dirt-purple.png" id="12_ca42v"]
 [ext_resource type="PackedScene" uid="uid://ukurqghjblqn" path="res://scenes/sunglasses-life.tscn" id="13_5newe"]
 [ext_resource type="PackedScene" uid="uid://bvqdsk3hm4v53" path="res://scenes/computer.tscn" id="13_kvuet"]
-[ext_resource type="PackedScene" uid="uid://f4am5o61tsi4" path="res://scenes/checkpoint.tscn" id="14_264po"]
 [ext_resource type="Texture2D" uid="uid://dabx0pgoxd26s" path="res://textures/wood-platform.png" id="14_trtic"]
-[ext_resource type="PackedScene" uid="uid://br813p4gprdda" path="res://scenes/enemy_spawner.tscn" id="15_1kice"]
 [ext_resource type="Texture2D" uid="uid://dtdk5pdbi7fjg" path="res://textures/bushes.png" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://doa8itx5bouhd" path="res://textures/palm-trees.png" id="18_ssvqc"]
 
@@ -52,6 +48,14 @@ curve_z = SubResource("Curve_u5sy4")
 background_mode = 3
 adjustment_enabled = true
 adjustment_color_correction = SubResource("CurveXYZTexture_gee14")
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ca42v"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1kice"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5newe"]
+normal = Vector2(-1, 0)
 
 [sub_resource type="Gradient" id="Gradient_264po"]
 colors = PackedColorArray(0.078431375, 0, 0, 0.3764706, 0, 0, 0, 0)
@@ -91,8 +95,6 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Bush"
 terrain_set_0/terrain_0/color = Color(0.3, 1, 0.32333332, 1)
 sources/0 = SubResource("TileSetAtlasSource_pl11u")
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ca42v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ca42v"]
 texture = ExtResource("9_ir15t")
@@ -329,6 +331,36 @@ environment = SubResource("Environment_iywne")
 [node name="Level" type="Node2D" parent="."]
 script = ExtResource("5_p57ef")
 
+[node name="Borders" type="Node2D" parent="Level"]
+
+[node name="DeathBarrier" type="Area2D" parent="Level/Borders" groups=["insta-death"]]
+position = Vector2(0, 80)
+collision_layer = 4
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape2D" parent="Level/Borders/DeathBarrier"]
+position = Vector2(-256, 0)
+shape = SubResource("WorldBoundaryShape2D_ca42v")
+debug_color = Color(0.7, 0, 0.011666489, 0.41960785)
+
+[node name="LeftBarrier" type="StaticBody2D" parent="Level/Borders" groups=["border"]]
+position = Vector2(-697, -59)
+collision_layer = 16
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape2D" parent="Level/Borders/LeftBarrier"]
+shape = SubResource("WorldBoundaryShape2D_1kice")
+debug_color = Color(0.0006266624, 0.27576765, 0.8927148, 0.41960785)
+
+[node name="RightBarrier" type="StaticBody2D" parent="Level/Borders" groups=["border"]]
+position = Vector2(5584, -59)
+collision_layer = 16
+collision_mask = 0
+
+[node name="Collision" type="CollisionShape2D" parent="Level/Borders/RightBarrier"]
+shape = SubResource("WorldBoundaryShape2D_5newe")
+debug_color = Color(0.0006266624, 0.27576765, 0.8927148, 0.41960785)
+
 [node name="BottomGradient" type="TextureRect" parent="Level"]
 anchors_preset = 12
 anchor_top = 1.0
@@ -345,62 +377,30 @@ texture = SubResource("GradientTexture2D_1kice")
 
 [node name="Bushes" type="TileMapLayer" parent="Level/DecorTilemaps"]
 position = Vector2(0, 10)
-tile_map_data = PackedByteArray("AAD///3/AAAAAAAAAAAAAP3/AAACAAAAAAABAP3/AAACAAAAAAACAP3/AAADAAAAAAD6//3/AAADAAAAAAD5//3/AAAAAAAAAADa//3/AAAAAAAAAADb//3/AAABAAAAAADc//3/AAABAAAAAADd//3/AAADAAAAAADq//P/AAADAAAAAADp//P/AAACAAAAAADo//P/AAAAAAAAAAALAPn/AAAAAAAAAAAMAPn/AAABAAAAAAANAPn/AAADAAAAAAAoAPb/AAAAAAAAAAApAPb/AAACAAAAAAAqAPb/AAABAAAAAAArAPb/AAABAAAAAAAsAPb/AAABAAAAAAAtAPb/AAABAAAAAAAuAPb/AAADAAAAAAD2/wEAAAAAAAAAAAD3/wEAAAACAAAAAAD4/wEAAAACAAAAAAD5/wEAAAABAAAAAAD6/wEAAAACAAAAAAD7/wEAAAABAAAAAAD8/wEAAAACAAAAAAD9/wEAAAACAAAAAAD+/wEAAAABAAAAAAD//wEAAAADAAAAAAD3/wAAAAABAAAAAAD4/wAAAAABAAAAAAD5/wAAAAACAAAAAAD6/wAAAAABAAAAAAD7/wAAAAACAAAAAAD8/wAAAAABAAAAAAD9/wAAAAADAAAAAAD2/wAAAAAAAAAAAADZ/+3/AAAAAAAAAADa/+3/AAABAAAAAADb/+3/AAACAAAAAADc/+3/AAABAAAAAADd/+3/AAADAAAAAAA=")
 tile_set = SubResource("TileSet_bhx41")
-
-[node name="DeathBarrier" type="Area2D" parent="Level" groups=["insta-death"]]
-position = Vector2(0, 80)
-collision_layer = 4
-collision_mask = 0
-
-[node name="Collision" type="CollisionShape2D" parent="Level/DeathBarrier"]
-position = Vector2(-256, 0)
-shape = SubResource("WorldBoundaryShape2D_ca42v")
-debug_color = Color(0.7, 0, 0.011666489, 0.41960785)
 
 [node name="Spikes" type="TileMapLayer" parent="Level" groups=["insta-death"]]
 position = Vector2(7, -6)
-tile_map_data = PackedByteArray("AAC9//z/AAADAAAAAAC8//z/AAACAAAAAAC7//z/AAAAAAAAAADm//z/AAAEAAAAAADs//z/AAAEAAAAAAC+//D/AAADAAAAAAC9//D/AAABAAAAAAC8//D/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_rysoc")
 
 [node name="MovingPlatforms" type="Node2D" parent="Level"]
-
-[node name="MovingPlatform" parent="Level/MovingPlatforms" instance=ExtResource("12_bt5mj")]
-position = Vector2(-985, -102)
-points = Array[Vector2]([Vector2(0, 0), Vector2(0, -300)])
-speed = 40.0
-
-[node name="MovingPlatform2" parent="Level/MovingPlatforms" instance=ExtResource("12_bt5mj")]
-position = Vector2(-657, -376)
-points = Array[Vector2]([Vector2(0, 0), Vector2(100, 0), Vector2(100, -100), Vector2(0, -100)])
-speed = 40.0
 
 [node name="Interactable" type="Node2D" parent="Level"]
 
 [node name="Collectables" type="TileMapLayer" parent="Level/Interactable"]
 use_parent_material = true
 position = Vector2(0, -11)
-tile_map_data = PackedByteArray("AAAtAPb/AAAAAAAAAQAxAPb/AAAAAAAAAQDg//n/AAAAAAAAAQDg//r/AAAAAAAAAQDh//n/AAAAAAAAAQDh//r/AAAAAAAAAQDi//n/AAAAAAAAAQDi//r/AAAAAAAAAQDj//n/AAAAAAAAAQDj//r/AAAAAAAAAQDk//n/AAAAAAAAAQDk//r/AAAAAAAAAQDl//n/AAAAAAAAAQDl//r/AAAAAAAAAQDm//n/AAAAAAAAAQDm//r/AAAAAAAAAQDn//n/AAAAAAAAAQDn//r/AAAAAAAAAQDo//n/AAAAAAAAAQDo//r/AAAAAAAAAQDp//n/AAAAAAAAAQDp//r/AAAAAAAAAQDq//n/AAAAAAAAAQDq//r/AAAAAAAAAQDr//n/AAAAAAAAAQDr//r/AAAAAAAAAQDs//n/AAAAAAAAAQDs//r/AAAAAAAAAQDt//n/AAAAAAAAAQDt//r/AAAAAAAAAQDu//n/AAAAAAAAAQDu//r/AAAAAAAAAQDv//n/AAAAAAAAAQDv//r/AAAAAAAAAQDw//n/AAAAAAAAAQDw//r/AAAAAAAAAQDx//n/AAAAAAAAAQDx//r/AAAAAAAAAQDy//n/AAAAAAAAAQDy//r/AAAAAAAAAQDz//n/AAAAAAAAAQDz//r/AAAAAAAAAQD0//n/AAAAAAAAAQD0//r/AAAAAAAAAQD1//n/AAAAAAAAAQD1//r/AAAAAAAAAQACAPz/AAAAAAAAAQAFAPz/AAAAAAAAAQAIAPz/AAAAAAAAAQAKAPr/AAAAAAAAAQAMAPj/AAAAAAAAAQAOAPb/AAAAAAAAAQAQAPX/AAAAAAAAAQASAPT/AAAAAAAAAQAVAPP/AAAAAAAAAQDg//j/AAAAAAAAAQDh//j/AAAAAAAAAQDi//j/AAAAAAAAAQDj//j/AAAAAAAAAQDk//j/AAAAAAAAAQDl//j/AAAAAAAAAQDm//j/AAAAAAAAAQDn//j/AAAAAAAAAQDo//j/AAAAAAAAAQDp//j/AAAAAAAAAQDq//j/AAAAAAAAAQDr//j/AAAAAAAAAQDs//j/AAAAAAAAAQDt//j/AAAAAAAAAQDu//j/AAAAAAAAAQDv//j/AAAAAAAAAQDw//j/AAAAAAAAAQDx//j/AAAAAAAAAQDy//j/AAAAAAAAAQDz//j/AAAAAAAAAQD0//j/AAAAAAAAAQD1//j/AAAAAAAAAQC+/+//AAAAAAAAAQC+//L/AAAAAAAAAQC+//X/AAAAAAAAAQC8/9j/AAAAAAAAAQC7/9j/AAAAAAAAAQC6/9n/AAAAAAAAAQC5/9n/AAAAAAAAAQC6/9j/AAAAAAAAAQC5/9j/AAAAAAAAAQC4/9j/AAAAAAAAAQC3/9j/AAAAAAAAAQC2/9j/AAAAAAAAAQC1/9j/AAAAAAAAAQC0/9j/AAAAAAAAAQC0/9n/AAAAAAAAAQC0/9r/AAAAAAAAAQC0/9v/AAAAAAAAAQC1/9v/AAAAAAAAAQC2/9v/AAAAAAAAAQC3/9v/AAAAAAAAAQC4/9v/AAAAAAAAAQC5/9v/AAAAAAAAAQC5/9r/AAAAAAAAAQC6/9r/AAAAAAAAAQC7/9r/AAAAAAAAAQC8/9r/AAAAAAAAAQC8/9v/AAAAAAAAAQC7/9v/AAAAAAAAAQC6/9v/AAAAAAAAAQC8/9n/AAAAAAAAAQC7/9n/AAAAAAAAAQC4/9n/AAAAAAAAAQC3/9n/AAAAAAAAAQC2/9n/AAAAAAAAAQC2/9r/AAAAAAAAAQC1/9r/AAAAAAAAAQC3/9r/AAAAAAAAAQC4/9r/AAAAAAAAAQC1/9n/AAAAAAAAAQBFAOv/AAAAAAAAAQBEAOv/AAAAAAAAAQBEAOr/AAAAAAAAAQBFAOr/AAAAAAAAAQBEAOn/AAAAAAAAAQBDAOn/AAAAAAAAAQBDAOr/AAAAAAAAAQBCAOj/AAAAAAAAAQBBAOj/AAAAAAAAAQBDAOj/AAAAAAAAAQBCAOn/AAAAAAAAAQBBAOn/AAAAAAAAAQBAAOn/AAAAAAAAAQA/AOr/AAAAAAAAAQBAAOr/AAAAAAAAAQBBAOr/AAAAAAAAAQBAAOv/AAAAAAAAAQA/AOv/AAAAAAAAAQA/AOz/AAAAAAAAAQBAAOz/AAAAAAAAAQA/AO3/AAAAAAAAAQA/AO7/AAAAAAAAAQA/AO//AAAAAAAAAQA/APD/AAAAAAAAAQA/APH/AAAAAAAAAQA/APL/AAAAAAAAAQA/APP/AAAAAAAAAQA/APT/AAAAAAAAAQBAAPT/AAAAAAAAAQBAAPP/AAAAAAAAAQBAAPL/AAAAAAAAAQBAAPH/AAAAAAAAAQBAAPD/AAAAAAAAAQBAAO//AAAAAAAAAQBAAO7/AAAAAAAAAQBAAO3/AAAAAAAAAQDL//n/AAAAAAAAAQDP//b/AAAAAAAAAQDL/+r/AAAAAAAAAQDL//P/AAAAAAAAAQDP//D/AAAAAAAAAQDL/+7/AAAAAAAAAQDP/+v/AAAAAAAAAQDL/+f/AAAAAAAAAQDM/+f/AAAAAAAAAQDN/+f/AAAAAAAAAQDO/+f/AAAAAAAAAQDP/+f/AAAAAAAAAQDP/+b/AAAAAAAAAQDO/+b/AAAAAAAAAQDN/+b/AAAAAAAAAQDM/+b/AAAAAAAAAQDL/+b/AAAAAAAAAQC2//n/AAAAAAAAAQC3//n/AAAAAAAAAQC4//n/AAAAAAAAAQAYAPL/AAAAAAAAAQAZAPL/AAAAAAAAAQAaAPL/AAAAAAAAAQAdAPP/AAAAAAAAAQAhAPT/AAAAAAAAAQAlAPb/AAAAAAAAAQAnAPj/AAAAAAAAAQApAPr/AAAAAAAAAQAsAPj/AAAAAAAAAQAtAPn/AAAAAAAAAQAuAPn/AAAAAAAAAQAvAPn/AAAAAAAAAQAwAPn/AAAAAAAAAQAxAPn/AAAAAAAAAQAyAPj/AAAAAAAAAQBVAO3/AAAAAAAAAQBWAO3/AAAAAAAAAQBXAO3/AAAAAAAAAQBYAO3/AAAAAAAAAQBZAO3/AAAAAAAAAQBaAO3/AAAAAAAAAQBbAO3/AAAAAAAAAQBbAOz/AAAAAAAAAQBaAOz/AAAAAAAAAQBaAOv/AAAAAAAAAQBZAOv/AAAAAAAAAQBYAOz/AAAAAAAAAgBXAOz/AAAAAAAAAQBXAOv/AAAAAAAAAQBWAOv/AAAAAAAAAQBVAOv/AAAAAAAAAQBWAOz/AAAAAAAAAQBZAOz/AAAAAAAAAQBYAOv/AAAAAAAAAQBVAOz/AAAAAAAAAQBbAOv/AAAAAAAAAQDW/+f/AAAAAAAAAQDX/+f/AAAAAAAAAQDY/+f/AAAAAAAAAQDZ/+f/AAAAAAAAAQDa/+f/AAAAAAAAAQDb/+f/AAAAAAAAAQDc/+f/AAAAAAAAAQDd/+f/AAAAAAAAAQDe/+f/AAAAAAAAAQDe/+b/AAAAAAAAAQDe/+X/AAAAAAAAAQDe/+T/AAAAAAAAAQDe/+P/AAAAAAAAAQDe/+L/AAAAAAAAAQDe/+H/AAAAAAAAAQDd/+H/AAAAAAAAAQDc/+H/AAAAAAAAAQDb/+H/AAAAAAAAAQDa/+H/AAAAAAAAAQDZ/+H/AAAAAAAAAQDY/+H/AAAAAAAAAQDX/+H/AAAAAAAAAQDW/+H/AAAAAAAAAQDW/+L/AAAAAAAAAQDW/+P/AAAAAAAAAQDW/+T/AAAAAAAAAQDW/+X/AAAAAAAAAQDW/+b/AAAAAAAAAQA=")
 tile_set = SubResource("TileSet_0tnpc")
 
 [node name="Statues" type="Node2D" parent="Level/Interactable"]
 
-[node name="Statue" parent="Level/Interactable/Statues" instance=ExtResource("11_kvpfn")]
-position = Vector2(-1164, -71)
-
-[node name="Statue2" parent="Level/Interactable/Statues" instance=ExtResource("11_kvpfn")]
-position = Vector2(141, -71)
-
-[node name="Statue3" parent="Level/Interactable/Statues" instance=ExtResource("11_kvpfn")]
-position = Vector2(-719, -401)
-
 [node name="Computers" type="Node2D" parent="Level/Interactable"]
 
-[node name="Computer2" parent="Level/Interactable/Computers" instance=ExtResource("13_kvuet")]
-position = Vector2(1023, -113)
-
 [node name="Computer" parent="Level/Interactable/Computers" instance=ExtResource("13_kvuet")]
-position = Vector2(-589, -103)
+position = Vector2(-584, -103)
+
+[node name="Computer2" parent="Level/Interactable/Computers" instance=ExtResource("13_kvuet")]
+position = Vector2(5447, -104)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Level/Interactable"]
 visible = false
@@ -408,11 +408,7 @@ position = Vector2(0, -11)
 
 [node name="Checkpoints" type="Node2D" parent="Level/Interactable"]
 
-[node name="Checkpoint" parent="Level/Interactable/Checkpoints" instance=ExtResource("14_264po")]
-position = Vector2(409, -256)
-
 [node name="Platforms" type="TileMapLayer" parent="Level"]
-tile_map_data = PackedByteArray("AAB6/93/BwAEAAAAAAB6/9n/BwAEAAAAAAB+/+f/BwADAAAAAAB9/+f/BwABAAAAAAB8/+f/BwABAAAAAAB7/+f/BwACAAAAAAB+/9//BwADAAAAAAB9/9//BwACAAAAAAB8/9//BwABAAAAAAB7/9//BwACAAAAAAB6/9//BwAAAAAAAAB+/9f/BwADAAAAAAB9/9f/BwABAAAAAAB8/9f/BwACAAAAAAB7/9f/BwACAAAAAAB6/9f/BwAAAAAAAAB6/+f/BwAAAAAAAADu//H/BwADAAAAAADt//H/BwACAAAAAADs//H/BwABAAAAAADr//H/BwABAAAAAADq//H/BwABAAAAAADp//H/BwACAAAAAADo//H/BwABAAAAAADn//H/BwABAAAAAADm//H/BwACAAAAAADl//H/BwACAAAAAADk//H/BwABAAAAAADj//H/BwAAAAAAAAAWAPH/BwADAAAAAAAVAPH/BwABAAAAAAAUAPH/BwACAAAAAAATAPH/BwABAAAAAAASAPH/BwACAAAAAAARAPH/BwABAAAAAAAQAPH/BwACAAAAAAAPAPH/BwAAAAAAAAAVAPL/BwADAAAAAAAUAPL/BwAAAAAAAADr//L/BwADAAAAAADq//L/BwACAAAAAADp//L/BwABAAAAAADo//L/BwABAAAAAADn//L/BwACAAAAAADm//L/BwAAAAAAAAB7/+D/BwADAAAAAAB6/+D/BwAAAAAAAAB7/9j/BwADAAAAAAB6/9j/BwAAAAAAAACg/8D/BwACAAAAAACf/8D/BwACAAAAAACe/8D/BwABAAAAAACd/8D/BwACAAAAAACc/8D/BwABAAAAAACb/8D/BwACAAAAAACa/8D/BwABAAAAAACZ/8D/BwACAAAAAACY/8D/BwACAAAAAACX/8D/BwABAAAAAACW/8D/BwACAAAAAACV/8D/BwABAAAAAACW/8H/BwADAAAAAACV/8H/BwAAAAAAAACg/8H/BwADAAAAAACf/8H/BwAAAAAAAACh/8D/BwADAAAAAACU/8D/BwAAAAAAAAB6/6D/BwAAAAAAAAB7/6D/BwACAAAAAAB8/6D/BwACAAAAAAB9/6D/BwACAAAAAAB+/6D/BwACAAAAAAB//6D/BwABAAAAAACA/6D/BwADAAAAAAB7/6H/BwADAAAAAAB6/6H/BwAAAAAAAACKAND/BwABAAAAAACJAND/BwABAAAAAACIAND/BwABAAAAAACHAND/BwACAAAAAACGAND/BwAAAAAAAACLAND/BwACAAAAAACMAND/BwADAAAAAACKANH/BwAAAAAAAACLANH/BwACAAAAAACMANH/BwABAAAAAACNANH/BwADAAAAAACGANz/BwAAAAAAAACHANz/BwACAAAAAACIANz/BwACAAAAAACJANz/BwACAAAAAACKANz/BwACAAAAAACLANz/BwADAAAAAACKAN3/BwAAAAAAAACLAN3/BwADAAAAAAA=")
 tile_set = SubResource("TileSet_kvuet")
 
 [node name="Polygons" type="Node2D" parent="Level"]
@@ -422,60 +418,14 @@ tile_set = SubResource("TileSet_kvuet")
 [node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon"]
 texture_repeat = 2
 texture = ExtResource("12_ca42v")
-polygon = PackedVector2Array(-1675, -1359, -1063, -1359, -1062, -661, -1225, -661, -1224, -576, -1062, -576, -1062, -144, -1198, -144, -1198, -54, -284, -54, -284, 234, -230, 234, -228, -54, -138, -54, -139, 233, -82, 233, -82, -54, 150, -54, 173, -87, 229, -140, 299, -175, 372, -193, 439, -195, 519, -175, 586, -134, 623, -91, 659.5938, -63.99997, 1109, -64, 1113, -289, 1296.9127, -289, 1350, -289, 1479, -289, 1479, -358, 1350, -358, 1350, -302, 1296.8912, -302, 1296, -965, 1536, -966, 2041, -136, 1539, 401, -1667.4448, 406)
-uv = PackedVector2Array(0, 0, 64, 0, 64, 64, 0, 64)
+polygon = PackedVector2Array(-720, -54, 5607, -55, 5607, 418, -721, 418)
+uv = PackedVector2Array(-720, -54, 5607, -55, 5607, 418, -721, 418)
 
 [node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]
 
 [node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon"]
 
-[node name="Polygon2" type="StaticBody2D" parent="Level/Polygons"]
-position = Vector2(45, 16)
-
-[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon2"]
-texture_repeat = 2
-texture = ExtResource("12_ca42v")
-polygon = PackedVector2Array(-811, -400, -718, -400, -718, -110, -811, -110)
-uv = PackedVector2Array(-811, -400, -718, -400, -718, -110, -811, -110)
-
-[node name="Grass" parent="Level/Polygons/Polygon2/Polygon" instance=ExtResource("6_p57ef")]
-
-[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon2"]
-
-[node name="Polygon3" type="StaticBody2D" parent="Level/Polygons"]
-position = Vector2(-131, 16)
-
-[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon3"]
-texture_repeat = 2
-texture = ExtResource("12_ca42v")
-polygon = PackedVector2Array(-811, -400, -718, -400, -718, -110, -811, -110)
-uv = PackedVector2Array(-811, -400, -718, -400, -718, -110, -811, -110)
-
-[node name="Grass" parent="Level/Polygons/Polygon3/Polygon" instance=ExtResource("6_p57ef")]
-
-[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon3"]
-
 [node name="Enemies" type="Node2D" parent="Level"]
-
-[node name="EnemySpawner" parent="Level/Enemies" instance=ExtResource("15_1kice")]
-position = Vector2(-21, -74)
-
-[node name="EnemySpawner6" parent="Level/Enemies" instance=ExtResource("15_1kice")]
-position = Vector2(102, -74)
-
-[node name="EnemySpawner2" parent="Level/Enemies" instance=ExtResource("15_1kice")]
-position = Vector2(-182, -82)
-
-[node name="EnemySpawner3" parent="Level/Enemies" instance=ExtResource("15_1kice")]
-position = Vector2(818, -111)
-enemy_to_spawn = 1
-
-[node name="EnemySpawner4" parent="Level/Enemies" instance=ExtResource("15_1kice")]
-position = Vector2(1213, -325)
-
-[node name="EnemySpawner5" parent="Level/Enemies" instance=ExtResource("15_1kice")]
-position = Vector2(-901, -413)
-enemy_to_spawn = 2
 
 [node name="Glambert" parent="Level" instance=ExtResource("1_yqjtg")]
 position = Vector2(-929, -576)

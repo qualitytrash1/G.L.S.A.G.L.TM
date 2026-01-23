@@ -3,14 +3,21 @@ extends Node2D
 @onready var statues: Node2D = $Level/Interactable/Statues
 @onready var glambert: Glambert = $Level/Glambert
 @onready var computers: Node2D = $Level/Interactable/Computers
-@onready var death_barrier: Area2D = $Level/DeathBarrier
+#BORDERS
+@onready var death_barrier: Area2D = $Level/Borders/DeathBarrier
+@onready var left_barrier: StaticBody2D = $Level/Borders/LeftBarrier
+@onready var right_barrier: StaticBody2D = $Level/Borders/RightBarrier
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
 	set_start_and_end_computers()
+	#SETS LIMITS
 	Globals.camera_y_limit = death_barrier.position.y
+	Globals.camera_left_limit = left_barrier.position.x
+	Globals.camera_right_limit = right_barrier.position.x
+	
 	Globals.statue_amount = statues.get_child_count()
 	Globals.iced_teas = 0
 	Globals.statues = 0
