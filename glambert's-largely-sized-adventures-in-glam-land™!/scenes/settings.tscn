@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://chqvop78alemk"]
+[gd_scene load_steps=12 format=3 uid="uid://chqvop78alemk"]
 
 [ext_resource type="Theme" uid="uid://cbp0x2v5m6a5b" path="res://textures/ui.tres" id="1_5p8wc"]
 [ext_resource type="Script" uid="uid://dopgnifo2k0wh" path="res://scripts/settings.gd" id="1_f4mfi"]
@@ -27,9 +27,29 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_83j8s"]
+resource_name = "open"
+
+[sub_resource type="Animation" id="Animation_gjs24"]
+resource_name = "close"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_am25x"]
+_data = {
+&"close": SubResource("Animation_gjs24"),
+&"open": SubResource("Animation_83j8s")
+}
+
 [node name="Settings" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_f4mfi")
+
+[node name="BG" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
 
 [node name="Settings" type="Control" parent="."]
 visible = false
@@ -39,15 +59,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="BG" type="Panel" parent="Settings"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_5p8wc")
 
 [node name="TabContainer" type="TabContainer" parent="Settings"]
 layout_mode = 1
@@ -309,6 +320,11 @@ mouse_filter = 2
 theme = ExtResource("1_5p8wc")
 text = "Exit game"
 horizontal_alignment = 1
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_am25x")
+}
 
 [connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/MasterVolume" to="." method="_on_master_volume_value_changed"]
 [connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/SoundVolume" to="." method="_on_sound_volume_value_changed"]
