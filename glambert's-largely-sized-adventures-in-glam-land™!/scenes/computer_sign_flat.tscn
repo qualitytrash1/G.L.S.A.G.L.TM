@@ -1,0 +1,127 @@
+[gd_scene load_steps=14 format=3 uid="uid://b5k8lqekougvr"]
+
+[ext_resource type="Script" uid="uid://cfe5eydr84dux" path="res://scripts/computer_sign_flat.gd" id="1_4pi80"]
+[ext_resource type="Texture2D" uid="uid://bomj1aacghugr" path="res://textures/computer-sign_base.png" id="1_fan31"]
+[ext_resource type="Theme" uid="uid://cbp0x2v5m6a5b" path="res://textures/ui.tres" id="2_dsyeg"]
+[ext_resource type="Texture2D" uid="uid://0qet13f7iw4v" path="res://textures/computer-sign_screen.png" id="2_h8p1v"]
+[ext_resource type="Shader" uid="uid://dvucg12v3ujeu" path="res://shaders/crt.gdshader" id="3_h8p1v"]
+
+[sub_resource type="Gradient" id="Gradient_dsyeg"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4pi80"]
+frequency = 0.064
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ur38h"]
+noise = SubResource("FastNoiseLite_4pi80")
+color_ramp = SubResource("Gradient_dsyeg")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dsyeg"]
+shader = ExtResource("3_h8p1v")
+shader_parameter/enable_grain = true
+shader_parameter/enable_curving = true
+shader_parameter/enable_scanlines = true
+shader_parameter/enable_chromatic_aberration = true
+shader_parameter/enable_rgb_grid = false
+shader_parameter/enable_vhs_wiggle = true
+shader_parameter/enable_vignette = true
+shader_parameter/brightness_multiplier = 1.20000000298024
+shader_parameter/grain_strength = 0.25
+shader_parameter/curve_power = 1.00999999977648
+shader_parameter/vignette_size = 0.4
+shader_parameter/vignette_smoothness = 0.4
+shader_parameter/vignette_opacity = 1.0
+shader_parameter/scanlines_interval = 6.0
+shader_parameter/scanline_opacity = 0.23999999463552
+shader_parameter/scanline_thickness = 3.0
+shader_parameter/chromatic_aberration_strength = 1.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_ur38h")
+shader_parameter/wiggle = 0.010000000475
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pi80"]
+size = Vector2(64, 20)
+
+[sub_resource type="Animation" id="Animation_isuje"]
+resource_name = "hover"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.50785303),
+"transitions": PackedFloat32Array(0.42044812, 1.5157168),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1)]
+}
+
+[sub_resource type="Animation" id="Animation_40dmp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vr7fj"]
+_data = {
+&"RESET": SubResource("Animation_40dmp"),
+&"hover": SubResource("Animation_isuje")
+}
+
+[node name="ComputerSignFlat" type="Node2D"]
+position = Vector2(0, 5)
+script = ExtResource("1_4pi80")
+
+[node name="Sprite" type="Node2D" parent="."]
+
+[node name="Screen" type="Sprite2D" parent="Sprite"]
+clip_children = 2
+texture = ExtResource("2_h8p1v")
+
+[node name="Text" type="RichTextLabel" parent="Sprite/Screen"]
+clip_contents = false
+offset_left = -25.0
+offset_top = -5.0
+offset_right = 3308.1953
+offset_bottom = 134.46423
+scale = Vector2(0.07170297, 0.07170297)
+mouse_filter = 2
+theme = ExtResource("2_dsyeg")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0.51, 0.42499995, 0)
+text = "sadsasasdasdassdaas"
+
+[node name="CRT" type="ColorRect" parent="Sprite"]
+process_mode = 3
+material = SubResource("ShaderMaterial_dsyeg")
+offset_left = -28.0
+offset_top = -6.0
+offset_right = 28.0
+offset_bottom = 6.0
+color = Color(1, 1, 1, 0)
+
+[node name="Base" type="Sprite2D" parent="Sprite"]
+texture = ExtResource("1_fan31")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 37)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -37)
+shape = SubResource("RectangleShape2D_4pi80")
+one_way_collision_margin = 0.1
+
+[node name="SignHover" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_vr7fj")
+}
