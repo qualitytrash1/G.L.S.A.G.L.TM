@@ -11,6 +11,7 @@ extends Node2D
 
 var index: int = 0
 
+signal on_screen
 
 func _ready() -> void:
 	
@@ -19,7 +20,7 @@ func _ready() -> void:
 
 	#SETS VARS
 	text.text = sign_text
-	text.position = Vector2(-25, -5)
+	text.position = Vector2(29, -5)
 	
 	index = len(text.text) + offset
 	
@@ -27,9 +28,14 @@ func _ready() -> void:
 		collision_shape_2d.disabled = true
 	else:
 		collision_shape_2d.disabled = false
-	
+		
+	await on_screen
 	while true:
 		text.position = Vector2(29, -5)
 		for i in range(index):
 			await get_tree().create_timer(0.25).timeout
 			text.position.x -= 4
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	emit_signal("on_screen")
