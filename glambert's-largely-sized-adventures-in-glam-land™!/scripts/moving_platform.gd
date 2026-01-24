@@ -4,6 +4,8 @@ extends Node2D
 
 @export var points: Array[Vector2]
 @export var speed: float
+@export var time_inbetween_movements: float
+
 
 @onready var moving_platform: AnimatableBody2D = $AnimatedBody
 
@@ -25,7 +27,6 @@ func _ready() -> void:
 		moving_platform.position = points[index]
 		#FOREVER
 		while true:
-			await get_tree().create_timer(0).timeout
 			if on_screen:
 				
 				if index < len(points) - 1:
@@ -44,7 +45,7 @@ func _ready() -> void:
 				tween.tween_property(moving_platform, "position", points[index], duration)
 				
 				await tween.finished
-			
+			await get_tree().create_timer(time_inbetween_movements).timeout
 			
 
 
