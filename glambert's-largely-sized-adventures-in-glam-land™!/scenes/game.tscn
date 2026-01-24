@@ -455,8 +455,8 @@ position = Vector2(-7, 0)
 texture_repeat = 2
 position = Vector2(793, -195)
 texture = ExtResource("12_ca42v")
-polygon = PackedVector2Array(0, -914, 2401, -917, 3292, -912, 3295, -135, 2830, -134.51569, 2830, 116, 2607, 116, 2607.3303, -383.10272, -70, -383, -70, -316, 0, -316, 0, 0, -70, 0, -70, -173, -437, -173, -437, -298, -1603, -296, -1613, -623)
-uv = PackedVector2Array(0, 0, 64, 0, 64, 64, 0, 64)
+polygon = PackedVector2Array(288, 32)
+uv = PackedVector2Array(288, 32)
 
 [node name="Grass" parent="Level/Polygons/StaticBody2D/Polygon" instance=ExtResource("6_p57ef")]
 
