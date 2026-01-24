@@ -10,9 +10,9 @@ var spawn_location: Vector2 = Vector2(0, 0)
 var zoom_factor: float = 250
 var current_level: int = 0
 #CAMERA LIMITS
-var camera_y_limit: float = 10000
-var camera_left_limit: float = 10000
-var camera_right_limit: float = 10000
+var camera_y_limit: float = 100000.0
+var camera_left_limit: float = 10000.0
+var camera_right_limit: float = 10000.0
 
 var has_checkpoint: bool = false
 var lives: int = 5
@@ -22,15 +22,16 @@ var in_menu: bool = false
 
 #VOLUME
 var volume_on: bool = true
-var master_vol: float = 2
-var sound_vol: float = 2
-var music_vol: float = 2
+var master_vol: float = 2.0
+var sound_vol: float = 2.0
+var music_vol: float = 2.0
 
 #VIDEO
 var enable_filter: bool = true
 var filter_node: ColorRect
 var vsync_enabled: bool = true
 var show_fps: bool = false
+var max_fps: float = 120
 
 var level_data: Array[Dictionary] = [
 	{"level": 1, "time": 400, "song": "uid://bsn7u4s87ur8q"},

@@ -9,12 +9,14 @@ extends CanvasLayer
 @onready var master_volume: HSlider = $Settings/TabContainer/Audio/Volume/MasterVolume
 @onready var sound_volume: HSlider = $Settings/TabContainer/Audio/Volume/SoundVolume
 @onready var music_volume: HSlider = $Settings/TabContainer/Audio/Volume/MusicVolume
+@onready var particle_multiplier: HSlider = $Settings/TabContainer/Video/ParticleMultiplier
 #CHECKBOXES
 @onready var enable_filter: CheckBox = $Settings/TabContainer/Video/EnableFilter
 @onready var vsync: CheckBox = $Settings/TabContainer/Video/Vsync
 @onready var show_fps: CheckBox = $Settings/TabContainer/Video/ShowFPS
 #OTHER
 @onready var anim: AnimationPlayer = $Anim
+@onready var max_fps: SpinBox = $Settings/TabContainer/Video/MaxFPS
 
 var in_settings: bool = false
 
@@ -23,9 +25,11 @@ func _ready() -> void:
 	
 	in_settings = false
 	#SET SETTINGS FROM GLOBAL VARS
+	#SLIDERS
 	master_volume.value = Globals.master_vol
 	sound_volume.value = Globals.sound_vol
 	music_volume.value = Globals.music_vol
+	#CHECKBOXES
 	enable_filter.button_pressed = Globals.enable_filter
 	vsync.button_pressed = Globals.vsync_enabled
 	show_fps.button_pressed = Globals.show_fps
@@ -34,6 +38,8 @@ func _ready() -> void:
 	_on_sound_volume_value_changed(Globals.sound_vol)
 	_on_music_volume_value_changed(Globals.music_vol)
 	_on_enable_filter_toggled(Globals.enable_filter)
+	#OTHER
+	max_fps.value = Globals.max_fps
 	
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("escape"):
@@ -148,3 +154,11 @@ func _on_vsync_toggled(toggled_on: bool) -> void:
 
 func _on_show_fps_toggled(toggled_on: bool) -> void:
 	Globals.show_fps = toggled_on
+
+
+func _on_spin_box_value_changed(value: float) -> void:
+	Globals.max_fps = value
+	if value > 0:
+		Engine.max_fps = value
+	else:
+		Engine.max_fps = 99999

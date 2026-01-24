@@ -132,7 +132,6 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.5019608)
 
 [node name="Settings" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -266,7 +265,7 @@ text = "VOLUME"
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="SpinBox" type="SpinBox" parent="Settings/TabContainer/Video"]
+[node name="MaxFPS" type="SpinBox" parent="Settings/TabContainer/Video"]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 108.0
@@ -276,7 +275,7 @@ theme = ExtResource("1_5p8wc")
 max_value = 99999.0
 alignment = 1
 
-[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Video/SpinBox"]
+[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Video/MaxFPS"]
 clip_contents = false
 layout_mode = 0
 offset_left = -119.0
@@ -437,6 +436,7 @@ libraries = {
 [connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/SoundVolume" to="." method="_on_sound_volume_value_changed"]
 [connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="pressed" from="Settings/TabContainer/Audio/VolumeToggle" to="." method="_on_volume_toggle_pressed"]
+[connection signal="value_changed" from="Settings/TabContainer/Video/MaxFPS" to="." method="_on_spin_box_value_changed"]
 [connection signal="toggled" from="Settings/TabContainer/Video/EnableFilter" to="." method="_on_enable_filter_toggled"]
 [connection signal="toggled" from="Settings/TabContainer/Video/Vsync" to="." method="_on_vsync_toggled"]
 [connection signal="toggled" from="Settings/TabContainer/Video/ShowFPS" to="." method="_on_show_fps_toggled"]
