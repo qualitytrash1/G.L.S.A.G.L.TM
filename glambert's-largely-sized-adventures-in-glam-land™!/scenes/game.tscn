@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=46 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bl4t22m8q6hwe" path="res://textures/stars.png" id="6_1kice"]
 [ext_resource type="PackedScene" uid="uid://c0ah5kn2ch61y" path="res://scenes/background.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://bb08qhktrr4g3" path="res://scenes/grass.tscn" id="6_p57ef"]
+[ext_resource type="Texture2D" uid="uid://ccfmj34r1qtxu" path="res://textures/vines.png" id="9_bhx41"]
 [ext_resource type="Texture2D" uid="uid://ff51uench70u" path="res://textures/spikes-short.png" id="9_ir15t"]
 [ext_resource type="PackedScene" uid="uid://3romnl56ifsa" path="res://scenes/ice_tea.tscn" id="10_vtaks"]
 [ext_resource type="Texture2D" uid="uid://bb4fukyjqwsgw" path="res://textures/bushes-vaporwave.png" id="11_e1j6l"]
@@ -327,6 +328,17 @@ offset = Vector2(640, 0)
 position = Vector2(289, 0)
 texture = ExtResource("17_rysoc")
 offset = Vector2(1280, 0)
+
+[node name="Vines" type="Parallax2D" parent="BG"]
+scroll_offset = Vector2(1062, -380)
+repeat_size = Vector2(1280, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="BG/Vines"]
+texture = ExtResource("9_bhx41")
+
+[node name="Sprite2D2" type="Sprite2D" parent="BG/Vines"]
+texture = ExtResource("9_bhx41")
+offset = Vector2(640, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_iywne")

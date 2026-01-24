@@ -132,7 +132,6 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.5019608)
 
 [node name="Settings" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -149,10 +148,11 @@ offset_top = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_5p8wc")
-current_tab = 0
+current_tab = 1
 clip_tabs = false
 
 [node name="Audio" type="Control" parent="Settings/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -262,26 +262,41 @@ theme = ExtResource("1_5p8wc")
 text = "VOLUME"
 
 [node name="Video" type="Control" parent="Settings/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="MaxFPS" type="LineEdit" parent="Settings/TabContainer/Video"]
+[node name="SpinBox" type="SpinBox" parent="Settings/TabContainer/Video"]
 layout_mode = 0
-offset_left = 61.0
-offset_top = 67.0
-offset_right = 270.0
-offset_bottom = 169.0
+offset_left = 80.0
+offset_top = 108.0
+offset_right = 265.0
+offset_bottom = 163.0
 theme = ExtResource("1_5p8wc")
+max_value = 99999.0
+alignment = 1
+
+[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Video/SpinBox"]
+clip_contents = false
+layout_mode = 0
+offset_left = -119.0
+offset_top = -44.0
+offset_right = 907.17944
+offset_bottom = 110.84268
+scale = Vector2(0.39750317, 0.39750317)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+text = "max fps"
+horizontal_alignment = 1
 
 [node name="Enable Filter" type="CheckBox" parent="Settings/TabContainer/Video"]
 layout_mode = 0
-offset_left = 62.0
-offset_top = 196.0
-offset_right = 474.0
-offset_bottom = 292.0
-theme_override_font_sizes/font_size = 64
-text = "Enable Filter"
+offset_left = 83.0
+offset_top = 171.0
+offset_right = 495.0
+offset_bottom = 267.0
+scale = Vector2(0.94792646, 0.94792646)
+theme = ExtResource("1_5p8wc")
+text = " Enable Filters"
 
 [node name="SaveData" type="Control" parent="Settings/TabContainer"]
 visible = false
