@@ -1340,15 +1340,13 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [resource]
-CheckBox/colors/checkbox_checked_color = Color(0, 0.9648127, 0.808011, 1)
-CheckBox/colors/checkbox_unchecked_color = Color(0, 0.9648127, 0.808011, 1)
 CheckBox/colors/font_color = Color(0, 0.9765469, 0.8158236, 1)
 CheckBox/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
-CheckBox/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+CheckBox/colors/font_focus_color = Color(0, 0.9648127, 0.808011, 1)
 CheckBox/colors/font_hover_color = Color(0, 0.9648127, 0.808011, 1)
-CheckBox/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+CheckBox/colors/font_hover_pressed_color = Color(0, 0.9648127, 0.808011, 1)
 CheckBox/colors/font_outline_color = Color(0, 0.506096, 0.42354468, 1)
-CheckBox/colors/font_pressed_color = Color(1, 1, 1, 1)
+CheckBox/colors/font_pressed_color = Color(0, 0.9648127, 0.808011, 1)
 CheckBox/constants/check_v_offset = 0
 CheckBox/constants/h_separation = 4
 CheckBox/constants/outline_size = 8

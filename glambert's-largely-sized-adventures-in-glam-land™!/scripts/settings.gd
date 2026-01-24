@@ -5,10 +5,15 @@ extends CanvasLayer
 @onready var pop_sound: AudioStreamPlayer = $Settings/PopSound
 @onready var menu: Control = $Menu
 @onready var settings: Control = $Settings
+#SLIDERS
 @onready var master_volume: HSlider = $Settings/TabContainer/Audio/Volume/MasterVolume
 @onready var sound_volume: HSlider = $Settings/TabContainer/Audio/Volume/SoundVolume
 @onready var music_volume: HSlider = $Settings/TabContainer/Audio/Volume/MusicVolume
-@onready var enable_filter: CheckBox = $"Settings/TabContainer/Video/Enable Filter"
+#CHECKBOXES
+@onready var enable_filter: CheckBox = $Settings/TabContainer/Video/EnableFilter
+@onready var vsync: CheckBox = $Settings/TabContainer/Video/Vsync
+@onready var show_fps: CheckBox = $Settings/TabContainer/Video/ShowFPS
+#OTHER
 @onready var anim: AnimationPlayer = $Anim
 
 var in_settings: bool = false
@@ -22,6 +27,8 @@ func _ready() -> void:
 	sound_volume.value = Globals.sound_vol
 	music_volume.value = Globals.music_vol
 	enable_filter.button_pressed = Globals.enable_filter
+	vsync.button_pressed = Globals.vsync_enabled
+	show_fps.button_pressed = Globals.show_fps
 	#APPLY SETTINGS
 	_on_master_volume_value_changed(Globals.master_vol)
 	_on_sound_volume_value_changed(Globals.sound_vol)
@@ -130,3 +137,14 @@ func _on_exit_pressed() -> void:
 	in_settings = false
 	settings.hide()
 	open_menu()
+
+
+func _on_vsync_toggled(toggled_on: bool) -> void:
+	Globals.vsync_enabled = toggled_on
+	if toggled_on:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED)
+	else:
+		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
+
+func _on_show_fps_toggled(toggled_on: bool) -> void:
+	Globals.show_fps = toggled_on

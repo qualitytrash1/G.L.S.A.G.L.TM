@@ -132,6 +132,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.5019608)
 
 [node name="Settings" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -288,7 +289,7 @@ theme = ExtResource("1_5p8wc")
 text = "max fps"
 horizontal_alignment = 1
 
-[node name="Enable Filter" type="CheckBox" parent="Settings/TabContainer/Video"]
+[node name="EnableFilter" type="CheckBox" parent="Settings/TabContainer/Video"]
 layout_mode = 0
 offset_left = 83.0
 offset_top = 171.0
@@ -297,6 +298,26 @@ offset_bottom = 267.0
 scale = Vector2(0.94792646, 0.94792646)
 theme = ExtResource("1_5p8wc")
 text = " Enable Filters"
+
+[node name="Vsync" type="CheckBox" parent="Settings/TabContainer/Video"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 229.0
+offset_right = 495.0
+offset_bottom = 325.0
+scale = Vector2(0.94792646, 0.94792646)
+theme = ExtResource("1_5p8wc")
+text = " v-sync"
+
+[node name="ShowFPS" type="CheckBox" parent="Settings/TabContainer/Video"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 292.0
+offset_right = 495.0
+offset_bottom = 388.0
+scale = Vector2(0.94792646, 0.94792646)
+theme = ExtResource("1_5p8wc")
+text = " show fps"
 
 [node name="SaveData" type="Control" parent="Settings/TabContainer"]
 visible = false
@@ -416,7 +437,9 @@ libraries = {
 [connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/SoundVolume" to="." method="_on_sound_volume_value_changed"]
 [connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="pressed" from="Settings/TabContainer/Audio/VolumeToggle" to="." method="_on_volume_toggle_pressed"]
-[connection signal="toggled" from="Settings/TabContainer/Video/Enable Filter" to="." method="_on_enable_filter_toggled"]
+[connection signal="toggled" from="Settings/TabContainer/Video/EnableFilter" to="." method="_on_enable_filter_toggled"]
+[connection signal="toggled" from="Settings/TabContainer/Video/Vsync" to="." method="_on_vsync_toggled"]
+[connection signal="toggled" from="Settings/TabContainer/Video/ShowFPS" to="." method="_on_show_fps_toggled"]
 [connection signal="pressed" from="Settings/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Settings" to="." method="_on_settings_pressed"]

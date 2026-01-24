@@ -99,8 +99,13 @@ var bodies_in_uncrouch: int = 0
 
 
 func _ready() -> void:
-	
+
 	get_tree().paused = false
+	
+	if Globals.show_fps:
+		fps.show()
+	else:
+		fps.hide()
 	
 	#SETS MOVEMENT VARIABLES
 	crouching = false
@@ -155,6 +160,11 @@ func _ready() -> void:
 	set_lives()
 
 func _physics_process(delta: float) -> void:
+	
+	if Globals.show_fps:
+		fps.show()
+	else:
+		fps.hide()
 	
 	fps.text = "FPS: " + str(Engine.get_frames_per_second())
 	

@@ -29,7 +29,8 @@ var music_vol: float = 2
 #VIDEO
 var enable_filter: bool = true
 var filter_node: ColorRect
-
+var vsync_enabled: bool = true
+var show_fps: bool = false
 
 var level_data: Array[Dictionary] = [
 	{"level": 1, "time": 400, "song": "uid://bsn7u4s87ur8q"},
