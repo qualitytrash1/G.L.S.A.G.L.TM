@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://chqvop78alemk"]
+[gd_scene load_steps=14 format=3 uid="uid://chqvop78alemk"]
 
 [ext_resource type="Theme" uid="uid://cbp0x2v5m6a5b" path="res://textures/ui.tres" id="1_5p8wc"]
 [ext_resource type="Script" uid="uid://dopgnifo2k0wh" path="res://scripts/settings.gd" id="1_f4mfi"]
 [ext_resource type="Texture2D" uid="uid://dsi32t8owkwtl" path="res://textures/volume-off.png" id="2_r6d6q"]
 [ext_resource type="Texture2D" uid="uid://btoecslt2qk6b" path="res://textures/volume-on.png" id="3_6wm04"]
 [ext_resource type="AudioStream" uid="uid://bnah3itumo6cq" path="res://audio/sfx/pop.mp3" id="5_es4n0"]
+[ext_resource type="Texture2D" uid="uid://tauxwfshbx8u" path="res://textures/controller.png" id="5_gjs24"]
 [ext_resource type="Texture2D" uid="uid://c4i3asq400ejf" path="res://textures/button-32_16.png" id="6_83j8s"]
 [ext_resource type="Texture2D" uid="uid://c42gpdcedhsly" path="res://textures/button-64_16.png" id="6_gis3k"]
 
@@ -132,6 +133,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.5019608)
 
 [node name="Settings" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -148,7 +150,7 @@ offset_top = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_5p8wc")
-current_tab = 1
+current_tab = 2
 clip_tabs = false
 
 [node name="Audio" type="Control" parent="Settings/TabContainer"]
@@ -262,6 +264,7 @@ theme = ExtResource("1_5p8wc")
 text = "VOLUME"
 
 [node name="Video" type="Control" parent="Settings/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -318,10 +321,262 @@ scale = Vector2(0.94792646, 0.94792646)
 theme = ExtResource("1_5p8wc")
 text = " show fps"
 
-[node name="SaveData" type="Control" parent="Settings/TabContainer"]
-visible = false
+[node name="Controls" type="Control" parent="Settings/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 2
+
+[node name="Controller" type="Sprite2D" parent="Settings/TabContainer/Controls"]
+position = Vector2(1358, 419)
+scale = Vector2(2.2174346, 2.2174346)
+texture = ExtResource("5_gjs24")
+
+[node name="Jump" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+position = Vector2(64.9399, -1.8038864)
+points = PackedVector2Array(109.58612, 0, 0, 0)
+width = 2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Jump"]
+clip_contents = false
+offset_left = 106.42929
+offset_top = -9.921373
+offset_right = 510.0488
+offset_bottom = 181.74153
+scale = Vector2(0.15491244, 0.15491244)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "jump"
+
+[node name="Sprint" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+position = Vector2(47.802986, -14.882061)
+points = PackedVector2Array(126.27203, -38.783554, 0, 0)
+width = 2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Sprint"]
+clip_contents = false
+offset_left = 124.468155
+offset_top = -50.057846
+offset_right = 528.08765
+offset_bottom = 141.60506
+scale = Vector2(0.15491244, 0.15491244)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "sprint"
+
+[node name="Walk" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+position = Vector2(-31.568008, 34.724808)
+points = PackedVector2Array(13.980164, 45.999115, 0, 0)
+width = 2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Walk"]
+clip_contents = false
+offset_left = -7.666519
+offset_top = 41.038414
+offset_right = 395.953
+offset_bottom = 232.70132
+scale = Vector2(0.15491244, 0.15491244)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "walk"
+
+[node name="Walk2" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+position = Vector2(-70.35156, -14.882061)
+points = PackedVector2Array(-88.8414, -25.25441, 0, 0)
+width = 2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Walk2"]
+clip_contents = false
+offset_left = -128.97787
+offset_top = -38.783554
+offset_right = 274.64163
+offset_bottom = 152.87935
+scale = Vector2(0.15491244, 0.15491244)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "walk"
+
+[node name="Jump2" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+position = Vector2(-59.077274, -28.862179)
+points = PackedVector2Array(-101.919586, -41.48938, 0, 0)
+width = 2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Jump2"]
+clip_contents = false
+offset_left = -140.25217
+offset_top = -52.312702
+offset_right = 263.36734
+offset_bottom = 139.3502
+scale = Vector2(0.15491244, 0.15491244)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "jump"
+
+[node name="Crouch" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+position = Vector2(-59.077274, -3.1568012)
+points = PackedVector2Array(-102.370544, -9.921371, 0, 0)
+width = 2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Crouch"]
+clip_contents = false
+offset_left = -149.27158
+offset_top = -18.489836
+offset_right = 551.2842
+offset_bottom = 173.17307
+scale = Vector2(0.15491244, 0.15491244)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "crouch"
+
+[node name="Crouch2" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+position = Vector2(63.136013, -82.97876)
+points = PackedVector2Array(0, -22.097618, 0, 0)
+width = 2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Crouch2"]
+clip_contents = false
+offset_left = -26.156334
+offset_top = -36.077744
+offset_right = 674.3995
+offset_bottom = 155.58516
+scale = Vector2(0.15491244, 0.15491244)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "crouch"
+
+[node name="Menu" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+position = Vector2(13.980114, -14.431099)
+points = PackedVector2Array(0, -22.097618, 0, 0)
+width = 2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Menu"]
+clip_contents = false
+offset_left = -17.136902
+offset_top = -34.27383
+offset_right = 683.4189
+offset_bottom = 157.38907
+scale = Vector2(0.15491244, 0.15491244)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "Menu
+"
+
+[node name="TextController" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller"]
+clip_contents = false
+offset_left = -173.1731
+offset_top = -158.742
+offset_right = 853.00635
+offset_bottom = -3.8993225
+scale = Vector2(0.34363827, 0.34363827)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+text = "controller"
+horizontal_alignment = 1
+
+[node name="TextKeyboard" type="RichTextLabel" parent="Settings/TabContainer/Controls"]
+clip_contents = false
+layout_mode = 0
+offset_left = 0.9999695
+offset_top = 49.000122
+offset_right = 1027.1794
+offset_bottom = 203.84277
+scale = Vector2(0.8455068, 0.8455068)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+text = "keyboard"
+horizontal_alignment = 1
+
+[node name="Walk" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard"]
+clip_contents = false
+layout_mode = 0
+offset_left = 338.2587
+offset_top = 126.55115
+offset_right = 2689.7705
+offset_bottom = 556.4853
+scale = Vector2(0.44635502, 0.40713894)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "Walk: \"a\", \"w\", 
+\"left-arrow\", 
+\"right-arrow\""
+
+[node name="Line" type="Line2D" parent="Settings/TabContainer/Controls/TextKeyboard/Walk"]
+position = Vector2(64.9399, 403.78964)
+scale = Vector2(3, 3)
+points = PackedVector2Array(225.66202, 0, -26.062866, 0)
+width = 2.0
+
+[node name="Jump" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard"]
+clip_contents = false
+layout_mode = 0
+offset_left = 350.08588
+offset_top = 303.95947
+offset_right = 1760.9927
+offset_bottom = 655.4597
+scale = Vector2(0.44635502, 0.40713894)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "Jump: \"space\", 
+\"up-arrow\""
+
+[node name="Line" type="Line2D" parent="Settings/TabContainer/Controls/TextKeyboard/Jump"]
+position = Vector2(64.9399, 264.35187)
+scale = Vector2(3, 3)
+points = PackedVector2Array(225.66202, 0, -26.062866, 0)
+width = 2.0
+
+[node name="Crouch" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard"]
+clip_contents = false
+layout_mode = 0
+offset_left = 350.08588
+offset_top = 422.23175
+offset_right = 1556.5134
+offset_bottom = 730.15765
+scale = Vector2(0.44635502, 0.40713894)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "Crouch: \"s\",
+\"down-arrow\""
+
+[node name="Line" type="Line2D" parent="Settings/TabContainer/Controls/TextKeyboard/Crouch"]
+position = Vector2(64.9399, 264.35187)
+scale = Vector2(3, 3)
+points = PackedVector2Array(225.66202, 0, -26.062866, 0)
+width = 2.0
+
+[node name="Slam" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard"]
+clip_contents = false
+layout_mode = 0
+offset_left = 313.42148
+offset_top = 541.6867
+offset_right = 1519.849
+offset_bottom = 849.6126
+scale = Vector2(0.44635502, 0.40713894)
+mouse_filter = 2
+theme = ExtResource("1_5p8wc")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
+text = "slam: crouch in air."
 
 [node name="PopSound" type="AudioStreamPlayer" parent="Settings"]
 stream = ExtResource("5_es4n0")
