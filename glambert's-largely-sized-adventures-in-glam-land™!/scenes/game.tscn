@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=43 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
@@ -19,8 +19,10 @@
 [ext_resource type="PackedScene" uid="uid://ukurqghjblqn" path="res://scenes/sunglasses-life.tscn" id="13_5newe"]
 [ext_resource type="PackedScene" uid="uid://bvqdsk3hm4v53" path="res://scenes/computer.tscn" id="13_kvuet"]
 [ext_resource type="Texture2D" uid="uid://dabx0pgoxd26s" path="res://textures/wood-platform.png" id="14_trtic"]
+[ext_resource type="PackedScene" uid="uid://f4am5o61tsi4" path="res://scenes/checkpoint.tscn" id="16_bt5mj"]
 [ext_resource type="Texture2D" uid="uid://dtdk5pdbi7fjg" path="res://textures/bushes.png" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://doa8itx5bouhd" path="res://textures/palm-trees.png" id="18_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://br813p4gprdda" path="res://scenes/enemy_spawner.tscn" id="20_37s47"]
 
 [sub_resource type="Gradient" id="Gradient_gts02"]
 colors = PackedColorArray(0.63, 0, 0.609, 1, 0.22916658, 0, 0.55, 0)
@@ -381,37 +383,9 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(0, 10)
 tile_set = SubResource("TileSet_bhx41")
 
-[node name="Signs" type="Node2D" parent="Level/Decor"]
-
-[node name="ComputerSignFlat" parent="Level/Decor/Signs" instance=ExtResource("12_5newe")]
-position = Vector2(-383, -64)
-sign_text = "use \"a\" and \"d\" to move left and right!"
-offset = 16
-
-[node name="ComputerSignFlat4" parent="Level/Decor/Signs" instance=ExtResource("12_5newe")]
-position = Vector2(284, -64)
-sign_text = "click jump again in the air to double jump!"
-offset = 12
-
-[node name="ComputerSignFlat5" parent="Level/Decor/Signs" instance=ExtResource("12_5newe")]
-position = Vector2(576, -153)
-sign_text = "touch the ice teas to collect them!"
-offset = 12
-
-[node name="ComputerSignFlat2" parent="Level/Decor/Signs" instance=ExtResource("12_5newe")]
-position = Vector2(-33, -114)
-sign_text = "press \"w\" or \"space\" to jump!"
-offset = 16
-floating_platform = true
-
-[node name="ComputerSignFlat3" parent="Level/Decor/Signs" instance=ExtResource("12_5newe")]
-position = Vector2(-654, -473)
-sign_text = "nothings up here dude."
-offset = 12
-floating_platform = true
-
 [node name="Spikes" type="TileMapLayer" parent="Level" groups=["insta-death"]]
-position = Vector2(7, -6)
+position = Vector2(0, -13)
+tile_map_data = PackedByteArray("AABsAPz/AAAAAAAAAABtAPz/AAADAAAAAAByAPz/AAAAAAAAAABzAPz/AAADAAAAAAB4APz/AAAAAAAAAAB5APz/AAADAAAAAACPAPr/AAAAAAAAAACQAPr/AAACAAAAAACRAPr/AAABAAAAAACSAPr/AAADAAAAAAA=")
 tile_set = SubResource("TileSet_rysoc")
 
 [node name="MovingPlatforms" type="Node2D" parent="Level"]
@@ -421,7 +395,7 @@ tile_set = SubResource("TileSet_rysoc")
 [node name="Collectables" type="TileMapLayer" parent="Level/Interactable"]
 use_parent_material = true
 position = Vector2(0, 1)
-tile_map_data = PackedByteArray("AAAiAPT/AAAAAAAAAQAjAPT/AAAAAAAAAQAkAPT/AAAAAAAAAQAlAPT/AAAAAAAAAQAlAPP/AAAAAAAAAQAkAPP/AAAAAAAAAQAjAPP/AAAAAAAAAQAiAPP/AAAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAAiAPT/AAAAAAAAAQAjAPT/AAAAAAAAAQAkAPT/AAAAAAAAAQAlAPT/AAAAAAAAAQAlAPP/AAAAAAAAAQAkAPP/AAAAAAAAAQAjAPP/AAAAAAAAAQAiAPP/AAAAAAAAAQA0APP/AAAAAAAAAQAxAPD/AAAAAAAAAQA0AO3/AAAAAAAAAQAxAOr/AAAAAAAAAQA9AOn/AAAAAAAAAQA+AOv/AAAAAAAAAQA/AO3/AAAAAAAAAQBAAO//AAAAAAAAAQBBAPH/AAAAAAAAAQBCAPP/AAAAAAAAAQBDAPX/AAAAAAAAAQBEAPf/AAAAAAAAAQBFAPn/AAAAAAAAAQBGAPv/AAAAAAAAAQBrAPn/AAAAAAAAAQBsAPj/AAAAAAAAAQBtAPj/AAAAAAAAAQBuAPn/AAAAAAAAAQBxAPn/AAAAAAAAAQByAPj/AAAAAAAAAQBzAPj/AAAAAAAAAQB0APn/AAAAAAAAAQB3APn/AAAAAAAAAQB4APj/AAAAAAAAAQB5APj/AAAAAAAAAQB6APn/AAAAAAAAAQCLAPv/AAAAAAAAAQCMAPr/AAAAAAAAAQCNAPn/AAAAAAAAAQCUAPn/AAAAAAAAAQCVAPr/AAAAAAAAAQCWAPv/AAAAAAAAAQCPAPf/AAAAAAAAAQCQAPb/AAAAAAAAAQCRAPb/AAAAAAAAAQCSAPf/AAAAAAAAAQCgAPf/AAAAAAAAAQChAPf/AAAAAAAAAQCiAPf/AAAAAAAAAQChAPb/AAAAAAAAAgA=")
 tile_set = SubResource("TileSet_0tnpc")
 
 [node name="Statues" type="Node2D" parent="Level/Interactable"]
@@ -440,7 +414,12 @@ position = Vector2(0, -11)
 
 [node name="Checkpoints" type="Node2D" parent="Level/Interactable"]
 
+[node name="Checkpoint" parent="Level/Interactable/Checkpoints" instance=ExtResource("16_bt5mj")]
+position = Vector2(2053, -108)
+
 [node name="Platforms" type="TileMapLayer" parent="Level"]
+position = Vector2(-3, -1)
+tile_map_data = PackedByteArray("AACvAPb/BwABAAAAAACwAPb/BwACAAAAAACxAPb/BwACAAAAAACyAPb/BwACAAAAAACzAPb/BwABAAAAAAC0APb/BwABAAAAAAC1APb/BwADAAAAAAC7APb/BwAAAAAAAAC8APb/BwABAAAAAAC9APb/BwABAAAAAAC+APb/BwACAAAAAAC/APb/BwACAAAAAADAAPb/BwACAAAAAADBAPb/BwACAAAAAADCAPb/BwADAAAAAACuAPb/BwAAAAAAAADCAPf/BwADAAAAAACwAPf/BwADAAAAAACvAPf/BwACAAAAAACuAPf/BwAAAAAAAAC0APf/BwAAAAAAAAC1APf/BwADAAAAAAC8APf/BwAAAAAAAAC9APf/BwADAAAAAADBAPf/BwABAAAAAADAAPf/BwAAAAAAAABAAev/BwAAAAAAAABBAev/BwACAAAAAABCAev/BwABAAAAAABDAev/BwABAAAAAABEAev/BwABAAAAAABFAev/BwABAAAAAABGAev/BwADAAAAAABCAez/BwABAAAAAABDAez/BwACAAAAAABEAez/BwACAAAAAABFAez/BwADAAAAAABBAez/BwAAAAAAAAA=")
 tile_set = SubResource("TileSet_kvuet")
 
 [node name="Polygons" type="Node2D" parent="Level"]
@@ -450,14 +429,91 @@ tile_set = SubResource("TileSet_kvuet")
 [node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon"]
 texture_repeat = 2
 texture = ExtResource("12_ca42v")
-polygon = PackedVector2Array(-720, -54, -66, -54.070724, -66, 92, 0, 92, 0, -54.08165, 356, -54.106567, 356, -143, 846, -143, 846, -370, 967, -370, 967, -143, 5607, -143, 5607, 418, -721, 418)
-uv = PackedVector2Array(-43.733063, 63.573006)
+polygon = PackedVector2Array(-720, -54, -66, -54.070724, -66, 92, 0, 92, 0, -54.08165, 356, -54.106567, 356, -143, 846, -143, 846, -370, 967, -370, 1120, -61, 1404, -61, 1404, 82, 1445, 82, 1445, -61, 1507, -61, 1507, 82, 1545, 82, 1545, -61, 2235.9258, -60.659805, 2281.0715, -93, 2361.826, -93, 2408.1726, -60.575012, 2521, -60.521835, 2564, -93, 2605, -93, 2649, -60.443634, 5607, -59, 5607, 418, -721, 418)
+uv = PackedVector2Array(0, 0, 64, 0, 64, 64, 0, 64)
 
 [node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]
 
 [node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon"]
 
+[node name="StaticBody2D" type="StaticBody2D" parent="Level/Polygons"]
+position = Vector2(-7, 0)
+
+[node name="Polygon" type="Polygon2D" parent="Level/Polygons/StaticBody2D"]
+texture_repeat = 2
+position = Vector2(793, -195)
+texture = ExtResource("12_ca42v")
+polygon = PackedVector2Array(-70, -623, 0, -623, 0, 0, -70, 0)
+
+[node name="Grass" parent="Level/Polygons/StaticBody2D/Polygon" instance=ExtResource("6_p57ef")]
+
+[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/StaticBody2D"]
+position = Vector2(793, -195)
+polygon = PackedVector2Array(-70, -623, 0, -623, 0, 0, -70, 0)
+
+[node name="Signs" type="Node2D" parent="Level"]
+position = Vector2(-3, 4)
+
+[node name="ComputerSignFlat" parent="Level/Signs" instance=ExtResource("12_5newe")]
+position = Vector2(-383, -68)
+sign_text = "use \"a\" and \"d\" to move left and right!"
+offset = 16
+
+[node name="ComputerSignFlat7" parent="Level/Signs" instance=ExtResource("12_5newe")]
+position = Vector2(911, -384)
+sign_text = "if you're in the air and you click down, you can slam into the ground! "
+offset = 16
+
+[node name="ComputerSignFlat8" parent="Level/Signs" instance=ExtResource("12_5newe")]
+position = Vector2(1256, -75)
+sign_text = "you can use this to kill enemies!"
+offset = 16
+
+[node name="ComputerSignFlat4" parent="Level/Signs" instance=ExtResource("12_5newe")]
+position = Vector2(284, -68)
+sign_text = "click jump again in the air to double jump!"
+offset = 12
+
+[node name="ComputerSignFlat5" parent="Level/Signs" instance=ExtResource("12_5newe")]
+position = Vector2(576, -157)
+sign_text = "touch the ice teas to collect them!"
+offset = 12
+
+[node name="ComputerSignFlat6" parent="Level/Signs" instance=ExtResource("12_5newe")]
+position = Vector2(754, -212)
+sign_text = "if you click jump while sliding down a wall, you can wall jump!"
+offset = 12
+
+[node name="ComputerSignFlat2" parent="Level/Signs" instance=ExtResource("12_5newe")]
+position = Vector2(-33, -114)
+sign_text = "press \"w\" or \"space\" to jump!"
+offset = 16
+floating_platform = true
+
+[node name="ComputerSignFlat3" parent="Level/Signs" instance=ExtResource("12_5newe")]
+position = Vector2(-654, -473)
+sign_text = "nothings up here dude."
+offset = 12
+floating_platform = true
+
+[node name="ComputerSignFlat9" parent="Level/Signs" instance=ExtResource("12_5newe")]
+position = Vector2(1648, -75)
+sign_text = "watch out for spikes!d"
+offset = 12
+
+[node name="ComputerSignFlat10" parent="Level/Signs" instance=ExtResource("12_5newe")]
+position = Vector2(2056, -75)
+sign_text = "nice job! heres a checkpoint."
+offset = 12
+
 [node name="Enemies" type="Node2D" parent="Level"]
+
+[node name="EnemySpawner" parent="Level/Enemies" instance=ExtResource("20_37s47")]
+position = Vector2(1475, -96)
+
+[node name="EnemySpawner2" parent="Level/Enemies" instance=ExtResource("20_37s47")]
+position = Vector2(2462, -94)
+enemy_to_spawn = 1
 
 [node name="Glambert" parent="Level" instance=ExtResource("1_yqjtg")]
 position = Vector2(-929, -576)
