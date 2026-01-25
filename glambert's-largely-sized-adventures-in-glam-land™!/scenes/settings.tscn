@@ -320,16 +320,6 @@ scale = Vector2(0.94792646, 0.94792646)
 theme = ExtResource("1_5p8wc")
 text = " show fps"
 
-[node name="HDR" type="CheckBox" parent="Settings/TabContainer/Video"]
-layout_mode = 0
-offset_left = 83.0
-offset_top = 347.0
-offset_right = 495.0
-offset_bottom = 443.0
-scale = Vector2(0.94792646, 0.94792646)
-theme = ExtResource("1_5p8wc")
-text = " HDR"
-
 [node name="Controls" type="Control" parent="Settings/TabContainer"]
 visible = false
 layout_mode = 2
@@ -705,7 +695,6 @@ libraries = {
 [connection signal="toggled" from="Settings/TabContainer/Video/EnableFilter" to="." method="_on_enable_filter_toggled"]
 [connection signal="toggled" from="Settings/TabContainer/Video/Vsync" to="." method="_on_vsync_toggled"]
 [connection signal="toggled" from="Settings/TabContainer/Video/ShowFPS" to="." method="_on_show_fps_toggled"]
-[connection signal="toggled" from="Settings/TabContainer/Video/HDR" to="." method="_on_hdr_toggled"]
 [connection signal="pressed" from="Settings/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
