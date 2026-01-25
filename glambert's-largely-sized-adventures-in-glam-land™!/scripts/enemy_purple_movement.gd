@@ -2,8 +2,6 @@ class_name BasicEnemy
 
 extends CharacterBody2D
 
-
-
 @onready var hole_detector: RayCast2D = $HoleDetector
 @onready var attack: AudioStreamPlayer = $Attack
 @onready var hit_box_collision: CollisionShape2D = $Hitbox/CollisionShape2D
@@ -15,8 +13,8 @@ extends CharacterBody2D
 @onready var sprite_parent: Node2D = $Sprite_Parent
 @onready var sprite: Node2D = $Sprite
 
-const SPEED = 800.0
-const JUMP_VELOCITY = -400.0
+const SPEED: float = 800.0
+const JUMP_VELOCITY: float = -400.0
 
 var direction: int
 var friction: float = 0.8

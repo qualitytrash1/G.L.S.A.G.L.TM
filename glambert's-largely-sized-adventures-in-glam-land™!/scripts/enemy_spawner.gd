@@ -16,7 +16,6 @@ var enemies: Array[Dictionary] = [
 	{"name": "Purple Plug Walk", "address": "uid://8ml8rkvcnoyg"},
 ]
 
-
 var on_screen: bool
 var enemy: PackedScene
 
@@ -24,12 +23,12 @@ var enemy: PackedScene
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	#SPAWNS ENEMY
 	enemy = load(enemies[enemy_to_spawn]["address"])
-	var clone_enemy = enemy.instantiate()
+	var clone_enemy: CharacterBody2D = enemy.instantiate()
 	add_child(clone_enemy)
 #OFF SCREEN
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	#DESPAWNS ENEMY
-	for i in get_children():
+	for i: Node2D in get_children():
 		
 		if i.is_in_group("enemy-spawner"):
 			continue

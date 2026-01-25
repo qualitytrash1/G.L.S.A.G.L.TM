@@ -48,7 +48,7 @@ var time_since_ground_pound : float = 0
 var flipped: bool = false
 var current_animation: String
 var slipping: bool = false
-var visual_crouching
+var visual_crouching: bool
 
 #OTHER
 var dying: bool = false
@@ -132,9 +132,9 @@ func _ready() -> void:
 	await get_tree().create_timer(0).timeout
 	
 	#CREATES THE RIGHT AMOUNT OF OUTLINES FOR STATUES IN LEVEL
-	for i in range(Globals.statue_amount):
+	for i: int in range(Globals.statue_amount):
 		
-		var clone_statue_button = statue_outline.duplicate()
+		var clone_statue_button: Control = statue_outline.duplicate()
 		
 		statues.add_child(clone_statue_button)
 		clone_statue_button.get_child(0).play("outline")
@@ -404,7 +404,7 @@ func flip():
 	else:
 		flip_dir = velocity.x < 0
 	#HIDE ALL
-	for i in sprites.get_children():
+	for i: Node2D in sprites.get_children():
 		if i == glambert_sunglasses:
 			break
 		i.hide() 
@@ -602,7 +602,7 @@ func end_level(node: Node, time: float, level_complete: bool):
 
 func set_lives():
 	var offset: int = 50
-	for i in range(Globals.lives):
+	for i: int in range(Globals.lives):
 		
 		var clone_sunglasses = sunglasses_no_shading.duplicate()
 		

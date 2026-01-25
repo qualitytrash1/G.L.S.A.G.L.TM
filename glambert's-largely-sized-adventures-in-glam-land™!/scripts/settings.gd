@@ -161,4 +161,4 @@ func _on_spin_box_value_changed(value: float) -> void:
 	if value > 0:
 		Engine.max_fps = value
 	else:
-		Engine.max_fps = 99999
+		Engine.max_fps = 99999 

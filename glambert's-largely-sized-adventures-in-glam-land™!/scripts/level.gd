@@ -4,7 +4,7 @@ class_name Level
 
 extends Node2D
 
-const POINT = preload("uid://v8qfgbxfrh3l")
+const POINT: PackedScene = preload("uid://v8qfgbxfrh3l")
 const DEFAULT_UV : PackedVector2Array = [
 	Vector2(0,0),
 	Vector2(64,0),
@@ -49,7 +49,7 @@ func point_pressed(point : Node2D) -> void:
 func update_points() -> void:
 	if level_editor:
 		var index : int = 0
-		for i in points_node.get_children():
+		for i: Node2D in points_node.get_children():
 			if index >= len(points):
 				i.queue_free()
 				index += 1
@@ -58,7 +58,7 @@ func update_points() -> void:
 			index += 1
 		if index >= len(points):
 			return
-		for i in range(index, len(points)):
+		for i: int in range(index, len(points)):
 			var new_point = POINT.instantiate()
 			points_node.add_child(new_point)
 			new_point.position = points[i]
@@ -68,7 +68,7 @@ func update_polygons() -> void:
 	for i : StaticBody2D in polygons.get_children(): #loop polygons
 		points = i.get_child(0).polygon
 		#PREVENT STINKY DECIMAL
-		for point in points:
+		for point: Vector2 in points:
 			point = round(point)
 		i.get_child(0).polygon = points
 		if Engine.is_editor_hint():

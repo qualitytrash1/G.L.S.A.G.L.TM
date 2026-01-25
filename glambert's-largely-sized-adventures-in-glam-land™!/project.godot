@@ -39,6 +39,10 @@ check-point=""
 life=""
 border=""
 
+[gui]
+
+fonts/dynamic_fonts/use_oversampling=false
+
 [input]
 
 ui_accept={
@@ -136,6 +140,7 @@ debug_grass={
 [physics]
 
 2d/run_on_separate_thread=true
+common/physics_ticks_per_second=50
 common/max_physics_steps_per_frame=1
 2d/solver/solver_iterations=8
 2d/solver/default_contact_bias=1.0

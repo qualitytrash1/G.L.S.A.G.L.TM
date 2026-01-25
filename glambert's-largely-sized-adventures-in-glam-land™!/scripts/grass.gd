@@ -46,7 +46,7 @@ func _update(debug : bool = false) -> void:
 	#HIDE/QUEUE FREE DEBUG TEXT
 	await get_tree().create_timer(0).timeout
 	if not debug or final_export:
-		for i in side.get_child(0).get_children():
+		for i: RichTextLabel in side.get_child(0).get_children():
 			if Globals.final_export:
 				i.queue_free()
 			else:
@@ -57,14 +57,14 @@ func _update(debug : bool = false) -> void:
 		else:
 			side.get_child(1).hide()
 	if debug:
-		for i in side.get_child(0).get_children():
+		for i: RichTextLabel in side.get_child(0).get_children():
 			i.show()
 		side.get_child(1).show()
 	distances = []
 	_create_tex()
 	if not texture_ready:
 		await done_making_texture
-	for i in sides.get_children():
+	for i: RichTextLabel in sides.get_children():
 		i.queue_free()
 	await get_tree().create_timer(0).timeout
 	side.hide()
@@ -95,7 +95,7 @@ func _update(debug : bool = false) -> void:
 		index += 1
 	await get_tree().create_timer(0).timeout
 	index = 0
-	for this_side in sides.get_children():
+	for this_side: Node2D in sides.get_children():
 		var tex_polygon : Polygon2D = this_side.get_child(0)
 		var next_side : Node2D
 		var next_tex_polygon : Polygon2D
@@ -109,7 +109,7 @@ func _update(debug : bool = false) -> void:
 			this_side.get_child(1).text += str(Vector2(round(distance * 1000)) / 1000.0)
 		index += 1
 	index = 0
-	for this_side in sides.get_children():
+	for this_side: Node2D in sides.get_children():
 		var distance : Vector2 = distances[index]
 		var tex_polygon : Polygon2D = this_side.get_child(0)
 		var next_side : Node2D
@@ -122,7 +122,7 @@ func _update(debug : bool = false) -> void:
 		new_node.global_translate(-distance)
 		tex_polygon.polygon[2].x = new_node.position.x
 		var precision : float = 0.002 #LOWER NUMBER = SLOWER BUT BETTER
-		for i in range(3000):
+		for i: int in range(3000):
 			next_tex_polygon.polygon[3].x = next_tex_polygon.to_local(tex_polygon.to_global(tex_polygon.polygon[2])).x
 			tex_polygon.polygon[2].x = tex_polygon.to_local(next_tex_polygon.to_global(next_tex_polygon.polygon[3])).x
 			if i % 500 == 499:
@@ -148,7 +148,7 @@ func update_visual_points(tex_polygon : Polygon2D) -> void:
 	var rand_color : Color = Color.RED
 	rand_color.h = (tex_polygon.global_position.distance_to(Vector2(0,0)) / 8)
 	var index : int = 0
-	for i in tex_polygon.get_children():
+	for i: Polygon2D in tex_polygon.get_children():
 		i.position = tex_polygon.polygon[index]
 		i.position.y -= 4
 		i.rotation = -tex_polygon.rotation
