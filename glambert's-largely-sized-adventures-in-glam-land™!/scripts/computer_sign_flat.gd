@@ -35,7 +35,7 @@ func _ready() -> void:
 	while true:
 		if on_screen_status:
 			text.position = Vector2(29, -5)
-			for i in range(index):
+			for i: int in range(index):
 				await get_tree().create_timer(0.25).timeout
 				text.position.x -= 4
 		await get_tree().create_timer(0.25).timeout

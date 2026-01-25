@@ -397,7 +397,7 @@ func _physics_process(delta: float) -> void:
 	set_collision_mask_value(4, (velocity.y >= 0 and not on_wall) or velocity.y >= 30) #disable platform collision if moving up
 
 
-func flip():
+func flip() -> void:
 	var flip_dir : bool = false #false = left, true = right
 	if on_wall:
 		flip_dir = last_wall_normal.x > 0
@@ -421,7 +421,7 @@ func flip():
 			sprite_facing_left.show()
 		glambert_sunglasses.flip_h = false
 
-func set_animation(animation: String):
+func set_animation(animation: String) -> void:
 	
 	visual_crouching = crouching
 	
@@ -554,7 +554,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			punch.play()
 			
 			#MAKES IT SO PARTICLES DONT CUT OFF
-			var particles = enemy.sparks.duplicate()
+			var particles: GPUParticles2D = enemy.sparks.duplicate()
 			add_child(particles)
 			particles.emitting = true
 			
@@ -573,7 +573,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 			end_level(enemy, 0, false)
 
 
-func end_level(node: Node, time: float, level_complete: bool):
+func end_level(node: Node, time: float, level_complete: bool) -> void:
 		
 		#GOES TO NEXT LEVEL
 		if level_complete:
@@ -600,11 +600,11 @@ func end_level(node: Node, time: float, level_complete: bool):
 		get_tree().reload_current_scene()
 
 
-func set_lives():
+func set_lives() -> void:
 	var offset: int = 50
 	for i: int in range(Globals.lives):
 		
-		var clone_sunglasses = sunglasses_no_shading.duplicate()
+		var clone_sunglasses: Sprite2D = sunglasses_no_shading.duplicate()
 		
 		lives.add_child(clone_sunglasses)
 		clone_sunglasses.show()

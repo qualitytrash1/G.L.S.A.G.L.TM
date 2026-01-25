@@ -73,7 +73,7 @@ func _update(debug : bool = false) -> void:
 	#MAIN CODE
 	#No clue how in the bigglyty gobly thid works
 	var index : int = 0
-	for point in polygon.polygon:
+	for point: Variant in polygon.polygon:
 		var new_side : Node2D = side.duplicate()
 		var tex_polygon : Polygon2D = new_side.get_child(0)
 		sides.add_child(new_side)

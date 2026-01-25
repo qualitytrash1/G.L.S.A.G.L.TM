@@ -24,7 +24,7 @@ func _ready() -> void:
 	if Globals.lives < 1:
 		Globals.lives = 5
 
-func set_start_and_end_computers():
+func set_start_and_end_computers() -> void:
 	
 	# MODULAR CODE:
 		# SETS THE FARTHEST LEFT COMPUTER TO START

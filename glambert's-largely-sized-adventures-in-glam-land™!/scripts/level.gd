@@ -59,7 +59,7 @@ func update_points() -> void:
 		if index >= len(points):
 			return
 		for i: int in range(index, len(points)):
-			var new_point = POINT.instantiate()
+			var new_point: Node2D = POINT.instantiate()
 			points_node.add_child(new_point)
 			new_point.position = points[i]
 			index += 1

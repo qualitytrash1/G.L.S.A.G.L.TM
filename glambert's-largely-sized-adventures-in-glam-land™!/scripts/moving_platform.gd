@@ -37,7 +37,7 @@ func _ready() -> void:
 				#TIME VARS
 				var start_pos: Vector2 = moving_platform.position
 				var end_pos: Vector2 = points[index]
-				var distance := start_pos.distance_to(end_pos)
+				var distance: float = start_pos.distance_to(end_pos)
 				duration = distance / speed
 				
 				#SMOOTHLY ANIMATES

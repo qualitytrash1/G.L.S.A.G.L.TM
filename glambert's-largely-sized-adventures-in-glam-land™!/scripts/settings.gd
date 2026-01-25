@@ -56,7 +56,7 @@ func _input(event: InputEvent) -> void:
 				settings.hide()
 				open_menu()
 
-func open_menu():
+func open_menu() -> void:
 	menu.show()
 	anim.play("open")
 	get_tree().paused = true
@@ -64,7 +64,7 @@ func open_menu():
 	var tween : Tween = create_tween()
 	tween.tween_property(AudioServer.get_bus_effect(1,0), "cutoff_hz", 600, 0.1)
 	
-func close_menu():
+func close_menu() -> void:
 	menu.hide()
 	anim.play("close")
 	get_tree().paused = false
