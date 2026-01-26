@@ -14,6 +14,7 @@ extends CanvasLayer
 @onready var enable_filter: CheckBox = $Settings/TabContainer/Video/EnableFilter
 @onready var vsync: CheckBox = $Settings/TabContainer/Video/Vsync
 @onready var show_fps: CheckBox = $Settings/TabContainer/Video/ShowFPS
+@onready var full_screen: CheckBox = $Settings/TabContainer/Video/FullScreen
 #OTHER
 @onready var anim: AnimationPlayer = $Anim
 @onready var max_fps: SpinBox = $Settings/TabContainer/Video/MaxFPS
@@ -34,7 +35,7 @@ func _ready() -> void:
 	enable_filter.button_pressed = Globals.enable_filter
 	vsync.button_pressed = Globals.vsync_enabled
 	show_fps.button_pressed = Globals.show_fps
-	show_fps.button_pressed = Globals.full_screen
+	full_screen.button_pressed = Globals.full_screen
 	#APPLY SETTINGS
 	_on_master_volume_value_changed(Globals.master_vol)
 	_on_sound_volume_value_changed(Globals.sound_vol)
