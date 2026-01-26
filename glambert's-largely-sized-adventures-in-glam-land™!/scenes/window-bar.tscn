@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://do14ojh5jrniy"]
+
+[ext_resource type="Texture2D" uid="uid://bvrqc335duw7r" path="res://textures/window-bar.png" id="1_108sd"]
+[ext_resource type="Script" uid="uid://dclenwxn3cmys" path="res://scripts/window_bar.gd" id="1_axb5l"]
+[ext_resource type="Texture2D" uid="uid://ieop4hx3yndv" path="res://textures/x-button.png" id="2_y5qhq"]
+[ext_resource type="Texture2D" uid="uid://bal1px7huodii" path="res://textures/max-button.png" id="3_kq8nk"]
+[ext_resource type="Texture2D" uid="uid://buwkg3f84ywkm" path="res://textures/minus-button.png" id="4_uicoe"]
+
+[node name="WindowBar" type="CanvasLayer"]
+process_mode = 3
+layer = 10002
+script = ExtResource("1_axb5l")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 5.0
+
+[node name="WindowBar" type="Sprite2D" parent="Control"]
+scale = Vector2(3, 3)
+texture = ExtResource("1_108sd")
+centered = false
+
+[node name="CloseButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1876.0001
+offset_top = 7.0000005
+offset_right = 1892.0001
+offset_bottom = 23.0
+scale = Vector2(1.7820239, 1.7820239)
+flat = true
+
+[node name="Sprite" type="Sprite2D" parent="Control/CloseButton"]
+position = Vector2(-8.7976456e-05, -0.56116)
+scale = Vector2(1.0535849, 1.0535849)
+texture = ExtResource("2_y5qhq")
+centered = false
+
+[node name="MaxButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1843.0001
+offset_top = 7.0000005
+offset_right = 1859.0001
+offset_bottom = 23.0
+scale = Vector2(1.7820239, 1.7820239)
+flat = true
+
+[node name="Sprite" type="Sprite2D" parent="Control/MaxButton"]
+position = Vector2(-8.7976456e-05, -0.56116)
+scale = Vector2(1.0535849, 1.0535849)
+texture = ExtResource("3_kq8nk")
+centered = false
+
+[node name="MinusButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 1810.0
+offset_top = 7.0000005
+offset_right = 1826.0
+offset_bottom = 23.0
+scale = Vector2(1.7820239, 1.7820239)
+flat = true
+
+[node name="Sprite" type="Sprite2D" parent="Control/MinusButton"]
+position = Vector2(-8.7976456e-05, -0.56116)
+scale = Vector2(1.0535849, 1.0535849)
+texture = ExtResource("4_uicoe")
+centered = false
+
+[connection signal="pressed" from="Control/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="Control/MaxButton" to="." method="_on_max_button_pressed"]
+[connection signal="pressed" from="Control/MinusButton" to="." method="_on_minus_button_pressed"]

@@ -138,6 +138,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 25.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -313,12 +315,22 @@ text = " v-sync"
 [node name="ShowFPS" type="CheckBox" parent="Settings/TabContainer/Video"]
 layout_mode = 0
 offset_left = 83.0
-offset_top = 292.0
+offset_top = 288.0
 offset_right = 495.0
-offset_bottom = 388.0
+offset_bottom = 384.0
 scale = Vector2(0.94792646, 0.94792646)
 theme = ExtResource("1_5p8wc")
 text = " show fps"
+
+[node name="FullScreen" type="CheckBox" parent="Settings/TabContainer/Video"]
+layout_mode = 0
+offset_left = 83.0
+offset_top = 347.0
+offset_right = 495.0
+offset_bottom = 443.0
+scale = Vector2(0.94792646, 0.94792646)
+theme = ExtResource("1_5p8wc")
+text = " fullscreen"
 
 [node name="Controls" type="Control" parent="Settings/TabContainer"]
 visible = false
@@ -585,9 +597,9 @@ volume_db = -6.148
 [node name="Exit" type="Button" parent="Settings"]
 layout_mode = 0
 offset_left = 1590.9999
-offset_top = 885.0
+offset_top = 819.99994
 offset_right = 1630.9999
-offset_bottom = 909.0
+offset_bottom = 843.99994
 scale = Vector2(8.44, 8.44)
 icon = ExtResource("6_83j8s")
 flat = true
@@ -695,6 +707,7 @@ libraries = {
 [connection signal="toggled" from="Settings/TabContainer/Video/EnableFilter" to="." method="_on_enable_filter_toggled"]
 [connection signal="toggled" from="Settings/TabContainer/Video/Vsync" to="." method="_on_vsync_toggled"]
 [connection signal="toggled" from="Settings/TabContainer/Video/ShowFPS" to="." method="_on_show_fps_toggled"]
+[connection signal="toggled" from="Settings/TabContainer/Video/FullScreen" to="." method="_on_full_screen_toggled"]
 [connection signal="pressed" from="Settings/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Settings" to="." method="_on_settings_pressed"]

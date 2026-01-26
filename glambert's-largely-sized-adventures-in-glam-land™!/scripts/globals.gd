@@ -32,6 +32,8 @@ var filter_node: ColorRect
 var vsync_enabled: bool = true
 var show_fps: bool = false
 var max_fps: float = 240
+var window_bar_visible: bool = true
+var full_screen: bool = false
 
 var level_data: Array[Dictionary] = [
 	{"level": 1, "time": 400, "song": "uid://bsn7u4s87ur8q"},

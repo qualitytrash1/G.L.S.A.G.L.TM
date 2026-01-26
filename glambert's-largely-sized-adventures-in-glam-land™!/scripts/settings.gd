@@ -17,6 +17,7 @@ extends CanvasLayer
 #OTHER
 @onready var anim: AnimationPlayer = $Anim
 @onready var max_fps: SpinBox = $Settings/TabContainer/Video/MaxFPS
+@onready var window_bar: WindowBar = $"../WindowBar"
 
 var in_settings: bool = false
 
@@ -33,6 +34,7 @@ func _ready() -> void:
 	enable_filter.button_pressed = Globals.enable_filter
 	vsync.button_pressed = Globals.vsync_enabled
 	show_fps.button_pressed = Globals.show_fps
+	show_fps.button_pressed = Globals.full_screen
 	#APPLY SETTINGS
 	_on_master_volume_value_changed(Globals.master_vol)
 	_on_sound_volume_value_changed(Globals.sound_vol)
@@ -162,3 +164,13 @@ func _on_spin_box_value_changed(value: float) -> void:
 		Engine.max_fps = value
 	else:
 		Engine.max_fps = 99999 
+
+
+func _on_full_screen_toggled(toggled_on: bool) -> void:
+	
+	Globals.full_screen = toggled_on
+	if toggled_on:
+		get_window().mode = Window.MODE_FULLSCREEN
+	else:
+		get_window().mode = Window.MODE_WINDOWED
+	window_bar.check_visibility()

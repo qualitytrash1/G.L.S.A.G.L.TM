@@ -1,3 +1,5 @@
+## An insanely radical dood, with some awesome shades and a passion for skate-boarding.
+#^^^^ if you put a double comment above everything, you can set the description of a class! niftyshifty aint it partner??RE?ER?ES>?RES>? ANBBSADVB AIM DYIGNG
 extends CharacterBody2D
 
 class_name Glambert
@@ -160,6 +162,13 @@ func _ready() -> void:
 	set_lives()
 
 func _physics_process(delta: float) -> void:
+	
+	if not Globals.window_bar_visible:
+		iced_tea_texts.position.y = 8
+		statues.position.y = 5
+	else:
+		iced_tea_texts.position.y = 35
+		statues.position.y = 52
 	
 	if Globals.show_fps:
 		fps.show()

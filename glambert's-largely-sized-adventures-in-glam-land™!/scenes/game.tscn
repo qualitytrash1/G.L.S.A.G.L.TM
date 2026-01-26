@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene load_steps=47 format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
 [ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://dtdk5pdbi7fjg" path="res://textures/bushes.png" id="17_rysoc"]
 [ext_resource type="Texture2D" uid="uid://doa8itx5bouhd" path="res://textures/palm-trees.png" id="18_ssvqc"]
 [ext_resource type="PackedScene" uid="uid://br813p4gprdda" path="res://scenes/enemy_spawner.tscn" id="20_37s47"]
+[ext_resource type="PackedScene" uid="uid://do14ojh5jrniy" path="res://scenes/window-bar.tscn" id="27_qnb83"]
 
 [sub_resource type="Gradient" id="Gradient_gts02"]
 colors = PackedColorArray(0.63, 0, 0.609, 1, 0.22916658, 0, 0.55, 0)
@@ -608,3 +609,5 @@ offset = Vector2(640, 0)
 
 [node name="Settings" parent="." instance=ExtResource("2_37s47")]
 layer = 999
+
+[node name="WindowBar" parent="." instance=ExtResource("27_qnb83")]
