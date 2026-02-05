@@ -76,3 +76,12 @@ func _on_control_mouse_exited() -> void:
 	while Input.is_action_pressed("click"):
 		await get_tree().create_timer(0).timeout
 	mouse_hovering = false
+
+func _on_resize_pressed() -> void:
+	var last_mouse_pos : Vector2 = DisplayServer.mouse_get_position()
+	while Input.is_action_pressed("click"):
+		var mouse_pos : Vector2 = DisplayServer.mouse_get_position()
+		var distance : Vector2 = mouse_pos - last_mouse_pos
+		DisplayServer.window_set_size(DisplayServer.window_get_size() + Vector2i(distance.x, distance.x))
+		last_mouse_pos = DisplayServer.mouse_get_position()
+		await get_tree().create_timer(0).timeout
