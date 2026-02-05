@@ -36,9 +36,9 @@ func _ready() -> void:
 		if on_screen_status:
 			text.position = Vector2(29, -5)
 			for i: int in range(index):
-				await get_tree().create_timer(0.25).timeout
-				text.position.x -= 4
-		await get_tree().create_timer(0.25).timeout
+				await get_tree().create_timer(0.1).timeout
+				text.position.x -= 2
+		await get_tree().create_timer(0.1).timeout
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:

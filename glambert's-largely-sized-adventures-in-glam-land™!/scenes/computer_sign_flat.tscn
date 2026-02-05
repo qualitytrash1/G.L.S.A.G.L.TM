@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b5k8lqekougvr"]
+[gd_scene format=3 uid="uid://b5k8lqekougvr"]
 
 [ext_resource type="Script" uid="uid://cfe5eydr84dux" path="res://scripts/computer_sign_flat.gd" id="1_4pi80"]
 [ext_resource type="Texture2D" uid="uid://bomj1aacghugr" path="res://textures/computer-sign_base.png" id="1_fan31"]
@@ -78,21 +78,21 @@ _data = {
 &"hover": SubResource("Animation_isuje")
 }
 
-[node name="ComputerSignFlat" type="Node2D"]
+[node name="ComputerSignFlat" type="Node2D" unique_id=633208951]
 position = Vector2(0, 5)
 script = ExtResource("1_4pi80")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1647635740]
 rect = Rect2(-27, -5, 54, 10)
 show_rect = false
 
-[node name="Sprite" type="Node2D" parent="."]
+[node name="Sprite" type="Node2D" parent="." unique_id=828138252]
 
-[node name="Screen" type="Sprite2D" parent="Sprite"]
+[node name="Screen" type="Sprite2D" parent="Sprite" unique_id=118389218]
 clip_children = 2
 texture = ExtResource("2_h8p1v")
 
-[node name="Text" type="RichTextLabel" parent="Sprite/Screen"]
+[node name="Text" type="RichTextLabel" parent="Sprite/Screen" unique_id=1778898828]
 clip_contents = false
 offset_left = -25.0
 offset_top = -5.0
@@ -105,7 +105,7 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0.51, 0.42499995, 0)
 text = "sadsasasdasdassdaas"
 
-[node name="CRT" type="ColorRect" parent="Sprite"]
+[node name="CRT" type="ColorRect" parent="Sprite" unique_id=45638567]
 process_mode = 3
 material = SubResource("ShaderMaterial_dsyeg")
 offset_left = -28.0
@@ -114,21 +114,19 @@ offset_right = 28.0
 offset_bottom = 6.0
 color = Color(1, 1, 1, 0)
 
-[node name="Base" type="Sprite2D" parent="Sprite"]
+[node name="Base" type="Sprite2D" parent="Sprite" unique_id=433604589]
 texture = ExtResource("1_fan31")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1187426084]
 position = Vector2(0, 37)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1633639887]
 position = Vector2(0, -37)
 shape = SubResource("RectangleShape2D_4pi80")
 one_way_collision_margin = 0.1
 
-[node name="SignHover" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_vr7fj")
-}
+[node name="SignHover" type="AnimationPlayer" parent="." unique_id=2107647269]
+libraries/ = SubResource("AnimationLibrary_vr7fj")
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

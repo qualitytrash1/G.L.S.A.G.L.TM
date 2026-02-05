@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=59 format=4 uid="uid://cbp0x2v5m6a5b"]
+[gd_resource type="Theme" format=4 uid="uid://cbp0x2v5m6a5b"]
 
 [ext_resource type="FontFile" uid="uid://daw3langu30qf" path="res://fonts/pixel-game-font/PixelGame-R9AZe.otf" id="1_03utp"]
 [ext_resource type="Texture2D" uid="uid://ugmuciomksqk" path="res://textures/point-big.png" id="1_42v55"]
@@ -203,6 +203,15 @@ font_weight = 600
 subpixel_positioning = 0
 msdf_pixel_range = 14
 msdf_size = 128
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
 cache/0/16/0/ascent = 18.0
 cache/0/16/0/descent = 5.0
 cache/0/16/0/underline_position = 1.609375

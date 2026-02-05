@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://do14ojh5jrniy"]
+[gd_scene format=3 uid="uid://do14ojh5jrniy"]
 
 [ext_resource type="Texture2D" uid="uid://bvrqc335duw7r" path="res://textures/window-bar.png" id="1_108sd"]
 [ext_resource type="Script" uid="uid://dclenwxn3cmys" path="res://scripts/window_bar.gd" id="1_axb5l"]
@@ -6,67 +6,71 @@
 [ext_resource type="Texture2D" uid="uid://bal1px7huodii" path="res://textures/max-button.png" id="3_kq8nk"]
 [ext_resource type="Texture2D" uid="uid://buwkg3f84ywkm" path="res://textures/minus-button.png" id="4_uicoe"]
 
-[node name="WindowBar" type="CanvasLayer"]
+[node name="WindowBar" type="CanvasLayer" unique_id=525692715]
 process_mode = 3
 layer = 10002
 script = ExtResource("1_axb5l")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1029247653]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
-offset_bottom = 5.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 42.0
+grow_horizontal = 2
 
-[node name="WindowBar" type="Sprite2D" parent="Control"]
+[node name="WindowBar" type="Sprite2D" parent="Control" unique_id=2034395251]
 scale = Vector2(3, 3)
 texture = ExtResource("1_108sd")
 centered = false
 
-[node name="CloseButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 1876.0001
-offset_top = 7.0000005
-offset_right = 1892.0001
-offset_bottom = 23.0
-scale = Vector2(1.7820239, 1.7820239)
+[node name="CloseButton" type="Button" parent="Control" unique_id=760154838]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.000122
+offset_top = 6.0
+offset_right = -20.000122
+offset_bottom = 22.0
+grow_horizontal = 0
+scale = Vector2(1.878, 1.878)
 flat = true
+icon_alignment = 1
+expand_icon = true
 
-[node name="Sprite" type="Sprite2D" parent="Control/CloseButton"]
-position = Vector2(-8.7976456e-05, -0.56116)
-scale = Vector2(1.0535849, 1.0535849)
+[node name="Sprite" type="Sprite2D" parent="Control/CloseButton" unique_id=1014382788]
 texture = ExtResource("2_y5qhq")
 centered = false
 
-[node name="MaxButton" type="Button" parent="Control"]
+[node name="MaxButton" type="Button" parent="Control" unique_id=151234845]
 layout_mode = 0
-offset_left = 1843.0001
-offset_top = 7.0000005
-offset_right = 1859.0001
-offset_bottom = 23.0
-scale = Vector2(1.7820239, 1.7820239)
+offset_left = 1850.0
+offset_top = 6.0
+offset_right = 1866.0
+offset_bottom = 22.0
+scale = Vector2(1.878, 1.878)
 flat = true
 
-[node name="Sprite" type="Sprite2D" parent="Control/MaxButton"]
-position = Vector2(-8.7976456e-05, -0.56116)
-scale = Vector2(1.0535849, 1.0535849)
+[node name="Sprite" type="Sprite2D" parent="Control/MaxButton" unique_id=1487560206]
+position = Vector2(-0.04, 0)
 texture = ExtResource("3_kq8nk")
 centered = false
 
-[node name="MinusButton" type="Button" parent="Control"]
+[node name="MinusButton" type="Button" parent="Control" unique_id=24412981]
 layout_mode = 0
-offset_left = 1810.0
-offset_top = 7.0000005
-offset_right = 1826.0
-offset_bottom = 23.0
-scale = Vector2(1.7820239, 1.7820239)
+offset_left = 1816.0
+offset_top = 6.0
+offset_right = 1832.0
+offset_bottom = 22.0
+scale = Vector2(1.878, 1.878)
 flat = true
 
-[node name="Sprite" type="Sprite2D" parent="Control/MinusButton"]
-position = Vector2(-8.7976456e-05, -0.56116)
-scale = Vector2(1.0535849, 1.0535849)
+[node name="Sprite" type="Sprite2D" parent="Control/MinusButton" unique_id=1533105342]
 texture = ExtResource("4_uicoe")
 centered = false
 
+[connection signal="mouse_entered" from="Control" to="." method="_on_window_bar_mouse_entered"]
+[connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]
 [connection signal="pressed" from="Control/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="Control/MaxButton" to="." method="_on_max_button_pressed"]
 [connection signal="pressed" from="Control/MinusButton" to="." method="_on_minus_button_pressed"]
