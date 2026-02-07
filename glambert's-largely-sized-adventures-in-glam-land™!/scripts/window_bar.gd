@@ -24,6 +24,8 @@ func _on_max_button_pressed() -> void:
 	#WINDOWED
 	elif get_window().mode == Window.MODE_WINDOWED:
 		get_window().mode = Window.MODE_MAXIMIZED
+	
+	check_visibility()
 
 func _on_minus_button_pressed() -> void:
 	get_window().mode = Window.MODE_MINIMIZED
