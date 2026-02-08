@@ -1,21 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb08qhktrr4g3"]
+[gd_scene format=3 uid="uid://bb08qhktrr4g3"]
 
 [ext_resource type="Script" uid="uid://djguocrvnugga" path="res://scripts/grass.gd" id="1_e1kak"]
 [ext_resource type="Texture2D" uid="uid://cc3g0b7lxq0ca" path="res://textures/grass.png" id="2_yarb5"]
 
-[node name="Grass" type="Node2D"]
+[node name="Grass" type="Node2D" unique_id=1451673536]
 script = ExtResource("1_e1kak")
 texture = ExtResource("2_yarb5")
 
-[node name="Side" type="Node2D" parent="."]
+[node name="Side" type="Node2D" parent="." unique_id=586673]
 
-[node name="Polygon2D" type="Polygon2D" parent="Side"]
+[node name="Polygon2D" type="Polygon2D" parent="Side" unique_id=1677213925]
 texture_filter = 1
 texture_repeat = 2
 texture = ExtResource("2_yarb5")
 polygon = PackedVector2Array(0, 0, 16, 0, 16, 16, 0, 16)
 
-[node name="0" type="RichTextLabel" parent="Side/Polygon2D"]
+[node name="0" type="RichTextLabel" parent="Side/Polygon2D" unique_id=2137341210]
 z_index = 4096
 clip_contents = false
 offset_right = 32.0
@@ -27,7 +27,7 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 12
 text = "0"
 
-[node name="1" type="RichTextLabel" parent="Side/Polygon2D"]
+[node name="1" type="RichTextLabel" parent="Side/Polygon2D" unique_id=224783548]
 z_index = 4096
 clip_contents = false
 offset_right = 32.0
@@ -39,7 +39,7 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 12
 text = "1"
 
-[node name="2" type="RichTextLabel" parent="Side/Polygon2D"]
+[node name="2" type="RichTextLabel" parent="Side/Polygon2D" unique_id=1093109240]
 z_index = 4096
 clip_contents = false
 offset_right = 32.0
@@ -51,7 +51,7 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 12
 text = "2"
 
-[node name="3" type="RichTextLabel" parent="Side/Polygon2D"]
+[node name="3" type="RichTextLabel" parent="Side/Polygon2D" unique_id=1748560415]
 z_index = 4096
 clip_contents = false
 offset_right = 32.0
@@ -63,7 +63,7 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 12
 text = "3"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Side"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Side" unique_id=737079831]
 modulate = Color(1, 1, 1, 0.78431374)
 z_index = 100
 clip_contents = false
@@ -77,4 +77,4 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[color=yellow]0.01"
 
-[node name="Sides" type="Node2D" parent="."]
+[node name="Sides" type="Node2D" parent="." unique_id=1791687350]

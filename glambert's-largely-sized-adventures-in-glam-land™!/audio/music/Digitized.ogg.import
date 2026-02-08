@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/Digitized.ogg-fb92be0b0b8d1520910374b877f2e18
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
-beat_count=0
+loop=true
+loop_offset=30.29
+bpm=103.0
+beat_count=236
 bar_beats=4

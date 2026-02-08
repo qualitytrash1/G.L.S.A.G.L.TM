@@ -3,6 +3,8 @@
 extends Node2D
 
 @export var texture : Texture2D
+@export var side_texture : Texture2D
+@export var bottom_texture : Texture2D
 @export var update : bool = false
 @export var create_tex : bool = false
 @onready var side: Node2D = $Side
@@ -10,6 +12,9 @@ extends Node2D
 @onready var level: Level = $"../../../../"
 @onready var sides: Node2D = $Sides
 @onready var textures: Control = $Side/Textures
+
+const MIN_SIDE_ANGLE: float = 89
+const MIN_BOTTOM_ANGLE: float = 179
 
 signal done_making_texture
 var texture_ready : bool = false
@@ -73,7 +78,7 @@ func _update(debug : bool = false) -> void:
 	#MAIN CODE
 	#No clue how in the bigglyty gobly thid works
 	var index : int = 0
-	for point: Variant in polygon.polygon:
+	for point: Vector2 in polygon.polygon:
 		var new_side : Node2D = side.duplicate()
 		var tex_polygon : Polygon2D = new_side.get_child(0)
 		sides.add_child(new_side)
@@ -84,6 +89,10 @@ func _update(debug : bool = false) -> void:
 			next_point = polygon.polygon[index + 1]
 		new_side.position = point
 		tex_polygon.look_at(next_point + global_position)
+		if abs(rad_to_deg(tex_polygon.rotation)) > MIN_SIDE_ANGLE and side_texture:
+			tex_polygon.texture = side_texture
+		if abs(rad_to_deg(tex_polygon.rotation)) > MIN_BOTTOM_ANGLE and bottom_texture:
+			tex_polygon.texture = bottom_texture
 		tex_polygon.polygon[0].x = 0
 		tex_polygon.polygon[1].x = tex_polygon.global_position.distance_to(next_point + global_position) 
 		tex_polygon.polygon[2].x = tex_polygon.global_position.distance_to(next_point + global_position) # + 16

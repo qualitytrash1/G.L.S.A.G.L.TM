@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bvqdsk3hm4v53"]
+[gd_scene format=3 uid="uid://bvqdsk3hm4v53"]
 
 [ext_resource type="Texture2D" uid="uid://8lp4816waf4" path="res://textures/computer-base.png" id="1_7ikar"]
 [ext_resource type="Texture2D" uid="uid://dp37a8dmp6aro" path="res://textures/computer-screen.png" id="2_tjrug"]
@@ -130,37 +130,37 @@ shader_parameter/wiggle = 0.010000000475
 a = Vector2(-56.5, 0)
 b = Vector2(56.6, 0)
 
-[node name="Computer" type="Area2D" groups=["collectable", "computer"]]
+[node name="Computer" type="Area2D" unique_id=1204014865 groups=["collectable", "computer"]]
 collision_layer = 4
 collision_mask = 0
 metadata/location = ""
 
-[node name="Screen" type="Sprite2D" parent="."]
+[node name="Screen" type="Sprite2D" parent="." unique_id=1966892947]
 texture = ExtResource("2_tjrug")
 
-[node name="Clip" type="Sprite2D" parent="."]
+[node name="Clip" type="Sprite2D" parent="." unique_id=1578737713]
 clip_children = 1
 texture = ExtResource("2_tjrug")
 
-[node name="ComputerText2" type="Sprite2D" parent="Clip"]
+[node name="ComputerText2" type="Sprite2D" parent="Clip" unique_id=1457530237]
 modulate = Color(1, 1, 1, 0.5372549)
 position = Vector2(0, -24)
 texture = ExtResource("3_uiul0")
 
-[node name="ComputerText1" type="Sprite2D" parent="Clip"]
+[node name="ComputerText1" type="Sprite2D" parent="Clip" unique_id=1431897089]
 modulate = Color(1, 1, 1, 0.5372549)
 position = Vector2(0, 18)
 texture = ExtResource("3_uiul0")
 
-[node name="ComputerText3" type="Sprite2D" parent="Clip"]
+[node name="ComputerText3" type="Sprite2D" parent="Clip" unique_id=2000537284]
 modulate = Color(1, 1, 1, 0.5372549)
 position = Vector2(0, -54)
 texture = ExtResource("3_uiul0")
 
-[node name="Base" type="Sprite2D" parent="."]
+[node name="Base" type="Sprite2D" parent="." unique_id=1812347781]
 texture = ExtResource("1_7ikar")
 
-[node name="LocationText" type="RichTextLabel" parent="."]
+[node name="LocationText" type="RichTextLabel" parent="." unique_id=1139536491]
 clip_contents = false
 offset_left = -22.0
 offset_top = 19.000002
@@ -172,19 +172,17 @@ theme = ExtResource("4_tjrug")
 text = "start"
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=984666597]
 process_mode = 3
-libraries = {
-&"": SubResource("AnimationLibrary_tjrug")
-}
-autoplay = "scroll"
+libraries/ = SubResource("AnimationLibrary_tjrug")
+autoplay = &"scroll"
 speed_scale = 0.766
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1048897765]
 position = Vector2(0.5, -8)
 shape = SubResource("RectangleShape2D_7ikar")
 
-[node name="CRT" type="ColorRect" parent="."]
+[node name="CRT" type="ColorRect" parent="." unique_id=919515014]
 process_mode = 3
 material = SubResource("ShaderMaterial_ur38h")
 offset_left = -40.0
@@ -193,9 +191,9 @@ offset_right = 41.0
 offset_bottom = 16.0
 color = Color(1, 1, 1, 0)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=691622471]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=822103989]
 position = Vector2(0.5, -46)
 shape = SubResource("SegmentShape2D_uiul0")
 one_way_collision = true

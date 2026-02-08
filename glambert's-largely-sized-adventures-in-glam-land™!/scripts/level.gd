@@ -66,16 +66,19 @@ func update_points() -> void:
 
 func update_polygons() -> void:
 	for i : StaticBody2D in polygons.get_children(): #loop polygons
-		points = i.get_child(0).polygon
+		points = i.get_child(1).polygon
 		#PREVENT STINKY DECIMAL
 		for point: Vector2 in points:
 			point = round(point)
+		i.get_child(1).polygon = points
 		i.get_child(0).polygon = points
+		i.get_child(0).position.y = i.get_child(1).position.y - 4
+		i.get_child(1).position.y 
 		if Engine.is_editor_hint():
-			i.get_child(1).polygon = []
+			i.get_child(2).polygon = []
 		else:
-			i.get_child(1).polygon = points #set collisions
-		if len(i.get_child(0).polygon) == 4:
-			i.get_child(0).uv = i.get_child(0).polygon #reset uv
+			i.get_child(2).polygon = points #set collisions
+		if len(i.get_child(1).polygon) == 4:
+			i.get_child(1).uv = i.get_child(1).polygon #reset uv
 		else:
-			i.get_child(0).uv = DEFAULT_UV #reset uv
+			i.get_child(1).uv = DEFAULT_UV #reset uv

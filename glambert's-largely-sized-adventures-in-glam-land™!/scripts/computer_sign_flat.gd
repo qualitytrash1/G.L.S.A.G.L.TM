@@ -22,10 +22,12 @@ func _ready() -> void:
 		sign_hover.play("hover")
 
 	#SETS VARS
+	text.text = ""
 	text.size.x = 1
-	text.text = sign_text
+	text.text = sign_text + "   "
 	text.position = Vector2(29, -5)
-	var text_size : int = text.size.x
+	var text_size : float = text.size.x
+	text.text += sign_text + "   " + sign_text + "   " #double text
 	
 	if not has_collision:
 		collision_shape_2d.disabled = true
@@ -34,15 +36,16 @@ func _ready() -> void:
 		
 	while true:
 		if not on_screen_status and not Engine.is_editor_hint():
+			#RESET AND WAIT FOR ON SCREEN
+			text.position = Vector2(29, -5)
 			await on_screen
 	
-		text.position = Vector2(29, -5)
 		while true:
 			await get_tree().create_timer(0.1).timeout
 			text.position.x -= speed
-			if text.position.x < (-text_size * 1.5) * text.scale.x:
+			if text.position.x < (-text_size * 2) * text.scale.x:
+				text.position.x += (text_size * 1) * text.scale.x
 				break
-		await get_tree().create_timer(0.1).timeout
 
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:

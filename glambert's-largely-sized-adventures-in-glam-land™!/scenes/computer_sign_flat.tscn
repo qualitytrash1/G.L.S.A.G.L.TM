@@ -95,9 +95,9 @@ texture = ExtResource("2_h8p1v")
 
 [node name="Text" type="RichTextLabel" parent="Sprite/Screen" unique_id=1778898828]
 clip_contents = false
-offset_left = -107.0
+offset_left = -115.59913
 offset_top = -5.0
-offset_right = 995.0
+offset_right = 3397.401
 offset_bottom = 125.0
 scale = Vector2(0.075, 0.075)
 mouse_filter = 2
@@ -105,7 +105,7 @@ theme = ExtResource("2_dsyeg")
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0.51, 0.42499995, 0)
 theme_override_font_sizes/normal_font_size = 128
-text = "TEXT TEXT TEXT AHHHHH"
+text = "TEXT TEXT TEXT AHHHHH   TEXT TEXT TEXT AHHHHH   TEXT TEXT TEXT AHHHHH   "
 fit_content = true
 autowrap_mode = 0
 
