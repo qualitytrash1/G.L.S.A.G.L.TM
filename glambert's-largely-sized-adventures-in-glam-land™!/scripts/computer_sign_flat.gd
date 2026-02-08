@@ -25,6 +25,7 @@ func _ready() -> void:
 	text.size.x = 1
 	text.text = sign_text
 	text.position = Vector2(29, -5)
+	var text_size : int = text.size.x
 	
 	if not has_collision:
 		collision_shape_2d.disabled = true
@@ -39,7 +40,7 @@ func _ready() -> void:
 		while true:
 			await get_tree().create_timer(0.1).timeout
 			text.position.x -= speed
-			if text.position.x < (-text.size.x * 1.5) * text.scale.x:
+			if text.position.x < (-text_size * 1.5) * text.scale.x:
 				break
 		await get_tree().create_timer(0.1).timeout
 

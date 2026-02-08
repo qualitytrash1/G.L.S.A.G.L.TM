@@ -40,8 +40,8 @@ var level_data: Array[Dictionary] = [
 	{"level": 2, "time": 400, "song": "uid://c1ckqndnn46hb"},
 	{"level": 3, "time": 400, "song": "uid://c64v154ca7onu"},
 	{"level": 4, "time": 400, "song": "uid://bfj0n8ykh3tje"},
-	{"level": 5, "time": 400, "song": "uid://b8b3pbis5sbb3"}
-
+	{"level": 5, "time": 400, "song": "uid://b8b3pbis5sbb3"},
+	{"level": 6, "time": 400, "song": "uid://b02rh4xegkirc"},
 
 ]
 var check_points: Array = []
