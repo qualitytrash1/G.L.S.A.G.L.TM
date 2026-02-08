@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cr4vhgrraqejj"]
+[gd_scene format=3 uid="uid://cr4vhgrraqejj"]
 
 [ext_resource type="Script" uid="uid://dlnwadiyltldw" path="res://scripts/glambert.gd" id="1_4w5rh"]
 [ext_resource type="Texture2D" uid="uid://da3at0peu7qy8" path="res://textures/glambert-body_animation.png" id="1_eb3d3"]
@@ -509,7 +509,7 @@ seamless = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y0eeb"]
 shader = ExtResource("7_yvlf7")
 shader_parameter/enable_grain = true
-shader_parameter/enable_curving = true
+shader_parameter/enable_curving = false
 shader_parameter/enable_scanlines = false
 shader_parameter/enable_chromatic_aberration = true
 shader_parameter/enable_rgb_grid = false
@@ -533,114 +533,112 @@ random_pitch = 1.02
 streams_count = 1
 stream_0/stream = ExtResource("4_0dbj0")
 
-[node name="Glambert" type="CharacterBody2D"]
+[node name="Glambert" type="CharacterBody2D" unique_id=2116054282]
 collision_mask = 27
 floor_snap_length = 12.0
 script = ExtResource("1_4w5rh")
 metadata/_edit_vertical_guides_ = [1420.0]
 
-[node name="Model" type="Node2D" parent="."]
+[node name="Model" type="Node2D" parent="." unique_id=1903068881]
 position = Vector2(-1, -4)
 
-[node name="Sprites" type="Node2D" parent="Model"]
+[node name="Sprites" type="Node2D" parent="Model" unique_id=110959516]
 process_mode = 3
 
-[node name="SpriteFacingLeft" type="AnimatedSprite2D" parent="Model/Sprites"]
+[node name="SpriteFacingLeft" type="AnimatedSprite2D" parent="Model/Sprites" unique_id=913321904]
 process_mode = 3
 visible = false
 sprite_frames = SubResource("SpriteFrames_btdif")
 animation = &"walk"
 autoplay = "idle"
 
-[node name="CrouchFacingLeft" type="AnimatedSprite2D" parent="Model/Sprites"]
+[node name="CrouchFacingLeft" type="AnimatedSprite2D" parent="Model/Sprites" unique_id=1843775541]
 process_mode = 3
 visible = false
 sprite_frames = SubResource("SpriteFrames_eb36h")
 animation = &"uncrouch"
 
-[node name="SpriteFacingRight" type="AnimatedSprite2D" parent="Model/Sprites"]
+[node name="SpriteFacingRight" type="AnimatedSprite2D" parent="Model/Sprites" unique_id=1000919242]
 process_mode = 3
 visible = false
 sprite_frames = SubResource("SpriteFrames_p27ua")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="CrouchFacingRight" type="AnimatedSprite2D" parent="Model/Sprites"]
+[node name="CrouchFacingRight" type="AnimatedSprite2D" parent="Model/Sprites" unique_id=2085560129]
 process_mode = 3
 sprite_frames = SubResource("SpriteFrames_npyba")
 animation = &"uncrouch"
 frame = 3
 frame_progress = 1.0
 
-[node name="GlambertSunglasses" type="Sprite2D" parent="Model/Sprites"]
+[node name="GlambertSunglasses" type="Sprite2D" parent="Model/Sprites" unique_id=228238841]
 process_mode = 3
 texture = ExtResource("2_4w5rh")
 
-[node name="NormalCollision" type="CollisionShape2D" parent="."]
+[node name="NormalCollision" type="CollisionShape2D" parent="." unique_id=384718522]
 shape = SubResource("CircleShape2D_jf5aq")
 
-[node name="NormalCollision2" type="CollisionShape2D" parent="."]
+[node name="NormalCollision2" type="CollisionShape2D" parent="." unique_id=1486489197]
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_eb36h")
 
-[node name="CrouchCollision" type="CollisionShape2D" parent="."]
+[node name="CrouchCollision" type="CollisionShape2D" parent="." unique_id=1584532878]
 position = Vector2(0, 6)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_rodan")
 disabled = true
 
-[node name="WallDetector" type="Area2D" parent="."]
+[node name="WallDetector" type="Area2D" parent="." unique_id=814012497]
 visible = false
 
-[node name="Collision" type="CollisionShape2D" parent="WallDetector"]
+[node name="Collision" type="CollisionShape2D" parent="WallDetector" unique_id=754781946]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_0dbj0")
 
-[node name="SmoothAnimations" type="AnimationPlayer" parent="."]
+[node name="SmoothAnimations" type="AnimationPlayer" parent="." unique_id=16717249]
 process_mode = 3
-libraries = {
-&"": SubResource("AnimationLibrary_ioqu6")
-}
+libraries/ = SubResource("AnimationLibrary_ioqu6")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." unique_id=1824072166]
 collision_mask = 4
 
-[node name="NormalHitbox" type="CollisionShape2D" parent="Hitbox"]
+[node name="NormalHitbox" type="CollisionShape2D" parent="Hitbox" unique_id=1727738047]
 shape = SubResource("CircleShape2D_0dbj0")
 
-[node name="NormalHitbox2" type="CollisionShape2D" parent="Hitbox"]
+[node name="NormalHitbox2" type="CollisionShape2D" parent="Hitbox" unique_id=1119304849]
 position = Vector2(2.842171e-14, 10)
 shape = SubResource("RectangleShape2D_eb36h")
 
-[node name="CrouchHitbox" type="CollisionShape2D" parent="Hitbox"]
+[node name="CrouchHitbox" type="CollisionShape2D" parent="Hitbox" unique_id=1000565039]
 position = Vector2(0, 4)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_1dt7h")
 disabled = true
 
-[node name="SafeToCrouch" type="Area2D" parent="."]
+[node name="SafeToCrouch" type="Area2D" parent="." unique_id=1113072879]
 collision_mask = 3
 
-[node name="CrouchCollision" type="CollisionShape2D" parent="SafeToCrouch"]
+[node name="CrouchCollision" type="CollisionShape2D" parent="SafeToCrouch" unique_id=321795902]
 position = Vector2(0, 6)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_rodan")
 disabled = true
 
-[node name="SafeToUncrouch" type="Area2D" parent="."]
+[node name="SafeToUncrouch" type="Area2D" parent="." unique_id=1293806090]
 collision_mask = 3
 
-[node name="NormalCollision" type="CollisionShape2D" parent="SafeToUncrouch"]
+[node name="NormalCollision" type="CollisionShape2D" parent="SafeToUncrouch" unique_id=2001803510]
 position = Vector2(0, -0.041)
 shape = SubResource("CircleShape2D_eb3d3")
 
-[node name="NormalCollision2" type="CollisionShape2D" parent="SafeToUncrouch"]
+[node name="NormalCollision2" type="CollisionShape2D" parent="SafeToUncrouch" unique_id=1243364561]
 position = Vector2(0, 9.959)
 shape = SubResource("RectangleShape2D_eb36h")
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1325925853]
 
-[node name="Control" type="Control" parent="UI"]
+[node name="Control" type="Control" parent="UI" unique_id=1274816559]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -648,7 +646,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="IcedTeaTexts" type="RichTextLabel" parent="UI/Control"]
+[node name="IcedTeaTexts" type="RichTextLabel" parent="UI/Control" unique_id=1082692142]
 clip_contents = false
 layout_mode = 0
 offset_left = 17.0
@@ -660,7 +658,7 @@ mouse_filter = 2
 theme = ExtResource("4_2yc5u")
 text = "Iced-Teas: 0"
 
-[node name="LevelText" type="RichTextLabel" parent="UI/Control"]
+[node name="LevelText" type="RichTextLabel" parent="UI/Control" unique_id=1537297527]
 clip_contents = false
 layout_mode = 1
 anchors_preset = 12
@@ -680,7 +678,7 @@ theme_override_colors/default_color = Color(0.99, 0.726, 0, 1)
 theme_override_colors/font_outline_color = Color(0.6262141, 0.4120647, 1.92523e-07, 1)
 text = "Level: #0"
 
-[node name="Statues" type="HBoxContainer" parent="UI/Control"]
+[node name="Statues" type="HBoxContainer" parent="UI/Control" unique_id=1562121804]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -692,18 +690,18 @@ grow_horizontal = 2
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="StatueOutline" type="Control" parent="UI/Control/Statues"]
+[node name="StatueOutline" type="Control" parent="UI/Control/Statues" unique_id=115627261]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="Sprite" type="AnimatedSprite2D" parent="UI/Control/Statues/StatueOutline"]
+[node name="Sprite" type="AnimatedSprite2D" parent="UI/Control/Statues/StatueOutline" unique_id=1604190578]
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_2yc5u")
 animation = &"outline"
 autoplay = "outline"
 centered = false
 
-[node name="ChromaticAbberation" type="ColorRect" parent="UI/Control"]
+[node name="ChromaticAbberation" type="ColorRect" parent="UI/Control" unique_id=966647832]
 material = SubResource("ShaderMaterial_y0eeb")
 layout_mode = 1
 anchors_preset = 15
@@ -713,13 +711,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
-[node name="SunglassesNoShading" type="Sprite2D" parent="UI/Control"]
+[node name="SunglassesNoShading" type="Sprite2D" parent="UI/Control" unique_id=1239460543]
 visible = false
 position = Vector2(277, 968)
 scale = Vector2(3.2107382, 3.2107382)
 texture = ExtResource("9_rodan")
 
-[node name="Lives" type="RichTextLabel" parent="UI/Control"]
+[node name="Lives" type="RichTextLabel" parent="UI/Control" unique_id=58003904]
 clip_contents = false
 layout_mode = 0
 offset_left = 14.000001
@@ -732,7 +730,7 @@ theme = ExtResource("4_2yc5u")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 
-[node name="FPS" type="RichTextLabel" parent="UI"]
+[node name="FPS" type="RichTextLabel" parent="UI" unique_id=1912189255]
 offset_left = 1561.0
 offset_top = 962.0
 offset_right = 1916.0
@@ -742,67 +740,67 @@ text = "das"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="Boing" type="AudioStreamPlayer" parent="."]
+[node name="Boing" type="AudioStreamPlayer" parent="." unique_id=416066023]
 stream = SubResource("AudioStreamRandomizer_gwivv")
 volume_db = -14.414
 bus = &"Sounds"
 
-[node name="Squish" type="AudioStreamPlayer" parent="."]
+[node name="Squish" type="AudioStreamPlayer" parent="." unique_id=912817930]
 stream = ExtResource("10_qos6g")
 volume_db = -4.0
 pitch_scale = 0.9
 bus = &"Sounds"
 
-[node name="Pop" type="AudioStreamPlayer" parent="."]
+[node name="Pop" type="AudioStreamPlayer" parent="." unique_id=813767828]
 stream = ExtResource("10_qos6g")
 volume_db = -4.0
 pitch_scale = 1.1
 bus = &"Sounds"
 
-[node name="Punch" type="AudioStreamPlayer" parent="."]
+[node name="Punch" type="AudioStreamPlayer" parent="." unique_id=2016813557]
 stream = ExtResource("8_ug42a")
 volume_db = -4.992
 pitch_scale = 0.79
 bus = &"Sounds"
 
-[node name="FinishLevel" type="AudioStreamPlayer" parent="."]
+[node name="FinishLevel" type="AudioStreamPlayer" parent="." unique_id=869010144]
 stream = ExtResource("8_4fsu5")
 bus = &"Sounds"
 
-[node name="StoneSliding" type="AudioStreamPlayer" parent="."]
+[node name="StoneSliding" type="AudioStreamPlayer" parent="." unique_id=1926475715]
 stream = ExtResource("8_p27ua")
 volume_db = 5.123
 bus = &"Sounds"
 
-[node name="Swishlast" type="AudioStreamPlayer" parent="."]
+[node name="Swishlast" type="AudioStreamPlayer" parent="." unique_id=1030086426]
 stream = ExtResource("11_gwivv")
 volume_db = -2.496
 bus = &"Sounds"
 
-[node name="Ding" type="AudioStreamPlayer" parent="."]
+[node name="Ding" type="AudioStreamPlayer" parent="." unique_id=214611241]
 stream = ExtResource("15_1dt7h")
 bus = &"Sounds"
 
-[node name="PowerUp" type="AudioStreamPlayer" parent="."]
+[node name="PowerUp" type="AudioStreamPlayer" parent="." unique_id=195188720]
 stream = ExtResource("17_jf5aq")
 bus = &"Sounds"
 
-[node name="SodaCanOpen" type="AudioStreamPlayer" parent="."]
+[node name="SodaCanOpen" type="AudioStreamPlayer" parent="." unique_id=470452793]
 stream = ExtResource("5_ioqu6")
 volume_db = -10.495
 bus = &"Sounds"
 
-[node name="Slip" type="AudioStreamPlayer" parent="."]
+[node name="Slip" type="AudioStreamPlayer" parent="." unique_id=1474076627]
 stream = ExtResource("13_jxnjb")
 volume_db = -10.495
 bus = &"Sounds"
 
-[node name="Attack" type="AudioStreamPlayer" parent="."]
+[node name="Attack" type="AudioStreamPlayer" parent="." unique_id=1930435605]
 stream = ExtResource("14_rwaqa")
 volume_db = 5.2
 bus = &"Sounds"
 
-[node name="Ground" type="GPUParticles2D" parent="."]
+[node name="Ground" type="GPUParticles2D" parent="." unique_id=777606238]
 position = Vector2(0, 9)
 emitting = false
 amount = 10
@@ -810,7 +808,7 @@ texture = ExtResource("16_y0eeb")
 lifetime = 0.5
 process_material = ExtResource("17_u87yd")
 
-[node name="GroundPound" type="GPUParticles2D" parent="."]
+[node name="GroundPound" type="GPUParticles2D" parent="." unique_id=1063834525]
 position = Vector2(0, 10)
 emitting = false
 texture = ExtResource("16_y0eeb")

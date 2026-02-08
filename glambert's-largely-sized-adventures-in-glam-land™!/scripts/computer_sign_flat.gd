@@ -1,3 +1,5 @@
+@tool
+
 extends Node2D
 
 @onready var text: RichTextLabel = $Sprite/Screen/Text
@@ -8,9 +10,9 @@ extends Node2D
 @export var offset: int
 @export var has_collision: bool
 @export var floating_platform: bool
+@export var speed : float
 
 var on_screen_status: bool = false
-var index: int = 0
 
 signal on_screen
 
@@ -20,24 +22,25 @@ func _ready() -> void:
 		sign_hover.play("hover")
 
 	#SETS VARS
+	text.size.x = 1
 	text.text = sign_text
 	text.position = Vector2(29, -5)
-	
-	index = len(text.text) + offset
 	
 	if not has_collision:
 		collision_shape_2d.disabled = true
 	else:
 		collision_shape_2d.disabled = false
 		
-	await on_screen
-	
 	while true:
-		if on_screen_status:
-			text.position = Vector2(29, -5)
-			for i: int in range(index):
-				await get_tree().create_timer(0.1).timeout
-				text.position.x -= 2
+		if not on_screen_status and not Engine.is_editor_hint():
+			await on_screen
+	
+		text.position = Vector2(29, -5)
+		while true:
+			await get_tree().create_timer(0.1).timeout
+			text.position.x -= speed
+			if text.position.x < (-text.size.x * 1.5) * text.scale.x:
+				break
 		await get_tree().create_timer(0.1).timeout
 
 

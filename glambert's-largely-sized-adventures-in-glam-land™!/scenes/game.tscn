@@ -1,7 +1,7 @@
-[gd_scene load_steps=47 format=4 uid="uid://cvhnqj4t7mdea"]
+[gd_scene format=4 uid="uid://cvhnqj4t7mdea"]
 
 [ext_resource type="Script" uid="uid://dctvjrw1ejqro" path="res://scripts/game.gd" id="1_dinhu"]
-[ext_resource type="PackedScene" uid="uid://4ulh2rbfgk15" path="res://scenes/sky_background.tscn" id="1_gee14"]
+[ext_resource type="PackedScene" path="res://scenes/sky_background.tscn" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cr4vhgrraqejj" path="res://scenes/glambert.tscn" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://chqvop78alemk" path="res://scenes/settings.tscn" id="2_37s47"]
 [ext_resource type="Texture2D" uid="uid://dy3pc8t7jwyyy" path="res://textures/graphical_ground.png" id="2_u5sy4"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://sfqrjqno6jek" path="res://textures/vaporwave_sun.png" id="5_0tnpc"]
 [ext_resource type="Script" uid="uid://dcrgb8yncovv1" path="res://scripts/level.gd" id="5_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bl4t22m8q6hwe" path="res://textures/stars.png" id="6_1kice"]
-[ext_resource type="PackedScene" uid="uid://c0ah5kn2ch61y" path="res://scenes/background.tscn" id="6_gee14"]
+[ext_resource type="PackedScene" path="res://scenes/background.tscn" id="6_gee14"]
 [ext_resource type="PackedScene" uid="uid://bb08qhktrr4g3" path="res://scenes/grass.tscn" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://ccfmj34r1qtxu" path="res://textures/vines.png" id="9_bhx41"]
 [ext_resource type="Texture2D" uid="uid://ff51uench70u" path="res://textures/spikes-short.png" id="9_ir15t"]
@@ -196,85 +196,85 @@ terrain_set_0/terrain_0/name = "Wood Platform"
 terrain_set_0/terrain_0/color = Color(0.52856266, 0.4067581, 0.15441164, 1)
 sources/7 = SubResource("TileSetAtlasSource_trtic")
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" unique_id=1112914303]
 script = ExtResource("1_dinhu")
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="." unique_id=736959186]
 position = Vector2(0, -1364)
 zoom = Vector2(4, 4)
 
-[node name="BG" type="Node2D" parent="."]
+[node name="BG" type="Node2D" parent="." unique_id=319564493]
 position = Vector2(0, -31)
 
-[node name="Background2" parent="BG" instance=ExtResource("6_gee14")]
+[node name="Background2" parent="BG" unique_id=1257968082 instance=ExtResource("6_gee14")]
 modulate = Color(0.57700837, 0.5770084, 0.57700837, 1)
 scroll_scale = Vector2(0.6, 0.6)
 scroll_offset = Vector2(-1093, 127)
 
-[node name="Background" parent="BG" instance=ExtResource("6_gee14")]
+[node name="Background" parent="BG" unique_id=776574340 instance=ExtResource("6_gee14")]
 scroll_scale = Vector2(0.8, 0.6)
 scroll_offset = Vector2(64, 127)
 
-[node name="Background3" parent="BG" instance=ExtResource("6_gee14")]
+[node name="Background3" parent="BG" unique_id=1886066387 instance=ExtResource("6_gee14")]
 modulate = Color(0, 2.4409287, 2.4782562, 1)
 scroll_scale = Vector2(0.9, 0.6)
 scroll_offset = Vector2(-1178, 152)
 
-[node name="Sky" parent="BG" instance=ExtResource("1_gee14")]
+[node name="Sky" parent="BG" unique_id=2010272632 instance=ExtResource("1_gee14")]
 scroll_offset = Vector2(1711, 173)
 
-[node name="Ground2" type="Parallax2D" parent="BG"]
+[node name="Ground2" type="Parallax2D" parent="BG" unique_id=930961882]
 modulate = Color(1, 1, 1, 0.78431374)
 scroll_scale = Vector2(0.85, 0.6)
 scroll_offset = Vector2(16, 122)
 repeat_size = Vector2(1280, 0)
 
-[node name="GraphicalGround" type="Sprite2D" parent="BG/Ground2"]
+[node name="GraphicalGround" type="Sprite2D" parent="BG/Ground2" unique_id=260583548]
 position = Vector2(-319, 190)
 texture = ExtResource("2_u5sy4")
 offset = Vector2(1280, 0)
 
-[node name="GraphicalGround2" type="Sprite2D" parent="BG/Ground2"]
+[node name="GraphicalGround2" type="Sprite2D" parent="BG/Ground2" unique_id=974100580]
 position = Vector2(-319, 190)
 texture = ExtResource("2_u5sy4")
 offset = Vector2(1920, 0)
 
-[node name="Ground" type="Parallax2D" parent="BG"]
+[node name="Ground" type="Parallax2D" parent="BG" unique_id=1828238802]
 scroll_scale = Vector2(0.9, 0.6)
 scroll_offset = Vector2(17, 122)
 repeat_size = Vector2(1280, 0)
 
-[node name="GraphicalGround" type="Sprite2D" parent="BG/Ground"]
+[node name="GraphicalGround" type="Sprite2D" parent="BG/Ground" unique_id=373260445]
 position = Vector2(-319, 190)
 texture = ExtResource("2_u5sy4")
 offset = Vector2(1280, 0)
 
-[node name="GraphicalGround2" type="Sprite2D" parent="BG/Ground"]
+[node name="GraphicalGround2" type="Sprite2D" parent="BG/Ground" unique_id=399942497]
 position = Vector2(-319, 190)
 texture = ExtResource("2_u5sy4")
 offset = Vector2(1920, 0)
 
-[node name="Sun" type="CanvasLayer" parent="BG"]
+[node name="Sun" type="CanvasLayer" parent="BG" unique_id=584801978]
 layer = -1
 
-[node name="Fade4" type="Sprite2D" parent="BG/Sun"]
+[node name="Fade4" type="Sprite2D" parent="BG/Sun" unique_id=1937931764]
 position = Vector2(961.50006, 999)
 scale = Vector2(3.0171874, 5.616667)
 texture = SubResource("GradientTexture2D_0tnpc")
 flip_v = true
 
-[node name="VaporwaveSun" type="Sprite2D" parent="BG/Sun"]
+[node name="VaporwaveSun" type="Sprite2D" parent="BG/Sun" unique_id=1576125038]
 position = Vector2(964, 121)
 scale = Vector2(4, 4)
 texture = ExtResource("5_0tnpc")
 
-[node name="Stars" type="Sprite2D" parent="BG/Sun"]
+[node name="Stars" type="Sprite2D" parent="BG/Sun" unique_id=2119144264]
 modulate = Color(1, 1, 1, 0.4745098)
 position = Vector2(964, 553.00006)
 scale = Vector2(2.9330645, 2.9330645)
 texture = ExtResource("6_1kice")
 
-[node name="Stars2" type="Sprite2D" parent="BG/Sun"]
+[node name="Stars2" type="Sprite2D" parent="BG/Sun" unique_id=839325484]
 modulate = Color(1, 1, 1, 0.6509804)
 position = Vector2(964, 553.00006)
 scale = Vector2(2.9330645, 2.9330645)
@@ -282,105 +282,105 @@ texture = ExtResource("6_1kice")
 flip_h = true
 flip_v = true
 
-[node name="PalmTrees2" type="Parallax2D" parent="BG"]
+[node name="PalmTrees2" type="Parallax2D" parent="BG" unique_id=1512509284]
 modulate = Color(0.5409905, 0.5409905, 0.5409905, 1)
 scroll_scale = Vector2(0.9, 0.8)
 scroll_offset = Vector2(-269, -3)
 repeat_size = Vector2(640, 0)
 
-[node name="Bushes" type="Sprite2D" parent="BG/PalmTrees2"]
+[node name="Bushes" type="Sprite2D" parent="BG/PalmTrees2" unique_id=1178182760]
 position = Vector2(-367, 0)
 texture = ExtResource("18_ssvqc")
 offset = Vector2(1280, 0)
 
-[node name="Bushes2" type="Sprite2D" parent="BG/PalmTrees2"]
+[node name="Bushes2" type="Sprite2D" parent="BG/PalmTrees2" unique_id=876254483]
 position = Vector2(-367, 0)
 texture = ExtResource("18_ssvqc")
 offset = Vector2(640, 0)
 
-[node name="PalmTrees" type="Parallax2D" parent="BG"]
+[node name="PalmTrees" type="Parallax2D" parent="BG" unique_id=950928197]
 modulate = Color(0.8431839, 0.8431839, 0.84318376, 1)
 scroll_scale = Vector2(0.95, 0.9)
 scroll_offset = Vector2(-1070, -66)
 repeat_size = Vector2(640, 0)
 
-[node name="Bushes" type="Sprite2D" parent="BG/PalmTrees"]
+[node name="Bushes" type="Sprite2D" parent="BG/PalmTrees" unique_id=122431990]
 position = Vector2(-367, 0)
 texture = ExtResource("18_ssvqc")
 offset = Vector2(1280, 0)
 
-[node name="Bushes2" type="Sprite2D" parent="BG/PalmTrees"]
+[node name="Bushes2" type="Sprite2D" parent="BG/PalmTrees" unique_id=430064638]
 position = Vector2(-367, 0)
 texture = ExtResource("18_ssvqc")
 offset = Vector2(640, 0)
 
-[node name="Bushes2" type="Parallax2D" parent="BG"]
+[node name="Bushes2" type="Parallax2D" parent="BG" unique_id=1273365800]
 modulate = Color(0.5409909, 0.5409904, 0.5409905, 1)
 scroll_scale = Vector2(0.95, 0.8)
 scroll_offset = Vector2(-452, 31)
 repeat_size = Vector2(640, 0)
 
-[node name="Bushes" type="Sprite2D" parent="BG/Bushes2"]
+[node name="Bushes" type="Sprite2D" parent="BG/Bushes2" unique_id=428609077]
 position = Vector2(-351, 0)
 texture = ExtResource("17_rysoc")
 offset = Vector2(640, 0)
 
-[node name="Bushes2" type="Sprite2D" parent="BG/Bushes2"]
+[node name="Bushes2" type="Sprite2D" parent="BG/Bushes2" unique_id=1327573011]
 position = Vector2(289, 0)
 texture = ExtResource("17_rysoc")
 offset = Vector2(1280, 0)
 
-[node name="Vines" type="Parallax2D" parent="BG"]
+[node name="Vines" type="Parallax2D" parent="BG" unique_id=305538782]
 scroll_offset = Vector2(1062, -380)
 repeat_size = Vector2(1280, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="BG/Vines"]
+[node name="Sprite2D" type="Sprite2D" parent="BG/Vines" unique_id=1492084396]
 texture = ExtResource("9_bhx41")
 offset = Vector2(640, 0)
 
-[node name="Sprite2D2" type="Sprite2D" parent="BG/Vines"]
+[node name="Sprite2D2" type="Sprite2D" parent="BG/Vines" unique_id=1697782471]
 texture = ExtResource("9_bhx41")
 offset = Vector2(1280, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=195744616]
 environment = SubResource("Environment_iywne")
 
-[node name="MusicController" parent="." instance=ExtResource("4_lbhrr")]
+[node name="MusicController" parent="." unique_id=220481758 instance=ExtResource("4_lbhrr")]
 
-[node name="Level" type="Node2D" parent="."]
+[node name="Level" type="Node2D" parent="." unique_id=428131752]
 script = ExtResource("5_p57ef")
 
-[node name="Borders" type="Node2D" parent="Level"]
+[node name="Borders" type="Node2D" parent="Level" unique_id=1189997483]
 
-[node name="DeathBarrier" type="Area2D" parent="Level/Borders" groups=["insta-death"]]
+[node name="DeathBarrier" type="Area2D" parent="Level/Borders" unique_id=1768739037 groups=["insta-death"]]
 position = Vector2(0, 80)
 collision_layer = 4
 collision_mask = 0
 
-[node name="Collision" type="CollisionShape2D" parent="Level/Borders/DeathBarrier"]
+[node name="Collision" type="CollisionShape2D" parent="Level/Borders/DeathBarrier" unique_id=1160199889]
 position = Vector2(-256, 0)
 shape = SubResource("WorldBoundaryShape2D_ca42v")
 debug_color = Color(0.7, 0, 0.011666489, 0.41960785)
 
-[node name="LeftBarrier" type="StaticBody2D" parent="Level/Borders" groups=["border"]]
+[node name="LeftBarrier" type="StaticBody2D" parent="Level/Borders" unique_id=321535144 groups=["border"]]
 position = Vector2(-697, -59)
 collision_layer = 16
 collision_mask = 0
 
-[node name="Collision" type="CollisionShape2D" parent="Level/Borders/LeftBarrier"]
+[node name="Collision" type="CollisionShape2D" parent="Level/Borders/LeftBarrier" unique_id=2006618022]
 shape = SubResource("WorldBoundaryShape2D_1kice")
 debug_color = Color(0.0006266624, 0.27576765, 0.8927148, 0.41960785)
 
-[node name="RightBarrier" type="StaticBody2D" parent="Level/Borders" groups=["border"]]
+[node name="RightBarrier" type="StaticBody2D" parent="Level/Borders" unique_id=1387019957 groups=["border"]]
 position = Vector2(4056, -59)
 collision_layer = 16
 collision_mask = 0
 
-[node name="Collision" type="CollisionShape2D" parent="Level/Borders/RightBarrier"]
+[node name="Collision" type="CollisionShape2D" parent="Level/Borders/RightBarrier" unique_id=233211757]
 shape = SubResource("WorldBoundaryShape2D_5newe")
 debug_color = Color(0.0006266624, 0.27576765, 0.8927148, 0.41960785)
 
-[node name="BottomGradient" type="TextureRect" parent="Level"]
+[node name="BottomGradient" type="TextureRect" parent="Level" unique_id=1423339983]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -393,221 +393,221 @@ grow_vertical = 0
 texture = SubResource("GradientTexture2D_1kice")
 metadata/_edit_use_anchors_ = true
 
-[node name="Decor" type="Node2D" parent="Level"]
+[node name="Decor" type="Node2D" parent="Level" unique_id=1789162694]
 
-[node name="Bushes" type="TileMapLayer" parent="Level/Decor"]
+[node name="Bushes" type="TileMapLayer" parent="Level/Decor" unique_id=1577914471]
 position = Vector2(0, 10)
 tile_map_data = PackedByteArray("AADp//3/AAAAAAAAAADq//3/AAACAAAAAADr//3/AAADAAAAAAD6//3/AAAAAAAAAAD7//3/AAABAAAAAAD8//3/AAABAAAAAAABAP3/AAACAAAAAAACAP3/AAACAAAAAAADAP3/AAADAAAAAAD9//3/AAADAAAAAAAAAP3/AAAAAAAAAAAWAO//AAAAAAAAAAAXAO//AAADAAAAAAAkAP3/AAAAAAAAAAAlAP3/AAABAAAAAAAmAP3/AAACAAAAAAAnAP3/AAABAAAAAAAoAP3/AAABAAAAAAApAP3/AAACAAAAAAAqAP3/AAADAAAAAAA1AP3/AAAAAAAAAAA2AP3/AAABAAAAAAA3AP3/AAABAAAAAAA4AP3/AAABAAAAAAA5AP3/AAACAAAAAAA6AP3/AAABAAAAAAA7AP3/AAACAAAAAAA8AP3/AAABAAAAAAA9AP3/AAADAAAAAABKAP3/AAABAAAAAABLAP3/AAACAAAAAABMAP3/AAACAAAAAABNAP3/AAABAAAAAABOAP3/AAABAAAAAABPAP3/AAACAAAAAABQAP3/AAADAAAAAABJAP3/AAAAAAAAAABpAP3/AAAAAAAAAABqAP3/AAACAAAAAABrAP3/AAACAAAAAABsAP3/AAACAAAAAABtAP3/AAABAAAAAABuAP3/AAACAAAAAABvAP3/AAABAAAAAABwAP3/AAABAAAAAABxAP3/AAADAAAAAAB/AP3/AAADAAAAAAB+AP3/AAABAAAAAAB9AP3/AAACAAAAAAB8AP3/AAAAAAAAAAA=")
 tile_set = SubResource("TileSet_bhx41")
 
-[node name="Spikes" type="TileMapLayer" parent="Level" groups=["insta-death"]]
+[node name="Spikes" type="TileMapLayer" parent="Level" unique_id=977795692 groups=["insta-death"]]
 position = Vector2(0, -13)
 tile_map_data = PackedByteArray("AABsAPz/AAAAAAAAAABtAPz/AAABAAAAAAB4APz/AAACAAAAAAB5APz/AAADAAAAAACQAPr/AAAAAAAAAACRAPr/AAADAAAAAACwAP//AAAAAAAAAACxAP//AAACAAAAAACyAP//AAABAAAAAACzAP//AAABAAAAAAC0AP//AAACAAAAAAC1AP//AAACAAAAAAC2AP//AAACAAAAAAC3AP//AAACAAAAAAC4AP//AAABAAAAAAC5AP//AAACAAAAAAC6AP//AAACAAAAAAC7AP//AAABAAAAAAC8AP//AAABAAAAAAC9AP//AAACAAAAAAC+AP//AAACAAAAAAC+AAAAAAAEAAAAAAC/AP//AAABAAAAAADAAP//AAACAAAAAADBAP//AAACAAAAAADCAP//AAABAAAAAADDAP//AAADAAAAAABuAPz/AAABAAAAAAB3APz/AAACAAAAAAB2APz/AAAAAAAAAABvAPz/AAADAAAAAAA=")
 tile_set = SubResource("TileSet_rysoc")
 
-[node name="MovingPlatforms" type="Node2D" parent="Level"]
+[node name="MovingPlatforms" type="Node2D" parent="Level" unique_id=1553601913]
 
-[node name="MovingPlatform" parent="Level/MovingPlatforms" instance=ExtResource("13_e1j6l")]
+[node name="MovingPlatform" parent="Level/MovingPlatforms" unique_id=909144945 instance=ExtResource("13_e1j6l")]
 position = Vector2(2900, -118)
 points = Array[Vector2]([Vector2(0, 0), Vector2(170, 0)])
 speed = 50.0
 time_inbetween_movements = 0.5
 
-[node name="Interactable" type="Node2D" parent="Level"]
+[node name="Interactable" type="Node2D" parent="Level" unique_id=711377585]
 
-[node name="Collectables" type="TileMapLayer" parent="Level/Interactable"]
+[node name="Collectables" type="TileMapLayer" parent="Level/Interactable" unique_id=1637028044]
 use_parent_material = true
 position = Vector2(0, 1)
 tile_map_data = PackedByteArray("AAAiAPT/AAAAAAAAAQAjAPT/AAAAAAAAAQAkAPT/AAAAAAAAAQAlAPT/AAAAAAAAAQAlAPP/AAAAAAAAAQAkAPP/AAAAAAAAAQAjAPP/AAAAAAAAAQAiAPP/AAAAAAAAAQA0APP/AAAAAAAAAQAxAPD/AAAAAAAAAQA0AO3/AAAAAAAAAQAxAOr/AAAAAAAAAQA9AOn/AAAAAAAAAQA+AOv/AAAAAAAAAQA/AO3/AAAAAAAAAQBAAO//AAAAAAAAAQBBAPH/AAAAAAAAAQBCAPP/AAAAAAAAAQBDAPX/AAAAAAAAAQBEAPf/AAAAAAAAAQBFAPn/AAAAAAAAAQBGAPv/AAAAAAAAAQCNAPn/AAAAAAAAAQCUAPn/AAAAAAAAAQCPAPf/AAAAAAAAAQCQAPb/AAAAAAAAAQCRAPb/AAAAAAAAAQCSAPf/AAAAAAAAAQCgAPf/AAAAAAAAAQChAPf/AAAAAAAAAQCiAPf/AAAAAAAAAQChAPb/AAAAAAAAAgC1APf/AAAAAAAAAQC2APf/AAAAAAAAAQC3APf/AAAAAAAAAQC4APf/AAAAAAAAAQC5APf/AAAAAAAAAQC6APf/AAAAAAAAAQC7APf/AAAAAAAAAQC8APf/AAAAAAAAAQC9APf/AAAAAAAAAQC+APf/AAAAAAAAAQC/APf/AAAAAAAAAQCVAPv/AAAAAAAAAQCMAPv/AAAAAAAAAQBrAPn/AAAAAAAAAQBsAPj/AAAAAAAAAQBtAPj/AAAAAAAAAQBuAPj/AAAAAAAAAQBvAPj/AAAAAAAAAQBwAPn/AAAAAAAAAQB1APn/AAAAAAAAAQB2APj/AAAAAAAAAQB3APj/AAAAAAAAAQB4APj/AAAAAAAAAQB5APj/AAAAAAAAAQB6APn/AAAAAAAAAQDhAPv/AAAAAAAAAQDgAPv/AAAAAAAAAQDfAPv/AAAAAAAAAQDeAPv/AAAAAAAAAQDdAPv/AAAAAAAAAQDcAPv/AAAAAAAAAQDbAPv/AAAAAAAAAQDaAPv/AAAAAAAAAQDZAPv/AAAAAAAAAQDYAPv/AAAAAAAAAQDXAPv/AAAAAAAAAQDWAPv/AAAAAAAAAQDVAPv/AAAAAAAAAQDUAPv/AAAAAAAAAQAtAN7/AAAAAAAAAQAuAN3/AAAAAAAAAQAvAN7/AAAAAAAAAQA=")
 tile_set = SubResource("TileSet_0tnpc")
 
-[node name="Statues" type="Node2D" parent="Level/Interactable"]
+[node name="Statues" type="Node2D" parent="Level/Interactable" unique_id=1791391127]
 
-[node name="Statue" parent="Level/Interactable/Statues" instance=ExtResource("16_pl11u")]
+[node name="Statue" parent="Level/Interactable/Statues" unique_id=1484161464 instance=ExtResource("16_pl11u")]
 position = Vector2(743, -518)
 
-[node name="Computers" type="Node2D" parent="Level/Interactable"]
+[node name="Computers" type="Node2D" parent="Level/Interactable" unique_id=383015567]
 
-[node name="Computer" parent="Level/Interactable/Computers" instance=ExtResource("13_kvuet")]
+[node name="Computer" parent="Level/Interactable/Computers" unique_id=1299202605 instance=ExtResource("13_kvuet")]
 position = Vector2(-584, -103)
 
-[node name="Computer2" parent="Level/Interactable/Computers" instance=ExtResource("13_kvuet")]
+[node name="Computer2" parent="Level/Interactable/Computers" unique_id=1537622149 instance=ExtResource("13_kvuet")]
 position = Vector2(3874, -109)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="Level/Interactable"]
+[node name="TileMapLayer" type="TileMapLayer" parent="Level/Interactable" unique_id=1039611830]
 visible = false
 position = Vector2(0, -11)
 
-[node name="Checkpoints" type="Node2D" parent="Level/Interactable"]
+[node name="Checkpoints" type="Node2D" parent="Level/Interactable" unique_id=548875740]
 
-[node name="Checkpoint" parent="Level/Interactable/Checkpoints" instance=ExtResource("16_bt5mj")]
+[node name="Checkpoint" parent="Level/Interactable/Checkpoints" unique_id=1155251662 instance=ExtResource("16_bt5mj")]
 position = Vector2(2053, -108)
 
-[node name="Platforms" type="TileMapLayer" parent="Level"]
+[node name="Platforms" type="TileMapLayer" parent="Level" unique_id=1351602258]
 position = Vector2(-3, -1)
 tile_map_data = PackedByteArray("AACvAPb/BwABAAAAAACwAPb/BwACAAAAAACxAPb/BwACAAAAAACyAPb/BwACAAAAAACzAPb/BwABAAAAAAC0APb/BwABAAAAAAC1APb/BwADAAAAAAC7APb/BwAAAAAAAAC8APb/BwABAAAAAAC9APb/BwABAAAAAAC+APb/BwACAAAAAAC/APb/BwACAAAAAADAAPb/BwACAAAAAADBAPb/BwACAAAAAADCAPb/BwADAAAAAACuAPb/BwAAAAAAAADCAPf/BwADAAAAAACwAPf/BwADAAAAAACvAPf/BwACAAAAAACuAPf/BwAAAAAAAAC0APf/BwAAAAAAAAC1APf/BwADAAAAAAC8APf/BwAAAAAAAAC9APf/BwADAAAAAADBAPf/BwABAAAAAADAAPf/BwAAAAAAAABAAev/BwAAAAAAAABBAev/BwACAAAAAABCAev/BwABAAAAAABDAev/BwABAAAAAABEAev/BwABAAAAAABFAev/BwABAAAAAABGAev/BwADAAAAAABCAez/BwABAAAAAABDAez/BwACAAAAAABEAez/BwACAAAAAABFAez/BwADAAAAAABBAez/BwAAAAAAAABfAfH/BwAAAAAAAABgAfH/BwABAAAAAABhAfH/BwACAAAAAABiAfH/BwABAAAAAABjAfH/BwACAAAAAABkAfH/BwABAAAAAABlAfH/BwADAAAAAACKAfH/BwADAAAAAACJAfH/BwACAAAAAACIAfH/BwACAAAAAACHAfH/BwABAAAAAACGAfH/BwABAAAAAACFAfH/BwACAAAAAACEAfH/BwAAAAAAAAA=")
 tile_set = SubResource("TileSet_kvuet")
 
-[node name="Polygons" type="Node2D" parent="Level"]
+[node name="Polygons" type="Node2D" parent="Level" unique_id=985292912]
 
-[node name="Polygon" type="StaticBody2D" parent="Level/Polygons"]
+[node name="Polygon" type="StaticBody2D" parent="Level/Polygons" unique_id=2034470623]
 
-[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon"]
+[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon" unique_id=1295776764]
 texture_repeat = 2
 texture = ExtResource("12_ca42v")
 polygon = PackedVector2Array(-720, -54, -66, -54.070724, -66, 92, 0, 92, 0, -54.08165, 356, -54.106567, 356, -143, 846, -143, 846, -370, 967, -370, 1120, -61, 1404, -61, 1404, 82, 1445, 82, 1445, -61, 1507, -61, 1507, 82, 1545, 82, 1545, -61, 2258, -60.659805, 2281.0715, -93, 2361.826, -93, 2386, -60.575012, 2542, -60.521835, 2564, -93, 2605, -93, 2630, -60.443634, 2757.4407, -60.39073, 2817.6206, -13, 3134.8765, -13, 3202, -60.232285, 4150, -59, 4150, 418, -721, 418)
 uv = PackedVector2Array(0, 0, 64, 0, 64, 64, 0, 64)
 
-[node name="Grass" parent="Level/Polygons/Polygon/Polygon" instance=ExtResource("6_p57ef")]
+[node name="Grass" parent="Level/Polygons/Polygon/Polygon" unique_id=336724926 instance=ExtResource("6_p57ef")]
 
-[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon"]
+[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon" unique_id=1324350434]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Level/Polygons"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Level/Polygons" unique_id=744309878]
 position = Vector2(-7, 0)
 
-[node name="Polygon" type="Polygon2D" parent="Level/Polygons/StaticBody2D"]
+[node name="Polygon" type="Polygon2D" parent="Level/Polygons/StaticBody2D" unique_id=1794460488]
 texture_repeat = 2
 position = Vector2(792, -196)
 texture = ExtResource("12_ca42v")
 polygon = PackedVector2Array(0, -306, 0, 0, -69, 0, -69, -172.87202, -431, -173, -431, -306, -1643, -305, -1598, -870, -432, -861, 0, -859, 3366, -867, 3366, -94, 3241.118, -94.000015, 2846, -94, 2846, 120, 2579, 120, 2579, -382, 0, -382, -69.000015, -382.07477, -69, -306)
 uv = PackedVector2Array(0, 0, 64, 0, 64, 64, 0, 64)
 
-[node name="Grass" parent="Level/Polygons/StaticBody2D/Polygon" instance=ExtResource("6_p57ef")]
+[node name="Grass" parent="Level/Polygons/StaticBody2D/Polygon" unique_id=1272410895 instance=ExtResource("6_p57ef")]
 
-[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/StaticBody2D"]
+[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/StaticBody2D" unique_id=745877040]
 position = Vector2(793, -195)
 
-[node name="Signs" type="Node2D" parent="Level"]
+[node name="Signs" type="Node2D" parent="Level" unique_id=1579568071]
 position = Vector2(-3, 4)
 
-[node name="ComputerSignFlat" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat" parent="Level/Signs" unique_id=710599314 instance=ExtResource("12_5newe")]
 position = Vector2(-383, -68)
 sign_text = "use \"a\" and \"d\" to move left and right!"
 offset = 16
 
-[node name="ComputerSignFlat7" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat7" parent="Level/Signs" unique_id=2137348849 instance=ExtResource("12_5newe")]
 position = Vector2(911, -384)
 sign_text = "if you're in the air and you click down, you can slam into the ground! "
 offset = 16
 
-[node name="ComputerSignFlat8" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat8" parent="Level/Signs" unique_id=993119571 instance=ExtResource("12_5newe")]
 position = Vector2(1256, -75)
 sign_text = "you can use this to kill enemies!"
 offset = 16
 
-[node name="ComputerSignFlat4" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat4" parent="Level/Signs" unique_id=892622278 instance=ExtResource("12_5newe")]
 position = Vector2(284, -68)
 sign_text = "click jump again in the air to double jump!"
 offset = 12
 
-[node name="ComputerSignFlat5" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat5" parent="Level/Signs" unique_id=730294890 instance=ExtResource("12_5newe")]
 position = Vector2(576, -157)
 sign_text = "touch the ice teas to collect them!"
 offset = 12
 
-[node name="ComputerSignFlat6" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat6" parent="Level/Signs" unique_id=696056598 instance=ExtResource("12_5newe")]
 position = Vector2(754, -212)
 sign_text = "if you click jump while sliding down a wall, you can wall jump!"
 offset = 12
 
-[node name="ComputerSignFlat2" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat2" parent="Level/Signs" unique_id=242644025 instance=ExtResource("12_5newe")]
 position = Vector2(-33, -114)
 sign_text = "press \"w\" or \"space\" to jump!"
 offset = 16
 floating_platform = true
 
-[node name="ComputerSignFlat3" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat3" parent="Level/Signs" unique_id=1339078238 instance=ExtResource("12_5newe")]
 position = Vector2(-654, -473)
 sign_text = "nothings up here dude."
 offset = 12
 floating_platform = true
 
-[node name="ComputerSignFlat9" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat9" parent="Level/Signs" unique_id=845549311 instance=ExtResource("12_5newe")]
 position = Vector2(1648, -75)
 sign_text = "watch out for spikes!"
 offset = 12
 
-[node name="ComputerSignFlat10" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat10" parent="Level/Signs" unique_id=1684845882 instance=ExtResource("12_5newe")]
 position = Vector2(2056, -75)
 sign_text = "nice job! heres a checkpoint."
 offset = 12
 
-[node name="ComputerSignFlat11" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat11" parent="Level/Signs" unique_id=438169382 instance=ExtResource("12_5newe")]
 position = Vector2(754, -596)
 sign_text = "look a statue! you may find these hidden around levels!."
 offset = 12
 
-[node name="ComputerSignFlat12" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat12" parent="Level/Signs" unique_id=814767811 instance=ExtResource("12_5newe")]
 position = Vector2(3324, -74)
 sign_text = "if your on the ground when you press down, you'll crouch!"
 offset = 12
 
-[node name="ComputerSignFlat13" parent="Level/Signs" instance=ExtResource("12_5newe")]
+[node name="ComputerSignFlat13" parent="Level/Signs" unique_id=1306933481 instance=ExtResource("12_5newe")]
 position = Vector2(3716, -74)
 sign_text = "great job! now jump into the computer to beat the level!"
 offset = 12
 
-[node name="Enemies" type="Node2D" parent="Level"]
+[node name="Enemies" type="Node2D" parent="Level" unique_id=845295668]
 
-[node name="EnemySpawner" parent="Level/Enemies" instance=ExtResource("20_37s47")]
+[node name="EnemySpawner" parent="Level/Enemies" unique_id=1372987019 instance=ExtResource("20_37s47")]
 position = Vector2(1475, -96)
 
-[node name="EnemySpawner2" parent="Level/Enemies" instance=ExtResource("20_37s47")]
+[node name="EnemySpawner2" parent="Level/Enemies" unique_id=125313859 instance=ExtResource("20_37s47")]
 position = Vector2(2462, -94)
 enemy_to_spawn = 1
 
-[node name="Glambert" parent="Level" instance=ExtResource("1_yqjtg")]
+[node name="Glambert" parent="Level" unique_id=2119240133 instance=ExtResource("1_yqjtg")]
 position = Vector2(-929, -576)
 
-[node name="FG" type="Node2D" parent="."]
+[node name="FG" type="Node2D" parent="." unique_id=2082766645]
 
-[node name="Bushes2" type="Parallax2D" parent="FG"]
+[node name="Bushes2" type="Parallax2D" parent="FG" unique_id=1692284741]
 modulate = Color(0.64, 0.64, 0.64, 1)
 scroll_scale = Vector2(1.05, 1)
 scroll_offset = Vector2(-1092, -66)
 repeat_size = Vector2(640, 0)
 
-[node name="Bushes" type="Sprite2D" parent="FG/Bushes2"]
+[node name="Bushes" type="Sprite2D" parent="FG/Bushes2" unique_id=913990423]
 position = Vector2(-351, 0)
 texture = ExtResource("17_rysoc")
 offset = Vector2(640, 0)
 
-[node name="Bushes2" type="Sprite2D" parent="FG/Bushes2"]
+[node name="Bushes2" type="Sprite2D" parent="FG/Bushes2" unique_id=415056127]
 position = Vector2(289, 0)
 texture = ExtResource("17_rysoc")
 offset = Vector2(1280, 0)
 
-[node name="Bushes" type="Parallax2D" parent="FG"]
+[node name="Bushes" type="Parallax2D" parent="FG" unique_id=36087214]
 scroll_scale = Vector2(1.2, 1)
 scroll_offset = Vector2(-1070, -66)
 repeat_size = Vector2(640, 0)
 
-[node name="Bushes" type="Sprite2D" parent="FG/Bushes"]
+[node name="Bushes" type="Sprite2D" parent="FG/Bushes" unique_id=1512344597]
 position = Vector2(-367, 0)
 texture = ExtResource("17_rysoc")
 offset = Vector2(640, 0)
 
-[node name="Bushes2" type="Sprite2D" parent="FG/Bushes"]
+[node name="Bushes2" type="Sprite2D" parent="FG/Bushes" unique_id=1094293758]
 position = Vector2(273, 0)
 texture = ExtResource("17_rysoc")
 offset = Vector2(1280, 0)
 
-[node name="PalmTrees" type="Parallax2D" parent="FG"]
+[node name="PalmTrees" type="Parallax2D" parent="FG" unique_id=1581410858]
 scroll_scale = Vector2(1.3, 1)
 scroll_offset = Vector2(-430, 25)
 repeat_size = Vector2(640, 0)
 
-[node name="Bushes" type="Sprite2D" parent="FG/PalmTrees"]
+[node name="Bushes" type="Sprite2D" parent="FG/PalmTrees" unique_id=881597557]
 position = Vector2(-367, 0)
 texture = ExtResource("18_ssvqc")
 offset = Vector2(1280, 0)
 
-[node name="Bushes2" type="Sprite2D" parent="FG/PalmTrees"]
+[node name="Bushes2" type="Sprite2D" parent="FG/PalmTrees" unique_id=92847730]
 position = Vector2(-367, 0)
 texture = ExtResource("18_ssvqc")
 offset = Vector2(640, 0)
 
-[node name="Settings" parent="." instance=ExtResource("2_37s47")]
+[node name="Settings" parent="." unique_id=752984628 instance=ExtResource("2_37s47")]
 layer = 999
 
-[node name="WindowBar" parent="." instance=ExtResource("27_qnb83")]
+[node name="WindowBar" parent="." unique_id=1970613282 instance=ExtResource("27_qnb83")]

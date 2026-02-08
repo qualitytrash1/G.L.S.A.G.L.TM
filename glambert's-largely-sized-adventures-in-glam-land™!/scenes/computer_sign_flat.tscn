@@ -19,7 +19,7 @@ seamless = true
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dsyeg"]
 shader = ExtResource("3_h8p1v")
 shader_parameter/enable_grain = true
-shader_parameter/enable_curving = true
+shader_parameter/enable_curving = false
 shader_parameter/enable_scanlines = true
 shader_parameter/enable_chromatic_aberration = true
 shader_parameter/enable_rgb_grid = false
@@ -27,7 +27,7 @@ shader_parameter/enable_vhs_wiggle = true
 shader_parameter/enable_vignette = true
 shader_parameter/brightness_multiplier = 1.20000000298024
 shader_parameter/grain_strength = 0.25
-shader_parameter/curve_power = 1.00999999977648
+shader_parameter/curve_power = 1.02
 shader_parameter/vignette_size = 0.4
 shader_parameter/vignette_smoothness = 0.4
 shader_parameter/vignette_opacity = 1.0
@@ -81,10 +81,11 @@ _data = {
 [node name="ComputerSignFlat" type="Node2D" unique_id=633208951]
 position = Vector2(0, 5)
 script = ExtResource("1_4pi80")
+sign_text = "TEXT TEXT TEXT AHHHHH"
+speed = 2.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1647635740]
-rect = Rect2(-27, -5, 54, 10)
-show_rect = false
+rect = Rect2(-32, -10, 64, 20)
 
 [node name="Sprite" type="Node2D" parent="." unique_id=828138252]
 
@@ -94,16 +95,19 @@ texture = ExtResource("2_h8p1v")
 
 [node name="Text" type="RichTextLabel" parent="Sprite/Screen" unique_id=1778898828]
 clip_contents = false
-offset_left = -25.0
+offset_left = -107.0
 offset_top = -5.0
-offset_right = 3308.1953
-offset_bottom = 134.46423
-scale = Vector2(0.07170297, 0.07170297)
+offset_right = 995.0
+offset_bottom = 125.0
+scale = Vector2(0.075, 0.075)
 mouse_filter = 2
 theme = ExtResource("2_dsyeg")
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0.51, 0.42499995, 0)
-text = "sadsasasdasdassdaas"
+theme_override_font_sizes/normal_font_size = 128
+text = "TEXT TEXT TEXT AHHHHH"
+fit_content = true
+autowrap_mode = 0
 
 [node name="CRT" type="ColorRect" parent="Sprite" unique_id=45638567]
 process_mode = 3
@@ -119,10 +123,12 @@ texture = ExtResource("1_fan31")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1187426084]
 position = Vector2(0, 37)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1633639887]
 position = Vector2(0, -37)
 shape = SubResource("RectangleShape2D_4pi80")
+disabled = true
 one_way_collision_margin = 0.1
 
 [node name="SignHover" type="AnimationPlayer" parent="." unique_id=2107647269]

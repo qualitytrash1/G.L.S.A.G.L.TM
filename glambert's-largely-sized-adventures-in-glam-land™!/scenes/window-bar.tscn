@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://ieop4hx3yndv" path="res://textures/x-button.png" id="2_y5qhq"]
 [ext_resource type="Texture2D" uid="uid://bal1px7huodii" path="res://textures/max-button.png" id="3_kq8nk"]
 [ext_resource type="Texture2D" uid="uid://buwkg3f84ywkm" path="res://textures/minus-button.png" id="4_uicoe"]
-[ext_resource type="Texture2D" uid="uid://bj2jsyurer3e" path="res://textures/resize.png" id="6_m5bj0"]
 
 [node name="WindowBar" type="CanvasLayer" unique_id=525692715]
 process_mode = 3
@@ -70,30 +69,8 @@ flat = true
 texture = ExtResource("4_uicoe")
 centered = false
 
-[node name="Resize" type="Button" parent="." unique_id=234328947]
-custom_minimum_size = Vector2(16, 16)
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -32.0
-offset_right = -16.0
-offset_bottom = -16.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(2, 2)
-action_mode = 0
-flat = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Resize" unique_id=1505464686]
-texture = ExtResource("6_m5bj0")
-centered = false
-
 [connection signal="mouse_entered" from="Bar" to="." method="_on_window_bar_mouse_entered"]
 [connection signal="mouse_exited" from="Bar" to="." method="_on_control_mouse_exited"]
 [connection signal="pressed" from="Bar/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="Bar/MaxButton" to="." method="_on_max_button_pressed"]
 [connection signal="pressed" from="Bar/MinusButton" to="." method="_on_minus_button_pressed"]
-[connection signal="pressed" from="Resize" to="." method="_on_resize_pressed"]
