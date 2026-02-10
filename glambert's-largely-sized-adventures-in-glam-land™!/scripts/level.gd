@@ -17,6 +17,7 @@ const DEFAULT_UV : PackedVector2Array = [
 
 @onready var points_node: Node2D = $Points
 @onready var polygons: Node2D = $Polygons
+@onready var polygon: Polygon2D = $Polygons/Polygon2/Polygon
 
 var points : Array = []
 
