@@ -222,7 +222,7 @@ func _physics_process(delta: float) -> void:
 		in_air = true
 		fall_time += delta
 		
-	if (is_on_wall_only() and (abs(last_vel.x) > 50 or on_wall) and not ground_pounding):
+	if (is_on_wall_only() and ((abs(last_vel.x) > 50 and abs(get_wall_normal().x) >= 1) or on_wall) and not ground_pounding):
 		rotation = 0
 		on_wall = true
 		jumping = false

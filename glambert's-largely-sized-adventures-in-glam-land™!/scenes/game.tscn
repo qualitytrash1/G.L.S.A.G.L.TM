@@ -432,28 +432,28 @@ uv = PackedVector2Array(0, 0, 64, 0, 64, 64, 0, 64)
 
 [node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon" unique_id=1324350434]
 
-[node name="Polygon2" type="StaticBody2D" parent="Level/Polygons" unique_id=744309878]
-position = Vector2(86, 2)
+[node name="Polygon2" type="StaticBody2D" parent="Level/Polygons" unique_id=2061535935]
 
-[node name="BGPolygon" type="Polygon2D" parent="Level/Polygons/Polygon2" unique_id=1424599626]
+[node name="BGPolygon" type="Polygon2D" parent="Level/Polygons/Polygon2" unique_id=436354258]
 texture_repeat = 2
-position = Vector2(0, -197)
+position = Vector2(0, -2)
+polygon = PackedVector2Array(-720, -54, -66, -54.070724, -66, 92, 0, 92, 0, -54.08165, 356, -54.106567, 356, -143, 846, -143, 846, -370, 967, -370, 1120, -61, 1404, -61, 1404, 82, 1445, 82, 1445, -61, 1507, -61, 1507, 82, 1545, 82, 1545, -61, 2258, -60.659805, 2281.0715, -93, 2361.826, -93, 2386, -60.575012, 2542, -60.521835, 2564, -93, 2605, -93, 2630, -60.443634, 2757.4407, -60.39073, 2817.6206, -13, 3134.8765, -13, 3202, -60.232285, 4150, -59, 4150, 418, -721, 418)
 uv = PackedVector2Array(0, 0, 64, 0, 64, 64, 0, 64)
 
-[node name="3DGrass" parent="Level/Polygons/Polygon2/BGPolygon" unique_id=575572406 instance=ExtResource("6_p57ef")]
+[node name="3DGrass" parent="Level/Polygons/Polygon2/BGPolygon" unique_id=1451673536 instance=ExtResource("6_p57ef")]
 texture = ExtResource("21_sww3w")
 side_texture = ExtResource("14_suyxu")
 
-[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon2" unique_id=1794460488]
+[node name="Polygon" type="Polygon2D" parent="Level/Polygons/Polygon2" unique_id=474220235]
 texture_repeat = 2
-position = Vector2(792, -193)
+position = Vector2(0, 2)
 texture = ExtResource("12_ca42v")
+polygon = PackedVector2Array(405, -333, 82, -621, -32, -911, 3452, -916, 4068, -861, 4545, -766, 4369, 30, 4126, -35, 4117, -116, 3948, -300, 3819, -340, 3675, -221, 3630, -83, 3384, -83, 3078, -414, 2602, -593, 2203, -502, 1190, -524, 835, -593, 791, -580, 723, -580, 686, -560, 686, -503, 786, -503, 786, -197, 719, -197)
 uv = PackedVector2Array(0, 0, 64, 0, 64, 64, 0, 64)
 
-[node name="Grass" parent="Level/Polygons/Polygon2/Polygon" unique_id=1272410895 instance=ExtResource("6_p57ef")]
+[node name="Grass" parent="Level/Polygons/Polygon2/Polygon" unique_id=14374741 instance=ExtResource("6_p57ef")]
 
-[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon2" unique_id=745877040]
-position = Vector2(793, -195)
+[node name="Collision" type="CollisionPolygon2D" parent="Level/Polygons/Polygon2" unique_id=24361333]
 
 [node name="Spikes" type="TileMapLayer" parent="Level" unique_id=977795692 groups=["insta-death"]]
 position = Vector2(0, -13)
