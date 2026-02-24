@@ -47,39 +47,37 @@ func _ready() -> void:
 	#OTHER
 	max_fps.value = Globals.max_fps
 	
-func _input(event: InputEvent) -> void:
+func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("escape"):
 		#OPENS SETTINHGS
-		Globals.in_settings = not Globals.in_settings
-		if Globals.in_settings:
-			open_menu()
-		#CLOSES SETTINGS
-		else:
-			if not in_submenu:
-				close_menu()
-			else:
-				#CLOSE SUBMENU
-				in_submenu = false
-				settings.hide()
+		if not in_submenu:
+			Globals.in_settings = not Globals.in_settings
+			if Globals.in_settings:
 				open_menu()
+			else:
+				close_menu()
+		else:
+			menu.show()
+		in_submenu = false
+		settings.hide()
 
 func open_menu() -> void:
-	#anim.stop()
+	in_submenu = false
 	menu.show()
-	#anim.play("open")
-	#get_tree().paused = true
-	#audio_tween.stop()
-	#audio_tween = create_tween()
-	#audio_tween.tween_property(AudioServer.get_bus_effect(1,0), "cutoff_hz", 600, 0.1)
+	anim.play("open")
+	get_tree().paused = true
+	audio_tween.stop()
+	audio_tween = create_tween()
+	audio_tween.tween_property(AudioServer.get_bus_effect(1,0), "cutoff_hz", 600, 0.1)
 	
 func close_menu() -> void:
-	#anim.stop()
+	in_submenu = false
 	menu.hide()
-	#anim.play("close")
-	#get_tree().paused = false
-	#audio_tween.stop()
-	#audio_tween = create_tween()
-	#audio_tween.tween_property(AudioServer.get_bus_effect(1,0), "cutoff_hz", 20500, 0.1)
+	anim.play("close")
+	get_tree().paused = false
+	audio_tween.stop()
+	audio_tween = create_tween()
+	audio_tween.tween_property(AudioServer.get_bus_effect(1,0), "cutoff_hz", 20500, 0.1)
 
 func _on_volume_toggle_pressed() -> void:
 	

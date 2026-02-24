@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsslovlujysmg"
-path.s3tc="res://.godot/imported/dirt.png-8f3447f5703c4d1ffe16a06c7c96ba03.s3tc.ctex"
+uid="uid://cqnrorgemn2mn"
+path.s3tc="res://.godot/imported/grass_color.png-7158d55469572d84185e8d71c127a069.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/dirt.png"
-dest_files=["res://.godot/imported/dirt.png-8f3447f5703c4d1ffe16a06c7c96ba03.s3tc.ctex"]
+source_file="res://textures/grass_color.png"
+dest_files=["res://.godot/imported/grass_color.png-7158d55469572d84185e8d71c127a069.s3tc.ctex"]
 
 [params]
 
