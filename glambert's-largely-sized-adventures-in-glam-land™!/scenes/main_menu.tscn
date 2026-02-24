@@ -60,17 +60,17 @@ material_override = SubResource("StandardMaterial3D_wu84c")
 mesh = SubResource("PlaneMesh_l6cm7")
 
 [node name="Ground2" type="MeshInstance3D" parent="World" unique_id=822555505]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -4, 12)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -2, 12)
 material_override = SubResource("StandardMaterial3D_8ln24")
 mesh = SubResource("PlaneMesh_l6cm7")
 
 [node name="Ground3" type="MeshInstance3D" parent="World" unique_id=51409352]
-transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, -5, 0, 5, -2.1855695e-07, 0, -1, -15)
+transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, -5, 0, 5, -2.1855695e-07, 0, 4, -15)
 material_override = SubResource("StandardMaterial3D_rtw2f")
 mesh = SubResource("PlaneMesh_oa1go")
 
 [node name="Ground4" type="MeshInstance3D" parent="World" unique_id=1419878721]
-transform = Transform3D(5, -4.371139e-07, 1.9106854e-14, 0, 2.1855695e-07, 5, 4.371139e-07, 5, -2.1855695e-07, 0, -13.357872, -15)
+transform = Transform3D(5, -4.371139e-07, 1.9106854e-14, 0, 2.1855695e-07, 5, 4.371139e-07, 5, -2.1855695e-07, 0, -8.357872, -15)
 material_override = SubResource("StandardMaterial3D_rtw2f")
 transparency = 0.5
 mesh = SubResource("PlaneMesh_oa1go")
