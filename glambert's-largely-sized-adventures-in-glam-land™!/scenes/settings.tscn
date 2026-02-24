@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://chqvop78alemk"]
+[gd_scene format=3 uid="uid://chqvop78alemk"]
 
 [ext_resource type="Theme" uid="uid://cbp0x2v5m6a5b" path="res://textures/ui.tres" id="1_5p8wc"]
 [ext_resource type="Script" uid="uid://dopgnifo2k0wh" path="res://scripts/settings.gd" id="1_f4mfi"]
@@ -118,11 +118,11 @@ _data = {
 &"open": SubResource("Animation_83j8s")
 }
 
-[node name="Settings" type="CanvasLayer"]
+[node name="Settings" type="CanvasLayer" unique_id=154964466]
 process_mode = 3
 script = ExtResource("1_f4mfi")
 
-[node name="BG" type="ColorRect" parent="."]
+[node name="BG" type="ColorRect" parent="." unique_id=838126236]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,7 +132,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0.5019608)
 
-[node name="Settings" type="Control" parent="."]
+[node name="Settings" type="Control" parent="." unique_id=1791686328]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -143,7 +143,7 @@ offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TabContainer" type="TabContainer" parent="Settings"]
+[node name="TabContainer" type="TabContainer" parent="Settings" unique_id=1823748042]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -155,19 +155,19 @@ theme = ExtResource("1_5p8wc")
 current_tab = 1
 clip_tabs = false
 
-[node name="Audio" type="Control" parent="Settings/TabContainer"]
+[node name="Audio" type="Control" parent="Settings/TabContainer" unique_id=529486888]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Volume" type="Control" parent="Settings/TabContainer/Audio"]
+[node name="Volume" type="Control" parent="Settings/TabContainer/Audio" unique_id=439527162]
 anchors_preset = 0
 offset_left = 11.0
 offset_top = 48.0
 offset_right = 652.0
 offset_bottom = 387.0
 
-[node name="MasterVolume" type="HSlider" parent="Settings/TabContainer/Audio/Volume"]
+[node name="MasterVolume" type="HSlider" parent="Settings/TabContainer/Audio/Volume" unique_id=1198296495]
 layout_mode = 0
 offset_left = 50.0
 offset_top = 88.0
@@ -178,7 +178,7 @@ max_value = 3.0
 step = 0.25
 value = 1.0
 
-[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Audio/Volume/MasterVolume"]
+[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Audio/Volume/MasterVolume" unique_id=139559213]
 clip_contents = false
 layout_mode = 0
 offset_left = 4.0
@@ -191,7 +191,7 @@ theme = ExtResource("1_5p8wc")
 text = "Master"
 horizontal_alignment = 1
 
-[node name="SoundVolume" type="HSlider" parent="Settings/TabContainer/Audio/Volume"]
+[node name="SoundVolume" type="HSlider" parent="Settings/TabContainer/Audio/Volume" unique_id=1699222548]
 layout_mode = 0
 offset_left = 50.0
 offset_top = 171.0
@@ -202,7 +202,7 @@ max_value = 3.0
 step = 0.25
 value = 1.0
 
-[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Audio/Volume/SoundVolume"]
+[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Audio/Volume/SoundVolume" unique_id=1753111092]
 clip_contents = false
 layout_mode = 0
 offset_left = 5.0
@@ -215,7 +215,7 @@ theme = ExtResource("1_5p8wc")
 text = "Sound"
 horizontal_alignment = 1
 
-[node name="MusicVolume" type="HSlider" parent="Settings/TabContainer/Audio/Volume"]
+[node name="MusicVolume" type="HSlider" parent="Settings/TabContainer/Audio/Volume" unique_id=2111218916]
 layout_mode = 0
 offset_left = 50.0
 offset_top = 252.0
@@ -226,7 +226,7 @@ max_value = 3.0
 step = 0.25
 value = 1.0
 
-[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Audio/Volume/MusicVolume"]
+[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Audio/Volume/MusicVolume" unique_id=246016677]
 clip_contents = false
 layout_mode = 0
 offset_left = 5.0
@@ -239,7 +239,7 @@ theme = ExtResource("1_5p8wc")
 text = "Music"
 horizontal_alignment = 1
 
-[node name="VolumeToggle" type="Button" parent="Settings/TabContainer/Audio"]
+[node name="VolumeToggle" type="Button" parent="Settings/TabContainer/Audio" unique_id=1198557282]
 layout_mode = 0
 offset_left = 69.0
 offset_top = 376.0
@@ -247,13 +247,13 @@ offset_right = 179.0
 offset_bottom = 480.0
 flat = true
 
-[node name="VolumeIcon" type="AnimatedSprite2D" parent="Settings/TabContainer/Audio/VolumeToggle"]
+[node name="VolumeIcon" type="AnimatedSprite2D" parent="Settings/TabContainer/Audio/VolumeToggle" unique_id=2054017498]
 position = Vector2(57, 48)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_f4mfi")
 animation = &"true"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Audio"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Audio" unique_id=1980010976]
 clip_contents = false
 layout_mode = 0
 offset_left = 225.0
@@ -265,11 +265,11 @@ mouse_filter = 2
 theme = ExtResource("1_5p8wc")
 text = "VOLUME"
 
-[node name="Video" type="Control" parent="Settings/TabContainer"]
+[node name="Video" type="Control" parent="Settings/TabContainer" unique_id=2095420954]
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="MaxFPS" type="SpinBox" parent="Settings/TabContainer/Video"]
+[node name="MaxFPS" type="SpinBox" parent="Settings/TabContainer/Video" unique_id=139592409]
 layout_mode = 0
 offset_left = 80.0
 offset_top = 108.0
@@ -279,7 +279,7 @@ theme = ExtResource("1_5p8wc")
 max_value = 99999.0
 alignment = 1
 
-[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Video/MaxFPS"]
+[node name="Text" type="RichTextLabel" parent="Settings/TabContainer/Video/MaxFPS" unique_id=1169076770]
 clip_contents = false
 layout_mode = 0
 offset_left = -119.0
@@ -292,7 +292,7 @@ theme = ExtResource("1_5p8wc")
 text = "max fps"
 horizontal_alignment = 1
 
-[node name="EnableFilter" type="CheckBox" parent="Settings/TabContainer/Video"]
+[node name="EnableFilter" type="CheckBox" parent="Settings/TabContainer/Video" unique_id=233655414]
 layout_mode = 0
 offset_left = 83.0
 offset_top = 171.0
@@ -302,7 +302,7 @@ scale = Vector2(0.94792646, 0.94792646)
 theme = ExtResource("1_5p8wc")
 text = " Enable Filters"
 
-[node name="Vsync" type="CheckBox" parent="Settings/TabContainer/Video"]
+[node name="Vsync" type="CheckBox" parent="Settings/TabContainer/Video" unique_id=1370812148]
 layout_mode = 0
 offset_left = 83.0
 offset_top = 229.0
@@ -312,7 +312,7 @@ scale = Vector2(0.94792646, 0.94792646)
 theme = ExtResource("1_5p8wc")
 text = " v-sync"
 
-[node name="ShowFPS" type="CheckBox" parent="Settings/TabContainer/Video"]
+[node name="ShowFPS" type="CheckBox" parent="Settings/TabContainer/Video" unique_id=506074122]
 layout_mode = 0
 offset_left = 83.0
 offset_top = 288.0
@@ -322,7 +322,7 @@ scale = Vector2(0.94792646, 0.94792646)
 theme = ExtResource("1_5p8wc")
 text = " show fps"
 
-[node name="FullScreen" type="CheckBox" parent="Settings/TabContainer/Video"]
+[node name="FullScreen" type="CheckBox" parent="Settings/TabContainer/Video" unique_id=2057654175]
 layout_mode = 0
 offset_left = 83.0
 offset_top = 347.0
@@ -332,22 +332,22 @@ scale = Vector2(0.94792646, 0.94792646)
 theme = ExtResource("1_5p8wc")
 text = " fullscreen"
 
-[node name="Controls" type="Control" parent="Settings/TabContainer"]
+[node name="Controls" type="Control" parent="Settings/TabContainer" unique_id=721159809]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="Controller" type="Sprite2D" parent="Settings/TabContainer/Controls"]
+[node name="Controller" type="Sprite2D" parent="Settings/TabContainer/Controls" unique_id=40204388]
 position = Vector2(1294, 536.13824)
 scale = Vector2(2.2174346, 2.2174346)
 texture = ExtResource("5_gjs24")
 
-[node name="Jump" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+[node name="Jump" type="Line2D" parent="Settings/TabContainer/Controls/Controller" unique_id=1124651366]
 position = Vector2(64.9399, -1.8038864)
 points = PackedVector2Array(109.58612, 0, 0, 0)
 width = 2.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Jump"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Jump" unique_id=279043062]
 clip_contents = false
 offset_left = 106.42929
 offset_top = -9.921373
@@ -360,12 +360,12 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
 text = "jump"
 
-[node name="Sprint" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+[node name="Sprint" type="Line2D" parent="Settings/TabContainer/Controls/Controller" unique_id=1406699690]
 position = Vector2(47.802986, -14.882061)
 points = PackedVector2Array(126.27203, -38.783554, 0, 0)
 width = 2.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Sprint"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Sprint" unique_id=1446510734]
 clip_contents = false
 offset_left = 124.468155
 offset_top = -50.057846
@@ -378,12 +378,12 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
 text = "sprint"
 
-[node name="Walk" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+[node name="Walk" type="Line2D" parent="Settings/TabContainer/Controls/Controller" unique_id=1579317995]
 position = Vector2(-31.568008, 34.724808)
 points = PackedVector2Array(13.980164, 45.999115, 0, 0)
 width = 2.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Walk"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Walk" unique_id=546696791]
 clip_contents = false
 offset_left = -7.666519
 offset_top = 41.038414
@@ -396,12 +396,12 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
 text = "walk"
 
-[node name="Walk2" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+[node name="Walk2" type="Line2D" parent="Settings/TabContainer/Controls/Controller" unique_id=959039863]
 position = Vector2(-70.35156, -14.882061)
 points = PackedVector2Array(-88.8414, -25.25441, 0, 0)
 width = 2.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Walk2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Walk2" unique_id=726254778]
 clip_contents = false
 offset_left = -128.97787
 offset_top = -38.783554
@@ -414,12 +414,12 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
 text = "walk"
 
-[node name="Jump2" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+[node name="Jump2" type="Line2D" parent="Settings/TabContainer/Controls/Controller" unique_id=296294586]
 position = Vector2(-59.077274, -28.862179)
 points = PackedVector2Array(-101.919586, -41.48938, 0, 0)
 width = 2.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Jump2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Jump2" unique_id=385863778]
 clip_contents = false
 offset_left = -140.25217
 offset_top = -52.312702
@@ -432,12 +432,12 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
 text = "jump"
 
-[node name="Crouch" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+[node name="Crouch" type="Line2D" parent="Settings/TabContainer/Controls/Controller" unique_id=416544661]
 position = Vector2(-59.077274, -3.1568012)
 points = PackedVector2Array(-102.370544, -9.921371, 0, 0)
 width = 2.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Crouch"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Crouch" unique_id=1719947558]
 clip_contents = false
 offset_left = -149.27158
 offset_top = -18.489836
@@ -450,12 +450,12 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
 text = "crouch"
 
-[node name="Crouch2" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+[node name="Crouch2" type="Line2D" parent="Settings/TabContainer/Controls/Controller" unique_id=434751504]
 position = Vector2(63.136013, -82.97876)
 points = PackedVector2Array(0, -22.097618, 0, 0)
 width = 2.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Crouch2"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Crouch2" unique_id=704993899]
 clip_contents = false
 offset_left = -26.156334
 offset_top = -36.077744
@@ -468,12 +468,12 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
 text = "crouch"
 
-[node name="Menu" type="Line2D" parent="Settings/TabContainer/Controls/Controller"]
+[node name="Menu" type="Line2D" parent="Settings/TabContainer/Controls/Controller" unique_id=406946813]
 position = Vector2(13.980114, -14.431099)
 points = PackedVector2Array(0, -22.097618, 0, 0)
 width = 2.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Menu"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller/Menu" unique_id=615204210]
 clip_contents = false
 offset_left = -17.136902
 offset_top = -34.27383
@@ -487,7 +487,7 @@ theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
 text = "Menu
 "
 
-[node name="TextController" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller"]
+[node name="TextController" type="RichTextLabel" parent="Settings/TabContainer/Controls/Controller" unique_id=531646378]
 clip_contents = false
 offset_left = -173.1731
 offset_top = -158.742
@@ -499,7 +499,7 @@ theme = ExtResource("1_5p8wc")
 text = "controller"
 horizontal_alignment = 1
 
-[node name="TextKeyboard" type="RichTextLabel" parent="Settings/TabContainer/Controls"]
+[node name="TextKeyboard" type="RichTextLabel" parent="Settings/TabContainer/Controls" unique_id=788656311]
 clip_contents = false
 layout_mode = 0
 offset_left = -63.0
@@ -512,7 +512,7 @@ theme = ExtResource("1_5p8wc")
 text = "keyboard"
 horizontal_alignment = 1
 
-[node name="Walk" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard"]
+[node name="Walk" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard" unique_id=1056761363]
 clip_contents = false
 layout_mode = 0
 offset_left = 338.2587
@@ -528,13 +528,13 @@ text = "Walk: \"a\", \"w\",
 \"left-arrow\", 
 \"right-arrow\""
 
-[node name="Line" type="Line2D" parent="Settings/TabContainer/Controls/TextKeyboard/Walk"]
+[node name="Line" type="Line2D" parent="Settings/TabContainer/Controls/TextKeyboard/Walk" unique_id=17354963]
 position = Vector2(64.9399, 403.78964)
 scale = Vector2(3, 3)
 points = PackedVector2Array(225.66202, 0, -26.062866, 0)
 width = 2.0
 
-[node name="Jump" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard"]
+[node name="Jump" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard" unique_id=1641219719]
 clip_contents = false
 layout_mode = 0
 offset_left = 350.08588
@@ -549,13 +549,13 @@ theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
 text = "Jump: \"space\", 
 \"up-arrow\""
 
-[node name="Line" type="Line2D" parent="Settings/TabContainer/Controls/TextKeyboard/Jump"]
+[node name="Line" type="Line2D" parent="Settings/TabContainer/Controls/TextKeyboard/Jump" unique_id=558116299]
 position = Vector2(64.9399, 264.35187)
 scale = Vector2(3, 3)
 points = PackedVector2Array(225.66202, 0, -26.062866, 0)
 width = 2.0
 
-[node name="Crouch" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard"]
+[node name="Crouch" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard" unique_id=1767252288]
 clip_contents = false
 layout_mode = 0
 offset_left = 350.08588
@@ -570,13 +570,13 @@ theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
 text = "Crouch: \"s\",
 \"down-arrow\""
 
-[node name="Line" type="Line2D" parent="Settings/TabContainer/Controls/TextKeyboard/Crouch"]
+[node name="Line" type="Line2D" parent="Settings/TabContainer/Controls/TextKeyboard/Crouch" unique_id=1072538558]
 position = Vector2(64.9399, 264.35187)
 scale = Vector2(3, 3)
 points = PackedVector2Array(225.66202, 0, -26.062866, 0)
 width = 2.0
 
-[node name="Slam" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard"]
+[node name="Slam" type="RichTextLabel" parent="Settings/TabContainer/Controls/TextKeyboard" unique_id=1528945065]
 clip_contents = false
 layout_mode = 0
 offset_left = 313.42148
@@ -590,11 +590,11 @@ theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.49, 0.49, 0.49, 1)
 text = "slam: crouch in air."
 
-[node name="PopSound" type="AudioStreamPlayer" parent="Settings"]
+[node name="PopSound" type="AudioStreamPlayer" parent="Settings" unique_id=263113300]
 stream = ExtResource("5_es4n0")
 volume_db = -6.148
 
-[node name="Exit" type="Button" parent="Settings"]
+[node name="Exit" type="Button" parent="Settings" unique_id=227330586]
 layout_mode = 0
 offset_left = 1590.9999
 offset_top = 819.99994
@@ -604,7 +604,7 @@ scale = Vector2(8.44, 8.44)
 icon = ExtResource("6_83j8s")
 flat = true
 
-[node name="Text" type="RichTextLabel" parent="Settings/Exit"]
+[node name="Text" type="RichTextLabel" parent="Settings/Exit" unique_id=921598789]
 clip_contents = false
 layout_mode = 0
 offset_left = -2.2511654
@@ -617,7 +617,7 @@ theme = ExtResource("1_5p8wc")
 text = "EXIT"
 horizontal_alignment = 1
 
-[node name="Menu" type="Control" parent="."]
+[node name="Menu" type="Control" parent="." unique_id=2116257780]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -626,7 +626,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=1956493604]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -640,12 +640,12 @@ grow_vertical = 2
 scale = Vector2(8.439527, 8.439527)
 theme_override_constants/separation = 0
 
-[node name="Resume" type="Button" parent="Menu/VBoxContainer"]
+[node name="Resume" type="Button" parent="Menu/VBoxContainer" unique_id=2017108573]
 layout_mode = 2
 icon = ExtResource("6_gis3k")
 flat = true
 
-[node name="Text" type="RichTextLabel" parent="Menu/VBoxContainer/Resume"]
+[node name="Text" type="RichTextLabel" parent="Menu/VBoxContainer/Resume" unique_id=2101150660]
 clip_contents = false
 layout_mode = 0
 offset_left = 13.744847
@@ -658,12 +658,12 @@ theme = ExtResource("1_5p8wc")
 text = "resume"
 horizontal_alignment = 1
 
-[node name="Settings" type="Button" parent="Menu/VBoxContainer"]
+[node name="Settings" type="Button" parent="Menu/VBoxContainer" unique_id=1418431151]
 layout_mode = 2
 icon = ExtResource("6_gis3k")
 flat = true
 
-[node name="Text" type="RichTextLabel" parent="Menu/VBoxContainer/Settings"]
+[node name="Text" type="RichTextLabel" parent="Menu/VBoxContainer/Settings" unique_id=11609243]
 clip_contents = false
 layout_mode = 0
 offset_left = 13.744847
@@ -676,12 +676,12 @@ theme = ExtResource("1_5p8wc")
 text = "settings"
 horizontal_alignment = 1
 
-[node name="ExitGame" type="Button" parent="Menu/VBoxContainer"]
+[node name="ExitGame" type="Button" parent="Menu/VBoxContainer" unique_id=43419108]
 layout_mode = 2
 icon = ExtResource("6_gis3k")
 flat = true
 
-[node name="Text" type="RichTextLabel" parent="Menu/VBoxContainer/ExitGame"]
+[node name="Text" type="RichTextLabel" parent="Menu/VBoxContainer/ExitGame" unique_id=1727947732]
 clip_contents = false
 layout_mode = 0
 offset_left = 4.147156
@@ -694,10 +694,8 @@ theme = ExtResource("1_5p8wc")
 text = "Exit game"
 horizontal_alignment = 1
 
-[node name="Anim" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_am25x")
-}
+[node name="Anim" type="AnimationPlayer" parent="." unique_id=1258705375]
+libraries/ = SubResource("AnimationLibrary_am25x")
 
 [connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/MasterVolume" to="." method="_on_master_volume_value_changed"]
 [connection signal="value_changed" from="Settings/TabContainer/Audio/Volume/SoundVolume" to="." method="_on_sound_volume_value_changed"]
@@ -711,3 +709,4 @@ libraries = {
 [connection signal="pressed" from="Settings/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Menu/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/ExitGame" to="." method="_on_exit_game_pressed"]

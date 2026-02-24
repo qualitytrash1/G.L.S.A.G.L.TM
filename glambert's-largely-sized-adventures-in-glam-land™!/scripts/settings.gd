@@ -20,12 +20,15 @@ extends CanvasLayer
 @onready var max_fps: SpinBox = $Settings/TabContainer/Video/MaxFPS
 @onready var window_bar: WindowBar = $"../WindowBar"
 
-var in_settings: bool = false
+var in_submenu: bool = false
+
+var audio_tween : Tween
 
 func _ready() -> void:
+	audio_tween = create_tween()
 	get_tree().paused = false
 	
-	in_settings = false
+	in_submenu = false
 	#SET SETTINGS FROM GLOBAL VARS
 	#SLIDERS
 	master_volume.value = Globals.master_vol
@@ -47,34 +50,36 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("escape"):
 		#OPENS SETTINHGS
-		if not Globals.in_menu:
+		Globals.in_settings = not Globals.in_settings
+		if Globals.in_settings:
 			open_menu()
 		#CLOSES SETTINGS
 		else:
-			if not in_settings:
+			if not in_submenu:
 				close_menu()
 			else:
-				#CLOSE SETTINGS
-				in_settings = false
+				#CLOSE SUBMENU
+				in_submenu = false
 				settings.hide()
 				open_menu()
 
 func open_menu() -> void:
+	#anim.stop()
 	menu.show()
-	anim.play("open")
-	get_tree().paused = true
-	Globals.in_menu = true
-	var tween : Tween = create_tween()
-	tween.tween_property(AudioServer.get_bus_effect(1,0), "cutoff_hz", 600, 0.1)
+	#anim.play("open")
+	#get_tree().paused = true
+	#audio_tween.stop()
+	#audio_tween = create_tween()
+	#audio_tween.tween_property(AudioServer.get_bus_effect(1,0), "cutoff_hz", 600, 0.1)
 	
 func close_menu() -> void:
+	#anim.stop()
 	menu.hide()
-	anim.play("close")
-	get_tree().paused = false
-	Globals.in_menu = false
-	var tween : Tween = create_tween()
-	tween.tween_property(AudioServer.get_bus_effect(1,0), "cutoff_hz", 20500, 0.1)
-	await tween.finished
+	#anim.play("close")
+	#get_tree().paused = false
+	#audio_tween.stop()
+	#audio_tween = create_tween()
+	#audio_tween.tween_property(AudioServer.get_bus_effect(1,0), "cutoff_hz", 20500, 0.1)
 
 func _on_volume_toggle_pressed() -> void:
 	
@@ -133,20 +138,18 @@ func _on_enable_filter_toggled(toggled_on: bool) -> void:
 
 
 func _on_resume_pressed() -> void:
+	Globals.in_settings = false
 	close_menu()
 
 
 func _on_settings_pressed() -> void:
-	in_settings = true
+	in_submenu = true
 	settings.show()
 	menu.hide()
 
-
-func _on_exit_pressed() -> void:
-	in_settings = false
-	settings.hide()
-	open_menu()
-
+func _on_exit_game_pressed() -> void:
+	Globals.in_settings = false
+	close_menu()
 
 func _on_vsync_toggled(toggled_on: bool) -> void:
 	Globals.vsync_enabled = toggled_on

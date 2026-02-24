@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Glambert's Largely Sized Adventures in Glam-Land™!"
-run/main_scene="uid://cvhnqj4t7mdea"
+run/main_scene="uid://bh5fbwfr7fob8"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://textures/icon.svg"
 

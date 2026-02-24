@@ -347,7 +347,7 @@ func _physics_process(delta: float) -> void:
 	
 	if direction:
 		
-		if Input.is_action_pressed("sprint"):
+		if Input.is_action_pressed("sprint") and not crouching:
 			speed = BASE_SPEED * 1.3
 			smooth_animations.speed_scale = 2
 		else:

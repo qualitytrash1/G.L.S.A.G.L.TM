@@ -14,6 +14,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gcyd"]
 size = Vector2(96, 6)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jpg3g"]
+size = Vector2(112, 79)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_8whk0"]
 animations = [{
 "frames": [{
@@ -109,10 +112,17 @@ speed = 2.0
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_8gcyd")
 
+[node name="DetectGroundPound" type="Area2D" parent="." unique_id=1366988262]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectGroundPound" unique_id=2025070347]
+position = Vector2(0, -50.5)
+shape = SubResource("RectangleShape2D_jpg3g")
+
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1221184333]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D" unique_id=1058363903]
-polygon = PackedVector2Array(-48, -16, 48, -16, 47, 3, 17, 13, -22, 13, -47, 3)
+position = Vector2(0, 3)
+polygon = PackedVector2Array(-48, -16, 48, -16, 47, -1, 17, 9, -22, 9, -47, -1)
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1698860828]
 sprite_frames = SubResource("SpriteFrames_8whk0")
@@ -146,3 +156,5 @@ stream = ExtResource("4_ausku")
 libraries/ = SubResource("AnimationLibrary_egpwq")
 
 [connection signal="body_entered" from="DetectGlambert" to="." method="_on_detect_glambert_body_entered"]
+[connection signal="body_entered" from="DetectGroundPound" to="." method="_on_detect_ground_pound_body_entered"]
+[connection signal="body_exited" from="DetectGroundPound" to="." method="_on_detect_ground_pound_body_exited"]

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bh5fbwfr7fob8"]
+
+[ext_resource type="PackedScene" uid="uid://chqvop78alemk" path="res://scenes/settings.tscn" id="1_l6cm7"]
+
+[node name="MainMenu" type="Node3D" unique_id=2006795585]
+
+[node name="Settings" parent="." unique_id=873312508 instance=ExtResource("1_l6cm7")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=937094612]
