@@ -4,9 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://di148ms8xuu2c" path="res://textures/grass_menu.png" id="2_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://20cwq7qyokly" path="res://textures/3d_ground.png" id="4_8ln24"]
 [ext_resource type="Texture2D" uid="uid://mulhf88vnaoi" path="res://textures/graphical_mountains.png" id="4_wu84c"]
+[ext_resource type="Script" uid="uid://bwo1jw268m20x" path="res://scripts/glambert_3d.gd" id="5_8ln24"]
+[ext_resource type="PackedScene" uid="uid://dy5jprt1aod3p" path="res://scenes/model.tscn" id="6_rtw2f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wu84c"]
 albedo_texture = ExtResource("2_ekxnf")
+uv1_scale = Vector3(8, 8, 8)
 texture_filter = 2
 distance_fade_mode = 1
 distance_fade_min_distance = 15.0
@@ -36,12 +39,19 @@ distance_fade_mode = 1
 [sub_resource type="PlaneMesh" id="PlaneMesh_oa1go"]
 size = Vector2(10, 3.795)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_rtw2f"]
+
 [sub_resource type="Environment" id="Environment_ekxnf"]
 tonemap_mode = 1
 tonemap_exposure = 1.15
 adjustment_enabled = true
 adjustment_contrast = 1.075
 adjustment_saturation = 1.05
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_oa1go"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rtw2f"]
+viewport_path = NodePath("Glambert3D/Sprite3D/SubViewport")
 
 [node name="MainMenu" type="Node3D" unique_id=2006795585]
 
@@ -65,18 +75,46 @@ material_override = SubResource("StandardMaterial3D_8ln24")
 mesh = SubResource("PlaneMesh_l6cm7")
 
 [node name="Ground3" type="MeshInstance3D" parent="World" unique_id=51409352]
-transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, -5, 0, 5, -2.1855695e-07, 0, 4, -15)
+transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, -5, 0, 5, -2.1855695e-07, 0.7261019, 5.1707067, -15.617483)
 material_override = SubResource("StandardMaterial3D_rtw2f")
 mesh = SubResource("PlaneMesh_oa1go")
 
 [node name="Ground4" type="MeshInstance3D" parent="World" unique_id=1419878721]
-transform = Transform3D(5, -4.371139e-07, 1.9106854e-14, 0, 2.1855695e-07, 5, 4.371139e-07, 5, -2.1855695e-07, 0, -8.357872, -15)
+transform = Transform3D(5, -4.371139e-07, 1.9106854e-14, 0, 2.1855695e-07, 5, 4.371139e-07, 5, -2.1855695e-07, 0.7261019, -7.1871653, -15.617483)
 material_override = SubResource("StandardMaterial3D_rtw2f")
 transparency = 0.5
 mesh = SubResource("PlaneMesh_oa1go")
+
+[node name="Floor" type="StaticBody3D" parent="World" unique_id=186109775]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor" unique_id=1007647947]
+shape = SubResource("WorldBoundaryShape3D_rtw2f")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1548184795]
 environment = SubResource("Environment_ekxnf")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=126857243]
 transform = Transform3D(1, 0, 0, 0, -0.50000006, 0.8660254, 0, -0.8660254, -0.50000006, 0, 0, 0)
+
+[node name="Glambert3D" type="CharacterBody3D" parent="." unique_id=1253329925]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.1736012)
+script = ExtResource("5_8ln24")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Glambert3D" unique_id=406015474]
+shape = SubResource("SphereShape3D_oa1go")
+
+[node name="Sprite3D" type="Sprite3D" parent="Glambert3D" unique_id=147997616]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+billboard = 2
+double_sided = false
+alpha_cut = 3
+texture_filter = 0
+texture = SubResource("ViewportTexture_rtw2f")
+
+[node name="SubViewport" type="SubViewport" parent="Glambert3D/Sprite3D" unique_id=1952337689]
+transparent_bg = true
+size = Vector2i(32, 32)
+
+[node name="Model" parent="Glambert3D/Sprite3D/SubViewport" unique_id=1024935025 instance=ExtResource("6_rtw2f")]
+position = Vector2(16, 16)
