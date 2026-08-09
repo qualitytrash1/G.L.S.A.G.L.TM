@@ -7,6 +7,9 @@ var input_dir : Vector2
 var direction : Vector3
 var vel : Vector2
 
+@onready var sprite: Sprite3D = $Sprite3D
+@onready var camera: Camera3D = $"../Camera3D"
+
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -22,4 +25,6 @@ func _physics_process(delta: float) -> void:
 		vel = lerp(vel, Vector2(0,0), delta * 30)
 	velocity.x = vel.x
 	velocity.z = vel.y
+	sprite.look_at(camera.global_position)
+	sprite.rotation = Vector3(0, sprite.rotation.y + deg_to_rad(180), 0)
 	move_and_slide()

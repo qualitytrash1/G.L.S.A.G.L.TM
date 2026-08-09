@@ -106,7 +106,6 @@ shape = SubResource("SphereShape3D_oa1go")
 
 [node name="Sprite3D" type="Sprite3D" parent="Glambert3D" unique_id=147997616]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
-billboard = 2
 double_sided = false
 alpha_cut = 3
 texture_filter = 0
